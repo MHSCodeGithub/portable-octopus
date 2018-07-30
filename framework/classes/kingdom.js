@@ -13,8 +13,14 @@ class Kingdom extends Objectable {
     this.treasury = treasury; // treasury owned by kingdom
     this.producers = []; // array of producers
     this.harbour = harbour; // harbour that connects kingdom to market
-    // TODO: Add kingdom functions
   }
+
+  public getID()        { return this.id;        }
+  public getName()      { return this.name;      }
+  public getHarbour()   { return this.harbour;   }
+  public getTreasury()  { return this.treasury;  }
+  public getProducers() { return this.producers; }
+
 }
 
 module.exports = Kingdom;
