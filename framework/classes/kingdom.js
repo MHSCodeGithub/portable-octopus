@@ -15,12 +15,6 @@ class Kingdom extends Objectable {
     this.harbour = harbour; // harbour that connects kingdom to market
   }
 
-  public getID()        { return this.id;        }
-  public getName()      { return this.name;      }
-  public getHarbour()   { return this.harbour;   }
-  public getTreasury()  { return this.treasury;  }
-  public getProducers() { return this.producers; }
-
 }
 
 module.exports = Kingdom;
