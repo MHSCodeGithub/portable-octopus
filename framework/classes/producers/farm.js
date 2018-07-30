@@ -6,8 +6,8 @@ const Producer = require('../producer');
  */
 
 class Farm extends Producer {
-  constructor(id, owner, kingdom) {
-    super(id, owner, kingdom);
+  constructor(id, owner) {
+    super(id, owner);
   }
 }
 

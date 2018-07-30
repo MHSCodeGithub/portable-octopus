@@ -9,7 +9,6 @@ class Harbour extends Objectable {
   constructor(id, kingdom) {
     super();
     this.id = id;
-    this.kingdom = kingdom;
   }
 }
 
