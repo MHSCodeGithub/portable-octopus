@@ -8,6 +8,8 @@
 `username` - **string**, publicly displayed name as well as login input.
 
 `password` - **string**, private sha256 hashed password.
+
+`kingdom` - **Kingdom**, players kingdom class.
 ### Kingdom
 `id` - **integer**, used to uniquely identify the kingdom.
 
