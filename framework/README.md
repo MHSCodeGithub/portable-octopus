@@ -1,5 +1,7 @@
 # Framework Documentation
 ## Classes
+### Class
+`property` - **data type**, description.
 ### Player
 `id` - **integer**, used to uniquely identify the player.
 
