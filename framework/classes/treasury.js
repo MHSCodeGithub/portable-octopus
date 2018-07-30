@@ -6,8 +6,9 @@ const Objectable = require('./objectable');
  */
 
 class Treasury extends Objectable {
-  constructor(kingdom) {
+  constructor(id, kingdom) {
     super();
+    this.id = id;
     this.kingdom = kingdom;
   }
 }
