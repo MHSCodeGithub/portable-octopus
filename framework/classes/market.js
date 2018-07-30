@@ -2,7 +2,7 @@
 const Objectable = require('./objectable');
 
 /*
- * <---> # Treasury class # <--->
+ * <---> # Market class # <--->
  */
 
 class Market extends Objectable {
@@ -12,4 +12,4 @@ class Market extends Objectable {
   }
 }
 
-module.exports = Harbour;
+module.exports = Market;

@@ -11,4 +11,4 @@ class Farm extends Producer {
   }
 }
 
-module.exports = Producer;
+module.exports = Farm;

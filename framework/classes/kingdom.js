@@ -17,4 +17,4 @@ class Kingdom extends Objectable {
   }
 }
 
-module.exports = Producer;
+module.exports = Kingdom;
