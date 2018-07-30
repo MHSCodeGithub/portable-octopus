@@ -43,5 +43,13 @@
 
 `kingdom` - **Kingdom**, the kingdom that owns the producer.
 
+`type` - **string**, type of producer.
+
 `level` - **integer**, the level of the producer determines effectiveness (e.g: farm yield).
+### Farm
+`growth` - **array<array<Integer>>**, 2 dimensional array containing the growth stages of the crops.
+
+`yield` - **integer**, a integer representing the yield of farm depending on the farm's level. Formula is as follows: ```javascript
+Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
+```
 ## Interface
