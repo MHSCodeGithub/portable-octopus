@@ -49,7 +49,8 @@
 ### Farm
 `growth` - **array<array<Integer>>**, 2 dimensional array containing the growth stages of the crops.
 
-`yield` - **integer**, a integer representing the yield of farm depending on the farm's level. Formula is as follows: ```javascript
+`yield` - **integer**, a integer representing the yield of farm depending on the farm's level. Formula is as follows:
+```javascript
 Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
 ```
 ## Interface
