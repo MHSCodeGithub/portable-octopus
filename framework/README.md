@@ -38,4 +38,10 @@
 `name` - **string**, name of commodity.
 
 `type` - **string**, type of commodity (mainly going to be used for sorting and UI stuff).
+### Producer
+`id` - **integer**, used to uniquely identify the producer.
+
+`kingdom` - **Kingdom**, the kingdom that owns the producer.
+
+`level` - **integer**, the level of the producer determines effectiveness (e.g: farm yield).
 ## Interface
