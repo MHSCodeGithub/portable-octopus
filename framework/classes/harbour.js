@@ -10,6 +10,7 @@ class Harbour extends Objectable {
     super();
     this.id = id;
     this.health = 600;
+    // TODO: Add Harbour functions
   }
 }
 

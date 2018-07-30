@@ -9,6 +9,7 @@ class Market extends Objectable {
   constructor() {
     super();
     this.commodities = []; // array container commodities of market
+    // TODO: Add Market functions
   }
 }
 

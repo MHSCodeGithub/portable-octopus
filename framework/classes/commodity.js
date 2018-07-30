@@ -12,6 +12,7 @@ class Commodity extends Objectable {
     this.value = 0; // value of commodity
     this.name = name; // name of commodity
     this.type = type; // type of commodity (used for sorting)
+    // TODO: Add Commodity functions
   }
 }
 

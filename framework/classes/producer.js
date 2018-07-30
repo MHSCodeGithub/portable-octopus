@@ -10,6 +10,7 @@ class Producer extends Objectable {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.kingdom = kingdom; // owning kingdom of producer
+    // TODO: Add Producer functions
   }
 }
 
