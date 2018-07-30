@@ -22,6 +22,10 @@
 `balance` - **integer**, the balance of the treasury.
 
 `health` - **integer**, the health of the treasury (to be used for wars).
+### Harbour
+`id` - **integer**, used to uniquely identify the harbour.
+
+`health` - **integer**, the health of the harbour (to be used for wars).
 ### Market
 `commodities` - **array<Commodity>**, array container commodities of market.
 ### Commodity
