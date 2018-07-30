@@ -1,5 +1,13 @@
 # Framework Documentation
 ## Classes
+### Player
+`id` - **integer**, used to uniquely identify the player.
+
+`username` - **string**, publicly displayed name as well as login input.
+
+`password` - **string**, private sha256 hashed password.
+
+`islands` - **array<Island>**, array of islands belonging to player.
 ### Island
 `id` - **integer**, used to uniquely identify the island.
 
