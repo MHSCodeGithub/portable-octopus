@@ -7,11 +7,14 @@ const Objectable = require('./objectable');
  */
 
 class Player extends Objectable {
-  constructor(id, username, password) {
+  constructor(id, username, password, connect) {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.username = username; // string username
-    this.password = sha256(password); // string sha256 hashed password
+    if(connect) { this.password = password; }
+    else        { this.password = sha256(password); } // string sha256 hashed password
+    this.islands = [];
+    // TODO: Add player functions
   }
 }
 
