@@ -22,4 +22,6 @@
 `balance` - **integer**, the balance of the treasury.
 
 `health` - **integer**, the health of the treasury (to be used for wars).
+### Market
+`commodities` - **array<Commodity>**, array container commodities of market.
 ## Interface
