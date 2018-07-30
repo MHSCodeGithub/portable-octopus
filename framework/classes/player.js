@@ -14,4 +14,4 @@ class Player extends Objectable {
   }
 }
 
-module.exports = Producer;
+module.exports = Player;
