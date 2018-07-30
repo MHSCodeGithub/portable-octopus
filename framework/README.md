@@ -13,7 +13,9 @@
 
 `name` - **string**, publicly displayed name of kingdom.
 
-`treasury` - **treasury**, the private treasury owned by the kingdom.
+`producers` - **array<Producer>**, array of producers owned by the kingdom.
+
+`harbour` - **harbour**, the harbour that connects the kingdom to the market.
 ### Treasury
 `id` - **integer**, used to uniquely identify the kingdom.
 
