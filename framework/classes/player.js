@@ -13,7 +13,6 @@ class Player extends Objectable {
     this.username = username; // string username
     if(connect) { this.password = password; }
     else        { this.password = sha256(password); } // string sha256 hashed password
-    this.islands = [];
     // TODO: Add player functions
   }
 }
