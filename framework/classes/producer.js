@@ -6,10 +6,11 @@ const Objectable = require('./objectable');
  */
 
 class Producer extends Objectable {
-  constructor(id, kingdom) {
+  constructor(id, kingdom, type) {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.kingdom = kingdom; // owning kingdom of producer
+    this.type = type;
     this.level = 0; // level of producer, determines effectiveness
     // TODO: Add Producer functions
   }
