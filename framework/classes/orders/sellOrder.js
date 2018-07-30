@@ -6,10 +6,11 @@ const Objectable = require('./objectable');
  */
 
 class SellOrder extends Objectable {
-  constructor(id) {
-    super();
+  constructor(id, commodity, price, amount) {
+    super(commodity, price, amount);
     this.id = id; // unique integer id (starts at 0)
-    // TODO: Add SellOrder functions
+    this.type = "sell";
+    // TODO: Add BuyOrder functions
   }
 }
 
