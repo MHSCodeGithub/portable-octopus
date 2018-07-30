@@ -8,6 +8,7 @@ const Objectable = require('./objectable');
 
 class Player extends Objectable {
   constructor(id, username, password) {
+    super();
     this.id = id; // unique integer id (starts at 0)
     this.username = username; // string username
     this.password = sha256(password); // string sha256 hashed password
