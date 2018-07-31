@@ -5,7 +5,7 @@ const database = require('../../database');
 
 function objectLength(target) {
   var i = 0;
-  for (property in target) {
+  for (var property in target) {
     i++;
   }
   return Number(i);
