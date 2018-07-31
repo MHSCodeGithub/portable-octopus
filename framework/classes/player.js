@@ -18,7 +18,7 @@ class Player extends Objectable {
     // TODO: Add player functions
   }
 
-  public check() {
+  check() {
     var data = database.read();
 
     for (property in data.accounts) {
@@ -33,7 +33,7 @@ class Player extends Objectable {
     return false;
   }
 
-  public save() {
+  save() {
     this.id = objectLength(database.read().accounts) + 1;
     database.addAccount(getClean(this));
   }
