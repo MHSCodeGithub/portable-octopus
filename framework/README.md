@@ -24,6 +24,13 @@
 `balance` - **integer**, the balance of the treasury.
 
 `health` - **integer**, the health of the treasury (to be used for wars).
+
+`effectBalance(amount)` - Parameter: **integer**, effects the balance of the treasury, input negative numbers to reduce it.
+
+`damage(amount)` - Parameter: **integer**, reduces the health of the treasury by the specified amount.
+
+`repair(amount)` - Parameter: **integer**, increases the health of the treasury by the specified amount.
+
 ### Harbour
 `id` - **integer**, used to uniquely identify the harbour.
 
@@ -39,11 +46,11 @@
 ### Producer
 `id` - **integer**, used to uniquely identify the producer.
 
-`kingdom` - **Kingdom**, the kingdom that owns the producer.
-
 `type` - **string**, type of producer.
 
 `level` - **integer**, the level of the producer determines effectiveness (e.g: farm yield).
+
+`upgrade()` - increases the producer's level.
 ### Farm
 `growth` - **array<array<Integer>>**, 2 dimensional array containing the growth stages of the crops.
 

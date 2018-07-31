@@ -6,7 +6,7 @@ const Objectable = require('./objectable');
  */
 
 class Harbour extends Objectable {
-  constructor(id, kingdom) {
+  constructor(id) {
     super();
     this.id = id;
     this.health = 600;

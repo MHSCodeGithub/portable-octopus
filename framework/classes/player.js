@@ -43,7 +43,7 @@ class Player extends Objectable {
 
   save() {
     this.id = objectLength(database.read().accounts) + 1;
-    database.addAccount(this.toJSON());
+    database.addAccount(this.toJSON(this));
   }
 }
 

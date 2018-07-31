@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(100, 1fr);
+  grid-template-rows: repeat(100, 1fr);
+  grid-gap: 1px;
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+}
+
+#game-container > div {
+  background: green;
+}
+
+.parent {
+  background: skyblue;
+}
+
+@media screen and (min-width: 1000px) {
+  #game-container {
+    width: 100vw;
+  }
+  .parent {
+    width: 100vw;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  #data {
+    width: 100vw;
+  }
+  #game-container {
+    height: 100vh;
+  }
+}
