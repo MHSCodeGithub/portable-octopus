@@ -1,4 +1,5 @@
 
+const automaticRoute = require('automatic-routing');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -64,6 +65,10 @@ app.post('/', function (req, res) {
       res.redirect('/');
     }
   }
+});
+
+app.get("*", function (req, res) {
+  automaticRoute(__dirname+"/front-end/", req, res);
 });
 
 app.get("/register.html", function (req, res) {
