@@ -15,12 +15,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const Player = require('./framework/classes/player');
 const database = require('./database');
 
+function objectLength(target) {
+  var i = 0;
+  for (var property in target) {
+    i++;
+  }
+  return Number(i);
+};
+
 app.get('/', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});
   res.cookie('failedLog', false, {httpOnly: false});
 
   if(req.session.username && req.session.password) {
-    var tempAccount = new Player(database.read().accounts.length, req.session.username, req.session.password, null, true);
+    var tempAccount = new Player(objectLength(database.read().accounts), req.session.username, req.session.password, null, true);
     if(tempAccount.check()) {
       res.cookie('username', tempAccount.username, {httpOnly: false});
       res.cookie('password', tempAccount.password, {httpOnly: false});
@@ -44,13 +52,13 @@ app.post('/', function (req, res) {
     req.session.password = req.body.password;
     res.redirect('/');
   } else if(req.body.type == "register") {
-    var newAccount = new Player(database.read().accounts.length, req.session.username, req.session.password, null, true);
+    var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, null, false);
     if(database.getAccount(newAccount.username)) {
       res.cookie('failedReg', true, {httpOnly: false});
       res.redirect('register.html');
     } else {
-      req.session.username = req.body.username;
-      req.session.password = req.body.password;
+      req.session.username = newAccount.username;
+      req.session.password = newAccount.password;
       newAccount.save();
       res.redirect('/');
     }
