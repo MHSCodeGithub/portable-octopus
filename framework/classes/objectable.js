@@ -9,12 +9,16 @@ class Objectable {
     this.toJSON = function (target) {
       var jsonedObject = {};
       for (var x in target) {
-        if(target[x].constructor !== Array && typeof target[x] == "object") {
-          jsonedObject[x] = this.toJSON(target[x]);
-        } else if (x === "toJSON" || x === "constructor" || typeof target[x] === 'function') {
-          continue;
-        } else {
-          jsonedObject[x] = target[x];
+        try {
+          if(target[x].constructor !== Array && typeof target[x] == "object") {
+            jsonedObject[x] = this.toJSON(target[x]);
+          } else if (x === "toJSON" || x === "constructor" || typeof target[x] === 'function') {
+            continue;
+          } else {
+            jsonedObject[x] = target[x];
+          }
+        } catch (e) {
+          console.log("## ERR IN OBJECTABLE ##");
         }
       }
       return jsonedObject;
