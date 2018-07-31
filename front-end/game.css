@@ -31,9 +31,6 @@ body {
 }
 
 @media screen and (max-width: 1000px) {
-  #data {
-    width: 100vw;
-  }
   #game-container {
     height: 100vh;
   }
