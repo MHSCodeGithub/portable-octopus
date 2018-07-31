@@ -6,35 +6,16 @@
 
 class Objectable {
   constructor() {
-    this.toJSON = function (proto) {
-      let jsoned = {};
-      let toConvert = proto || this;
-      Object.getOwnPropertyNames(toConvert).forEach((prop) => {
-        const val = toConvert[prop];
-        // don't include those
-        if (prop === 'toJSON' || prop === 'constructor') {
-          return;
-        }
-        if (typeof val === 'function') {
-          jsoned[prop] = val.bind(jsoned);
-          return;
-        }
-        jsoned[prop] = val;
-      });
+    this.toJSON = function () {
+      var jsonedObject = {};
+      for (var x in this) {
 
-      const inherited = Object.getPrototypeOf(toConvert);
-      if (inherited !== null) {
-        Object.keys(this.toJSON(inherited)).forEach(key => {
-          if (!!jsoned[key] || key === 'constructor' || key === 'toJSON')
-            return;
-          if (typeof inherited[key] === 'function') {
-            jsoned[key] = inherited[key].bind(jsoned);
-            return;
-          }
-          jsoned[key] = inherited[key];
-        });
+        if (x === "toJSON" || x === "constructor" || typeof this[x] === 'function') {
+          continue;
+        }
+        jsonedObject[x] = this[x];
       }
-      return jsoned;
+      return jsonedObject;
     }
   }
 }
