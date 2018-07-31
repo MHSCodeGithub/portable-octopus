@@ -7,13 +7,21 @@
   <body>
     <div id="login">
       <h1>login</h1>
-      <a href="register.html">register</a>
       <form action="/" method="post">
         <input type="hidden" name="type" value="login">
         <input type="text" id="username" name="username" placeholder="Username">
         <input type="password" id="password" name="password" placeholder="Password">
         <input type="submit" value="Submit">
-        <p id="err">Incorrect Login Details!</p>
+        <p id="errLog" style="display: none;">Incorrect Login Details!</p>
+      </form>
+
+      <h1>register</h1>
+      <form action="/" method="post">
+        <input type="hidden" name="type" value="register">
+        <input type="text" id="username" name="username" placeholder="Username">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="submit" value="Submit">
+        <p id="errReg" style="display: none;">Username Taken!</p>
       </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
@@ -37,9 +45,15 @@
 
       $(function () {
         if(getCookie("failedLog") == "true") {
-          $("#err").show();
+          $("#errLog").show();
         } else {
-          $("#err").hide();
+          $("#errLog").hide();
+        }
+
+        if(getCookie("failedReg") == "true") {
+          $("#errReg").show();
+        } else {
+          $("#errReg").hide();
         }
       });
     </script>
