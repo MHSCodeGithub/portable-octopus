@@ -33,8 +33,6 @@
 ### Commodity
 `id` - **integer**, used to uniquely identify the commodity.
 
-`value` - **integer**, used to represent the economical value determined by supply and demand.
-
 `name` - **string**, name of commodity.
 
 `type` - **string**, type of commodity (mainly going to be used for sorting and UI stuff).
