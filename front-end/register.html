@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="css/chat.css">
+  </head>
+  <body>
+    <div id="register">
+      <h1>register</h1>
+      <form action="/" method="post">
+        <input type="hidden" name="type" value="register">
+        <input type="text" id="username" name="username" placeholder="Username">
+        <input type="password" id="password" name="password" placeholder="Password">
+        <input type="submit" value="Submit">
+        <p id="err">Username Taken!</p>
+      </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return false;
+      }
+
+      $(function () {
+        if(getCookie("failedReg") == "true") {
+          $("#err").show();
+        } else {
+          $("#err").hide();
+        }
+      });
+    </script>
+  </body>
+</html>
