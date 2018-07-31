@@ -1,0 +1,48 @@
+/* GENERAL
+––––––––––––––––––––––––––––––––––––––– */
+body {
+  background: url('../img/background.jpg');
+  background-size: contain;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* LOGIN BOX
+––––––––––––––––––––––––––––––––––––––– */
+#tabs {
+  display: inline-block;
+  background: white;
+  height: 450px;
+  width: 400px;
+  border-radius: 10px;
+}
+
+input {
+  display: flex;
+  width: 100%;
+  margin: 15px 0;
+  font-size: 1.7em;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 8px;
+
+}
+
+.ui-state-active {
+  border: 2px solid dodgerblue;
+}
+
+.ui-tabs-nav {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid gray;
+}
