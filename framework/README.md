@@ -24,6 +24,13 @@
 `balance` - **integer**, the balance of the treasury.
 
 `health` - **integer**, the health of the treasury (to be used for wars).
+
+`effectBalance(amount)` - Parameter: **integer**, effects the balance of the treasury, input negative numbers to reduce it.
+
+`damage(amount)` - Parameter: **integer**, reduces the health of the treasury by the specified amount.
+
+`repair(amount)` - Parameter: **integer**, increases the health of the treasury by the specified amount.
+
 ### Harbour
 `id` - **integer**, used to uniquely identify the harbour.
 
