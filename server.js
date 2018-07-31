@@ -5,6 +5,7 @@ var session = require('express-session');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+const sha256 = require('sha256');
 var port = process.env.PORT || 3000;
 
 app.use(cookieParser());
@@ -49,7 +50,7 @@ app.get('/', function(req, res){
 app.post('/', function (req, res) {
   if(req.body.type == "login") {
     req.session.username = req.body.username;
-    req.session.password = req.body.password;
+    req.session.password = sha256(req.body.password);
     res.redirect('/');
   } else if(req.body.type == "register") {
     var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, null, false);
