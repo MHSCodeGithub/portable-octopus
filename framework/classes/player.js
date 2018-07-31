@@ -3,6 +3,11 @@ const sha256 = require('sha256');
 const Objectable = require('./objectable');
 const database = require('../../database');
 
+const Treasury = require('./treasury');
+const Producer = require('./producer');
+const Harbour = require('./harbour');
+const Kingdom = require('./kingdom');
+
 function objectLength(target) {
   var i = 0;
   for (var property in target) {
@@ -34,7 +39,16 @@ class Player extends Objectable {
          && data.accounts[property].password === this.password) {
 
         this.id = data.accounts[property].id;
-        // TODO: Load kingdom in
+
+        var tre = new Treasury(data.accounts[property].kingdom.treasury.id);
+        tre.health = data.accounts[property].kingdom.treasury.health;
+        var har = new Harbour(data.accounts[property].kingdom.harbour.id);
+        har.health = data.accounts[property].kingdom.harbour.health;
+
+        var king = new Kingdom(data.accounts[property].kingdom.id, data.accounts[property].kingdom.name, tre, har);
+
+        this.kingdom = king;
+        // TODO: Load kingdom producers in
         return true;
       }
     }
