@@ -46,11 +46,11 @@
 ### Producer
 `id` - **integer**, used to uniquely identify the producer.
 
-`kingdom` - **Kingdom**, the kingdom that owns the producer.
-
 `type` - **string**, type of producer.
 
 `level` - **integer**, the level of the producer determines effectiveness (e.g: farm yield).
+
+`upgrade()` - increases the producer's level.
 ### Farm
 `growth` - **array<array<Integer>>**, 2 dimensional array containing the growth stages of the crops.
 
