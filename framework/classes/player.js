@@ -23,7 +23,6 @@ class Player extends Objectable {
     if(connect) { this.password = password; }
     else        { this.password = sha256(password); } // string sha256 hashed password
     this.kingdom = kingdom; // kingdom managed by player
-    console.log(this.toJSON);
     // TODO: Add player functions
   }
 
