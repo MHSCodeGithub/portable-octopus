@@ -3,6 +3,14 @@ const sha256 = require('sha256');
 const Objectable = require('./objectable');
 const database = require('../../database');
 
+function objectLength(target) {
+  var i = 0;
+  for (property in target) {
+    i++;
+  }
+  return Number(i);
+};
+
 /*
  * <---> # Player class # <--->
  */
@@ -15,17 +23,18 @@ class Player extends Objectable {
     if(connect) { this.password = password; }
     else        { this.password = sha256(password); } // string sha256 hashed password
     this.kingdom = kingdom; // kingdom managed by player
+    console.log(this.toJSON);
     // TODO: Add player functions
   }
 
   check() {
     var data = database.read();
 
-    for (property in data.accounts) {
-      if(   data.accounts[property].username === this.username
-         && data.accounts[property].password === this.password) {
+    for (thing in data.accounts) {
+      if(   data.accounts[thing].username === this.username
+         && data.accounts[thing].password === this.password) {
 
-        this.id = data.accounts[property].id;
+        this.id = data.accounts[thing].id;
         // TODO: Load kingdom in
         return true;
       }
@@ -35,7 +44,7 @@ class Player extends Objectable {
 
   save() {
     this.id = objectLength(database.read().accounts) + 1;
-    database.addAccount(getClean(this));
+    database.addAccount(this.toJSON());
   }
 }
 
