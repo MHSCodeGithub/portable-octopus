@@ -2,7 +2,10 @@
 <html>
   <head>
     <title>Economio</title>
-    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="game.css">
+    <script src="panzoom/test/libs/jquery.js"></script>
+    <script src="panzoom/dist/jquery.panzoom.js"></script>
+    <script src="panzoom/test/libs/jquery.mousewheel.js"></script>
   </head>
   <body>
     <!-- ## Depracted chat system ## (IGNORE)
@@ -13,6 +16,47 @@
       </form>
     </div>
     -->
+    <section id="game">
+      <div class="parent">
+        <div class="panzoom">
+          <div id="game-container">
+
+          </div>
+        </div>
+      </div>
+      <div id="data">
+        <h1>Block</h1>
+        <div id="block-data">
+          <div id="block-data-loc">
+            <span>X: </span> <span id="x">Unknown</span><br />
+            <span>Y: </span> <span id="y">Unknown</span>
+          </div>
+          <div id="block-data-about">
+            <span>Owner: </span> <span id="owner">Unknown</span><br />
+            <span>Production: </span> <span id="production">Unknown</span>
+          </div>
+          <div id="buy">
+            <button disabled>Buy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function() {
+        var $section = $('#game');
+        var $panzoom = $section.find('.panzoom').panzoom();
+        $panzoom.parent().on('mousewheel.focal', function( e ) {
+          e.preventDefault();
+          var delta = e.delta || e.originalEvent.wheelDelta;
+          var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+          $panzoom.panzoom('zoom', zoomOut, {
+            animate: false,
+            focal: e
+          });
+        });
+      })();
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
