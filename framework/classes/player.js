@@ -40,14 +40,18 @@ class Player extends Objectable {
 
         this.id = data.accounts[property].id;
 
-        var tre = new Treasury(data.accounts[property].kingdom.treasury.id);
-        tre.health = data.accounts[property].kingdom.treasury.health;
-        var har = new Harbour(data.accounts[property].kingdom.harbour.id);
-        har.health = data.accounts[property].kingdom.harbour.health;
+        try {
+          var tre = new Treasury(data.accounts[property].kingdom.treasury.id);
+          tre.health = data.accounts[property].kingdom.treasury.health;
+          var har = new Harbour(data.accounts[property].kingdom.harbour.id);
+          har.health = data.accounts[property].kingdom.harbour.health;
 
-        var king = new Kingdom(data.accounts[property].kingdom.id, data.accounts[property].kingdom.name, tre, har);
+          var king = new Kingdom(data.accounts[property].kingdom.id, data.accounts[property].kingdom.name, tre, har);
 
-        this.kingdom = king;
+          this.kingdom = king;
+        } catch (e) {
+          this.kingdom = null;
+        }
         // TODO: Load kingdom producers in
         return true;
       }
