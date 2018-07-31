@@ -91,6 +91,10 @@
         socket.on('result', function (message) {
           alert(message);
         });
+
+        for (var i = 0; i < 10000; i++) {
+          $("#game-container").append("<div id='block-"+i+"'> </div>");
+        }
       });
     </script>
   </body>
