@@ -2,6 +2,7 @@
 ## Classes
 ### Class
 `property` - **data type**, description.
+
 ### Player
 `id` - **integer**, used to uniquely identify the player.
 
@@ -9,7 +10,12 @@
 
 `password` - **string**, private sha256 hashed password.
 
-`kingdom` - **Kingdom**, players kingdom class.
+`kingdom` - **Kingdom**, players owned kingdom class.
+
+`check()` - checks if the user is in the database w/the correct username & password. If the user is found, the database user's data will be loaded onto the original user.
+
+`save()` - saves the current player's state to the db.
+
 ### Kingdom
 `id` - **integer**, used to uniquely identify the kingdom.
 
@@ -18,6 +24,7 @@
 `producers` - **array<Producer>**, array of producers owned by the kingdom.
 
 `harbour` - **harbour**, the harbour that connects the kingdom to the market.
+
 ### Treasury
 `id` - **integer**, used to uniquely identify the treasury.
 
@@ -35,14 +42,17 @@
 `id` - **integer**, used to uniquely identify the harbour.
 
 `health` - **integer**, the health of the harbour (to be used for wars).
+
 ### Market
 `commodities` - **array<Commodity>**, array container commodities of market.
+
 ### Commodity
 `id` - **integer**, used to uniquely identify the commodity.
 
 `name` - **string**, name of commodity.
 
 `type` - **string**, type of commodity (mainly going to be used for sorting and UI stuff).
+
 ### Producer
 `id` - **integer**, used to uniquely identify the producer.
 
@@ -51,6 +61,7 @@
 `level` - **integer**, the level of the producer determines effectiveness (e.g: farm yield).
 
 `upgrade()` - increases the producer's level.
+
 ### Farm
 `growth` - **array<array<Integer>>**, 2 dimensional array containing the growth stages of the crops.
 
@@ -58,4 +69,5 @@
 ```javascript
 Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
 ```
+
 ## Interface
