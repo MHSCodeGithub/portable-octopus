@@ -30,11 +30,11 @@ class Player extends Objectable {
   check() {
     var data = database.read();
 
-    for (thing in data.accounts) {
-      if(   data.accounts[thing].username === this.username
-         && data.accounts[thing].password === this.password) {
+    for (var property in data.accounts) {
+      if(   data.accounts[property].username === this.username
+         && data.accounts[property].password === this.password) {
 
-        this.id = data.accounts[thing].id;
+        this.id = data.accounts[property].id;
         // TODO: Load kingdom in
         return true;
       }
