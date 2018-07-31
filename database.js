@@ -20,7 +20,7 @@ exports.addAccount = function (account) {
 
 exports.getAccount = function (username) {
   var data = exports.read();
-  for (property in data.accounts) {
+  for (var property in data.accounts) {
     if(data.accounts[property].username === username) {
       return data.accounts[property];
     }
