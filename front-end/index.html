@@ -92,8 +92,12 @@
           alert(message);
         });
 
-        for (var i = 0; i < 10000; i++) {
-          $("#game-container").append("<div id='block-"+i+"'> </div>");
+        var total = 0;
+        for (var i = 0; i < 100; i++) {
+          for (var j = 0; j < 100; j++) {
+            total++;
+            $("#game-container").append("<div id='block-"+(total)+"' class='x-"+i+" y-"+j+"'> </div>");
+          }
         }
       });
     </script>
