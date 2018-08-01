@@ -2,38 +2,39 @@
 <html>
   <head>
     <title>Login | Octable Portopus</title>
+    <link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
     <link rel="stylesheet" href="css/jquery-ui.min.css">
     <link rel="stylesheet" href="css/login.css">
   </head>
   <body>
-    <div id="tabs">
+      <div id="tabs">
 
-      <ul>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#register">Register</a></li>
-      </ul>
+        <ul>
+          <li><a href="#login">LOGIN</a></li>
+          <li><a href="#register">REGISTER</a></li>
+        </ul>
 
-      <div id="login">
-        <form action="/" method="post">
-          <input type="hidden" name="type" value="login">
-          <input type="text" id="username" name="username" placeholder="Username">
-          <input type="password" id="password" name="password" placeholder="Password">
-          <input type="submit" value="Submit">
-          <p id="errLog" style="display: none;">Incorrect Login Details!</p>
-        </form>
+        <div id="login">
+          <form action="/" method="post">
+            <input type="hidden" name="type" value="login">
+            <input type="text" id="username" name="username" placeholder="Username">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="submit" value="SUBMIT">
+            <p id="errLog" style="display: none;">Incorrect Login Details!</p>
+          </form>
+        </div>
+
+        <div id="register">
+          <form action="/" method="post">
+            <input type="hidden" name="type" value="register">
+            <input type="text" id="username" name="username" placeholder="Username">
+            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="text" id="kingdom" name="kingdom" placeholder="Kingdom Name">
+            <input type="submit" value="SUBMIT">
+            <p id="errReg" style="display: none;">Username Taken!</p>
+          </form>
+        </div>
       </div>
-
-      <div id="register">
-        <form action="/" method="post">
-          <input type="hidden" name="type" value="register">
-          <input type="text" id="username" name="username" placeholder="Username">
-          <input type="password" id="password" name="password" placeholder="Password">
-          <input type="text" id="kingdom" name="kingdom" placeholder="Kingdom Name">
-          <input type="submit" value="Submit">
-          <p id="errReg" style="display: none;">Username Taken!</p>
-        </form>
-      </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="js/jquery-3.3.1.min.js"></script>

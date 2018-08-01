@@ -14,16 +14,22 @@ body * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'VT323', monospace;
 }
 
 /* LOGIN BOX
 ––––––––––––––––––––––––––––––––––––––– */
 #tabs {
   display: inline-block;
-  background: white;
-  height: 450px;
-  width: 400px;
-  border-radius: 10px;
+  background: #FFB57A;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin: 15px;
 }
 
 input {
@@ -31,18 +37,55 @@ input {
   width: 100%;
   margin: 15px 0;
   font-size: 1.7em;
-  border: 1px solid black;
-  border-radius: 8px;
+  border: 2px solid #E4E4E4;
+  border-radius: 2px;
   padding: 8px;
 
 }
 
-.ui-state-active {
-  border: 2px solid dodgerblue;
-}
-
 .ui-tabs-nav {
   display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid gray;
+}
+
+.ui-tab {
+  background: #00BCB7;
+  width: 50%;
+  height: 100%;
+  list-style: none;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.ui-tab:hover {
+  background: #009692;
+  border-bottom: 5px solid #327b75;
+}
+
+.ui-tabs-anchor {
+  color: white;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  font-size: 2em;
+}
+
+.ui-state-active, .ui-state-active:hover {
+  background: #008986;
+  border-bottom: 5px solid #005B53;
+  width: 50%;
+  height: 100%;
+}
+
+input[type=submit] {
+  background: #57BC00;
+  border: 2px solid #4E7E00;
+  color: white;
+  font-size: 2em;
+  align-self: flex-end;
+}
+
+input[type=submit]:hover {
+  cursor: pointer;
+  background: #449700;
+  border-color: #3D6400;
 }
