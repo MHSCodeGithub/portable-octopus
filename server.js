@@ -48,6 +48,29 @@ app.get('/', function(req, res){
   }
 });
 
+app.get('/index.html', function(req, res){
+  res.cookie('failedReg', false, {httpOnly: false});
+  res.cookie('failedLog', false, {httpOnly: false});
+
+  if(req.session.username && req.session.password) {
+    var tempAccount = new Player(objectLength(database.read().accounts), req.session.username, req.session.password, null, true);
+    if(tempAccount.check()) {
+      res.cookie('username', tempAccount.username, {httpOnly: false});
+      res.cookie('password', tempAccount.password, {httpOnly: false});
+      res.sendFile(__dirname + '/front-end/index.html');
+    } else {
+      req.session.username = false;
+      req.session.password = false;
+      res.cookie('failedLog', true, {httpOnly: false});
+      res.sendFile(__dirname + '/front-end/login.html');
+    }
+  } else {
+    req.session.username = false;
+    req.session.password = false;
+    res.sendFile(__dirname + '/front-end/login.html');
+  }
+});
+
 app.post('/', function (req, res) {
   if(req.body.type == "login") {
     req.session.username = req.body.username;
@@ -56,8 +79,10 @@ app.post('/', function (req, res) {
   } else if(req.body.type == "register") {
     var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, null, false);
     if(database.getAccount(newAccount.username)) {
+      req.session.username = null;
+      req.session.password = null;
       res.cookie('failedReg', true, {httpOnly: false});
-      res.redirect('register.html');
+      res.redirect('login.html');
     } else {
       req.session.username = newAccount.username;
       req.session.password = newAccount.password;
@@ -69,12 +94,6 @@ app.post('/', function (req, res) {
 
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);
-});
-
-app.get("/register.html", function (req, res) {
-  req.session.username = false;
-  req.session.password = false;
-  res.sendFile(__dirname + '/front-end/register.html')
 });
 
 io.on('connection', function(socket){
