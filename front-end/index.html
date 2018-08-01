@@ -92,13 +92,46 @@
           alert(message);
         });
 
+        function drawLine(startY, startX, color, endY, endX) {
+          if(startX < endX) {
+            console.log("sel1");
+            for (var i = 0; i < (endX-startX)+1; i++) {
+              $(".y-"+startY+".x-"+(i+startX)).css("background", color);
+            }
+          } else if(startX > endX) {
+            console.log("sel2");
+            for (var i = 0; i < (startX-endX)+1; i++) {
+              $(".y-"+startY+".x-"+(startX-i)).css("background", color);
+            }
+          } else if(startY < endY) {
+            console.log("sel3");
+            for (var i = 0; i < (endY-startY)+1; i++) {
+              $(".y-"+(i+startY)+".x-"+startX).css("background", color);
+            }
+          } else if(startY > endY) {
+            console.log("sel4");
+            for (var i = 0; i < (startY-endY)+1; i++) {
+              $(".y-"+(endY-i)+".x-"+startX).css("background", color);
+            }
+          }
+        }
+
         var total = 0;
         for (var i = 0; i < 100; i++) {
           for (var j = 0; j < 100; j++) {
             total++;
-            $("#game-container").append("<div id='block-"+(total)+"' class='x-"+i+" y-"+j+"'> </div>");
+            $("#game-container").append("<div id='block-"+(total)+"' class='y-"+(i+1)+" x-"+(j+1)+"'> </div>");
           }
         }
+
+        drawLine(2, 4, "#654321", 11, 4);
+        drawLine(11, 4, "#654321", 11, 7);
+        drawLine(2, 5, "#785027", 10, 5);
+        drawLine(10, 5, "#785027", 10, 7);
+        drawLine(2, 6, "#8b5d2e", 9, 6);
+        drawLine(9, 6, "#8b5d2e", 9, 7);
+        drawLine(2, 2, "#8b5d2e", 11, 2);
+        drawLine(2, 3, "#785027", 11, 3);
       });
     </script>
   </body>
