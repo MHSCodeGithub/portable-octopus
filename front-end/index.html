@@ -124,14 +124,28 @@
           }
         }
 
-        drawLine(2, 4, "#654321", 11, 4);
-        drawLine(11, 4, "#654321", 11, 7);
-        drawLine(2, 5, "#785027", 10, 5);
-        drawLine(10, 5, "#785027", 10, 7);
-        drawLine(2, 6, "#8b5d2e", 9, 6);
-        drawLine(9, 6, "#8b5d2e", 9, 7);
-        drawLine(2, 2, "#8b5d2e", 11, 2);
-        drawLine(2, 3, "#785027", 11, 3);
+        function drawHouse(startX, startY) {
+          /*
+            dark: #654321
+            med: #785027
+            light: #8b5d2e
+          */
+
+          console.log(startX+3);
+
+          drawLine(startY+1, startX+3, "#654321", startY+7, startX+3);
+          drawLine(startY+7, startX+3, "#654321", startY+11, startX+7);
+          drawLine(startY+1, startX+4, "#785027", startY+6, startX+4);
+          drawLine(startY+6, startX+5, "#785027", startY+9, startX+7);
+          drawLine(startY+1, startX+5, "#8b5d2e", startY+5, startX+5);
+          drawLine(startY+5, startX+6, "#8b5d2e", startY+9, startX+7);
+          drawLine(startY+1, startX+1, "#8b5d2e", startY+8, startX+1);
+          drawLine(startY+1, startX+2, "#785027", startY+8, startX+2);
+          drawLine(startY+8, startX+3, "#785027", startY+12, startX+7);
+          drawLine(startY+9, startX+1, "#8b5d2e", startY+13, startX+7);
+        }
+
+        drawHouse(1, 1);
       });
     </script>
   </body>
