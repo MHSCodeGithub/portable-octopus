@@ -145,14 +145,18 @@
           $(this).hide();
         })
 
+        var house0 = true;
+
         $(".house-0").click(function () {
-          if($(this).children().length == 0) {
+          if($(this).children().length == 0 && house0) {
+            house0 = false;
             var classes = $(this).attr('class').split(" ");
             var x = classes[1].split("-")[1],
                 y = classes[0].split("-")[1];
 
             $(this).append("<div class='info'></div>")
           } else {
+            house0 = true;
             $(this).children().hide();
           }
         });
