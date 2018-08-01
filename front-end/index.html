@@ -92,26 +92,22 @@
           alert(message);
         });
 
-        function drawLine(startY, startX, color, endY, endX) {
+        function drawLine(startY, startX, color, endY, endX, id) {
           if(startX < endX) {
-            console.log("sel1");
             for (var i = 0; i < (endX-startX)+1; i++) {
-              $(".y-"+startY+".x-"+(i+startX)).css("background", color);
+              $(".y-"+startY+".x-"+(i+startX)).css("background", color).addClass(id);
             }
           } else if(startX > endX) {
-            console.log("sel2");
             for (var i = 0; i < (startX-endX)+1; i++) {
-              $(".y-"+startY+".x-"+(startX-i)).css("background", color);
+              $(".y-"+startY+".x-"+(startX-i)).css("background", color).addClass(id);
             }
           } else if(startY < endY) {
-            console.log("sel3");
             for (var i = 0; i < (endY-startY)+1; i++) {
-              $(".y-"+(i+startY)+".x-"+startX).css("background", color);
+              $(".y-"+(i+startY)+".x-"+startX).css("background", color).addClass(id);
             }
           } else if(startY > endY) {
-            console.log("sel4");
             for (var i = 0; i < (startY-endY)+1; i++) {
-              $(".y-"+(endY-i)+".x-"+startX).css("background", color);
+              $(".y-"+(endY-i)+".x-"+startX).css("background", color).addClass(id);
             }
           }
         }
@@ -124,28 +120,42 @@
           }
         }
 
-        function drawHouse(startX, startY) {
+        function drawHouse(startX, startY, id) {
           /*
             dark: #654321
             med: #785027
             light: #8b5d2e
           */
 
-          console.log(startX+3);
-
-          drawLine(startY+1, startX+3, "#654321", startY+7, startX+3);
-          drawLine(startY+7, startX+3, "#654321", startY+11, startX+7);
-          drawLine(startY+1, startX+4, "#785027", startY+6, startX+4);
-          drawLine(startY+6, startX+5, "#785027", startY+9, startX+7);
-          drawLine(startY+1, startX+5, "#8b5d2e", startY+5, startX+5);
-          drawLine(startY+5, startX+6, "#8b5d2e", startY+9, startX+7);
-          drawLine(startY+1, startX+1, "#8b5d2e", startY+8, startX+1);
-          drawLine(startY+1, startX+2, "#785027", startY+8, startX+2);
-          drawLine(startY+8, startX+3, "#785027", startY+12, startX+7);
-          drawLine(startY+9, startX+1, "#8b5d2e", startY+13, startX+7);
+          drawLine(startY+1, startX+3, "#654321", startY+7, startX+3, "house-"+id);
+          drawLine(startY+7, startX+3, "#654321", startY+11, startX+7, "house-"+id);
+          drawLine(startY+1, startX+4, "#785027", startY+6, startX+4, "house-"+id);
+          drawLine(startY+6, startX+5, "#785027", startY+9, startX+7, "house-"+id);
+          drawLine(startY+1, startX+5, "#8b5d2e", startY+5, startX+5, "house-"+id);
+          drawLine(startY+5, startX+6, "#8b5d2e", startY+9, startX+7, "house-"+id);
+          drawLine(startY+1, startX+1, "#8b5d2e", startY+8, startX+1, "house-"+id);
+          drawLine(startY+1, startX+2, "#785027", startY+8, startX+2, "house-"+id);
+          drawLine(startY+8, startX+3, "#785027", startY+12, startX+7, "house-"+id);
+          drawLine(startY+9, startX+1, "#8b5d2e", startY+13, startX+7, "house-"+id);
         }
 
-        drawHouse(1, 1);
+        drawHouse(1, 1, 0);
+
+        $(".info").click(function () {
+          $(this).hide();
+        })
+
+        $(".house-0").click(function () {
+          if($(this).children().length == 0) {
+            var classes = $(this).attr('class').split(" ");
+            var x = classes[1].split("-")[1],
+                y = classes[0].split("-")[1];
+
+            $(this).append("<div class='info'></div>")
+          } else {
+            $(this).children().hide();
+          }
+        });
       });
     </script>
   </body>

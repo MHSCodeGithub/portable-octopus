@@ -21,6 +21,13 @@ body {
   background: skyblue;
 }
 
+.info {
+  position: fixed;
+  width: 10vw;
+  height: 10vw;
+  background: white;
+}
+
 @media screen and (min-width: 1000px) {
   #game-container {
     width: 100vw;
