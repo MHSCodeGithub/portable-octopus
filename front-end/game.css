@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 body {
   margin: 0;
 }
@@ -27,6 +30,24 @@ body {
   height: 10vw;
   background: url('img/house-menu.png');
   background-size: contain;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.info h1 {
+  margin-left: 1vw;
+  font-size: 10px;
+}
+
+.info p {
+  margin-left: 1vw;
+  font-size: 5px;
+}
+
+.info img {
+  width: 1.5vw;
+  height: 1.5vw;
+  float: right;
+  margin: 0.5vw;
 }
 
 @media screen and (min-width: 1000px) {

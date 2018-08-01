@@ -141,11 +141,14 @@
 
         drawHouse(1, 1, 0);
 
-        $(".info").click(function () {
-          $(this).hide();
-        })
-
         var house0 = true;
+
+        (function($) {
+          $(document).on("click",".info img",function(){
+            house0 = true;
+            $(".info").hide();
+          });
+        })(jQuery);
 
         $(".house-0").click(function () {
           if($(this).children().length == 0 && house0) {
@@ -154,11 +157,13 @@
             var x = classes[1].split("-")[1],
                 y = classes[0].split("-")[1];
 
-            $(this).append("<div class='info'></div>")
-          } else {
-            house0 = true;
-            $(this).children().hide();
-          }
+            $(this).append("<div class='info'><img src='img/exit.png' alt='exit' /><h1>House</h1><p>Houses NPCs.</p></div>")
+          } /*else if($(this).children().length == 1) {
+            $(".info img").click(function () {
+              house0 = true;
+              $(".info").hide();
+            });
+          }*/
         });
       });
     </script>
