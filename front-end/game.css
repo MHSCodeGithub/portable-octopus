@@ -9,7 +9,7 @@ body {
   display: grid;
   grid-template-columns: repeat(100, 1fr);
   grid-template-rows: repeat(100, 1fr);
-  grid-gap: 0px;
+  grid-gap: 0.5px;
   background: black;
   width: 100vw;
   height: 100vw;
@@ -35,12 +35,12 @@ body {
 
 .info h1 {
   margin-left: 1vw;
-  font-size: 10px;
+  font-size: 20px;
 }
 
 .info p {
   margin-left: 1vw;
-  font-size: 5px;
+  font-size: 10px;
 }
 
 .info img {
@@ -56,6 +56,16 @@ body {
   }
   .parent {
     width: 100vw;
+  }
+
+  #game-menu {
+    width: 20vw;
+    height: 100vh;
+    background: white;
+    position: fixed;
+    float: right;
+    right: 0;
+    top: 0;
   }
 }
 
