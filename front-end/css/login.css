@@ -26,8 +26,9 @@ body * {
 
 #tabs {
   display: inline-block;
-  background: #FFB57A;
-  height: 420px;
+  background: url('../img/login-bg.png') no-repeat;
+  height: 454px;
+  width: 306px;
 }
 
 form {
@@ -35,13 +36,13 @@ form {
   flex-direction: column;
   height: 100%;
   justify-content: center;
-  margin: 15px;
+  margin: 40px;
 }
 
 input, .input {
   display: flex;
   width: 100%;
-  margin: 15px 0;
+  margin: 10px 0;
   font-size: 1.7em;
   border: 2px solid #E4E4E4;
   border-radius: 2px;
@@ -51,10 +52,13 @@ input, .input {
 .input {
   color: #FFB57A;
   border: 2px solid #FFB57A;
+  width: 20px;
+  align-self: center;
 }
 
 .ui-tabs-nav {
   display: flex;
+  margin: 18px;
 }
 
 .ui-tab {
@@ -87,15 +91,19 @@ input, .input {
 }
 
 input[type=submit] {
-  background: #57BC00;
-  border: 2px solid #4E7E00;
+  background:url("../img/button.png") no-repeat left bottom;
   color: white;
   font-size: 2em;
-  align-self: baseline;
+  height: 65px;
+  width: 162px;
+  border: none;
+  align-self: center;
+  font-size: 2.5em;
 }
 
 input[type=submit]:hover {
   cursor: pointer;
-  background: #449700;
-  border-color: #3D6400;
+  background: url('../img/button-p.png') no-repeat left bottom;
+  padding-bottom: 3px;
+  color: #eee;
 }
