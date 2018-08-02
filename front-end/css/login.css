@@ -5,23 +5,29 @@ body {
   background-size: contain;
   overflow: hidden;
   display: flex;
-  justify-content: center;
   align-items: center;
   height: 100vh;
+  flex-direction: column;
 }
 
 body * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'VT323', monospace;
+  font-family: 'VT323', sans-serif;
 }
 
 /* LOGIN BOX
 ––––––––––––––––––––––––––––––––––––––– */
+#title {
+  max-width: 40%;
+  margin: 50px 0 120px 0;
+}
+
 #tabs {
   display: inline-block;
   background: #FFB57A;
+  height: 420px;
 }
 
 form {
@@ -32,7 +38,7 @@ form {
   margin: 15px;
 }
 
-input {
+input, .input {
   display: flex;
   width: 100%;
   margin: 15px 0;
@@ -40,7 +46,11 @@ input {
   border: 2px solid #E4E4E4;
   border-radius: 2px;
   padding: 8px;
+}
 
+.input {
+  color: #FFB57A;
+  border: 2px solid #FFB57A;
 }
 
 .ui-tabs-nav {
@@ -81,7 +91,7 @@ input[type=submit] {
   border: 2px solid #4E7E00;
   color: white;
   font-size: 2em;
-  align-self: flex-end;
+  align-self: baseline;
 }
 
 input[type=submit]:hover {
