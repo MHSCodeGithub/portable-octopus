@@ -25,6 +25,11 @@ function objectLength(target) {
   return Number(i);
 };
 
+app.use(function(req, res, next) {
+  res.setHeader('charset', 'utf-8')
+  next();
+});
+
 app.get('/', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});
   res.cookie('failedLog', false, {httpOnly: false});
