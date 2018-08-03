@@ -26,7 +26,7 @@
       </div>
     </section>
     <div id="game-menu">
-      
+
     </div>
     <script>
       (function() {
@@ -116,8 +116,8 @@
         }
 
         var total = 0;
-        for (var i = 0; i < 100; i++) {
-          for (var j = 0; j < 100; j++) {
+        for (var i = 0; i < 50; i++) {
+          for (var j = 0; j < 50; j++) {
             total++;
             $("#game-container").append("<div id='block-"+(total)+"' class='y-"+(i+1)+" x-"+(j+1)+"'> </div>");
           }
@@ -142,7 +142,7 @@
           drawLine(startY+9, startX+1, "#8b5d2e", startY+13, startX+7, "house-"+id);
         }
 
-        drawHouse(1, 1, 0);
+        // drawHouse(1, 1, 0);
 
         var house0 = true;
 

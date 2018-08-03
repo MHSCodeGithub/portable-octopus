@@ -7,8 +7,8 @@ body {
 
 #game-container {
   display: grid;
-  grid-template-columns: repeat(100, 1fr);
-  grid-template-rows: repeat(100, 1fr);
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(50, 1fr);
   grid-gap: 0px;
   background: black;
   width: 100vw;
