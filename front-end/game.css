@@ -17,7 +17,8 @@ body {
 }
 
 #game-container > div {
-  background: green;
+  background: url('img/grass.png');
+  background-size: contain;
 }
 
 .parent {
