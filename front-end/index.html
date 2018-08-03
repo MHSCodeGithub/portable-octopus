@@ -127,10 +127,17 @@
         function drawFarm(x, y, stage) {
           $(".y-"+y+".x-"+x).css("background", "url('img/farm"+stage+".png')");
           $(".y-"+y+".x-"+x).css("background-size", "contain");
-          $(".y-"+y+".x-"+x).addClass("farm0");
+          $(".y-"+y+".x-"+x).addClass("farm0 built");
         }
 
         drawFarm(1,1,0);
+
+        function drawSelect(x, y, reason) {
+          $(".y-"+y+".x-"+x).css("background", "url('img/selected-tile.png')");
+          $(".y-"+y+".x-"+x).css("background-size", "contain");
+          $(".y-"+y+".x-"+x).addClass("selected");
+          $(".y-"+y+".x-"+x).addClass(reason);
+        }
 
         (function($) {
           $(document).on("click",".info img",function(){
