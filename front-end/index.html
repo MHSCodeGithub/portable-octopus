@@ -1,14 +1,17 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Kingdom | Octable Portopus</title>
-    <link rel="stylesheet" href="css/game.css">
-    <script src="panzoom/test/libs/jquery.js"></script>
-    <script src="panzoom/dist/jquery.panzoom.js"></script>
-    <script src="panzoom/test/libs/jquery.mousewheel.js"></script>
-  </head>
-  <body>
-    <!-- ## Depracted chat system ## (IGNORE)
+
+<head>
+  <title>Kingdom | Octable Portopus</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/game.css">
+  <script src="panzoom/test/libs/jquery.js"></script>
+  <script src="panzoom/dist/jquery.panzoom.js"></script>
+  <script src="panzoom/test/libs/jquery.mousewheel.js"></script>
+</head>
+
+<body>
+  <!-- ## Depracted chat system ## (IGNORE)
     <div id="chat">
       <ul id="chat-output"></ul>
       <form id="chat-input" action="">
@@ -17,204 +20,221 @@
     </div>
     -->
 
-    <!-- GAME
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <section id="game">
-      <div class="parent">
-        <div class="panzoom">
-          <div id="game-container">
-
-          </div>
+  <!-- GAME
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <section id="game">
+    <div class="parent">
+      <!--Actual Game-->
+      <div class="panzoom">
+        <div id="game-container">
         </div>
       </div>
-    </section>
 
-    <!-- MENU
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div id="menu">
-      <button type="button" name="button" id="market-btn">Market</button>
-      <button type="button" name="button" id="shop-btn">Shop</button>
-      <button type="button" name="button" id="map-btn">World Map</button>
-      <button type="button" name="button" id="quit-btn">Quit</button>
-
+      <!--Shop Menu-->
       <div id="shop-modal" class="modal">
         <div class="modal-content">
-          <span class="close">&times;</span>
+          <h1>This will be Shop</h1>
         </div>
       </div>
 
+      <!--Market Menu-->
+      <div id="market-modal" class="modal">
+        <div class="modal-content">
+          <h1>This will be Market</h1>
+        </div>
+      </div>
+
+      <!--World Map-->
+      <div id="map-modal" class="modal">
+        <div class="modal-content">
+          <h1>This will be map</h1>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- SILLY SCRIPTS
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <script>
-      (function() {
-        var $section = $('#game');
-        var $panzoom = $section.find('.panzoom').panzoom();
-        $panzoom.parent().on('mousewheel.focal', function( e ) {
-          e.preventDefault();
-          var delta = e.delta || e.originalEvent.wheelDelta;
-          var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-          $panzoom.panzoom('zoom', zoomOut, {
-            animate: false,
-            focal: e
-          });
-        });
-      })();
-    </script>
+  <!-- MENU
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div id="menu">
+    <button type="button" name="button" class="modal-btn" id="shop-btn">Shop</button>
+    <button type="button" name="button" class="modal-btn" id="market-btn">Market</button>
+    <button type="button" name="button" class="modal-btn" id="map-btn">World Map</button>
+    <button type="button" name="button" class="modal-btn" id="logout-btn">Log Out</button>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-    <script>
-      function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return false;
-      }
-
-      var username = getCookie("username");
-      var password = getCookie("password");
-
-      if(!username || !password) {
-        alert("Critical Error Please Login Again. (Reset session by re-opening browser)");
-      }
-
-      var me = {};
-
-      $(function () {
-        var socket = io.connect('http://localhost:3000');
-
-        /* ## Depracted chat system ## (IGNORE)
-        var now = new Date();
-        $('#chat-input').submit(function(){
-          if($('#message').val() != "") {
-            socket.emit('chat message', {content: $('#message').val(), author: username, timeStamp: String(now.getUTCHours()+":"+now.getUTCMinutes()+":"+now.getUTCSeconds())});
-            $('#message').val('');
-          }
-          return false;
-        });*/
-
-        // ## Depracted chat system ## (IGNORE)
-        socket.on('chat message', function(msg){ // <-- Required for bug fix
-          /*$('#chat-output').append($('<li>').text("["+msg.timeStamp+"] ["+msg.author+"] "+msg.content));
-          $("#chat-output").animate({ scrollTop: $("#chat-output")[0].scrollHeight - $("#chat-output").height() }, 100);*/
-        });
-
-        socket.on('result', function (message) {
-          alert(message);
-        });
-
-        function drawLine(startY, startX, color, endY, endX, id) {
-          if(startX < endX) {
-            for (var i = 0; i < (endX-startX)+1; i++) {
-              $(".y-"+startY+".x-"+(i+startX)).css("background", color).addClass(id);
-            }
-          } else if(startX > endX) {
-            for (var i = 0; i < (startX-endX)+1; i++) {
-              $(".y-"+startY+".x-"+(startX-i)).css("background", color).addClass(id);
-            }
-          } else if(startY < endY) {
-            for (var i = 0; i < (endY-startY)+1; i++) {
-              $(".y-"+(i+startY)+".x-"+startX).css("background", color).addClass(id);
-            }
-          } else if(startY > endY) {
-            for (var i = 0; i < (startY-endY)+1; i++) {
-              $(".y-"+(endY-i)+".x-"+startX).css("background", color).addClass(id);
-            }
-          }
-        }
-
-        var total = 0;
-        for (var i = 0; i < 50; i++) {
-          for (var j = 0; j < 50; j++) {
-            total++;
-            $("#game-container").append("<div id='block-"+(total)+"' class='y-"+(i+1)+" x-"+(j+1)+"'> </div>");
-          }
-        }
-
-
-        function drawFarm(x, y, stage) {
-          $(".y-"+y+".x-"+x).css("background", "url('img/farm"+stage+".png')");
-          $(".y-"+y+".x-"+x).css("background-size", "contain");
-          $(".y-"+y+".x-"+x).addClass("farm0 built");
-        }
-
-        drawFarm(1,1,0);
-
-        function drawSelect(x, y, reason) {
-          $(".y-"+y+".x-"+x).css("background", "url('img/selected-tile.png')");
-          $(".y-"+y+".x-"+x).css("background-size", "contain");
-          $(".y-"+y+".x-"+x).addClass("selected");
-          $(".y-"+y+".x-"+x).addClass(reason);
-        }
-
-        (function($) {
-          $(document).on("click",".info img",function(){
-            $(this).parent().parent().removeClass("open");
-            $(this).parent().remove();
-          });
-        })(jQuery);
-
-        $(".farm0").click(function () {
-          if($(this).children().length == 0 && !$(this).hasClass("open")) {
-            $(this).addClass("open");
-            var classes = $(this).attr('class').split(" ");
-            var x = classes[1].split("-")[1],
-                y = classes[0].split("-")[1];
-
-            $(this).append("<div class='info'><img src='img/exit.png' alt='exit' /><h1>House</h1><p>Houses NPCs.</p></div>")
-          } /*else if($(this).children().length == 1) {
-            $(".info img").click(function () {
-              house0 = true;
-              $(".info").hide();
-            });
-          }*/
+  <!-- SILLY SCRIPTS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script>
+    (function() {
+      var $section = $('#game');
+      var $panzoom = $section.find('.panzoom').panzoom();
+      $panzoom.parent().on('mousewheel.focal', function(e) {
+        e.preventDefault();
+        var delta = e.delta || e.originalEvent.wheelDelta;
+        var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+        $panzoom.panzoom('zoom', zoomOut, {
+          animate: false,
+          focal: e
         });
       });
+    })();
+  </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
-
-
-
-
-
-
-      // Get the modal
-  var modal = document.getElementById('shop-modal');
-
-  // Get the button that opens the modal
-  var btn = document.getElementById("shop-btn");
-
-  // Get the <span> element that closes the modal
-  var span = document.getElementsByClassName("close")[0];
-
-  // When the user clicks on the button, open the modal
-  btn.onclick = function() {
-      modal.style.display = "block";
-  }
-
-  // When the user clicks on <span> (x), close the modal
-  span.onclick = function() {
-      modal.style.display = "none";
-  }
-
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function(event) {
-      if (event.target == modal) {
-          modal.style.display = "none";
+  <script>
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
       }
-  }
+      return false;
+    }
 
-    </script>
-  </body>
+    var username = getCookie("username");
+    var password = getCookie("password");
+
+    if (!username || !password) {
+      alert("Critical Error Please Login Again. (Reset session by re-opening browser)");
+    }
+
+    var me = {};
+
+    $(function() {
+      var socket = io.connect('http://localhost:3000');
+
+      /* ## Depracted chat system ## (IGNORE)
+      var now = new Date();
+      $('#chat-input').submit(function(){
+        if($('#message').val() != "") {
+          socket.emit('chat message', {content: $('#message').val(), author: username, timeStamp: String(now.getUTCHours()+":"+now.getUTCMinutes()+":"+now.getUTCSeconds())});
+          $('#message').val('');
+        }
+        return false;
+      });*/
+
+      // ## Depracted chat system ## (IGNORE)
+      socket.on('chat message', function(msg) { // <-- Required for bug fix
+        /*$('#chat-output').append($('<li>').text("["+msg.timeStamp+"] ["+msg.author+"] "+msg.content));
+        $("#chat-output").animate({ scrollTop: $("#chat-output")[0].scrollHeight - $("#chat-output").height() }, 100);*/
+      });
+
+      socket.on('result', function(message) {
+        alert(message);
+      });
+
+      function drawLine(startY, startX, color, endY, endX, id) {
+        if (startX < endX) {
+          for (var i = 0; i < (endX - startX) + 1; i++) {
+            $(".y-" + startY + ".x-" + (i + startX)).css("background", color).addClass(id);
+          }
+        } else if (startX > endX) {
+          for (var i = 0; i < (startX - endX) + 1; i++) {
+            $(".y-" + startY + ".x-" + (startX - i)).css("background", color).addClass(id);
+          }
+        } else if (startY < endY) {
+          for (var i = 0; i < (endY - startY) + 1; i++) {
+            $(".y-" + (i + startY) + ".x-" + startX).css("background", color).addClass(id);
+          }
+        } else if (startY > endY) {
+          for (var i = 0; i < (startY - endY) + 1; i++) {
+            $(".y-" + (endY - i) + ".x-" + startX).css("background", color).addClass(id);
+          }
+        }
+      }
+
+      var total = 0;
+      for (var i = 0; i < 18; i++) {
+        for (var j = 0; j < 18; j++) {
+          total++;
+          $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + "'> </div>");
+        }
+      }
+
+
+      function drawFarm(x, y, stage) {
+        $(".y-" + y + ".x-" + x).css("background", "url('img/farm" + stage + ".png')");
+        $(".y-" + y + ".x-" + x).css("background-size", "contain");
+        $(".y-" + y + ".x-" + x).addClass("farm0 built");
+      }
+
+      drawFarm(1, 1, 0);
+
+      function drawSelect(x, y, reason) {
+        $(".y-" + y + ".x-" + x).css("background", "url('img/selected-tile.png')");
+        $(".y-" + y + ".x-" + x).css("background-size", "contain");
+        $(".y-" + y + ".x-" + x).addClass("selected");
+        $(".y-" + y + ".x-" + x).addClass(reason);
+      }
+
+      (function($) {
+        $(document).on("click", ".info img", function() {
+          $(this).parent().parent().removeClass("open");
+          $(this).parent().remove();
+        });
+
+        // Code for modal interaction
+        $(".modal-btn").click(function() {
+
+          if ($(this).attr('id') == "shop-btn") {
+            if ($("#shop-modal").css('display') == 'none') {
+              $(".modal").css('display', 'none');
+              $("#shop-modal").css('display', 'block');
+            } else {
+              $("#shop-modal").css('display', 'none');
+            }
+          } else if ($(this).attr('id') == "market-btn") {
+            if ($("#market-modal").css('display') == 'none') {
+              $(".modal").css('display', 'none');
+              $("#market-modal").css('display', 'block');
+            } else {
+              $("#market-modal").css('display', 'none');
+            }
+          } else {
+            if ($("#map-modal").css('display') == 'none') {
+              $(".modal").css('display', 'none');
+              $("#map-modal").css('display', 'block');
+            } else {
+              $("#map-modal").css('display', 'none');
+            }
+          }
+
+        });
+
+        /*window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }*/
+      })(jQuery);
+
+      $(".farm0").click(function() {
+        if ($(this).children().length == 0 && !$(this).hasClass("open")) {
+          $(this).addClass("open");
+          var classes = $(this).attr('class').split(" ");
+          var x = classes[1].split("-")[1],
+            y = classes[0].split("-")[1];
+
+          $(this).append("<div class='info'><img src='img/exit.png' alt='exit' /><h1>House</h1><p>Houses NPCs.</p></div>")
+        }
+        /*else if($(this).children().length == 1) {
+                   $(".info img").click(function () {
+                     house0 = true;
+                     $(".info").hide();
+                   });
+                 }*/
+      });
+    });
+  </script>
+</body>
+
 </html>
