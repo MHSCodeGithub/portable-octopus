@@ -90,7 +90,6 @@ body * {
   top: 0;
   width: 80%;
   height: 100%;
-  overflow: hidden;
   background: rgba(0, 0, 0, 0.5);
 }
 
@@ -100,4 +99,21 @@ body * {
   width: 93%;
   height: 89.5%;
   margin: 3.5%;
+}
+
+/* SHOP ITEM
+––––––––––––––––––––––––––––––––––––––– */
+#shop-item-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 30px;
+  align-content: flex-start;
+}
+
+.shop-item {
+  border: 1px solid gray;
+  height: 200px;
+  width: 250px;
+  margin: 20px auto;
 }
