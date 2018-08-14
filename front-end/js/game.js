@@ -81,14 +81,14 @@ $(function() {
     }
   }
 
-  function drawFarm(x, y, stage) {
-    $(".y-" + y + ".x-" + x).css("background", "url('img/farm" + stage + ".png')");
+  function drawFarm(x, y, type, stage) {
+    $(".y-" + y + ".x-" + x).css("background", "url('img/farm-"+ stage + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).addClass("farm0 built");
   }
 
   function drawSelect(x, y, reason) {
-    $(".y-" + y + ".x-" + x).css("background", "url('img/selected-tile.png')");
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/selected-tile.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).addClass("selected");
     $(".y-" + y + ".x-" + x).addClass(reason);
