@@ -97,6 +97,47 @@ app.post('/', function (req, res) {
   }
 });
 
+app.get("/get-items", function (req, res) {
+  var items = [{
+    name: "Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 0
+  }, {
+    name: "Another Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "AnBeautiful other Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Woot Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Yar! Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Bar Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Car! Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }]
+
+  res.send(items);
+});
+
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);
 });
