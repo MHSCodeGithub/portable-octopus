@@ -112,9 +112,20 @@ $(function() {
       $(".modal").css('display', 'none');
       $("#"+target+"-modal").css('display', 'block');
       // TODO: API get will go here
-      $.get("/get-items", function (data) {
-        console.log(data);
-        
+      $.get("/get-items", function (items) {
+        console.log(items);
+        for (var i = 0; i < items.length; i++) {
+          var item = `
+          <div class="shop-item">
+            <h2 class="item-name">`+items[i].name+`</h2>
+            <img src="`+items[i].image+`" alt="" class="item-img">
+            <p class="item-desc">`+items[i].description+`</p>
+            <button class="item-buy-btn">`+items[i].price+`</button>
+          </div>
+          `
+
+          $("#shop-item-wrap").append(item);
+        }
       });
     } else {
       $("#"+target+"-modal").css('display', 'none');
