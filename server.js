@@ -16,6 +16,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const Player = require('./framework/classes/player');
+const Kingdom = require('./framework/classes/kingdom');
+const Treasury = require('./framework/classes/treasury');
+const Harbour = require('./framework/classes/harbour');
+
 const database = require('./database');
 
 function objectLength(target) {
@@ -96,7 +100,10 @@ app.post('/', function (req, res) {
     req.session.password = sha256(req.body.password);
     res.redirect('/');
   } else if(req.body.type == "register") {
-    var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, null, false);
+    var treasury = new Treasury(0);
+    var harbour = new Harbour(0);
+    var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
+    var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, kingdom, false);
     if(database.getAccount(newAccount.username)) {
       req.session.username = null;
       req.session.password = null;
