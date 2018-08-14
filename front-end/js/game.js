@@ -1,4 +1,6 @@
 
+var API = new APIClass();
+
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
 
@@ -111,8 +113,8 @@ $(function() {
     if ($("#"+target+"-modal").css('display') == 'none') {
       $(".modal").css('display', 'none');
       $("#"+target+"-modal").css('display', 'block');
-      // TODO: API get will go here
-      $.get("/get-items", function (items) {
+      
+      API.get("items", function (items) {
         console.log(items);
         $("#shop-item-wrap").html("")
         for (var i = 0; i < items.length; i++) {
@@ -162,14 +164,6 @@ $(function() {
   /* New Code
   ––––––––––––––––––––––––––––––––––––––– */
 
-  var API = new APIClass();
 
-  API.get("test", function (data) {
-    console.log(data);
-  });
-
-  API.send("another-test", {message: "hello"}, function (data) {
-    console.log(data);
-  });
 
 });
