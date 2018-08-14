@@ -114,6 +114,7 @@ $(function() {
       // TODO: API get will go here
       $.get("/get-items", function (items) {
         console.log(items);
+        $("#shop-item-wrap").html("")
         for (var i = 0; i < items.length; i++) {
           var item = `
           <div class="shop-item">
@@ -123,7 +124,6 @@ $(function() {
             <button class="item-buy-btn">`+items[i].price+`</button>
           </div>
           `
-
           $("#shop-item-wrap").append(item);
         }
       });
