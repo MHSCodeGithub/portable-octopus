@@ -109,7 +109,7 @@ app.get("/get-items", function (req, res) {
     description: "A very Beautiful Item",
     price: 1
   }, {
-    name: "AnBeautiful other Random Item",
+    name: "AnBeautiful othe",
     image: "http://via.placeholder.com/80x80",
     description: "A very Beautiful Item",
     price: 1
