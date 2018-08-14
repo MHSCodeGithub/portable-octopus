@@ -104,16 +104,13 @@ body * {
 /* SHOP ITEM
 ––––––––––––––––––––––––––––––––––––––– */
 #shop-item-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding: 30px;
-  align-content: flex-start;
+  display: inline-block;
 }
 
 .shop-item {
   border: 1px solid gray;
   height: 200px;
   width: 250px;
-  margin: 20px auto;
+  margin: 15px;
+  float: left;;
 }

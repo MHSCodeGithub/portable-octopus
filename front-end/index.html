@@ -128,7 +128,7 @@
         var delta = e.delta || e.originalEvent.wheelDelta;
         var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
         $panzoom.panzoom('zoom', zoomOut, {
-          animate: false,
+          animate: true,
           focal: e
         });
       });
