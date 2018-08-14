@@ -31,7 +31,53 @@ app.use(function(req, res, next) {
   next();
 });
 
-api.setup(app);
+var apiGets = {
+  // # items
+  items: [{
+    name: "Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 0
+  }, {
+    name: "Another Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "AnBeautiful othe",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Woot Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Yar! Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Bar Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }, {
+    name: "Car! Random Item",
+    image: "http://via.placeholder.com/80x80",
+    description: "A very Beautiful Item",
+    price: 1
+  }],
+  // # ping
+  ping: "pong"
+}
+
+var apiPosts = {
+
+}
+
+api.setup(app, apiGets, apiPosts);
 
 app.get('/', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});
