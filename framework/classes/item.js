@@ -6,16 +6,14 @@ const Objectable = require('./objectable');
  */
 
 class Item extends Objectable {
-  constructor(id, name) {
+  constructor(id, name, image, description, price) {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.name = name;
-    this.level = 0; // level of producer, determines effectiveness
-  }
-
-  upgrade() {
-    this.level += 1;
+    this.image = image;
+    this.decription = description;
+    this.price = price;
   }
 }
 
-module.exports = Producer;
+module.exports = Item;

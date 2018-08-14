@@ -6,8 +6,8 @@ const Producer = require('../producer');
  */
 
 class Farm extends Producer {
-  constructor(id, kingdom) {
-    super(id, kingdom, "farm");
+  constructor(id) {
+    super(id, "farm");
     this.growth = [[],[],[],[],[]];
     this.yield = Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
     // TODO: Add Treasury functions
