@@ -112,6 +112,10 @@ $(function() {
       $(".modal").css('display', 'none');
       $("#"+target+"-modal").css('display', 'block');
       // TODO: API get will go here
+      $.get("/get-items", function (data) {
+        console.log(data);
+        
+      });
     } else {
       $("#"+target+"-modal").css('display', 'none');
     }
@@ -146,5 +150,5 @@ $(function() {
   ––––––––––––––––––––––––––––––––––––––– */
 
 
-  
+
 });

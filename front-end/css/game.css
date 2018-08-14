@@ -110,7 +110,17 @@ body * {
 .shop-item {
   border: 1px solid gray;
   height: 200px;
-  width: 250px;
-  margin: 15px;
-  float: left;;
+  min-width: 250px;
+  max-width: 350px;
+  margin: 20px;
+  float: left;
+  display: block;
+}
+
+.shop-item * {
+  float: left;
+}
+
+.item-name {
+  width: 100%;
 }
