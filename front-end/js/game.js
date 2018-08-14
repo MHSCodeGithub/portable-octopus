@@ -82,7 +82,13 @@ $(function() {
   }
 
   function drawFarm(x, y, type, stage) {
-    $(".y-" + y + ".x-" + x).css("background", "url('img/farm-"+ stage + "-" + stage + ".png')");
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
+    $(".y-" + y + ".x-" + x).css("background-size", "contain");
+    $(".y-" + y + ".x-" + x).addClass("farm0 built");
+  }
+
+  function drawProducer(x, y, type) {
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).addClass("farm0 built");
   }
@@ -105,7 +111,24 @@ $(function() {
     }
   }
 
-  drawFarm(1, 1, 0);
+  drawFarm(2, 2, "wheat", 0);
+  drawFarm(4, 2, "wheat", 1);
+  drawFarm(6, 2, "wheat", 2);
+
+  drawProducer(8, 2, "mill");
+  drawProducer(10, 2, "bakery");
+
+  drawFarm(2, 4, "cotton", 0);
+  drawFarm(4, 4, "cotton", 1);
+  drawFarm(6, 4, "cotton", 2);
+
+  drawProducer(8, 4, "cotton_mill");
+
+  drawFarm(2, 6, "cattle", 0);
+  drawFarm(4, 6, "cattle", 1);
+  drawFarm(6, 6, "cattle", 2);
+
+  drawProducer(8, 6, "butchery");
 
   /* Modal Interaction
   ––––––––––––––––––––––––––––––––––––––– */
