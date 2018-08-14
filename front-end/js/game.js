@@ -119,11 +119,11 @@ $(function() {
           var item = `
           <div class="shop-item">
             <h2 class="item-name">`+items[i].name+`</h2>
-            <div class="img-desc-wrap">
+            <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
               <p class="item-desc">`+items[i].description+`</p>
+              <button class="item-buy-btn">$`+items[i].price+`</button>
             </div>
-            <button class="item-buy-btn">$`+items[i].price+`</button>
           </div>
           `
           $("#shop-item-wrap").append(item);
