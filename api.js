@@ -10,7 +10,7 @@ exports.setup = function (app) {
   app.post("/api/send/:type", function (req, res) {
     var type = req.params.type;
     var data = req.body;
-    console.log("--- ## API ## ---");
+    console.log("--- ## API Post ## ---");
     console.log(type);
     console.log(data);
     res.send("true");
