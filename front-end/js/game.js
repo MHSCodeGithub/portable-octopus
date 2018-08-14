@@ -1,6 +1,4 @@
 
-var API = new APIClass();
-
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
 
@@ -30,6 +28,11 @@ if (!username || !password) {
 var me = {};
 
 $(function() {
+
+  /* Initialisations
+  ––––––––––––––––––––––––––––––––––––––– */
+
+  var API = new APIClass();
   var socket = io.connect('http://localhost:3000');
 
   /* Deprecated Stuff
@@ -113,7 +116,7 @@ $(function() {
     if ($("#"+target+"-modal").css('display') == 'none') {
       $(".modal").css('display', 'none');
       $("#"+target+"-modal").css('display', 'block');
-      
+
       API.get("items", function (items) {
         console.log(items);
         $("#shop-item-wrap").html("")
