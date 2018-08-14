@@ -162,6 +162,14 @@ $(function() {
   /* New Code
   ––––––––––––––––––––––––––––––––––––––– */
 
+  var API = new APIClass();
 
+  API.get("test", function (data) {
+    console.log(data);
+  });
+
+  API.send("another-test", {message: "hello"}, function (data) {
+    console.log(data);
+  });
 
 });

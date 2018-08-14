@@ -7,6 +7,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const sha256 = require('sha256');
+const api = require('./api');
 var port = process.env.PORT || 3000;
 
 app.use(cookieParser());
@@ -29,6 +30,8 @@ app.use(function(req, res, next) {
   res.setHeader('charset', 'utf-8')
   next();
 });
+
+api.setup(app);
 
 app.get('/', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});
