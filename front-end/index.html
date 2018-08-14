@@ -240,29 +240,13 @@
         // Code for modal interaction
         $(".modal-btn").click(function() {
 
-          if ($(this).attr('id') == "shop-btn") {
-            if ($("#shop-modal").css('display') == 'none') {
-              $(".modal").css('display', 'none');
-              $("#shop-modal").css('display', 'block');
-            } else {
-              $("#shop-modal").css('display', 'none');
-            }
-          } else if ($(this).attr('id') == "market-btn") {
-            if ($("#market-modal").css('display') == 'none') {
-              $(".modal").css('display', 'none');
-              $("#market-modal").css('display', 'block');
-            } else {
-              $("#market-modal").css('display', 'none');
-            }
+          var target = $(this).attr('id').split('-')[0];
+          if ($("#"+target+"-modal").css('display') == 'none') {
+            $(".modal").css('display', 'none');
+            $("#"+target+"-modal").css('display', 'block');
           } else {
-            if ($("#map-modal").css('display') == 'none') {
-              $(".modal").css('display', 'none');
-              $("#map-modal").css('display', 'block');
-            } else {
-              $("#map-modal").css('display', 'none');
-            }
+            $("#"+target+"-modal").css('display', 'none');
           }
-
         });
 
         /*window.onclick = function(event) {
