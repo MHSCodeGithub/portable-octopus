@@ -9,7 +9,7 @@ exports.write = function (data) {
 };
 
 if (!fs.existsSync("./data.json")) {
-  fs.writeFileSync("./data.json", "{\"accounts\": {}}");
+  fs.writeFileSync("./data.json", fs.readFileSync("setup.json"));
 }
 
 exports.addAccount = function (account) {
@@ -28,3 +28,18 @@ exports.getAccount = function (username) {
 
   return false;
 };
+
+exports.getItem = function (id) {
+  var data = exports.read();
+  for (var property in data.items) {
+    if(data.items[property].id === id) {
+      return data.items[property];
+    }
+  }
+
+  return false;
+};
+
+exports.getItems = function () {
+  return exports.read().items;
+}
