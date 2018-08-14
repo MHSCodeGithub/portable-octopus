@@ -73,7 +73,7 @@
         var delta = e.delta || e.originalEvent.wheelDelta;
         var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
         $panzoom.panzoom('zoom', zoomOut, {
-          animate: true,
+          animate: false,
           focal: e
         });
       });
@@ -82,7 +82,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-  
+
   <script src="./js/api.js" charset="utf-8"></script>
   <script src="./js/game.js" charset="utf-8"></script>
 </body>
