@@ -15,14 +15,14 @@ function APIClass() {
 
   function send(target, toSend) {
     return new Promise(function(resolve) {
-      $.post("/api/get/"+target, toSend, function (data) {
+      $.post("/api/send/"+target, toSend, function (data) {
         resolve(data)
       });
     });
   }
 
   this.send = async function (target, data, callback) {
-    var result = await get(target, data);
+    var result = await send(target, data);
     callback(result);
   }
 }
