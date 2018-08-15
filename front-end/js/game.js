@@ -137,10 +137,19 @@ $(function() {
             <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
               <p class="item-desc">`+items[i].description+`</p>
-              <button class="item-buy-btn">$`+items[i].price+`</button>
             </div>
+            <button class="item-buy-btn">$`+items[i].price+`</button>
           </div>
           `
+
+          console.log('#item-6 > button:nth-child(3)');
+          $('#item-'+items[i].id+' > button:nth-child(3)').click(function () {
+            console.log("yas");
+            API.send("buy-producer", {username: username, password: password, target: $(this).parent().parent().attr('id').split("-")[1]}, function () {
+              console.log("Bought producer!");
+            });
+          });
+
           $("#shop-item-wrap").append(item);
         }
       });
