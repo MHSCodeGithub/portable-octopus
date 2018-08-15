@@ -145,8 +145,9 @@ $(function() {
         }
 
         $('.item-buy-btn').click(function () {
-          API.send("buy-producer", {username: username, password: password, target: $(this).parent().attr('id').split("-")[1]}, function () {
-            console.log("Bought producer!");
+          API.send("buy-producer", {username: username, password: password, target: $(this).parent().attr('id').split("-")[1]}, function (data) {
+            console.log(data);
+            updateMap();
           });
         });
       });
