@@ -132,8 +132,7 @@ $(function() {
         $("#shop-item-wrap").html("")
         for (var i = 0; i < items.length; i++) {
           var item = `
-          <div class="shop-item">
-            <span style='display: none;' id='item-`+items[i].id+`'></span>
+          <div class="shop-item" id='item-`+items[i].id+`'>
             <h2 class="item-name">`+items[i].name+`</h2>
             <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
