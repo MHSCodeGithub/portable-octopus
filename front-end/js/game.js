@@ -63,22 +63,22 @@ $(function() {
   /* Draw Functions
   ––––––––––––––––––––––––––––––––––––––– */
 
-  function drawFarm(x, y, type, stage) {
+  function drawFarm(id, x, y, type, stage) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("farm0 built");
+    $(".y-" + y + ".x-" + x).addClass("farm"+id+" built");
   }
 
   function drawGrass(x, y) {
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass("farm0 built");
+    $(".y-" + y + ".x-" + x).removeClass("grass");
   }
 
-  function drawProducer(x, y, type) {
+  function drawProducer(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("farm0 built");
+    $(".y-" + y + ".x-" + x).addClass(type+id+" built");
   }
 
   function drawSelect(x, y, reason) {
@@ -101,9 +101,9 @@ $(function() {
         var producer = data[i];
 
         if(producer.type == "farm") {
-          drawFarm(producer.x, producer.y, producer.subType, producer.growth);
+          drawFarm(producer.id, producer.x, producer.y, producer.subType, producer.growth);
         } else {
-          drawProducer(producer.x, producer.y, producer.type);
+          drawProducer(producer.id, producer.x, producer.y, producer.type);
         }
       }
     });
@@ -120,28 +120,6 @@ $(function() {
     }
   }
 
-  /*drawFarm(2, 2, "wheat", 0);
-  drawFarm(4, 2, "wheat", 1);
-  drawFarm(6, 2, "wheat", 2);
-
-  drawProducer(8, 2, "mill");
-  drawProducer(10, 2, "bakery");
-
-  drawFarm(2, 4, "cotton", 0);
-  drawFarm(4, 4, "cotton", 1);
-  drawFarm(6, 4, "cotton", 2);
-
-  drawProducer(8, 4, "cotton_mill");
-
-  drawFarm(2, 6, "cattle", 0);
-  drawFarm(4, 6, "cattle", 1);
-  drawFarm(6, 6, "cattle", 2);
-
-  drawProducer(8, 6, "butchery");*/
-
-  /* Modal Interaction
-  ––––––––––––––––––––––––––––––––––––––– */
-
   $(".modal-btn").click(function() {
 
     var target = $(this).attr('id').split('-')[0];
@@ -154,15 +132,24 @@ $(function() {
         $("#shop-item-wrap").html("")
         for (var i = 0; i < items.length; i++) {
           var item = `
-          <div class="shop-item">
+          <div class="shop-item" id='item-`+items[i].id+`'>
             <h2 class="item-name">`+items[i].name+`</h2>
             <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
               <p class="item-desc">`+items[i].description+`</p>
-              <button class="item-buy-btn">$`+items[i].price+`</button>
             </div>
+            <button class="item-buy-btn">$`+items[i].price+`</button>
           </div>
           `
+
+          console.log('#item-6 > button:nth-child(3)');
+          $('#item-'+items[i].id+' > button:nth-child(3)').click(function () {
+            console.log("yas");
+            API.send("buy-producer", {username: username, password: password, target: $(this).parent().parent().attr('id').split("-")[1]}, function () {
+              console.log("Bought producer!");
+            });
+          });
+
           $("#shop-item-wrap").append(item);
         }
       });
