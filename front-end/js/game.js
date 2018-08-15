@@ -120,28 +120,6 @@ $(function() {
     }
   }
 
-  /*drawFarm(2, 2, "wheat", 0);
-  drawFarm(4, 2, "wheat", 1);
-  drawFarm(6, 2, "wheat", 2);
-
-  drawProducer(8, 2, "mill");
-  drawProducer(10, 2, "bakery");
-
-  drawFarm(2, 4, "cotton", 0);
-  drawFarm(4, 4, "cotton", 1);
-  drawFarm(6, 4, "cotton", 2);
-
-  drawProducer(8, 4, "cotton_mill");
-
-  drawFarm(2, 6, "cattle", 0);
-  drawFarm(4, 6, "cattle", 1);
-  drawFarm(6, 6, "cattle", 2);
-
-  drawProducer(8, 6, "butchery");*/
-
-  /* Modal Interaction
-  ––––––––––––––––––––––––––––––––––––––– */
-
   $(".modal-btn").click(function() {
 
     var target = $(this).attr('id').split('-')[0];
@@ -155,6 +133,7 @@ $(function() {
         for (var i = 0; i < items.length; i++) {
           var item = `
           <div class="shop-item">
+            <span style='display: none;' id='item-`+items[i].id+`'></span>
             <h2 class="item-name">`+items[i].name+`</h2>
             <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
