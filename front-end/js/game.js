@@ -63,22 +63,22 @@ $(function() {
   /* Draw Functions
   ––––––––––––––––––––––––––––––––––––––– */
 
-  function drawFarm(x, y, type, stage) {
+  function drawFarm(id, x, y, type, stage) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("farm0 built");
+    $(".y-" + y + ".x-" + x).addClass("farm"+id+" built");
   }
 
   function drawGrass(x, y) {
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass("farm0 built");
+    $(".y-" + y + ".x-" + x).removeClass("grass");
   }
 
-  function drawProducer(x, y, type) {
+  function drawProducer(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("farm0 built");
+    $(".y-" + y + ".x-" + x).addClass(type+id+" built");
   }
 
   function drawSelect(x, y, reason) {
@@ -101,9 +101,9 @@ $(function() {
         var producer = data[i];
 
         if(producer.type == "farm") {
-          drawFarm(producer.x, producer.y, producer.subType, producer.growth);
+          drawFarm(producer.id, producer.x, producer.y, producer.subType, producer.growth);
         } else {
-          drawProducer(producer.x, producer.y, producer.type);
+          drawProducer(producer.id, producer.x, producer.y, producer.type);
         }
       }
     });
