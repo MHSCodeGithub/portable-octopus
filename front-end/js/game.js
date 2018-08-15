@@ -141,7 +141,6 @@ $(function() {
             <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
           </div>
           `
-
           $("#shop-item-wrap").append(item);
         }
 
