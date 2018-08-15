@@ -35,6 +35,18 @@ $(function() {
   var API = new APIClass();
   var socket = io.connect('http://localhost:3000');
 
+  API.send("get-map", {username: username, password: password}, function (data) {
+    for (var i = 0; i < data.length; i++) {
+      var producer = data[i];
+
+      if(producer.type == "farm") {
+        drawFarm(producer.x, producer.y, producer.subType, producer.growth);
+      } else {
+        drawProducer(producer.x, producer.y, producer.type);
+      }
+    }
+  });
+
   /* Deprecated Stuff
   ––––––––––––––––––––––––––––––––––––––– */
 
