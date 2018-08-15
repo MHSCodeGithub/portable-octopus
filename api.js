@@ -29,13 +29,12 @@ exports.setup = function (app, gets) {
     console.log(data);
 
     if(type == "buy-producer") {
+
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
         var kingdom = testAcc.kingdom;
         var current = kingdom.producers.length;
         var result = isItem(data.target);
-
-        console.log(result);
 
         if(result) {
           switch (result.name) {
@@ -76,8 +75,6 @@ exports.setup = function (app, gets) {
               break;
           }
 
-          console.log(kingdom.producers);
-
           testAcc.update();
           res.send("Updated!")
         } else {
@@ -89,7 +86,7 @@ exports.setup = function (app, gets) {
     } else if(type == "get-map") {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
-        var kingdom = testAcc.kingdom;
+        var kingdom = testAcc.toJSON(testAcc).kingdom;
 
         res.send(kingdom.producers);
       } else {
