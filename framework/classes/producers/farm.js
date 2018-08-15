@@ -10,7 +10,10 @@ class Farm extends Producer {
     super(id, "farm");
     this.growth = 0;
     this.subType = type;
-    this.yield = Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
+  }
+
+  yeild() {
+    return this.level * 4;
   }
 }
 
