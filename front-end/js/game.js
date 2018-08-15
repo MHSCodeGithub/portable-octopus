@@ -61,26 +61,6 @@ $(function() {
   /* Draw Functions
   ––––––––––––––––––––––––––––––––––––––– */
 
-  function drawLine(startY, startX, color, endY, endX, id) {
-    if (startX < endX) {
-      for (var i = 0; i < (endX - startX) + 1; i++) {
-        $(".y-" + startY + ".x-" + (i + startX)).css("background", color).addClass(id);
-      }
-    } else if (startX > endX) {
-      for (var i = 0; i < (startX - endX) + 1; i++) {
-        $(".y-" + startY + ".x-" + (startX - i)).css("background", color).addClass(id);
-      }
-    } else if (startY < endY) {
-      for (var i = 0; i < (endY - startY) + 1; i++) {
-        $(".y-" + (i + startY) + ".x-" + startX).css("background", color).addClass(id);
-      }
-    } else if (startY > endY) {
-      for (var i = 0; i < (startY - endY) + 1; i++) {
-        $(".y-" + (endY - i) + ".x-" + startX).css("background", color).addClass(id);
-      }
-    }
-  }
-
   function drawFarm(x, y, type, stage) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
