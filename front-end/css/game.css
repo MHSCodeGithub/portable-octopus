@@ -127,6 +127,11 @@ body * {
   position: relative;
 }
 
+.item-desc-wrap img {
+  width: 35%;
+  height: 35%;
+}
+
 .item-name {
   width: 100%;
   padding-bottom: 12px;
