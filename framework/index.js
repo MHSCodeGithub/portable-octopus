@@ -9,6 +9,7 @@ exports.Harbour = require('./classes/harbour');
 // # Producer(s)
 
 exports.Producer = require('./classes/producer');
+exports.producers = {};
 exports.producers.Bakery = require('./classes/producers/bakery');
 exports.producers.Butchery = require('./classes/producers/butchery');
 exports.producers.CottonMill = require('./classes/producers/cotton_mill');

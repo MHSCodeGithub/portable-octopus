@@ -43,9 +43,9 @@ class Player extends Objectable {
         try {
           var tre = new Treasury(data.accounts[property].kingdom.treasury.id);
           tre.health = data.accounts[property].kingdom.treasury.health;
+          tre.balance = data.accounts[property].kingdom.treasury.balance;
           var har = new Harbour(data.accounts[property].kingdom.harbour.id);
           har.health = data.accounts[property].kingdom.harbour.health;
-          har.balance = data.accounts[property].kingdom.harbour.balance;
 
           var king = new Kingdom(data.accounts[property].kingdom.id, data.accounts[property].kingdom.name, tre, har);
 
@@ -62,6 +62,10 @@ class Player extends Objectable {
 
   save() {
     this.id = objectLength(database.read().accounts) + 1;
+    database.addAccount(this.toJSON(this));
+  }
+
+  update() {
     database.addAccount(this.toJSON(this));
   }
 }
