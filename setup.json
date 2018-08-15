@@ -5,46 +5,46 @@
   "items": [
     {
       "id": 0,
-      "name": "Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 0
+      "name": "Wheat Farm",
+      "image": "img/map/farm-wheat-2.png",
+      "description": "A farm that produces wheat!",
+      "price": 100
     }, {
       "id": 1,
-      "name": "Another Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "name": "Cotton Farm",
+      "image": "img/map/farm-cotton-2.png",
+      "description": "A farm that produces cotton!",
+      "price": 200
     }, {
-      "id": 2,
-      "name": "AnBeautiful othe",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "id": 1,
+      "name": "Cattle Farm",
+      "image": "img/map/farm-cattle-2.png",
+      "description": "A farm that produces meat!",
+      "price": 200
     }, {
-      "id": 3,
-      "name": "Woot Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "id": 1,
+      "name": "Mill",
+      "image": "img/map/mill.gif",
+      "description": "A mill that grinds wheat and turns it into flour!",
+      "price": 200
     }, {
-      "id": 4,
-      "name": "Yar! Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "id": 1,
+      "name": "Bakery",
+      "image": "img/map/bakery.gif",
+      "description": "A bakery that bakes wheat and turns it into bread!",
+      "price": 200
     }, {
-      "id": 5,
-      "name": "Bar Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "id": 1,
+      "name": "Cotton Mill",
+      "image": "img/map/cotton_mill.gif",
+      "description": "A cotton mill that turns cotton into clothing!",
+      "price": 200
     }, {
-      "id": 6,
-      "name": "Car! Random Item",
-      "image": "http://via.placeholder.com/80x80",
-      "description": "A very Beautiful Item",
-      "price": 1
+      "id": 1,
+      "name": "Butchery",
+      "image": "img/map/butchery.gif",
+      "description": "A butchery that turn meat into smoked meat!",
+      "price": 200
     }
   ]
 }
