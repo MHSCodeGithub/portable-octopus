@@ -9,7 +9,7 @@ class Farm extends Producer {
   constructor(id, type) {
     super(id, "farm");
     this.growth = 0;
-    this.type = type;
+    this.subType = type;
     this.yield = Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
   }
 }
