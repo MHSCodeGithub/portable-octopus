@@ -9,11 +9,11 @@ exports.Harbour = require('./classes/harbour');
 // # Producer(s)
 
 exports.Producer = require('./classes/producer');
-exports.Producers.Bakery = require('./classes/producers/bakery');
-exports.Producers.Butcher = require('./classes/producers/butcher');
-exports.Producers.CottonMill = require('./classes/producers/cotton_mill');
-exports.Producers.Farm = require('./classes/producers/farm');
-exports.Producers.Mill = require('./classes/producers/mill');
+exports.producers.Bakery = require('./classes/producers/bakery');
+exports.producers.Butcher = require('./classes/producers/butcher');
+exports.producers.CottonMill = require('./classes/producers/cotton_mill');
+exports.producers.Farm = require('./classes/producers/farm');
+exports.producers.Mill = require('./classes/producers/mill');
 
 // # Database
 
