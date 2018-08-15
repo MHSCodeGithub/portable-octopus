@@ -16,31 +16,31 @@
       "description": "A farm that produces cotton!",
       "price": 200
     }, {
-      "id": 1,
+      "id": 2,
       "name": "Cattle Farm",
       "image": "img/map/farm-cattle-2.png",
       "description": "A farm that produces meat!",
       "price": 200
     }, {
-      "id": 1,
+      "id": 3,
       "name": "Mill",
       "image": "img/map/mill.gif",
       "description": "A mill that grinds wheat and turns it into flour!",
       "price": 200
     }, {
-      "id": 1,
+      "id": 4,
       "name": "Bakery",
       "image": "img/map/bakery.gif",
       "description": "A bakery that bakes wheat and turns it into bread!",
       "price": 200
     }, {
-      "id": 1,
+      "id": 5,
       "name": "Cotton Mill",
       "image": "img/map/cotton_mill.gif",
       "description": "A cotton mill that turns cotton into clothing!",
       "price": 200
     }, {
-      "id": 1,
+      "id": 6,
       "name": "Butchery",
       "image": "img/map/butchery.gif",
       "description": "A butchery that turn meat into smoked meat!",
