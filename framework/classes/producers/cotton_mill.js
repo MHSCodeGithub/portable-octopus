@@ -6,8 +6,8 @@ const Producer = require('../producer');
  */
 
 class CottonMill extends Producer {
-  constructor(id) {
-    super(id, "cotton_mill");
+  constructor(id, x, y) {
+    super(id, "cotton_mill", x, y);
   }
 
   yeild() {

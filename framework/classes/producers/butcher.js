@@ -6,8 +6,8 @@ const Producer = require('../producer');
  */
 
 class Butcher extends Producer {
-  constructor(id) {
-    super(id, "butcher");
+  constructor(id, x, y) {
+    super(id, "butcher", x, y);
   }
 
   yeild() {

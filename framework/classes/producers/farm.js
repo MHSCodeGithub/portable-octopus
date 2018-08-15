@@ -6,8 +6,8 @@ const Producer = require('../producer');
  */
 
 class Farm extends Producer {
-  constructor(id, type) {
-    super(id, "farm");
+  constructor(id, type, x, y) {
+    super(id, "farm", x, y);
     this.growth = 0;
     this.subType = type;
   }
