@@ -35,17 +35,7 @@ $(function() {
   var API = new APIClass();
   var socket = io.connect('http://localhost:3000');
 
-  API.send("get-map", {username: username, password: password}, function (data) {
-    for (var i = 0; i < data.length; i++) {
-      var producer = data[i];
-
-      if(producer.type == "farm") {
-        drawFarm(producer.x, producer.y, producer.subType, producer.growth);
-      } else {
-        drawProducer(producer.x, producer.y, producer.type);
-      }
-    }
-  });
+  updateMap();
 
   /* Deprecated Stuff
   ––––––––––––––––––––––––––––––––––––––– */
@@ -79,6 +69,12 @@ $(function() {
     $(".y-" + y + ".x-" + x).addClass("farm0 built");
   }
 
+  function drawGrass(x, y) {
+    $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
+    $(".y-" + y + ".x-" + x).css("background-size", "contain");
+    $(".y-" + y + ".x-" + x).removeClass("farm0 built");
+  }
+
   function drawProducer(x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
@@ -92,6 +88,27 @@ $(function() {
     $(".y-" + y + ".x-" + x).addClass(reason);
   }
 
+  function updateMap() {
+
+    API.send("get-map", {username: username, password: password}, function (data) {
+      for (var i = 0; i < 18; i++) {
+        for (var j = 0; j < 18; j++) {
+          drawGrass(i, j);
+        }
+      }
+
+      for (var i = 0; i < data.length; i++) {
+        var producer = data[i];
+
+        if(producer.type == "farm") {
+          drawFarm(producer.x, producer.y, producer.subType, producer.growth);
+        } else {
+          drawProducer(producer.x, producer.y, producer.type);
+        }
+      }
+    });
+  }
+
   /* Map Generation/Setups
   ––––––––––––––––––––––––––––––––––––––– */
 
@@ -103,7 +120,7 @@ $(function() {
     }
   }
 
-  drawFarm(2, 2, "wheat", 0);
+  /*drawFarm(2, 2, "wheat", 0);
   drawFarm(4, 2, "wheat", 1);
   drawFarm(6, 2, "wheat", 2);
 
@@ -120,7 +137,7 @@ $(function() {
   drawFarm(4, 6, "cattle", 1);
   drawFarm(6, 6, "cattle", 2);
 
-  drawProducer(8, 6, "butchery");
+  drawProducer(8, 6, "butchery");*/
 
   /* Modal Interaction
   ––––––––––––––––––––––––––––––––––––––– */
