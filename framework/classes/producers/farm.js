@@ -6,9 +6,10 @@ const Producer = require('../producer');
  */
 
 class Farm extends Producer {
-  constructor(id) {
+  constructor(id, type) {
     super(id, "farm");
     this.growth = 0;
+    this.type = type;
     this.yield = Math.floor(Math.pow(this.level, 2) + (Math.pow(this.level, 2) / 3));
   }
 }
