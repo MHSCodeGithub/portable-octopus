@@ -66,26 +66,33 @@ $(function() {
   function drawFarm(id, x, y, type, stage) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("farm"+id+" built");
+    $(".y-" + y + ".x-" + x).removeClass().addClass("farm"+id+" built").addClass("y-" + y + " x-" + x);
   }
 
   function drawGrass(x, y) {
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass("grass");
+    $(".y-" + y + ".x-" + x).removeClass().addClass("grass empty").addClass("y-" + y + " x-" + x);
   }
 
   function drawProducer(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass(type+id+" built");
+    $(".y-" + y + ".x-" + x).removeClass().addClass(type+id+" built").addClass("y-" + y + " x-" + x);
   }
 
   function drawSelect(x, y, reason) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/selected-tile.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).addClass("selected");
-    $(".y-" + y + ".x-" + x).addClass(reason);
+    $(".y-" + y + ".x-" + x).addClass("selected "+reason);
+  }
+
+  function selectAvailiable() {
+    for (var i = 0; i < 18; i++) {
+      for (var j = 0; j < 18; j++) {
+        if($(".y-" + (i+1) + ".x-" + (j+1)).hasClass("empty")) { drawSelect(j+1, i+1, "to-build"); }
+      }
+    }
   }
 
   function updateMap() {
@@ -93,7 +100,7 @@ $(function() {
     API.send("get-map", {username: username, password: password}, function (data) {
       for (var i = 0; i < 18; i++) {
         for (var j = 0; j < 18; j++) {
-          drawGrass(i, j);
+          drawGrass(i+1, j+1);
         }
       }
 
@@ -103,9 +110,9 @@ $(function() {
         var producer = data[i];
 
         if(producer.type == "farm") {
-          drawFarm(producer.id, producer.x, producer.y, producer.subType, producer.growth);
+          drawFarm(producer.id, producer.y, producer.x, producer.subType, producer.growth);
         } else {
-          drawProducer(producer.id, producer.x, producer.y, producer.type);
+          drawProducer(producer.id, producer.y, producer.x, producer.type);
         }
       }
     });
@@ -118,9 +125,10 @@ $(function() {
   for (var i = 0; i < 18; i++) {
     for (var j = 0; j < 18; j++) {
       total++;
-      $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + "'> </div>");
+      $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + " grass empty'> </div>");
     }
   }
+
 
   $(".modal-btn").click(function() {
 
@@ -147,9 +155,22 @@ $(function() {
         }
 
         $('.item-buy-btn').click(function () {
-          API.send("buy-producer", {username: username, password: password, target: $(this).parent().attr('id').split("-")[1]}, function (data) {
-            console.log(data);
-            updateMap();
+          selectAvailiable();
+
+          var pre = this;
+
+          $(".to-build").click(function () {
+            if($(this).hasClass("selected")) {
+              API.send("buy-producer", {
+                username: username,
+                password: password,
+                target: $(pre).parent().attr('id').split("-")[1],
+                x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
+                y: Number($(this).attr("class").split(' ')[3].split("-")[1])
+              }, function (data) {
+                updateMap();
+              });
+            }
           });
         });
       });

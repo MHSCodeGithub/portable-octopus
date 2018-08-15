@@ -54,27 +54,27 @@ class Player extends Objectable {
           for (var i = 0; i < data.accounts[property].kingdom.producers.length; i++) {
             switch (data.accounts[property].kingdom.producers[i].type) {
               case "farm":
-                var producer = new framework.producers.Farm(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, 1, 1);
+                var producer = new framework.producers.Farm(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
                 king.producers.push(producer);
                 break;
               case "mill":
-                var producer = new framework.producers.Mill(data.accounts[property].kingdom.producers[i].id, 1, 1);
+                var producer = new framework.producers.Mill(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
                 king.producers.push(producer);
                 break;
               case "bakery":
-                var producer = new framework.producers.Bakery(data.accounts[property].kingdom.producers[i].id, 1, 1);
+                var producer = new framework.producers.Bakery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
                 king.producers.push(producer);
                 break;
               case "cotton_mill":
-                var producer = new framework.producers.CottonMill(data.accounts[property].kingdom.producers[i].id, 1, 1);
+                var producer = new framework.producers.CottonMill(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
                 king.producers.push(producer);
                 break;
               case "butchery":
-                var producer = new framework.producers.Butchery(data.accounts[property].kingdom.producers[i].id, 1, 1);
+                var producer = new framework.producers.Butchery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
                 king.producers.push(producer);
                 break;

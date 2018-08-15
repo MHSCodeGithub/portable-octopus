@@ -39,37 +39,37 @@ exports.setup = function (app, gets) {
         if(result) {
           switch (result.name) {
             case "Wheat Farm":
-              var producer = new framework.producers.Farm(current, "wheat", 1, 1);
+              var producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Cotton Farm":
-              var producer = new framework.producers.Farm(current, "cotton", 1, 1);
+              var producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Cattle Farm":
-              var producer = new framework.producers.Farm(current, "cattle", 1, 1);
+              var producer = new framework.producers.Farm(current, "cattle", Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Mill":
-              var producer = new framework.producers.Mill(current, 1, 1);
+              var producer = new framework.producers.Mill(current, Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Bakery":
-              var producer = new framework.producers.Bakery(current, 1, 1);
+              var producer = new framework.producers.Bakery(current, Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Cotton Mill":
-              var producer = new framework.producers.CottonMill(current, 1, 1);
+              var producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
             case "Butchery":
-              var producer = new framework.producers.Butchery(current, 1, 1);
+              var producer = new framework.producers.Butchery(current, Number(data.x), Number(data.y));
 
               kingdom.producers.push(producer);
               break;
