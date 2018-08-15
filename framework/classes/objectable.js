@@ -10,7 +10,7 @@ class Objectable {
       var jsonedObject = {};
       for (var x in target) {
         try {
-          if(target[x].constructor !== Array && typeof target[x] == "object") {
+          if((target[x].constructor !== Array && typeof target[x] == "object") || target[x].constructor === Array) {
             jsonedObject[x] = this.toJSON(target[x]);
           } else if (x === "toJSON" || x === "constructor" || typeof target[x] === 'function') {
             continue;
