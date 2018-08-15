@@ -10,7 +10,7 @@ class Producer extends Objectable {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.type = type;
-    this.level = 0; // level of producer, determines effectiveness
+    this.level = 1; // level of producer, determines effectiveness
   }
 
   upgrade() {
