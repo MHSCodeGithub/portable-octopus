@@ -2,12 +2,12 @@
 const Producer = require('../producer');
 
 /*
- * <---> # Butcher class # <--->
+ * <---> # Butchery class # <--->
  */
 
-class Butcher extends Producer {
+class Butchery extends Producer {
   constructor(id, x, y) {
-    super(id, "butcher", x, y);
+    super(id, "butchery", x, y);
   }
 
   yeild() {
@@ -15,4 +15,4 @@ class Butcher extends Producer {
   }
 }
 
-module.exports = Butcher;
+module.exports = Butchery;
