@@ -42,11 +42,7 @@ var apiGets = {
   ping: "pong"
 }
 
-var apiPosts = {
-
-}
-
-api.setup(app, apiGets, apiPosts);
+api.setup(app, apiGets);
 
 app.get('/', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});

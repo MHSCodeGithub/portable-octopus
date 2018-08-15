@@ -1,5 +1,5 @@
 
-exports.setup = function (app, gets, posts) {
+exports.setup = function (app, gets) {
   app.get("/api/get/:type", function (req, res) {
     var type = req.params.type;
     console.log("--- ## API Get ## ---");
@@ -16,7 +16,8 @@ exports.setup = function (app, gets, posts) {
     console.log(type);
     console.log(data);
 
-    if(posts[type]) { res.send(posts[type]); }
-    else            { res.send("undefined"); }
+    if(type == "buy-producer") {
+      res.send("ok")
+    } else { res.send("undefined"); }
   });
 }
