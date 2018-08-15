@@ -132,26 +132,24 @@ $(function() {
         $("#shop-item-wrap").html("")
         for (var i = 0; i < items.length; i++) {
           var item = `
-          <div class="shop-item" id='item-`+items[i].id+`'>
+          <div class="shop-item" id="item-`+items[i].id+`">
             <h2 class="item-name">`+items[i].name+`</h2>
             <div class="item-desc-wrap">
               <img src="`+items[i].image+`" alt="" class="item-img">
               <p class="item-desc">`+items[i].description+`</p>
             </div>
-            <button class="item-buy-btn">$`+items[i].price+`</button>
+            <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
           </div>
           `
 
-          console.log('#item-6 > button:nth-child(3)');
-          $('#item-'+items[i].id+' > button:nth-child(3)').click(function () {
-            console.log("yas");
-            API.send("buy-producer", {username: username, password: password, target: $(this).parent().parent().attr('id').split("-")[1]}, function () {
-              console.log("Bought producer!");
-            });
-          });
-
           $("#shop-item-wrap").append(item);
         }
+
+        $('.item-buy-btn').click(function () {
+          API.send("buy-producer", {username: username, password: password, target: $(this).parent().attr('id').split("-")[1]}, function () {
+            console.log("Bought producer!");
+          });
+        });
       });
     } else {
       $("#"+target+"-modal").css('display', 'none');
