@@ -109,12 +109,12 @@ body * {
 
 .shop-item {
   border: 1px solid gray;
-  min-width: 250px;
-  max-width: 350px;
+  width: 300px;
   margin: 20px;
   float: left;
   display: block;
   padding: 10px 15px;
+  height: 170px;
 }
 
 .shop-item * {
@@ -122,14 +122,14 @@ body * {
 }
 
 .item-desc-wrap {
-  display: inline;
+  display: flex;
   width: 100%;
   position: relative;
 }
 
 .item-desc-wrap img {
-  width: 35%;
-  height: 35%;
+  width: 80px;
+  height: 80px;
 }
 
 .item-name {
@@ -147,6 +147,6 @@ body * {
 
 .item-buy-btn {
   float: right;
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
