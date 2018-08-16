@@ -48,6 +48,11 @@ exports.setup = function (app, gets) {
 
               kingdom.producers.push(producer);
               break;
+            case "Gem Mine":
+              var producer = new framework.producers.Mine(current, "gem", Number(data.x), Number(data.y));
+
+              kingdom.producers.push(producer);
+              break;
             case "Wheat Farm":
               var producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
 
