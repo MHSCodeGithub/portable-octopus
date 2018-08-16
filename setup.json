@@ -45,6 +45,12 @@
       "image": "img/map/butchery.gif",
       "description": "A butchery that turn meat into smoked meat!",
       "price": 600
+    }, {
+      "id": 7,
+      "name": "Gold Mine",
+      "image": "img/map/mine-gold.gif",
+      "description": "A mine that collects gold!",
+      "price": 500
     }
   ]
 }

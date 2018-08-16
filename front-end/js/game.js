@@ -69,6 +69,12 @@ $(function() {
     $(".y-" + y + ".x-" + x).removeClass().addClass("farm"+id+" built").addClass("y-" + y + " x-" + x);
   }
 
+  function drawMine(id, x, y, type) {
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/mine-" + type + ".gif')");
+    $(".y-" + y + ".x-" + x).css("background-size", "contain");
+    $(".y-" + y + ".x-" + x).removeClass().addClass("mine"+id+" built").addClass("y-" + y + " x-" + x);
+  }
+
   function drawGrass(x, y) {
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
@@ -111,6 +117,8 @@ $(function() {
 
         if(producer.type == "farm") {
           drawFarm(producer.id, producer.y, producer.x, producer.subType, producer.growth);
+        } else if(producer.type == "mine") {
+          drawMine(producer.id, producer.y, producer.x, producer.subType)
         } else {
           drawProducer(producer.id, producer.y, producer.x, producer.type);
         }

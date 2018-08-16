@@ -53,6 +53,11 @@ class Player extends Objectable {
 
           for (var i = 0; i < data.accounts[property].kingdom.producers.length; i++) {
             switch (data.accounts[property].kingdom.producers[i].type) {
+              case "mine":
+                var producer = new framework.producers.Mine(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
+
+                king.producers.push(producer);
+                break;
               case "farm":
                 var producer = new framework.producers.Farm(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
 
