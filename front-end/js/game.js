@@ -156,6 +156,7 @@ $(function() {
 
         $('.item-buy-btn').click(function () {
           selectAvailiable();
+          $(".modal").css('display', 'none');
 
           var pre = this;
 
