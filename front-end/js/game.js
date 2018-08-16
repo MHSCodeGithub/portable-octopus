@@ -166,6 +166,7 @@ $(function() {
 
         $('.item-buy-btn').click(function () {
           selectAvailiable();
+          $panzoom.panzoom("enable")
           $(".modal").css('display', 'none');
 
           var pre = this;
