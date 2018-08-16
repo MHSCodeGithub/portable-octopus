@@ -65,9 +65,10 @@
   <!-- SILLY SCRIPTS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script>
+    var $panzoom;
     (function() {
       var $section = $('#game');
-      var $panzoom = $section.find('.panzoom').panzoom();
+      $panzoom = $section.find('.panzoom').panzoom();
       $panzoom.parent().on('mousewheel.focal', function(e) {
         e.preventDefault();
         var delta = e.delta || e.originalEvent.wheelDelta;

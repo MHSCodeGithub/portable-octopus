@@ -145,6 +145,8 @@ $(function() {
       $(".modal").css('display', 'none');
       $("#"+target+"-modal").css('display', 'block');
 
+      $panzoom.panzoom("disable");
+
       API.get("items", function (items) {
         console.log(items);
         $("#shop-item-wrap").html("")
@@ -184,6 +186,7 @@ $(function() {
         });
       });
     } else {
+      $panzoom.panzoom("enable")
       $("#"+target+"-modal").css('display', 'none');
     }
   });
