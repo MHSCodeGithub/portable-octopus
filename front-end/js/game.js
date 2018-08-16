@@ -164,14 +164,16 @@ $(function() {
           $("#shop-item-wrap").append(item);
         }
 
-        $('.item-buy-btn').click(function () {
+        $('.item-buy-btn').bind("click", function () {
           selectAvailiable();
           $panzoom.panzoom("enable")
           $(".modal").css('display', 'none');
 
           var pre = this;
 
-          $(".to-build").click(function () {
+          $(".to-build").bind("click", function () {
+            console.log("PRODUCER PLACE");
+            console.log($(this).attr("class"));
             if($(this).hasClass("selected")) {
               API.send("buy-producer", {
                 username: username,
@@ -180,11 +182,14 @@ $(function() {
                 x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
                 y: Number($(this).attr("class").split(' ')[3].split("-")[1])
               }, function (data) {
+                console.log(data);
+                $('.to-build').unbind("click");
                 updateMap();
               });
             }
           });
         });
+
       });
     } else {
       $panzoom.panzoom("enable")

@@ -90,6 +90,8 @@ exports.setup = function (app, gets) {
               break;
           }
 
+          testAcc.kingdom = kingdom;
+
           testAcc.update();
           res.send("Updated!")
         } else {
