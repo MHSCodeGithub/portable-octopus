@@ -104,17 +104,20 @@ body * {
 /* SHOP ITEM
 ––––––––––––––––––––––––––––––––––––––– */
 #shop-item-wrap {
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  align-content: flex-start;
+  overflow-y: scroll;
 }
 
 .shop-item {
   border: 1px solid gray;
-  width: 300px;
-  margin: 20px;
+  max-width: 300px;
+  margin: 20px auto;
   float: left;
   display: block;
   padding: 10px 15px;
-  height: 170px;
+  max-height: 170px;
 }
 
 .shop-item * {
