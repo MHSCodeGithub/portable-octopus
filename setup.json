@@ -51,6 +51,12 @@
       "image": "img/map/mine-gold.gif",
       "description": "A mine that collects gold!",
       "price": 500
+    }, {
+      "id": 8,
+      "name": "Iron Mine",
+      "image": "img/map/mine-iron.gif",
+      "description": "A mine that collects iron!",
+      "price": 500
     }
   ]
 }
