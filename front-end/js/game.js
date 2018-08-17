@@ -222,9 +222,14 @@ $(function() {
     $(this).parent().remove();
   });
 
+  /* Front-end JS
+  ––––––––––––––––––––––––––––––––––––––– */
+  $(document).ready(function() {
+    $("#tabs").tabs();
+  });
+
   /* New Code
   ––––––––––––––––––––––––––––––––––––––– */
-
 
 
 });

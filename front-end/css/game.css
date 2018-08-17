@@ -101,7 +101,7 @@ body * {
   margin: 3.5%;
 }
 
-/* SHOP ITEM
+/* SHOP MODAL
 ––––––––––––––––––––––––––––––––––––––– */
 #shop-item-wrap {
   display: grid;
@@ -152,4 +152,40 @@ body * {
   float: right;
   position: relative;
   bottom: 0;
+}
+
+/* MARKET MODAL
+––––––––––––––––––––––––––––––––––––––– */
+.ui-tabs-nav {
+  display: flex;
+  margin: 18px;
+}
+
+.ui-tab {
+  background: #00BCB7;
+  width: 50%;
+  height: 100%;
+  list-style: none;
+  text-align: center;
+  padding: 0.5em;
+}
+
+.ui-tab:hover {
+  background: #009692;
+  border-bottom: 5px solid #327b75;
+}
+
+.ui-tabs-anchor {
+  color: white;
+  text-decoration: none;
+  height: 100%;
+  width: 100%;
+  font-size: 2em;
+}
+
+.ui-state-active, .ui-state-active:hover {
+  background: #008986;
+  border-bottom: 5px solid #005B53;
+  width: 50%;
+  height: 100%;
 }
