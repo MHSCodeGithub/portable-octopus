@@ -43,7 +43,7 @@
       "id": 6,
       "name": "Butchery",
       "image": "img/map/butchery.gif",
-      "description": "A butchery that turn meat into smoked meat!",
+      "description": "A butchery that turns meat into smoked meat!",
       "price": 600
     }, {
       "id": 7,
@@ -62,6 +62,12 @@
       "name": "Gem Mine",
       "image": "img/map/mine-gem.gif",
       "description": "A mine that collects gems!",
+      "price": 1000
+    }, {
+      "id": 9,
+      "name": "Blacksmith",
+      "image": "img/map/blacksmith.gif",
+      "description": "A blacksmith that turns iron into iron swords!",
       "price": 1000
     }
   ]
