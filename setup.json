@@ -64,7 +64,7 @@
       "description": "A mine that collects gems!",
       "price": 1000
     }, {
-      "id": 9,
+      "id": 10,
       "name": "Blacksmith",
       "image": "img/map/blacksmith.gif",
       "description": "A blacksmith that turns iron into iron swords!",

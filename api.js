@@ -78,6 +78,11 @@ exports.setup = function (app, gets) {
 
               kingdom.producers.push(producer);
               break;
+            case "Blacksmith":
+              var producer = new framework.producers.Blacksmith(current, Number(data.x), Number(data.y));
+
+              kingdom.producers.push(producer);
+              break;
             case "Cotton Mill":
               var producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
 
