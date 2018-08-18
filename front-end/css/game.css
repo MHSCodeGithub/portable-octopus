@@ -9,6 +9,7 @@ body * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'VT323', sans-serif;
 }
 
 #game {
@@ -190,6 +191,8 @@ body * {
   height: 100%;
 }
 
+/* MARKET MODAL - My Commodities
+––––––––––––––––––––––––––––––––––––––– */
 table {
     border-spacing: 0;
     width: 100%;
@@ -203,4 +206,43 @@ th, td {
 
 tr:nth-child(even) {
     background-color: #f2f2f2
+}
+
+/* PRODUCER INFORMATION
+––––––––––––––––––––––––––––––––––––––– */
+.producer-info {
+  position: absolute;
+  top: 0;
+  z-index: 3;
+  background: #FFB57A;
+  border: 3px solid #D0712E;
+  padding: 5px;
+  font-size: 1.3em;
+}
+
+.producer-info-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25px;
+  height: 25px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 1.2em;
+  margin: 3px;
+}
+
+.producer-btn {
+  color: white;
+  padding: 0 3px;
+}
+
+#producer-upgrade-btn {
+  background: dodgerblue;
+}
+
+#producer-sell-btn {
+  background: red;
 }
