@@ -30,6 +30,24 @@ function objectLength(target) {
   return Number(i);
 };
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function cleanStr(string) {
+  string = string.replace("_", " ");
+
+  var words = string.split(" ");
+
+  for (var i = 0; i < words.length; i++) {
+    words[i] = capitalizeFirstLetter(words[i])
+  }
+
+  string = words.join(" ");
+
+  return string;
+}
+
 app.use(function(req, res, next) {
   res.setHeader('charset', 'utf-8')
   next();
@@ -113,6 +131,36 @@ app.post('/', function (req, res) {
     }
   }
 });
+
+setInterval(function () {
+  var accounts = database.read().accounts;
+
+  for (var i = 1; i < objectLength(accounts)+1; i++) {
+    var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
+    if(testAcc.check()) {
+      // console.log(testAcc.kingdom);
+      for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
+        var producer = testAcc.kingdom.producers[j];
+
+        var amount = producer.yeild();
+
+        var data = database.read();
+
+        for (var k = 0; k < data.commodities.length; k++) {
+          if(data.commodities[k].name == cleanStr(producer.produce)) {
+            for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
+              if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
+                testAcc.kingdom.harbour.commodities[n].amount += amount;
+              }
+            }
+          }
+        }
+
+      }
+      testAcc.update()
+    }
+  }
+}, 60*5*1000);
 
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);

@@ -164,14 +164,16 @@ $(function() {
 
         if($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" ||
            $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") {
-         $(".producer-info").hide()
-         return;
-       }
+          $(".producer-info").hide()
+          return;
+        }
+        var id = $(this).attr("class").split(" ")[0].split("-")[1];
+        var target = $(this).attr("class").split(" ")[0].split("-")[1];
 
         API.send("get-producer", {
           username: username,
           password: password,
-          target: $(this).attr("class").split(" ")[0].split("-")[1]
+          target: target
         }, function (data) {
 
           API.get("items", function (items) {
@@ -184,6 +186,8 @@ $(function() {
                 console.log(items[i]);
                 $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                 $(".producer-info-level").text("Lvl."+data.level);
+                $(".hidden-id").text(id);
+                $(".hidden-target").text(target);
               }
             }
           })
@@ -193,6 +197,30 @@ $(function() {
       $(".producer-info-close").click(function () {
         $(".producer-info").hide()
       })
+    });
+  }
+
+  function updateCommodities() {
+    API.send("get-commodities", {username: username, password, password}, function (data) {
+      $("#commodities-table").html(`
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+        `);
+      for (var i = 0; i < data.length; i++) {
+        $("#commodities-table").append(
+          `
+            <tr>
+              <td>${data[i].name}</td>
+              <td>${data[i].type}</td>
+              <td>${data[i].amount}</td>
+            </tr>
+          `
+        );
+      }
+      console.log(data);
     });
   }
 
@@ -279,32 +307,49 @@ $(function() {
     $("#tabs").tabs();
   });
 
-  /* New Code
+  /* Automatic Commodity Table Updater
   ––––––––––––––––––––––––––––––––––––––– */
 
+  setInterval(function () {
+    if($("#my-commodities").is(":visible")) {
+      updateCommodities()
+    }
+  }, 10*1000);
+
   $("#market-btn").click(function () {
-    API.send("get-commodities", {username: username, password, password}, function (data) {
-      $("#commodities-table").html(`
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Amount</th>
-        </tr>
-        `);
-      for (var i = 0; i < data.length; i++) {
-        $("#commodities-table").append(
-          `
-            <tr>
-              <td>${data[i].name}</td>
-              <td>${data[i].type}</td>
-              <td>${data[i].amount}</td>
-            </tr>
-          `
-        );
-      }
-      console.log(data);
-    });
+    updateCommodities();
   });
 
+
+  $("#producer-upgrade-btn").click(function () {
+    API.send("upgrade-producer", {
+      username: username,
+      password: password,
+      target: $(".hidden-id").text()
+    }, function (data) {
+      console.log(data);
+
+      API.send("get-producer", {
+        username: username,
+        password: password,
+        target: $(".hidden-target").text()
+      }, function (data) {
+
+        API.get("items", function (items) {
+          console.log(data);
+          console.log(items);
+          if(data.subType) { data.type = data.subType + " " + data.type; }
+
+          for (var i = 0; i < items.length; i++) {
+            if(items[i].name == cleanStr(data.type)) {
+              console.log(items[i]);
+              $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+              $(".producer-info-level").text("Lvl."+data.level);
+            }
+          }
+        })
+      })
+    });
+  });
 
 });
