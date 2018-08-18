@@ -115,6 +115,7 @@ body * {
   background-size: contain;
   position: absolute;
   bottom: 0;
+  margin-bottom: 20px;
 }
 
 #logout-btn:hover {
