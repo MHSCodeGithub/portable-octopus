@@ -12,7 +12,12 @@ class Harbour extends Objectable {
     this.x = x;
     this.y = y;
     this.health = 600;
+    this.commodities = [];
     // TODO: Add Harbour functions
+  }
+
+  addCommodity(commodity) {
+    this.commodities.push(commodity);
   }
 }
 

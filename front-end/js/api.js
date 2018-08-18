@@ -10,6 +10,7 @@ function APIClass() {
 
   this.get = async function (target, callback) {
     var result = await get(target);
+    if(result.type == "error") { alert(result.data); }
     callback(result);
   }
 
@@ -23,6 +24,7 @@ function APIClass() {
 
   this.send = async function (target, data, callback) {
     var result = await send(target, data);
+    if(result.type == "error") { alert(result.data); }
     callback(result);
   }
 }

@@ -43,3 +43,7 @@ exports.getItem = function (id) {
 exports.getItems = function () {
   return exports.read().items;
 }
+
+exports.getCommodities = function () {
+  return exports.read().commodities;
+}

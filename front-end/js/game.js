@@ -243,5 +243,22 @@ $(function() {
   /* New Code
   ––––––––––––––––––––––––––––––––––––––– */
 
+  $("#market-btn").click(function () {
+    API.send("get-commodities", {username: username, password, password}, function (data) {
+      for (var i = 0; i < data.length; i++) {
+        $("#commodities-table").append(
+          `
+            <tr>
+              <td>${data[i].name}</td>
+              <td>${data[i].type}</td>
+              <td>${data[i].amount}</td>
+            </tr>
+          `
+        );
+      }
+      console.log(data);
+    });
+  });
+
 
 });

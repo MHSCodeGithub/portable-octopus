@@ -118,6 +118,19 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "get-commodities") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+        var data = framework.database.getCommodities();
+
+        for (var i = 0; i < data.length; i++) {
+          data[i].amount = testAcc.getCommodityAmount(data[i].id);
+        }
+
+        res.send(data);
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else { res.send({type: "error", data: "No API Answer, please contact developers!"}); }
   });
 }
