@@ -135,6 +135,14 @@ $(function() {
           }
         }
       }
+
+      /* Block Interactions
+      ––––––––––––––––––––––––––––––––––––––– */
+      $('.built').unbind("click");
+      $('.built').bind("click", function () {
+        console.log("ya");
+        /* HERE GOES BUILDING INFO CODE */
+      });
     });
   }
 
@@ -214,26 +222,6 @@ $(function() {
       modal.style.display = "none";
     }
   }*/
-
-  /* Block Interactions
-  ––––––––––––––––––––––––––––––––––––––– */
-
-  $(".farm0").click(function() {
-    console.log("ya");
-    if ($(this).children().length == 0 && !$(this).hasClass("open")) {
-      $(this).addClass("open");
-      var classes = $(this).attr('class').split(" ");
-      var x = classes[1].split("-")[1],
-        y = classes[0].split("-")[1];
-
-      $(this).append("<div class='info'><img src='img/exit.png' alt='exit' /><h1>House</h1><p>Houses NPCs.</p></div>")
-    }
-  }); // TODO: make code dynamic to all producers + add API
-
-  $(document).on("click", ".info img", function() {
-    $(this).parent().parent().removeClass("open");
-    $(this).parent().remove();
-  });
 
   /* Front-end JS
   ––––––––––––––––––––––––––––––––––––––– */
