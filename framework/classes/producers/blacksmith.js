@@ -7,7 +7,7 @@ const Producer = require('../producer');
 
 class Blacksmith extends Producer {
   constructor(id, x, y) {
-    super(id, "blacksmith", x, y);
+    super(id, "blacksmith", x, y, "iron_sword");
   }
 
   yeild() {

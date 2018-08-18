@@ -7,7 +7,7 @@ const Producer = require('../producer');
 
 class Mine extends Producer {
   constructor(id, type, x, y) {
-    super(id, "mine", x, y);
+    super(id, "mine", x, y, type);
     this.subType = type;
   }
 
