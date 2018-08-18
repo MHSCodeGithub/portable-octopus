@@ -1,5 +1,6 @@
 
 const Objectable = require('./objectable');
+const database = require('../../database');
 
 /*
  * <---> # Treasury class # <--->
@@ -13,6 +14,9 @@ class Harbour extends Objectable {
     this.y = y;
     this.health = 600;
     this.commodities = [];
+    for (var i = 0; i < database.read().commodities.length; i++) {
+      this.commodities.push({id: database.read().commodities[i].id, amount: 0});
+    }
     // TODO: Add Harbour functions
   }
 

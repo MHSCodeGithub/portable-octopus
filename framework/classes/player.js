@@ -107,12 +107,12 @@ class Player extends Objectable {
   }
 
   getCommodityAmount(id) {
-    var total = 0;
     for (var i = 0; i < this.kingdom.harbour.commodities.length; i++) {
       if(this.kingdom.harbour.commodities[i].id == id) {
-        total++;
+        return this.kingdom.harbour.commodities[i].amount;
       }
-    } return total;
+    }
+    return 0;
   }
 
   charge(amount) {
