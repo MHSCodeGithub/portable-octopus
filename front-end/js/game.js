@@ -271,6 +271,11 @@ $(function() {
           $("#shop-item-wrap").append(item);
         }
 
+        $(".modal-close-btn").unbind("click");
+        $(".modal-close-btn").bind("click", function () {
+          $("#"+target+"-modal").css('display', 'none');
+        });
+
         $('.item-buy-btn').bind("click", function () {
           selectAvailiable();
           $panzoom.panzoom("enable")
