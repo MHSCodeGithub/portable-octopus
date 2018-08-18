@@ -131,6 +131,12 @@
       "name": "Gems",
       "type": "Mineral",
       "description": "Gems are a rare mineral!"
+    },
+    {
+      "id": 10,
+      "name": "Iron Sword",
+      "type": "Tool",
+      "description": "Sword made from iron used in battle!"
     }
   ]
 }
