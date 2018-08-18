@@ -160,8 +160,13 @@ $(function() {
       ––––––––––––––––––––––––––––––––––––––– */
       $('.built').unbind("click");
       $('.built').bind("click", function () {
-        console.log("yas");
         $(".producer-info").show()
+
+        if($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" ||
+           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") {
+         $(".producer-info").hide()
+         return;
+       }
 
         API.send("get-producer", {
           username: username,
