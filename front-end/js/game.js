@@ -176,18 +176,23 @@ $(function() {
           target: target
         }, function (data) {
 
+          $(".hidden-id").text(id);
+          $(".hidden-target").text(target);
+
           API.get("items", function (items) {
-            console.log(data);
-            console.log(items);
             if(data.subType) { data.type = data.subType + " " + data.type; }
 
             for (var i = 0; i < items.length; i++) {
               if(items[i].name == cleanStr(data.type)) {
-                console.log(items[i]);
-                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
-                $(".producer-info-level").text("Lvl."+data.level);
-                $(".hidden-id").text(id);
-                $(".hidden-target").text(target);
+                API.send("get-yeild", {
+                  username: username,
+                  password: password,
+                  target: $(".hidden-target").text()
+                }, function (producerYeild) {
+                  $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+                  $(".producer-info-level").text("Lvl."+data.level);
+                  $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
+                })
               }
             }
           })
@@ -337,7 +342,6 @@ $(function() {
       password: password,
       target: $(".hidden-id").text()
     }, function (data) {
-      console.log(data);
 
       API.send("get-producer", {
         username: username,
@@ -346,15 +350,19 @@ $(function() {
       }, function (data) {
 
         API.get("items", function (items) {
-          console.log(data);
-          console.log(items);
           if(data.subType) { data.type = data.subType + " " + data.type; }
 
           for (var i = 0; i < items.length; i++) {
             if(items[i].name == cleanStr(data.type)) {
-              console.log(items[i]);
-              $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
-              $(".producer-info-level").text("Lvl."+data.level);
+              API.send("get-yeild", {
+                username: username,
+                password: password,
+                target: $(".hidden-target").text()
+              }, function (producerYeild) {
+                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+                $(".producer-info-level").text("Lvl."+data.level);
+                $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
+              })
             }
           }
         })

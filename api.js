@@ -275,7 +275,6 @@ exports.setup = function (app, gets) {
             for (var k = 0; k < items.length; k++) {
               if(items[k].id == data.target) {
                 var price = items[k].price * (testAcc.kingdom.producers[i].level+1);
-                console.log(price);
                 if(testAcc.kingdom.treasury.balance - price < 0) {
                   res.send({type: "error", data: "You do not have enough money!"});
                   return;
@@ -310,6 +309,22 @@ exports.setup = function (app, gets) {
         for (var i = 0; i < testAcc.kingdom.producers.length; i++) {
           if(testAcc.kingdom.producers[i].id == data.target) {
             res.send(testAcc.toJSON(testAcc).kingdom.producers[i]);
+            return;
+          }
+        }
+
+        res.send({type: "error", data: "Request for non-existant producer, please contact developers!"});
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
+    } else if(type == "get-yeild") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+
+
+        for (var i = 0; i < testAcc.kingdom.producers.length; i++) {
+          if(testAcc.kingdom.producers[i].id == data.target) {
+            res.send({val: testAcc.kingdom.producers[i].yeild()});
             return;
           }
         }
