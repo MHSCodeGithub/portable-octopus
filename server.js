@@ -96,8 +96,8 @@ app.post('/', function (req, res) {
     req.session.password = sha256(req.body.password);
     res.redirect('/');
   } else if(req.body.type == "register") {
-    var treasury = new Treasury(0);
-    var harbour = new Harbour(0);
+    var treasury = new Treasury(0, 9, 9);
+    var harbour = new Harbour(0, 9, 9);
     var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
     var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, kingdom, false);
     if(database.getAccount(newAccount.username)) {

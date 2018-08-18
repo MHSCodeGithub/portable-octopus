@@ -46,6 +46,8 @@ class Player extends Objectable {
           var tre = new Treasury(data.accounts[property].kingdom.treasury.id);
           tre.health = data.accounts[property].kingdom.treasury.health;
           tre.balance = data.accounts[property].kingdom.treasury.balance;
+          tre.x = data.accounts[property].kingdom.treasury.x;
+          tre.y = data.accounts[property].kingdom.treasury.y;
           var har = new Harbour(data.accounts[property].kingdom.harbour.id);
           har.health = data.accounts[property].kingdom.harbour.health;
 

@@ -110,6 +110,10 @@ exports.setup = function (app, gets) {
       if(testAcc.check()) {
         var kingdom = testAcc.toJSON(testAcc).kingdom;
 
+        var target = kingdom.producers;
+        target.push(kingdom.treasury);
+        // target.push(kingdom.harbour);
+
         res.send(kingdom.producers);
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})

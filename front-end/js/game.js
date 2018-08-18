@@ -87,6 +87,12 @@ $(function() {
     $(".y-" + y + ".x-" + x).removeClass().addClass(type+id+" built").addClass("y-" + y + " x-" + x);
   }
 
+  function drawFeature(id, x, y, type) {
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
+    $(".y-" + y + ".x-" + x).css("background-size", "contain");
+    $(".y-" + y + ".x-" + x).removeClass().addClass(type+id+" built").addClass("y-" + y + " x-" + x);
+  }
+
   function drawSelect(x, y, reason) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/selected-tile.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
@@ -115,12 +121,16 @@ $(function() {
       for (var i = 0; i < data.length; i++) {
         var producer = data[i];
 
-        if(producer.type == "farm") {
-          drawFarm(producer.id, producer.y, producer.x, producer.subType, producer.growth);
-        } else if(producer.type == "mine") {
-          drawMine(producer.id, producer.y, producer.x, producer.subType)
+        if(i == data.length-1) {
+          drawFeature(producer.id, producer.y, producer.x, "treasury");
         } else {
-          drawProducer(producer.id, producer.y, producer.x, producer.type);
+          if(producer.type == "farm") {
+            drawFarm(producer.id, producer.y, producer.x, producer.subType, producer.growth);
+          } else if(producer.type == "mine") {
+            drawMine(producer.id, producer.y, producer.x, producer.subType)
+          } else {
+            drawProducer(producer.id, producer.y, producer.x, producer.type);
+          }
         }
       }
     });
