@@ -196,6 +196,30 @@ $(function() {
     });
   }
 
+  function updateCommodities() {
+    API.send("get-commodities", {username: username, password, password}, function (data) {
+      $("#commodities-table").html(`
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+        `);
+      for (var i = 0; i < data.length; i++) {
+        $("#commodities-table").append(
+          `
+            <tr>
+              <td>${data[i].name}</td>
+              <td>${data[i].type}</td>
+              <td>${data[i].amount}</td>
+            </tr>
+          `
+        );
+      }
+      console.log(data);
+    });
+  }
+
   /* Map Generation/Setups
   ––––––––––––––––––––––––––––––––––––––– */
 
@@ -283,28 +307,13 @@ $(function() {
   ––––––––––––––––––––––––––––––––––––––– */
 
   setInterval(function () {
-    API.send("get-commodities", {username: username, password, password}, function (data) {
-      $("#commodities-table").html(`
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Amount</th>
-        </tr>
-        `);
-      for (var i = 0; i < data.length; i++) {
-        $("#commodities-table").append(
-          `
-            <tr>
-              <td>${data[i].name}</td>
-              <td>${data[i].type}</td>
-              <td>${data[i].amount}</td>
-            </tr>
-          `
-        );
-      }
-      console.log(data);
-    });
+    if($("#my-commodities").is(":visible")) {
+      updateCommodities()
+    }
   }, 10*1000);
 
+  $("#market-btn").click(function () {
+    updateCommodities();
+  });
 
 });
