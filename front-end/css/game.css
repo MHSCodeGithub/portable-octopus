@@ -152,6 +152,22 @@ body * {
   margin: 3.5%;
 }
 
+.modal-close-btn {
+  background: url('../img/close-btn.png');
+  height: 72px;
+  width: 66px;
+  position: absolute;
+  background-size: contain;
+  top: 1.5%;
+  right: 1.5%;
+}
+
+.modal-close-btn:hover {
+  background: url('../img/close-btn-p.png');
+  background-size: contain;
+  cursor: pointer;
+}
+
 /* SHOP MODAL
 ––––––––––––––––––––––––––––––––––––––– */
 #shop-item-wrap {
@@ -215,14 +231,16 @@ body * {
   height: 39px;
   border: none;
   color: white;
-  font-size: 1.5em;
+  font-size: 1.6em;
   margin-top: 5px;
+  padding-bottom: 3px;
 }
 
 .item-buy-btn:hover {
   background: url('../img/buy-btn-p.png');
   background-size: contain;
   padding-top: 6px;
+  cursor: pointer;
 }
 
 /* MARKET MODAL
