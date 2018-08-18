@@ -274,6 +274,7 @@ $(function() {
         $(".modal-close-btn").unbind("click");
         $(".modal-close-btn").bind("click", function () {
           $("#"+target+"-modal").css('display', 'none');
+          $panzoom.panzoom("enable")
         });
 
         $('.item-buy-btn').bind("click", function () {
