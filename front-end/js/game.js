@@ -177,7 +177,8 @@ $(function() {
             for (var i = 0; i < items.length; i++) {
               if(items[i].name == cleanStr(data.type)) {
                 console.log(items[i]);
-                $(".producer-info-name").text(cleanStr(data.type));
+                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+                $(".producer-info-level").text("Lvl."+data.level);
               }
             }
           })
