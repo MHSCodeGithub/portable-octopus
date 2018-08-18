@@ -70,5 +70,67 @@
       "description": "A blacksmith that turns iron into iron swords!",
       "price": 1000
     }
+  ],
+  "commodities": [
+    {
+      "id": 0,
+      "name": "Beef",
+      "type": "Food",
+      "description": "Beef is the meat of cattle!"
+    },
+    {
+      "id": 1,
+      "name": "Smoked Beef",
+      "type": "Food",
+      "description": "Smoked Beef is beef but smoked!"
+    },
+    {
+      "id": 2,
+      "name": "Wheat",
+      "type": "Food",
+      "description": "Wheat is a crop!"
+    },
+    {
+      "id": 3,
+      "name": "Flour",
+      "type": "Food",
+      "description": "Flour is milled wheat!"
+    },
+    {
+      "id": 4,
+      "name": "Bread",
+      "type": "Food",
+      "description": "Bread is a baked good made from wheat!"
+    },
+    {
+      "id": 5,
+      "name": "Cotton",
+      "type": "Textile",
+      "description": "Cotton is a crop!"
+    },
+    {
+      "id": 6,
+      "name": "Clothing",
+      "type": "Textile",
+      "description": "Clothing is what citizens wear!"
+    },
+    {
+      "id": 7,
+      "name": "Iron",
+      "type": "Mineral",
+      "description": "Iron is a common mineral!"
+    },
+    {
+      "id": 8,
+      "name": "Gold",
+      "type": "Mineral",
+      "description": "Gold is a valuable mineral!"
+    },
+    {
+      "id": 9,
+      "name": "Gems",
+      "type": "Mineral",
+      "description": "Gems are a rare mineral!"
+    }
   ]
 }

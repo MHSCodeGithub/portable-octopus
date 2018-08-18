@@ -2,13 +2,13 @@
 const Commodity = require('../commodity');
 
 /*
- * <---> # Gem class # <--->
+ * <---> # Gems class # <--->
  */
 
-class Gem extends Commodity {
+class Gems extends Commodity {
   constructor(id) {
-    super(id, "gem", "mineral");
+    super(id, "gems", "mineral");
   }
 }
 
-module.exports = Gem;
+module.exports = Gems;
