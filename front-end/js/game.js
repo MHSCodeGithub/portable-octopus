@@ -316,6 +316,16 @@ $(function() {
     }
   }, 10*1000);
 
+  setInterval(function () {
+    API.send("get-balance", {username: username, password: password}, function (balance) {
+      $("#balance").text("$"+balance.data);
+    });
+  }, 5*1000);
+
+  API.send("get-balance", {username: username, password: password}, function (balance) {
+    $("#balance").text("$"+balance.data);
+  });
+
   $("#market-btn").click(function () {
     updateCommodities();
   });
