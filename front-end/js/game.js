@@ -2,6 +2,10 @@
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -16,6 +20,20 @@ function getCookie(cname) {
     }
   }
   return false;
+}
+
+function cleanStr(string) {
+  string = string.replace("_", " ");
+
+  var words = string.split(" ");
+
+  for (var i = 0; i < words.length; i++) {
+    words[i] = capitalizeFirstLetter(words[i])
+  }
+
+  string = words.join(" ");
+
+  return string;
 }
 
 var username = getCookie("username");
@@ -143,19 +161,27 @@ $(function() {
       $('.built').unbind("click");
       $('.built').bind("click", function () {
         console.log("yas");
-        /* HERE GOES BUILDING INFO CODE */
-        if($(".producer-info").is(':hidden')) {
-          $(".producer-info").show()
+        $(".producer-info").show()
 
-          API.send("get-producer", {
-            username: username,
-            password: password,
-            target: $(this).attr("class").split(" ")[0].split("-")[1]
-          }, function (data) {
+        API.send("get-producer", {
+          username: username,
+          password: password,
+          target: $(this).attr("class").split(" ")[0].split("-")[1]
+        }, function (data) {
+
+          API.get("items", function (items) {
             console.log(data);
-            $(".producer-info-name").text(data.type);
+            console.log(items);
+            if(data.subType) { data.type = data.subType + " " + data.type; }
+
+            for (var i = 0; i < items.length; i++) {
+              if(items[i].name == cleanStr(data.type)) {
+                console.log(items[i]);
+                $(".producer-info-name").text(cleanStr(data.type));
+              }
+            }
           })
-        }
+        })
       });
 
       $(".producer-info-close").click(function () {
