@@ -121,8 +121,10 @@ $(function() {
       for (var i = 0; i < data.length; i++) {
         var producer = data[i];
 
-        if(i == data.length-1) {
+        if(i == data.length-2) {
           drawFeature(producer.id, producer.y, producer.x, "treasury");
+        } else if(i == data.length-1) {
+          drawFeature(producer.id, producer.y, producer.x, "harbour");
         } else {
           if(producer.type == "farm") {
             drawFarm(producer.id, producer.y, producer.x, producer.subType, producer.growth);

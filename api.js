@@ -112,7 +112,7 @@ exports.setup = function (app, gets) {
 
         var target = kingdom.producers;
         target.push(kingdom.treasury);
-        // target.push(kingdom.harbour);
+        target.push(kingdom.harbour);
 
         res.send(kingdom.producers);
       } else {

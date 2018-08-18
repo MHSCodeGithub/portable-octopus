@@ -6,9 +6,11 @@ const Objectable = require('./objectable');
  */
 
 class Harbour extends Objectable {
-  constructor(id) {
+  constructor(id, x, y) {
     super();
     this.id = id;
+    this.x = x;
+    this.y = y;
     this.health = 600;
     // TODO: Add Harbour functions
   }
