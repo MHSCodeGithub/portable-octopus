@@ -294,6 +294,33 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "sell-producer") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+
+        for (var i = 0; i < testAcc.kingdom.producers.length; i++) {
+          if(testAcc.kingdom.producers[i].id == data.target) {
+            var items = framework.database.getItems();
+
+            for (var k = 0; k < items.length; k++) {
+              if(items[k].id == data.target) {
+                var price = (items[k].price * testAcc.kingdom.producers[i].level)/2;
+
+                testAcc.kingdom.producers[i].upgrade();
+                testAcc.charge(-price);
+                testAcc.kingdom.producers.splice(i, 1);
+                testAcc.update();
+                res.send("Updated!");
+                return;
+              }
+            }
+          }
+        }
+
+        res.send({type: "error", data: "Request for non-existant producer, please contact developers!"});
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else if(type == "get-balance") {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
