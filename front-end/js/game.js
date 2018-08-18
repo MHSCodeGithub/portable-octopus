@@ -279,10 +279,10 @@ $(function() {
     $("#tabs").tabs();
   });
 
-  /* New Code
+  /* Automatic Commodity Table Updater
   ––––––––––––––––––––––––––––––––––––––– */
 
-  $("#market-btn").click(function () {
+  setInterval(function () {
     API.send("get-commodities", {username: username, password, password}, function (data) {
       $("#commodities-table").html(`
         <tr>
@@ -304,7 +304,7 @@ $(function() {
       }
       console.log(data);
     });
-  });
+  }, 10*1000);
 
 
 });
