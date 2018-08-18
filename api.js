@@ -1,6 +1,17 @@
 
 const framework = require('./framework');
 
+function isItemName(name) {
+  var items = framework.database.getItems();
+
+  for (var i = 0; i < items.length; i++) {
+    if(items[i].name == name) { return items[i]; }
+  }
+
+  return false;
+}
+
+
 function isItem(id) {
   var items = framework.database.getItems();
 
@@ -41,55 +52,176 @@ exports.setup = function (app, gets) {
             case "Gold Mine":
               var producer = new framework.producers.Mine(current, "gold", Number(data.x), Number(data.y));
 
+              var price = isItemName("Gold Mine").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Iron Mine":
               var producer = new framework.producers.Mine(current, "iron", Number(data.x), Number(data.y));
+
+              var price = isItemName("Iron Mine").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
 
               kingdom.producers.push(producer);
               break;
             case "Gem Mine":
               var producer = new framework.producers.Mine(current, "gem", Number(data.x), Number(data.y));
 
+              var price = isItemName("Gem Mine").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Wheat Farm":
               var producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
+
+              var price = isItemName("Wheat Farm").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
 
               kingdom.producers.push(producer);
               break;
             case "Cotton Farm":
               var producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
 
+              var price = isItemName("Cotton Farm").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Cattle Farm":
               var producer = new framework.producers.Farm(current, "cattle", Number(data.x), Number(data.y));
+
+              var price = isItemName("Cattle Farm").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
 
               kingdom.producers.push(producer);
               break;
             case "Mill":
               var producer = new framework.producers.Mill(current, Number(data.x), Number(data.y));
 
+              var price = isItemName("Mill").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Bakery":
               var producer = new framework.producers.Bakery(current, Number(data.x), Number(data.y));
+
+              var price = isItemName("Bakery").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
 
               kingdom.producers.push(producer);
               break;
             case "Blacksmith":
               var producer = new framework.producers.Blacksmith(current, Number(data.x), Number(data.y));
 
+              var price = isItemName("Blacksmith").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Cotton Mill":
               var producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
 
+              var price = isItemName("Cotton Mill").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
               kingdom.producers.push(producer);
               break;
             case "Butchery":
               var producer = new framework.producers.Butchery(current, Number(data.x), Number(data.y));
+
+              var price = isItemName("Butchery").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
 
               kingdom.producers.push(producer);
               break;

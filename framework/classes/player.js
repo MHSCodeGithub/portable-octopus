@@ -120,7 +120,6 @@ class Player extends Objectable {
     else {
       this.kingdom.treasury.balance -= amount;
     }
-    update();
   }
 
   save() {
