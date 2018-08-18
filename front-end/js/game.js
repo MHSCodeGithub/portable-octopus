@@ -169,6 +169,7 @@ $(function() {
         }
         var id = $(this).attr("class").split(" ")[0].split("-")[1];
         var target = $(this).attr("class").split(" ")[0].split("-")[1];
+        var another = $(this).attr("class").split(" ")[0];
 
         API.send("get-producer", {
           username: username,
@@ -177,7 +178,7 @@ $(function() {
         }, function (data) {
 
           $(".hidden-id").text(id);
-          $(".hidden-target").text(target);
+          $(".hidden-target").text(another);
 
           API.get("items", function (items) {
             if(data.subType) { data.type = data.subType + " " + data.type; }
@@ -188,7 +189,7 @@ $(function() {
                 API.send("get-yeild", {
                   username: username,
                   password: password,
-                  target: $(".hidden-target").text()
+                  target: $(".hidden-id").text()
                 }, function (producerYeild) {
                   $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                   $(".producer-info-level").text("Lvl."+data.level);
@@ -349,7 +350,7 @@ $(function() {
       API.send("get-producer", {
         username: username,
         password: password,
-        target: $(".hidden-target").text()
+        target: $(".hidden-id").text()
       }, function (data) {
 
         API.get("items", function (items) {
@@ -360,7 +361,7 @@ $(function() {
               API.send("get-yeild", {
                 username: username,
                 password: password,
-                target: $(".hidden-target").text()
+                target: $(".hidden-id").text()
               }, function (producerYeild) {
                 $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                 $(".producer-info-level").text("Lvl."+data.level);
@@ -372,6 +373,18 @@ $(function() {
           }
         })
       })
+    });
+  });
+
+  $("#producer-sell-btn").click(function () {
+    API.send("sell-producer", {
+      username: username,
+      password: password,
+      target: $(".hidden-id").text()
+    }, function (data) {
+      $(".producer-info").hide();
+      $("."+$(".hidden-target").text()).unbind("click");
+      updateMap()
     });
   });
 
