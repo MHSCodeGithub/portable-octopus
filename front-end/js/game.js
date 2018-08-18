@@ -284,6 +284,13 @@ $(function() {
 
   $("#market-btn").click(function () {
     API.send("get-commodities", {username: username, password, password}, function (data) {
+      $("#commodities-table").html(`
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+        `);
       for (var i = 0; i < data.length; i++) {
         $("#commodities-table").append(
           `
