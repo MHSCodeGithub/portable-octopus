@@ -10,6 +10,7 @@ body * {
   padding: 0;
   box-sizing: border-box;
   font-family: 'VT323', sans-serif;
+  font-weight: normal;
 }
 
 #game {
@@ -101,6 +102,7 @@ body * {
   background-size: contain;
   color: white;
   padding-bottom: 10px;
+  font-family: 'VT323', sans-serif;
 }
 
 .modal-btn:hover {
@@ -157,16 +159,20 @@ body * {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-content: flex-start;
   overflow-y: scroll;
+  background: #FFB57A;
+  border: 10px solid #D0712E;
+  outline: 4px solid #753713;
 }
 
 .shop-item {
-  border: 1px solid gray;
-  max-width: 300px;
+  width: 270px;
   margin: 20px auto;
   float: left;
   display: block;
   padding: 10px 15px;
-  max-height: 170px;
+  height: 170px;
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
 }
 
 .shop-item * {
@@ -177,6 +183,7 @@ body * {
   display: flex;
   width: 100%;
   position: relative;
+  font-size: 1.2em;
 }
 
 .item-desc-wrap img {
@@ -187,6 +194,7 @@ body * {
 .item-name {
   width: 100%;
   padding-bottom: 12px;
+  font-size: 2em;
 }
 
 .item-img {
@@ -201,6 +209,20 @@ body * {
   float: right;
   position: relative;
   bottom: 0;
+  background: url('../img/buy-btn.png');
+  background-size: contain;
+  width: 81px;
+  height: 39px;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  margin-top: 5px;
+}
+
+.item-buy-btn:hover {
+  background: url('../img/buy-btn-p.png');
+  background-size: contain;
+  padding-top: 6px;
 }
 
 /* MARKET MODAL
