@@ -134,30 +134,22 @@ app.post('/', function (req, res) {
 
 setInterval(function () {
   var accounts = database.read().accounts;
-  console.log(accounts);
 
   for (var i = 1; i < objectLength(accounts)+1; i++) {
-    console.log(accounts[i].username);
     var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
     if(testAcc.check()) {
       // console.log(testAcc.kingdom);
       for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
         var producer = testAcc.kingdom.producers[j];
 
-        console.log(producer.produce);
-        console.log(cleanStr(producer.produce));
-
         var amount = producer.yeild();
-        console.log(amount);
 
         var data = database.read();
 
         for (var k = 0; k < data.commodities.length; k++) {
           if(data.commodities[k].name == cleanStr(producer.produce)) {
-            console.log("K: " +k);
             for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
               if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                console.log("N: " +n);
                 testAcc.kingdom.harbour.commodities[n].amount += amount;
               }
             }
