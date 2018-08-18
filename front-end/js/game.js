@@ -207,6 +207,7 @@ $(function() {
         $(".producer-info").hide()
       })
     });
+    getBalance()
   }
 
   function updateCommodities() {
@@ -298,6 +299,7 @@ $(function() {
                 console.log(data);
                 $('.to-build').unbind("click");
                 updateMap();
+                getBalance()
               });
             }
           });
@@ -331,15 +333,15 @@ $(function() {
     }
   }, 10*1000);
 
-  setInterval(function () {
+  /*setInterval(function () {
+    getBalance()
+  }, 5*1000);*/
+
+  function getBalance() {
     API.send("get-balance", {username: username, password: password}, function (balance) {
       $("#balance").text("$"+balance.data);
     });
-  }, 5*1000);
-
-  API.send("get-balance", {username: username, password: password}, function (balance) {
-    $("#balance").text("$"+balance.data);
-  });
+  }
 
   $("#market-btn").click(function () {
     updateCommodities();
@@ -370,6 +372,7 @@ $(function() {
                 password: password,
                 target: $(".hidden-id").text()
               }, function (producerYeild) {
+                getBalance()
                 $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                 $(".producer-info-level").text("Lvl."+data.level);
                 $("#producer-upgrade-btn").text("Upgrade ($"+(price*(data.level+1))+")");
@@ -391,6 +394,7 @@ $(function() {
     }, function (data) {
       $(".producer-info").hide();
       $("."+$(".hidden-target").text()).unbind("click");
+      getBalance()
       updateMap()
     });
   });
