@@ -113,6 +113,8 @@ body * {
 #logout-btn {
   background: url("../img/logout-btn.png");
   background-size: contain;
+  position: absolute;
+  bottom: 0;
 }
 
 #logout-btn:hover {
