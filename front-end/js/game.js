@@ -358,6 +358,7 @@ $(function() {
 
           for (var i = 0; i < items.length; i++) {
             if(items[i].name == cleanStr(data.type)) {
+              var price = items[i].price;
               API.send("get-yeild", {
                 username: username,
                 password: password,
@@ -365,8 +366,8 @@ $(function() {
               }, function (producerYeild) {
                 $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                 $(".producer-info-level").text("Lvl."+data.level);
+                $("#producer-upgrade-btn").text("Upgrade ($"+(price*(data.level+1))+")");
                 $("#producer-sell-btn").text("Sell ($"+((price*data.level)/2)+")");
-                $("#producer-upgrade-btn").text("Upgrade ($"+(items[i].price*(data.level+1))+")");
                 $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
               })
             }
