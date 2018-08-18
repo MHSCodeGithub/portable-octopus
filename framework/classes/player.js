@@ -115,6 +115,14 @@ class Player extends Objectable {
     } return total;
   }
 
+  charge(amount) {
+    if(this.kingdom.treasury.balance - amount < 0) { this.kingdom.treasury.balance = 0; }
+    else {
+      this.kingdom.treasury.balance -= amount;
+    }
+    update();
+  }
+
   save() {
     this.id = objectLength(database.read().accounts) + 1;
     database.addAccount(this.toJSON(this));
