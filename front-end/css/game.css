@@ -89,10 +89,35 @@ body * {
   flex-direction: column;
   width: 70%;
   margin-top: 50px;
+  align-items: center;
 }
 
 .modal-btn {
   margin: 10px 0;
+  height: 70px;
+  width: 200px;
+  background: url('../img/menu-btn.png');
+  border: none;
+  background-size: contain;
+  color: white;
+  padding-bottom: 10px;
+}
+
+.modal-btn:hover {
+  background: url('../img/menu-btn-p.png');
+  background-size: contain;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+#logout-btn {
+  background: url("../img/logout-btn.png");
+  background-size: contain;
+}
+
+#logout-btn:hover {
+  background: url("../img/logout-btn-p.png");
+  background-size: contain;
 }
 
 #balance {
