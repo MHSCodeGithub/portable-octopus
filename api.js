@@ -131,6 +131,22 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "get-producer") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+
+
+        for (var i = 0; i < testAcc.kingdom.producers.length; i++) {
+          if(testAcc.kingdom.producers[i].id == data.target) {
+            res.send(testAcc.toJSON(testAcc).kingdom.producers[i]);
+            return;
+          }
+        }
+
+        res.send({type: "error", data: "Request for non-existant producer, please contact developers!"});
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else { res.send({type: "error", data: "No API Answer, please contact developers!"}); }
   });
 }

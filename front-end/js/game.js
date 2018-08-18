@@ -37,6 +37,8 @@ $(function() {
 
   updateMap();
 
+  $(".producer-info").hide();
+
   /* Deprecated Stuff
   ––––––––––––––––––––––––––––––––––––––– */
 
@@ -66,13 +68,13 @@ $(function() {
   function drawFarm(id, x, y, type, stage) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + "-" + stage + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass().addClass("farm"+"-"+id+" built").addClass("y-" + y + " x-" + x);
+    $(".y-" + y + ".x-" + x).removeClass().addClass("farm"+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
   function drawMine(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/mine-" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass().addClass("mine"+"-"+id+" built").addClass("y-" + y + " x-" + x);
+    $(".y-" + y + ".x-" + x).removeClass().addClass("mine"+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
   function drawGrass(x, y) {
@@ -84,13 +86,13 @@ $(function() {
   function drawProducer(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built").addClass("y-" + y + " x-" + x);
+    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
   function drawFeature(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built").addClass("y-" + y + " x-" + x);
+    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built feature").addClass("y-" + y + " x-" + x);
   }
 
   function drawSelect(x, y, reason) {
@@ -140,9 +142,25 @@ $(function() {
       ––––––––––––––––––––––––––––––––––––––– */
       $('.built').unbind("click");
       $('.built').bind("click", function () {
-        console.log("ya");
+        console.log("yas");
         /* HERE GOES BUILDING INFO CODE */
+        if($(".producer-info").is(':hidden')) {
+          $(".producer-info").show()
+
+          API.send("get-producer", {
+            username: username,
+            password: password,
+            target: $(this).attr("class").split(" ")[0].split("-")[1]
+          }, function (data) {
+            console.log(data);
+            $(".producer-info-name").text(data.type);
+          })
+        }
       });
+
+      $(".producer-info-close").click(function () {
+        $(".producer-info").hide()
+      })
     });
   }
 
