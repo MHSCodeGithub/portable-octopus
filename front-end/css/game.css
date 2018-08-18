@@ -63,22 +63,30 @@ body * {
   margin: 0.5vw;
 }
 
-
 .parent {
   width: 100%;
   height: 100%;
 }
 
+/* MENU
+––––––––––––––––––––––––––––––––––––––– */
 #menu {
   width: 20vw;
   height: 100vh;
-  background: lightgray;
+  background: #FFB57A;
   position: absolute;
-  float: right;
   right: 0;
   top: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-size: 2.8em;
+  border: 6px solid #D0712E;
+}
+
+#menu button {
+  width: 70%;
+  margin: 15px 0;
 }
 
 /* MODALs
