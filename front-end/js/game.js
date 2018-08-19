@@ -337,6 +337,19 @@ $(function() {
               }
             });
           });
+        } else if(target == "market") {
+          $("#create-order-btn").unbind("click");
+          $("#create-order-btn").bind("click", function () {
+            if($("#market-table").is(":visible")) {
+              $("#market-table").hide();
+              $("#market-order").show();
+              $("#create-order-btn").text("Cancel")
+            } else {
+              $("#market-table").show();
+              $("#market-order").hide();
+              $("#create-order-btn").text("Create Order")
+            }
+          });
         }
 
       });
