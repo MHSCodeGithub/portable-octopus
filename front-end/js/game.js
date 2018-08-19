@@ -120,8 +120,8 @@ $(function() {
   }
 
   function selectAvailiable() {
-    for (var i = 0; i < 18; i++) {
-      for (var j = 0; j < 18; j++) {
+    for (var i = 0; i < 19; i++) {
+      for (var j = 0; j < 19; j++) {
         if($(".y-" + (i+1) + ".x-" + (j+1)).hasClass("empty")) { drawSelect(j+1, i+1, "to-build"); }
       }
     }
@@ -130,8 +130,8 @@ $(function() {
   function updateMap() {
 
     API.send("get-map", {username: username, password: password}, function (data) {
-      for (var i = 0; i < 18; i++) {
-        for (var j = 0; j < 18; j++) {
+      for (var i = 0; i < 19; i++) {
+        for (var j = 0; j < 19; j++) {
           drawGrass(i+1, j+1);
         }
       }
