@@ -181,12 +181,12 @@ body * {
 }
 
 .shop-item {
-  width: 270px;
+  max-width: 270px;
   margin: 20px auto;
   float: left;
   display: block;
   padding: 10px 15px;
-  height: 170px;
+  max-height: 170px;
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
 }
