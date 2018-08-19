@@ -10,7 +10,6 @@ class BuyOrder extends Objectable {
     super(commodity, price, amount, creatorName);
     this.id = id; // unique integer id (starts at 0)
     this.type = "buy";
-    this.creator = creatorName;
     // TODO: Add BuyOrder functions
   }
 }
