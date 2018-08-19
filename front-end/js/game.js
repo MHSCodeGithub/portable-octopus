@@ -210,6 +210,20 @@ $(function() {
     getBalance()
   }
 
+  function updateAmount() {
+    var amount;
+    if($("#order-type").val() == "sell") {
+      amount = Number($("#order-commodity").val().split("-")[1]);
+    } else {
+      amount = 10000;
+    }
+
+    $("#order-amount").attr({max: amount});
+    if($("#order-amount").val() > amount) {
+      $("#order-amount").val(amount);
+    }
+  }
+
   function updateCommodities() {
     API.send("get-commodities", {username: username, password, password}, function (data) {
       $("#commodities-table").html(`
@@ -230,6 +244,41 @@ $(function() {
           `
         );
       }
+      console.log(data);
+    });
+  }
+
+  function getSuitableCommodities() {
+    API.send("get-commodities", {username: username, password, password}, function (data) {
+      $("#order-commodity").html("");
+      for (var i = 0; i < data.length; i++) {
+        if(data[i].amount > 0) {
+
+          $("#order-commodity").append(
+            `
+              <option value="${data[i].name}-${data[i].amount}">
+                ${data[i].name} - ${data[i].amount}
+              </tr>
+            `
+          );
+
+          $("#order-amount").unbind("change");
+          $("#order-amount").bind("change", function () {
+            updateAmount()
+          });
+
+          $("#order-type").unbind("change");
+          $("#order-type").bind("change", function () {
+            updateAmount()
+          });
+
+          $("#order-commodity").unbind("change");
+          $("#order-commodity").bind("change", function () {
+            updateAmount()
+          });
+        }
+      }
+      console.log("DATA: ");
       console.log(data);
     });
   }
@@ -344,6 +393,7 @@ $(function() {
               $("#market-table").hide();
               $("#market-order").show();
               $("#create-order-btn").text("Cancel")
+              getSuitableCommodities();
             } else {
               $("#market-table").show();
               $("#market-order").hide();
