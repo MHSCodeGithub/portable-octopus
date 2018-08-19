@@ -269,8 +269,8 @@ $(function() {
   ––––––––––––––––––––––––––––––––––––––– */
 
   var total = 0;
-  for (var i = 0; i < 18; i++) {
-    for (var j = 0; j < 18; j++) {
+  for (var i = 0; i < 19; i++) {
+    for (var j = 0; j < 19; j++) {
       total++;
       $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + " grass empty'> </div>");
     }

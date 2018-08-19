@@ -20,8 +20,8 @@ body * {
 
 #game-container {
   display: grid;
-  grid-template-columns: repeat(18, 1fr);
-  grid-template-rows: repeat(18, 1fr);
+  grid-template-columns: repeat(19, 1fr);
+  grid-template-rows: repeat(19, 1fr);
   grid-gap: 0px;
   background: black;
   width: 576px;
