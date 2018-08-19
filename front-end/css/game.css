@@ -296,6 +296,12 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
+/* MARKET MODAL - Market
+––––––––––––––––––––––––––––––––––––––– */
+#create-order-btn {
+  float: right;
+}
+
 /* PRODUCER INFORMATION
 ––––––––––––––––––––––––––––––––––––––– */
 .producer-info {
