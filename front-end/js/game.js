@@ -234,6 +234,37 @@ $(function() {
     });
   }
 
+  function updateOrders() {
+    API.send("get-orders", {username: username, password, password}, function (data) {
+      $("#commodities-table").html(`
+        <tr>
+          <th>Buy/Sell</th>
+          <th>Commodity</th>
+          <th>Price</th>
+          <th>Amount</th>
+          <th>Fulfillment</th>
+          <th>Player</th>
+          <th></th>
+        </tr>
+        `);
+      for (var i = 0; i < data.length; i++) {
+        $("#commodities-table").append(
+          `
+            <tr>
+              <td>${data[i].type}</td>
+              <td>${data[i].commodity}</td>
+              <td>${data[i].price}</td>
+              <td>${data[i].amount}</td>
+              <td>${data[i].fulfillment}</td>
+              <td>${data[i].player}</td>
+            </tr>
+          `
+        );
+      }
+      console.log(data);
+    });
+  }
+
   /* Map Generation/Setups
   ––––––––––––––––––––––––––––––––––––––– */
 
@@ -255,57 +286,60 @@ $(function() {
 
       $panzoom.panzoom("disable");
 
-      API.get("items", function (items) {
-        console.log(items);
-        $("#shop-item-wrap").html("")
-        for (var i = 0; i < items.length; i++) {
-          var item = `
-          <div class="shop-item" id="item-`+items[i].id+`">
-            <h2 class="item-name">`+items[i].name+`</h2>
-            <div class="item-desc-wrap">
-              <img src="`+items[i].image+`" alt="" class="item-img">
-              <p class="item-desc">`+items[i].description+`</p>
+      if(target == "market") {
+
+        API.get("items", function (items) {
+          console.log(items);
+          $("#shop-item-wrap").html("")
+          for (var i = 0; i < items.length; i++) {
+            var item = `
+            <div class="shop-item" id="item-`+items[i].id+`">
+              <h2 class="item-name">`+items[i].name+`</h2>
+              <div class="item-desc-wrap">
+                <img src="`+items[i].image+`" alt="" class="item-img">
+                <p class="item-desc">`+items[i].description+`</p>
+              </div>
+              <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
             </div>
-            <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
-          </div>
-          `
-          $("#shop-item-wrap").append(item);
-        }
+            `
+            $("#shop-item-wrap").append(item);
+          }
 
-        $(".modal-close-btn").unbind("click");
-        $(".modal-close-btn").bind("click", function () {
-          $("#"+target+"-modal").css('display', 'none');
-          $panzoom.panzoom("enable")
-        });
-
-        $('.item-buy-btn').bind("click", function () {
-          selectAvailiable();
-          $panzoom.panzoom("enable")
-          $(".modal").css('display', 'none');
-
-          var pre = this;
-
-          $(".to-build").bind("click", function () {
-            console.log("PRODUCER PLACE");
-            console.log($(this).attr("class"));
-            if($(this).hasClass("selected")) {
-              API.send("buy-producer", {
-                username: username,
-                password: password,
-                target: $(pre).parent().attr('id').split("-")[1],
-                x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
-                y: Number($(this).attr("class").split(' ')[3].split("-")[1])
-              }, function (data) {
-                console.log(data);
-                $('.to-build').unbind("click");
-                updateMap();
-                getBalance()
-              });
-            }
+          $(".modal-close-btn").unbind("click");
+          $(".modal-close-btn").bind("click", function () {
+            $("#"+target+"-modal").css('display', 'none');
+            $panzoom.panzoom("enable")
           });
-        });
 
-      });
+          $('.item-buy-btn').bind("click", function () {
+            selectAvailiable();
+            $panzoom.panzoom("enable")
+            $(".modal").css('display', 'none');
+
+            var pre = this;
+
+            $(".to-build").bind("click", function () {
+              console.log("PRODUCER PLACE");
+              console.log($(this).attr("class"));
+              if($(this).hasClass("selected")) {
+                API.send("buy-producer", {
+                  username: username,
+                  password: password,
+                  target: $(pre).parent().attr('id').split("-")[1],
+                  x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
+                  y: Number($(this).attr("class").split(' ')[3].split("-")[1])
+                }, function (data) {
+                  console.log(data);
+                  $('.to-build').unbind("click");
+                  updateMap();
+                  getBalance()
+                });
+              }
+            });
+          });
+
+        });
+      }
     } else {
       $panzoom.panzoom("enable")
       $("#"+target+"-modal").css('display', 'none');
@@ -330,6 +364,8 @@ $(function() {
   setInterval(function () {
     if($("#my-commodities").is(":visible")) {
       updateCommodities()
+    } else if($("#market").is(":visible")) {
+      // updateOrders()
     }
   }, 10*1000);
 
@@ -345,6 +381,7 @@ $(function() {
 
   $("#market-btn").click(function () {
     updateCommodities();
+    // updateOrders();
   });
 
 
