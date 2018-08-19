@@ -29,6 +29,7 @@ exports.setup = function (app, gets) {
     console.log(type);
 
     if(gets[type]) { res.send(gets[type]);  }
+    else if(type == "orders") { res.send(framework.database.getOrders()); }
     else           { res.send({type: "error", data: "No API Answer, please contact developers!"}); }
   });
 

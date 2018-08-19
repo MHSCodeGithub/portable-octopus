@@ -235,8 +235,8 @@ $(function() {
   }
 
   function updateOrders() {
-    API.send("get-orders", {username: username, password, password}, function (data) {
-      $("#commodities-table").html(`
+    API.get("orders", function (data) {
+      $("#market-table").html(`
         <tr>
           <th>Buy/Sell</th>
           <th>Commodity</th>
@@ -248,7 +248,7 @@ $(function() {
         </tr>
         `);
       for (var i = 0; i < data.length; i++) {
-        $("#commodities-table").append(
+        $("#market-table").append(
           `
             <tr>
               <td>${data[i].type}</td>
@@ -286,30 +286,30 @@ $(function() {
 
       $panzoom.panzoom("disable");
 
-      if(target == "market") {
-
-        API.get("items", function (items) {
-          console.log(items);
-          $("#shop-item-wrap").html("")
-          for (var i = 0; i < items.length; i++) {
-            var item = `
-            <div class="shop-item" id="item-`+items[i].id+`">
-              <h2 class="item-name">`+items[i].name+`</h2>
-              <div class="item-desc-wrap">
-                <img src="`+items[i].image+`" alt="" class="item-img">
-                <p class="item-desc">`+items[i].description+`</p>
-              </div>
-              <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
+      API.get("items", function (items) {
+        console.log(items);
+        $("#shop-item-wrap").html("")
+        for (var i = 0; i < items.length; i++) {
+          var item = `
+          <div class="shop-item" id="item-`+items[i].id+`">
+            <h2 class="item-name">`+items[i].name+`</h2>
+            <div class="item-desc-wrap">
+              <img src="`+items[i].image+`" alt="" class="item-img">
+              <p class="item-desc">`+items[i].description+`</p>
             </div>
-            `
-            $("#shop-item-wrap").append(item);
-          }
+            <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
+          </div>
+          `
+          $("#shop-item-wrap").append(item);
+        }
 
-          $(".modal-close-btn").unbind("click");
-          $(".modal-close-btn").bind("click", function () {
-            $("#"+target+"-modal").css('display', 'none');
-            $panzoom.panzoom("enable")
-          });
+        $(".modal-close-btn").unbind("click");
+        $(".modal-close-btn").bind("click", function () {
+          $("#"+target+"-modal").css('display', 'none');
+          $panzoom.panzoom("enable")
+        });
+
+        if(target == "shop") {
 
           $('.item-buy-btn').bind("click", function () {
             selectAvailiable();
@@ -337,9 +337,9 @@ $(function() {
               }
             });
           });
+        }
 
-        });
-      }
+      });
     } else {
       $panzoom.panzoom("enable")
       $("#"+target+"-modal").css('display', 'none');
@@ -365,9 +365,9 @@ $(function() {
     if($("#my-commodities").is(":visible")) {
       updateCommodities()
     } else if($("#market").is(":visible")) {
-      // updateOrders()
+      updateOrders()
     }
-  }, 10*1000);
+  }, 5*1000);
 
   /*setInterval(function () {
     getBalance()
@@ -381,7 +381,7 @@ $(function() {
 
   $("#market-btn").click(function () {
     updateCommodities();
-    // updateOrders();
+    updateOrders();
   });
 
 

@@ -44,6 +44,10 @@ exports.getItems = function () {
   return exports.read().items;
 }
 
+exports.getOrders = function () {
+  return exports.read().orders;
+}
+
 exports.getCommodities = function () {
   return exports.read().commodities;
 }
