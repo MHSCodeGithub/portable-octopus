@@ -11,6 +11,7 @@ body * {
   box-sizing: border-box;
   font-family: 'VT323', sans-serif;
   font-weight: normal;
+  overflow: hidden;
 }
 
 #game {
@@ -181,8 +182,8 @@ body * {
 }
 
 .shop-item {
-  max-width: 270px;
-  margin: 20px auto;
+  max-width: 300px;
+  margin: 20px 15px;
   float: left;
   display: block;
   padding: 10px 15px;
@@ -306,26 +307,33 @@ tr:nth-child(even) {
 ––––––––––––––––––––––––––––––––––––––– */
 .producer-info {
   position: absolute;
-  top: 0;
-  z-index: 3;
+  top: 50px;
+  left: 50px;
+}
+
+.producer-info-wrap {
   background: #FFB57A;
-  border: 3px solid #D0712E;
-  padding: 5px;
+  border: 5px solid #D0712E;
+  outline: 2px solid #753713;
+  padding: 7px;
   font-size: 1.3em;
 }
 
 .producer-info-close {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 25px;
-  background: red;
-  color: white;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 1.2em;
+  top: -20px;
+  right: -20px;
+  width: 33px;
+  height: 36px;
+  background: url('../img/close-btn.png');
+  background-size: contain;
   margin: 3px;
+}
+
+.producer-info-close:hover {
+  background: url('../img/close-btn-p.png');
+  background-size: contain;
+  cursor: pointer;
 }
 
 .producer-btn {
