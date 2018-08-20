@@ -11,7 +11,7 @@ class Mill extends Producer {
   }
 
   yeild() {
-    return this.level * 3;
+    return this.level * 2;
   }
 }
 

@@ -12,7 +12,7 @@ class Mine extends Producer {
   }
 
   yeild() {
-    return this.level * 4;
+    return this.level * 3;
   }
 }
 

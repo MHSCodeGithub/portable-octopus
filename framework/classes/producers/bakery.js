@@ -11,7 +11,7 @@ class Bakery extends Producer {
   }
 
   yeild() {
-    return this.level * 2;
+    return this.level * 1;
   }
 }
 
