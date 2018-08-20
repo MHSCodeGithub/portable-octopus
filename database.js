@@ -29,6 +29,23 @@ exports.getAccount = function (username) {
   return false;
 };
 
+exports.addOrder = function (order) {
+  var database = exports.read();
+  database.orders[order.id] = order;
+  exports.write(database);
+};
+
+exports.getOrder = function (id) {
+  var data = exports.read();
+  for (var property in data.accounts) {
+    if(data.orders[property].id === id) {
+      return data.orders[property];
+    }
+  }
+
+  return false;
+};
+
 exports.getItem = function (id) {
   var data = exports.read();
   for (var property in data.items) {

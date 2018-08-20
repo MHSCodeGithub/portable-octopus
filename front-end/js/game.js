@@ -218,9 +218,11 @@ $(function() {
       amount = 10000;
     }
 
-    $("#order-amount").attr({max: amount});
+    $("#order-amount").attr({max: amount, min: 1});
     if($("#order-amount").val() > amount) {
       $("#order-amount").val(amount);
+    } else if($("#order-amount").val() < 1) {
+      $("#order-amount").val(1);
     }
   }
 
@@ -251,9 +253,10 @@ $(function() {
   function getSuitableCommodities() {
     API.send("get-commodities", {username: username, password, password}, function (data) {
       $("#order-commodity").html("");
+      var total = false;
       for (var i = 0; i < data.length; i++) {
-        if(data[i].amount > 0) {
-
+        if(data[i].amount > 0) { total = true; }
+        if($("#order-type").val() == "sell" && data[i].amount > 0) {
           $("#order-commodity").append(
             `
               <option value="${data[i].name}-${data[i].amount}">
@@ -261,23 +264,60 @@ $(function() {
               </tr>
             `
           );
-
-          $("#order-amount").unbind("change");
-          $("#order-amount").bind("change", function () {
-            updateAmount()
-          });
-
-          $("#order-type").unbind("change");
-          $("#order-type").bind("change", function () {
-            updateAmount()
-          });
-
-          $("#order-commodity").unbind("change");
-          $("#order-commodity").bind("change", function () {
-            updateAmount()
-          });
+        } else if($("#order-type").val() == "buy") {
+          $("#order-commodity").append(
+            `
+              <option value="${data[i].name}-${data[i].amount}">
+                ${data[i].name} - ${data[i].amount}
+              </tr>
+            `
+          );
         }
       }
+
+      $("#order-amount").unbind("change");
+      $("#order-amount").bind("change", function () {
+        updateAmount()
+      });
+
+      $("#order-type").unbind("change");
+      $("#order-type").bind("change", function () {
+        updateAmount()
+      });
+
+      $("#order-commodity").unbind("change");
+      $("#order-commodity").bind("change", function () {
+        updateAmount()
+      });
+
+      $("#order-submit").unbind("click");
+      $("#order-submit").bind("click", function () {
+        if($("#order-commodity").val()) {
+          API.send("create-order", {
+            username: username,
+            password: password,
+            type: $("#order-type").val(),
+            commodity: $("#order-commodity").val().split("-")[0],
+            price: Number($("#order-price").val()),
+            amount: Number($("#order-amount").val())
+          }, function (response) {
+            console.log("response");
+            console.log(response);
+          });
+        } else {
+          alert("Please Fill Out Correct Order!")
+        }
+      });
+
+      $("#order-type").unbind("change");
+      $("#order-type").bind("change", function () {
+        if(!total) {
+          alert("You have nothing to sell!")
+          $("#order-type").val("buy");
+        }
+        getSuitableCommodities()
+      });
+
       console.log("DATA: ");
       console.log(data);
     });

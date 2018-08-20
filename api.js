@@ -329,6 +329,18 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "create-order") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+        delete data.password;
+        data.author = data.username;
+        delete data.username;
+        data.id = framework.database.read().orders.length;
+        framework.database.addOrder(data);
+        res.send("OK");
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else if(type == "get-producer") {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
