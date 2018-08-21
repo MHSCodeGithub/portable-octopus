@@ -130,6 +130,10 @@ class Player extends Objectable {
     }
   }
 
+  pay(amount) {
+    this.kingdom.treasury.balance += amount;
+  }
+
   save() {
     this.id = objectLength(database.read().accounts) + 1;
     database.addAccount(this.toJSON(this));

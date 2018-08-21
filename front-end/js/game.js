@@ -378,6 +378,18 @@ $(function() {
       $("#fulfill-amount").bind("change", function () {
         updateOrderAmount(data.amount)
       });
+
+      $("#fulfill-submit").unbind("click");
+      $("#fulfill-submit").bind("click", function () {
+        API.send("fulfill-order", {
+          username: username,
+          password: password,
+          id: data.id,
+          amount: Number($("#fulfill-amount").val())
+        }, function (response) {
+          console.log(response);
+        })
+      });
     })
   }
 
@@ -548,9 +560,9 @@ $(function() {
     }
   }, 5*1000);
 
-  /*setInterval(function () {
+  setInterval(function () {
     getBalance()
-  }, 5*1000);*/
+  }, 5*1000);
 
   function getBalance() {
     API.send("get-balance", {username: username, password: password}, function (balance) {

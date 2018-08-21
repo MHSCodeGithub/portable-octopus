@@ -57,6 +57,17 @@ exports.getItem = function (id) {
   return false;
 };
 
+exports.getCommodity = function (name) {
+  var data = exports.read();
+  for (var property in data.commodities) {
+    if(data.commodities[property].name === name) {
+      return data.commodities[property];
+    }
+  }
+
+  return false;
+};
+
 exports.getItems = function () {
   return exports.read().items;
 }

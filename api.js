@@ -351,6 +351,59 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "fulfill-order") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+        var order = framework.database.getOrder(Number(data.id));
+
+        var otherAccount = framework.database.getAccount(order.author);
+        var other = new framework.Player(0, otherAccount.username, otherAccount.password, null, true);
+        if(other.check()) {
+
+          console.log(order);
+          if(order.type == "sell") {
+            var balance = testAcc.kingdom.treasury.balance;
+
+            if(balance >= order.price*data.amount) {
+              if(other.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount > Number(data.amount)) {
+                testAcc.charge(order.price*data.amount);
+                other.pay(order.price*data.amount);
+
+                testAcc.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount += Number(data.amount);
+                other.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount -= Number(data.amount);
+                res.send("SUCCESS!")
+              } else {
+                res.send({type: "error", data: "Seller does not have enough commodities to sell!"})
+              }
+            } else {
+              res.send({type: "error", data: "Not Enough Money in Balance!"})
+            }
+          } else if(order.type == "buy") {
+            var balance = other.kingdom.treasury.balance;
+
+            if(balance >= order.price*data.amount) {
+              if(testAcc.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount >= Number(data.amount)) {
+                other.charge(order.price*data.amount);
+                testAcc.pay(order.price*data.amount);
+
+                other.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount += Number(data.amount);
+                testAcc.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount -= Number(data.amount);
+                res.send("SUCCESS!")
+              } else {
+                res.send({type: "error", data: "You do not have enough commodities to sell!"})
+              }
+            } else {
+              res.send({type: "error", data: "Not Enough Money in Seller's Balance!"})
+            }
+          }
+          other.update()
+          testAcc.update()
+        } else {
+          res.send({type: "error", data: "Author of Order Does Not Exist!"})
+        }
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else if(type == "get-producer") {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
