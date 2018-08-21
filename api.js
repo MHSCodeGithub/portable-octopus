@@ -365,7 +365,7 @@ exports.setup = function (app, gets) {
             var balance = testAcc.kingdom.treasury.balance;
 
             if(balance >= order.price*data.amount) {
-              if(other.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount > Number(data.amount)) {
+              if(other.kingdom.harbour.commodities[framework.database.getCommodity(order.commodity).id].amount >= Number(data.amount)) {
                 testAcc.charge(order.price*data.amount);
                 other.pay(order.price*data.amount);
 
@@ -396,6 +396,17 @@ exports.setup = function (app, gets) {
               res.send({type: "error", data: "Not Enough Money in Seller's Balance!"})
             }
           }
+          var db = framework.database.read();
+
+          for (var i = 0; i < db.orders.length; i++) {
+            if(db.orders[i].id == data.id) {
+              db.orders[i].fulfillment += Number(data.amount);
+              if(db.orders[i].fulfillment == Number(db.orders[i].amount)) {
+                db.orders.splice(i, 1);
+              }
+            }
+          } framework.database.write(db);
+
           other.update()
           testAcc.update()
         } else {

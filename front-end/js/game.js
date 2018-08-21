@@ -368,7 +368,7 @@ $(function() {
             <tr>
               <span>Type: </span><span id="fulfill-type">${data.type}</span><br>
               <span>Price: </span>$<span id="fulfill-price">${data.price}</span><br>
-              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${data.amount}">/${data.amount}<br>
+              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${data.amount-data.fulfillment}">/${data.amount-data.fulfillment}<br>
               <button type="button" id="fulfill-submit">Fulfill</button>
             </tr>
         `
@@ -376,7 +376,7 @@ $(function() {
 
       $("#fulfill-amount").unbind("change");
       $("#fulfill-amount").bind("change", function () {
-        updateOrderAmount(data.amount)
+        updateOrderAmount(Number(data.amount)-Number(data.fulfillment))
       });
 
       $("#fulfill-submit").unbind("click");
@@ -388,6 +388,11 @@ $(function() {
           amount: Number($("#fulfill-amount").val())
         }, function (response) {
           console.log(response);
+          $("#market-table").show();
+          $("#market-fulfill").hide();
+          $("#create-order-btn").text("Create Order")
+          updateOrders();
+          updateCommodities();
         })
       });
     })
