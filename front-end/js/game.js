@@ -325,6 +325,10 @@ $(function() {
           }, function (response) {
             console.log("response");
             console.log(response);
+            $("#market-table").show();
+            $("#market-order").hide();
+            $("#create-order-btn").text("Create Order")
+            updateOrders();
           });
         } else {
           alert("Please Fill Out Correct Order!")
@@ -468,6 +472,7 @@ $(function() {
               $("#market-table").show();
               $("#market-order").hide();
               $("#create-order-btn").text("Create Order")
+              updateOrders();
             }
           });
         }
