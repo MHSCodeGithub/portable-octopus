@@ -292,7 +292,7 @@ tr:nth-child(even) {
   padding: 7px;
   font-size: 1.3em;
   height: 120px;
-  width: 300px;
+  width: 290px;
 }
 
 .producer-info-close {
@@ -320,11 +320,13 @@ tr:nth-child(even) {
   border: none;
   padding-bottom: 6px;
   position: relative;
-  bottom: 25px;
+  bottom: 35px;
+  font-size: 1.2em;
 }
 
 #producer-upgrade-btn {
   background: url("../img/upgrade-btn.png");
+  margin: 0 20px;
 }
 
 #producer-upgrade-btn:hover {
@@ -336,6 +338,7 @@ tr:nth-child(even) {
 
 #producer-sell-btn {
   background: url("../img/sell-btn.png");
+  margin: 0 20px 0 30px;
 }
 
 #producer-sell-btn:hover {
@@ -343,4 +346,11 @@ tr:nth-child(even) {
   background-size: contain;
   padding-top: 8px;
   cursor: pointer;
+}
+
+.producer-info-btn-wrap {
+  width: 120px;
+  height: 55px;
+  display: block;
+  float: left;
 }
