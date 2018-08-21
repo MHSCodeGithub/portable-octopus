@@ -338,9 +338,16 @@ exports.setup = function (app, gets) {
         data.id = framework.database.read().orders.length;
 
         data.fulfillment = 0;
-        
+
         framework.database.addOrder(data);
         res.send("OK");
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
+    } else if(type == "get-order") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+        res.send(framework.database.getOrder(Number(data.id)));
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }

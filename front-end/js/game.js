@@ -241,10 +241,19 @@ $(function() {
     }
 
     $("#order-amount").attr({max: amount, min: 1});
-    if($("#order-amount").val() > amount) {
+    if(Number($("#order-amount").val()) > amount) {
       $("#order-amount").val(amount);
-    } else if($("#order-amount").val() < 1) {
+    } else if(Number($("#order-amount").val()) < 1) {
       $("#order-amount").val(1);
+    }
+  }
+
+  function updateOrderAmount(amount) {
+    $("#fulfill-amount").attr({max: amount, min: 1});
+    if(Number($("#fulfill-amount").val()) > amount) {
+      $("#fulfill-amount").val(amount);
+    } else if(Number($("#fulfill-amount").val()) < 1) {
+      $("#fulfill-amount").val(1);
     }
   }
 
@@ -349,6 +358,29 @@ $(function() {
     });
   }
 
+  function getSuitableFulfillment(id) {
+    API.send("get-order", {username: username, password: password, id: id}, function (data) {
+      console.log("ORDER DAATAA");
+      console.log(data);
+      $("#market-fulfill").html(
+        `
+          <h1>Fulfill Order</h1>
+            <tr>
+              <span>Type: </span><span id="fulfill-type">${data.type}</span><br>
+              <span>Price: </span>$<span id="fulfill-price">${data.price}</span><br>
+              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${data.amount}">/${data.amount}<br>
+              <button type="button" id="fulfill-submit">Fulfill</button>
+            </tr>
+        `
+      );
+
+      $("#fulfill-amount").unbind("change");
+      $("#fulfill-amount").bind("change", function () {
+        updateOrderAmount(data.amount)
+      });
+    })
+  }
+
   function updateOrders() {
     API.get("orders", function (data) {
       $("#market-table").html(`
@@ -380,9 +412,13 @@ $(function() {
 
       $(".order-fulfill").unbind("click");
       $(".order-fulfill").bind("click", function () {
-        console.log(
-          $(this).parent().parent().attr("id").split("-")[1]
-        );
+
+        if($("#market-table").is(":visible")) {
+          $("#market-table").hide();
+          $("#market-fulfill").show();
+          getSuitableFulfillment($(this).parent().parent().attr("id").split("-")[1])
+          $("#create-order-btn").text("Cancel");
+        }
       });
       console.log(data);
     });
@@ -468,6 +504,11 @@ $(function() {
               $("#market-order").show();
               $("#create-order-btn").text("Cancel")
               getSuitableCommodities();
+            } else if($("#market-fulfill").is(":visible")) {
+              $("#market-table").show();
+              $("#market-fulfill").hide();
+              $("#create-order-btn").text("Create Order")
+              updateOrders();
             } else {
               $("#market-table").show();
               $("#market-order").hide();

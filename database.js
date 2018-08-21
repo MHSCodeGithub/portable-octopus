@@ -37,7 +37,7 @@ exports.addOrder = function (order) {
 
 exports.getOrder = function (id) {
   var data = exports.read();
-  for (var property in data.accounts) {
+  for (var property in data.orders) {
     if(data.orders[property].id === id) {
       return data.orders[property];
     }
