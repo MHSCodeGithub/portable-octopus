@@ -361,17 +361,25 @@ $(function() {
       for (var i = 0; i < data.length; i++) {
         $("#market-table").append(
           `
-            <tr>
+            <tr id="order-${data[i].id}">
               <td>${data[i].type}</td>
               <td>${data[i].commodity}</td>
               <td>$${data[i].price}</td>
               <td>${data[i].amount}</td>
               <td>${data[i].fulfillment}/${data[i].amount}</td>
               <td>${data[i].author}</td>
+              <td><button class="order-fulfill">Fulfill</button></td>
             </tr>
           `
         );
       }
+
+      $(".order-fulfill").unbind("click");
+      $(".order-fulfill").bind("click", function () {
+        console.log(
+          $(this).parent().parent().attr("id").split("-")[1]
+        );
+      });
       console.log(data);
     });
   }
