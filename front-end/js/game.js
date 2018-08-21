@@ -364,10 +364,10 @@ $(function() {
             <tr>
               <td>${data[i].type}</td>
               <td>${data[i].commodity}</td>
-              <td>${data[i].price}</td>
+              <td>$${data[i].price}</td>
               <td>${data[i].amount}</td>
-              <td>${data[i].fulfillment}</td>
-              <td>${data[i].player}</td>
+              <td>${data[i].fulfillment}/${data[i].amount}</td>
+              <td>${data[i].author}</td>
             </tr>
           `
         );

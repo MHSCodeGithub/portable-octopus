@@ -336,6 +336,9 @@ exports.setup = function (app, gets) {
         data.author = data.username;
         delete data.username;
         data.id = framework.database.read().orders.length;
+
+        data.fulfillment = 0;
+        
         framework.database.addOrder(data);
         res.send("OK");
       } else {
