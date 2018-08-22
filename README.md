@@ -5,3 +5,7 @@ Y11 software project (game).
 2) npm install (only for first time)
 3) node server.js
 4) it should work if not, rip.
+## Resetting DB
+1) delete data.json
+2) restart server
+3) register new accounts
