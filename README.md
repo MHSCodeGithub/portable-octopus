@@ -10,4 +10,4 @@ Y11 software project (game).
 2) restart server
 3) register new accounts
 ## Roadmap
-[game roadmap](https://github.com/MHSCodeGithub/portable-octopus/blob/master/Game%20Roadmap.png)
+[game roadmap](https://github.com/MHSCodeGithub/portable-octopus/blob/master/Game%20Roadmap.png "Roadmap")
