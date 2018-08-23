@@ -100,6 +100,12 @@ class Player extends Objectable {
 
                 king.producers.push(producer);
                 break;
+              case "brewery":
+                var producer = new framework.producers.Brewery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
+                producer.level = data.accounts[property].kingdom.producers[i].level;
+
+                king.producers.push(producer);
+                break;
             }
           }
 
