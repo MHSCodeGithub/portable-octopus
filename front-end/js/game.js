@@ -576,8 +576,11 @@ $(function() {
   }
 
   $("#market-btn").click(function () {
-    updateCommodities();
     updateOrders();
+  });
+
+  $("#stockpile-btn").click(function () {
+    updateCommodities();
   });
 
 
