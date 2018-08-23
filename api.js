@@ -114,6 +114,22 @@ exports.setup = function (app, gets) {
 
               kingdom.producers.push(producer);
               break;
+            case "Hop Farm":
+              var producer = new framework.producers.Farm(current, "hop", Number(data.x), Number(data.y));
+
+              var price = isItemName("Hop Farm").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
+              kingdom.producers.push(producer);
+              break;
             case "Cotton Farm":
               var producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
 

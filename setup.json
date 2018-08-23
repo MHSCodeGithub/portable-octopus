@@ -25,6 +25,12 @@
       "description": "A farm that produces meat!",
       "price": 300
     }, {
+      "id": 11,
+      "name": "Hop Farm",
+      "image": "img/map/farm-hop.png",
+      "description": "A Farm that produces hops!",
+      "price": 400
+    }, {
       "id": 3,
       "name": "Mill",
       "image": "img/map/mill.gif",
@@ -104,6 +110,12 @@
       "name": "Bread",
       "type": "Food",
       "description": "Bread is a baked good made from wheat!"
+    },
+    {
+      "id": 11,
+      "name": "Hop",
+      "type": "Food",
+      "description": "A flower used in making beer!"
     },
     {
       "id": 5,
