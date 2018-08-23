@@ -226,6 +226,12 @@ body * {
 
 /* MARKET MODAL
 ––––––––––––––––––––––––––––––––––––––– */
+#market-modal-wrap {
+  background: #FFB57A;
+  border: 10px solid #D0712E;
+  outline: 4px solid #753713;
+}
+
 .ui-tabs-nav {
   display: flex;
   margin: 18px;
