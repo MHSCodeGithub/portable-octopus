@@ -9,19 +9,19 @@
     {
       "id": 0,
       "name": "Wheat Farm",
-      "image": "img/map/farm-wheat-2.png",
+      "image": "img/map/farm-wheat.png",
       "description": "A farm that produces wheat!",
       "price": 100
     }, {
       "id": 1,
       "name": "Cotton Farm",
-      "image": "img/map/farm-cotton-2.png",
+      "image": "img/map/farm-cotton.png",
       "description": "A farm that produces cotton!",
       "price": 200
     }, {
       "id": 2,
       "name": "Cattle Farm",
-      "image": "img/map/farm-cattle-2.png",
+      "image": "img/map/farm-cattle.png",
       "description": "A farm that produces meat!",
       "price": 300
     }, {
