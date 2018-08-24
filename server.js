@@ -142,7 +142,7 @@ setInterval(function () {
         var producer = testAcc.kingdom.producers[j];
 
         var amount = producer.yeild();
-        var tier = producer.tier();
+        var tier = producer.tier;
 
         var data = database.read();
 
