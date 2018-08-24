@@ -49,6 +49,12 @@
       "description": "A winery that uses grapes to make wine!",
       "price": 1200
     }, {
+      "id": 15,
+      "name": "Wood Farm",
+      "image": "img/map/farm-wood.png",
+      "description": "A farm that produces wood!",
+      "price": 100
+    }, {
       "id": 3,
       "name": "Mill",
       "image": "img/map/mill.gif",
