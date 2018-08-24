@@ -6,7 +6,7 @@ const Objectable = require('./objectable');
  */
 
 class Producer extends Objectable {
-  constructor(id, type, x, y, produce) {
+  constructor(id, type, x, y, produce, tier) {
     super();
     this.id = id; // unique integer id (starts at 0)
     this.type = type;
@@ -14,6 +14,7 @@ class Producer extends Objectable {
     this.x = x;
     this.y = y;
     this.produce = produce;
+    this.tier = tier;
   }
 
   upgrade() {

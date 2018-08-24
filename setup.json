@@ -160,6 +160,12 @@
       "description": "A common alcoholic beverage made from grapes!"
     },
     {
+      "id": 15,
+      "name": "Wood",
+      "type": "Construction",
+      "description": "A fibrous building material!"
+    },
+    {
       "id": 5,
       "name": "Cotton",
       "type": "Textile",

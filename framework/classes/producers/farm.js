@@ -7,8 +7,8 @@ const Producer = require('../producer');
 
 class Farm extends Producer {
   constructor(id, type, x, y) {
-    if(type == "cattle") { super(id, "farm", x, y, "beef"); }
-    else                 { super(id, "farm", x, y, type);   }
+    if(type == "cattle") { super(id, "farm", x, y, "beef", 1); }
+    else                 { super(id, "farm", x, y, type, 1);   }
     this.subType = type;
   }
 
