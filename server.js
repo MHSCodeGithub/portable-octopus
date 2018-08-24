@@ -143,6 +143,7 @@ setInterval(function () {
 
         var amount = producer.yeild();
         var tier = producer.tier;
+        var level = producer.level;
 
         var data = database.read();
 
@@ -150,7 +151,7 @@ setInterval(function () {
           if(data.commodities[k].name == cleanStr(producer.produce)) {
             for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
               if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                testAcc.kingdom.treasury.balance += (Number(tier)*10);
+                testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
                 testAcc.kingdom.harbour.commodities[n].amount += amount;
               }
             }
