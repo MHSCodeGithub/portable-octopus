@@ -28,7 +28,7 @@
       "id": 11,
       "name": "Hop Farm",
       "image": "img/map/farm-hop.png",
-      "description": "A Farm that produces hops!",
+      "description": "A farm that produces hops!",
       "price": 400
     }, {
       "id": 12,
@@ -36,6 +36,18 @@
       "image": "img/map/brewery.gif",
       "description": "A brewery that uses hops to make beer!",
       "price": 800
+    }, {
+      "id": 13,
+      "name": "Grape Farm",
+      "image": "img/map/farm-grape.png",
+      "description": "A farm that produces grapes!",
+      "price": 600
+    }, {
+      "id": 14,
+      "name": "Winery",
+      "image": "img/map/winery.gif",
+      "description": "A winery that uses grapes to make wine!",
+      "price": 1200
     }, {
       "id": 3,
       "name": "Mill",
@@ -128,6 +140,18 @@
       "name": "Beer",
       "type": "Food",
       "description": "A common alcoholic beverage made from hops!"
+    },
+    {
+      "id": 13,
+      "name": "Grape",
+      "type": "Food",
+      "description": "A common berry used in wine!"
+    },
+    {
+      "id": 14,
+      "name": "Wine",
+      "type": "Food",
+      "description": "A common alcoholic beverage made from grapes!"
     },
     {
       "id": 5,
