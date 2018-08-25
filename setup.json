@@ -50,6 +50,12 @@
       "price": 1200
     }, {
       "id": 15,
+      "name": "Quarry",
+      "image": "img/map/quarry.gif",
+      "description": "A quarry that produces stone!",
+      "price": 100
+    }, {
+      "id": 16,
       "name": "Wood Farm",
       "image": "img/map/farm-wood.png",
       "description": "A farm that produces wood!",
@@ -158,6 +164,12 @@
       "name": "Wine",
       "type": "Food",
       "description": "A common alcoholic beverage made from grapes!"
+    },
+    {
+      "id": 16,
+      "name": "Stone",
+      "type": "Construction",
+      "description": "A strong building material!"
     },
     {
       "id": 15,

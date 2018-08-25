@@ -82,6 +82,12 @@ class Player extends Objectable {
 
                 king.producers.push(producer);
                 break;
+              case "quarry":
+                var producer = new framework.producers.Quarry(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
+                producer.level = data.accounts[property].kingdom.producers[i].level;
+
+                king.producers.push(producer);
+                break;
               case "blacksmith":
                 var producer = new framework.producers.Blacksmith(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;

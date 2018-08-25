@@ -19,6 +19,7 @@ exports.producers.Mine = require('./classes/producers/mine');
 exports.producers.Mill = require('./classes/producers/mill');
 exports.producers.Brewery = require('./classes/producers/brewery');
 exports.producers.Winery = require('./classes/producers/winery');
+exports.producers.Quarry = require('./classes/producers/quarry');
 
 // # Database
 
