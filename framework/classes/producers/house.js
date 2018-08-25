@@ -6,8 +6,9 @@ const Producer = require('../producer');
  */
 
 class House extends Producer {
-  constructor(id, x, y) {
+  constructor(id, x, y, citizens) {
     super(id, "house", x, y, "citizens", 1);
+    this.citizens = citizens;
   }
 
   yeild() {

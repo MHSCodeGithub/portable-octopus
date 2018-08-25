@@ -163,7 +163,7 @@ exports.setup = function (app, gets) {
               kingdom.producers.push(producer);
               break;
             case "House":
-              var producer = new framework.producers.House(current, Number(data.x), Number(data.y));
+              var producer = new framework.producers.House(current, Number(data.x), Number(data.y), 5);
 
               var price = isItemName("House").price;
 

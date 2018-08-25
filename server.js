@@ -142,6 +142,7 @@ app.post('/', function (req, res) {
 
 setInterval(function () {
   var accounts = database.read().accounts;
+  var commodities = database.read().commodities;
 
   for (var i = 1; i < objectLength(accounts)+1; i++) {
     var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
@@ -153,7 +154,35 @@ setInterval(function () {
         var tier = producer.tier;
         var level = producer.level;
 
-        if(producer.type == "house") { continue; }
+        if(producer.type == "house") {
+          var fed = false;
+          for (var k = 0; k < testAcc.kingdom.harbour.commodities.length; k++) {
+            if(commodities[k].type == "Food") {
+              if(amount) {
+                if(testAcc.kingdom.harbour.commodities[k].amount >= amount) {
+                  testAcc.kingdom.harbour.commodities[k].amount -= amount;
+                  amount = 0;
+                  break;
+                } else {
+                  amount -= testAcc.kingdom.harbour.commodities[k].amount;
+                  testAcc.kingdom.harbour.commodities[k].amount = 0;
+                }
+              }
+            }
+          }
+
+          if (amount > 0) {
+            console.log(`left over ${amount}`);
+            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild() - amount;
+            if (testAcc.kingdom.producers[j].citizens < 0) {
+              testAcc.kingdom.producers[j].citizens = 0;
+            }
+          } else {
+            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild()
+          }
+
+          continue;
+        }
 
         var data = database.read();
 
@@ -172,7 +201,7 @@ setInterval(function () {
       testAcc.update()
     }
   }
-}, 60*5*1000);
+}, 5*5*1000);
 
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);
