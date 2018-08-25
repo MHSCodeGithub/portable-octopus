@@ -85,6 +85,14 @@ app.get('/', function(req, res){
   }
 });
 
+app.get("/logout", function (req, res) {
+  res.cookie('failedReg', false, {httpOnly: false});
+  res.cookie('failedLog', false, {httpOnly: false});
+  req.session.username = false;
+  req.session.password = false;
+  res.sendFile(__dirname + '/front-end/login.html');
+})
+
 app.get('/index.html', function(req, res){
   res.cookie('failedReg', false, {httpOnly: false});
   res.cookie('failedLog', false, {httpOnly: false});

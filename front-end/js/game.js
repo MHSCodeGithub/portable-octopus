@@ -635,4 +635,8 @@ $(function() {
     });
   });
 
+  $("#logout-btn").click(function () {
+    window.location.replace("/logout");
+  });
+
 });
