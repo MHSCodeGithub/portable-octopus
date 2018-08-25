@@ -7,6 +7,12 @@
   ],
   "items": [
     {
+      "id": 17,
+      "name": "House",
+      "image": "img/map/house.png",
+      "description": "A house that shelters citizens!",
+      "price": 100
+    }, {
       "id": 0,
       "name": "Wheat Farm",
       "image": "img/map/farm-wheat.png",
@@ -17,37 +23,37 @@
       "name": "Cotton Farm",
       "image": "img/map/farm-cotton.png",
       "description": "A farm that produces cotton!",
-      "price": 200
+      "price": 300
     }, {
       "id": 2,
       "name": "Cattle Farm",
       "image": "img/map/farm-cattle.png",
       "description": "A farm that produces meat!",
-      "price": 300
+      "price": 500
     }, {
       "id": 11,
       "name": "Hop Farm",
       "image": "img/map/farm-hop.png",
       "description": "A farm that produces hops!",
-      "price": 400
+      "price": 800
     }, {
       "id": 12,
       "name": "Brewery",
       "image": "img/map/brewery.gif",
       "description": "A brewery that uses hops to make beer!",
-      "price": 800
+      "price": 1600
     }, {
       "id": 13,
       "name": "Grape Farm",
       "image": "img/map/farm-grape.png",
       "description": "A farm that produces grapes!",
-      "price": 600
+      "price": 1000
     }, {
       "id": 14,
       "name": "Winery",
       "image": "img/map/winery.gif",
       "description": "A winery that uses grapes to make wine!",
-      "price": 1200
+      "price": 2000
     }, {
       "id": 15,
       "name": "Quarry",
@@ -77,37 +83,37 @@
       "name": "Cotton Mill",
       "image": "img/map/cotton_mill.gif",
       "description": "A cotton mill that turns cotton into clothing!",
-      "price": 400
+      "price": 600
     }, {
       "id": 6,
       "name": "Butchery",
       "image": "img/map/butchery.gif",
       "description": "A butchery that turns meat into smoked meat!",
-      "price": 600
+      "price": 1000
     }, {
       "id": 7,
       "name": "Gold Mine",
       "image": "img/map/mine-gold.gif",
       "description": "A mine that collects gold!",
-      "price": 500
+      "price": 1200
     }, {
       "id": 8,
       "name": "Iron Mine",
       "image": "img/map/mine-iron.gif",
       "description": "A mine that collects iron!",
-      "price": 400
+      "price": 900
     }, {
       "id": 9,
       "name": "Gem Mine",
       "image": "img/map/mine-gem.gif",
       "description": "A mine that collects gems!",
-      "price": 1000
+      "price": 2000
     }, {
       "id": 10,
       "name": "Blacksmith",
       "image": "img/map/blacksmith.gif",
       "description": "A blacksmith that turns iron into iron swords!",
-      "price": 1000
+      "price": 1800
     }
   ],
   "commodities": [

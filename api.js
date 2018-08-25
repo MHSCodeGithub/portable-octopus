@@ -162,6 +162,22 @@ exports.setup = function (app, gets) {
 
               kingdom.producers.push(producer);
               break;
+            case "House":
+              var producer = new framework.producers.House(current, Number(data.x), Number(data.y));
+
+              var price = isItemName("House").price;
+
+              console.log(price);
+
+              if(testAcc.kingdom.treasury.balance - price < 0) {
+                res.send({type: "error", data: "You do not have enough money!"});
+                return;
+              }
+
+              testAcc.charge(price);
+
+              kingdom.producers.push(producer);
+              break;
             case "Winery":
               var producer = new framework.producers.Winery(current, Number(data.x), Number(data.y));
 

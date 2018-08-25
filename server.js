@@ -153,6 +153,8 @@ setInterval(function () {
         var tier = producer.tier;
         var level = producer.level;
 
+        if(producer.type == "house") { continue; }
+
         var data = database.read();
 
         for (var k = 0; k < data.commodities.length; k++) {

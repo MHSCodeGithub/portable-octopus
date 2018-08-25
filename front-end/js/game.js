@@ -129,6 +129,12 @@ $(function() {
     $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
+  function drawHouse(id, x, y, type) {
+    $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
+    $(".y-" + y + ".x-" + x).css("background-size", "contain");
+    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
+  }
+
   function drawFeature(id, x, y, type) {
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
@@ -171,7 +177,9 @@ $(function() {
           if(producer.type == "farm") {
             drawFarm(producer.id, producer.y, producer.x, producer.subType);
           } else if(producer.type == "mine") {
-            drawMine(producer.id, producer.y, producer.x, producer.subType)
+            drawMine(producer.id, producer.y, producer.x, producer.subType);
+          } else if(producer.type == "house") {
+            drawHouse(producer.id, producer.y, producer.x, "house");
           } else {
             drawProducer(producer.id, producer.y, producer.x, producer.type);
           }
