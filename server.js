@@ -184,19 +184,37 @@ setInterval(function () {
           continue;
         }
 
-        var data = database.read();
+      }
 
-        for (var k = 0; k < data.commodities.length; k++) {
-          if(data.commodities[k].name == cleanStr(producer.produce)) {
-            for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
-              if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
-                testAcc.kingdom.harbour.commodities[n].amount += amount;
+      var citizens = testAcc.kingdom.getCitizens();
+
+      for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
+        var producer = testAcc.kingdom.producers[j];
+
+        var amount = producer.yeild();
+        var tier = producer.tier;
+        var level = producer.level;
+
+        if(producer.type != "house") {
+          citizens -= producer.tier;
+
+          if(citizens > 0) {
+            producer.functioning = true;
+            var data = database.read();
+            for (var k = 0; k < data.commodities.length; k++) {
+              if(data.commodities[k].name == cleanStr(producer.produce)) {
+                for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
+                  if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
+                    testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
+                    testAcc.kingdom.harbour.commodities[n].amount += amount;
+                  }
+                }
               }
             }
+          } else {
+            producer.functioning = false;
           }
         }
-
       }
       testAcc.update()
     }

@@ -15,6 +15,15 @@ class Kingdom extends Objectable {
     this.harbour = harbour; // harbour that connects kingdom to market
   }
 
+  getCitizens() {
+    var citizens = 0;
+    for (var i = 0; i < this.producers.length; i++) {
+      if(this.producers[i].type == "house") {
+        citizens += this.producers[i].citizens;
+      }
+    }
+    return citizens;
+  }
 }
 
 module.exports = Kingdom;
