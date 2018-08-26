@@ -124,6 +124,7 @@ app.post('/', function (req, res) {
   } else if(req.body.type == "register") {
     var treasury = new Treasury(0, 10, 10); treasury.balance = 500;
     var harbour = new Harbour(0, 19, 10);
+    harbour.commodities[0].amount = 10;
     var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
     var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, kingdom, false);
     if(database.getAccount(newAccount.username)) {
