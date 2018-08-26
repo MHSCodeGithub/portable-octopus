@@ -11,6 +11,23 @@ function isItemName(name) {
   return false;
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function cleanStr(string) {
+  string = string.replace("_", " ");
+
+  var words = string.split(" ");
+
+  for (var i = 0; i < words.length; i++) {
+    words[i] = capitalizeFirstLetter(words[i])
+  }
+
+  string = words.join(" ");
+
+  return string;
+}
 
 function isItem(id) {
   var items = framework.database.getItems();
@@ -385,9 +402,22 @@ exports.setup = function (app, gets) {
           if(testAcc.kingdom.producers[i].id == data.target) {
             var items = framework.database.getItems();
 
+            var name = testAcc.kingdom.producers[i].type;
+
+            if(testAcc.kingdom.producers[i].subType) { name = testAcc.kingdom.producers[i].subType + " " + name; }
+
+            name = cleanStr(name);
+
+            console.log("Name;");
+            console.log(name);
+
             for (var k = 0; k < items.length; k++) {
-              if(items[k].id == data.target) {
+              if(items[k].name == name) {
                 var price = items[k].price * (testAcc.kingdom.producers[i].level+1);
+                console.log("price: ");
+                console.log(items[k]);
+                console.log(testAcc.kingdom.producers[i]);
+                console.log(price);
                 if(testAcc.kingdom.treasury.balance - price < 0) {
                   res.send({type: "error", data: "You do not have enough money!"});
                   return;
