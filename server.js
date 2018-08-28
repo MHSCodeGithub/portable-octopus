@@ -200,14 +200,32 @@ setInterval(function () {
           citizens -= producer.tier;
 
           if(citizens > 0) {
-            producer.functioning = true;
+            testAcc.kingdom.producers[j].functioning = true;
             var data = database.read();
             for (var k = 0; k < data.commodities.length; k++) {
               if(data.commodities[k].name == cleanStr(producer.produce)) {
                 for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
                   if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                    testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
-                    testAcc.kingdom.harbour.commodities[n].amount += amount;
+                    if(producer.intake != "None") {
+                      for (var b = 0; b < data.commodities.length; b++) {
+                        if(data.commodities[b].name == (producer.intake)) {
+                          for (var c = 0; c < testAcc.kingdom.harbour.commodities.length; c++) {
+                            if(testAcc.kingdom.harbour.commodities[c].id == data.commodities[b].id) {
+                              if(testAcc.kingdom.harbour.commodities[c].amount >= amount) {
+                                testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
+                                testAcc.kingdom.harbour.commodities[n].amount += amount;
+                                testAcc.kingdom.harbour.commodities[c].amount -= amount;
+                              } else {
+                                testAcc.kingdom.producers[j].functioning = false;
+                              }
+                            }
+                          }
+                        }
+                      }
+                    } else {
+                      testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
+                      testAcc.kingdom.harbour.commodities[n].amount += amount;
+                    }
                   }
                 }
               }
