@@ -230,7 +230,11 @@ $(function() {
                     $(".producer-info-intake").text("");
                   } else {
                     $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
-                    $(".producer-info-intake").text("Intake: "+cleanStr(data.intake)+" "+(producerYeild.val*12)+"/hour");
+                    if(data.intake == "None") {
+                      $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
+                    } else {
+                      $(".producer-info-intake").text("Intake: "+cleanStr(data.intake)+" "+(producerYeild.val*12)+"/hour");
+                    }
                   }
                 })
               }
@@ -630,8 +634,14 @@ $(function() {
                 $("#producer-sell-btn").text("Sell(+$"+((price*data.level)/2)+")");
                 if(data.type == "house") {
                   $(".producer-info-gen").text(data.citizens+" citizens!");
+                  $(".producer-info-intake").text("");
                 } else {
-                  $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
+                  $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
+                  if(data.intake == "None") {
+                    $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
+                  } else {
+                    $(".producer-info-intake").text("Intake: "+cleanStr(data.intake)+" "+(producerYeild.val*12)+"/hour");
+                  }
                 }
               })
             }
