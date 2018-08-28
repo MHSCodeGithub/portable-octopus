@@ -61,54 +61,63 @@ class Player extends Objectable {
               case "mine":
                 var producer = new framework.producers.Mine(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "farm":
                 var producer = new framework.producers.Farm(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].subType, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "mill":
                 var producer = new framework.producers.Mill(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "bakery":
                 var producer = new framework.producers.Bakery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "quarry":
                 var producer = new framework.producers.Quarry(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "blacksmith":
                 var producer = new framework.producers.Blacksmith(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "cotton_mill":
                 var producer = new framework.producers.CottonMill(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "butchery":
                 var producer = new framework.producers.Butchery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
               case "brewery":
                 var producer = new framework.producers.Brewery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
@@ -121,6 +130,7 @@ class Player extends Objectable {
               case "winery":
                 var producer = new framework.producers.Winery(data.accounts[property].kingdom.producers[i].id, data.accounts[property].kingdom.producers[i].x, data.accounts[property].kingdom.producers[i].y);
                 producer.level = data.accounts[property].kingdom.producers[i].level;
+                producer.functioning = data.accounts[property].kingdom.producers[i].functioning;
 
                 king.producers.push(producer);
                 break;
