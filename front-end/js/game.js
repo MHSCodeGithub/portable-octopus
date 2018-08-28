@@ -225,7 +225,11 @@ $(function() {
                   $(".producer-info-level").text("Lvl."+data.level);
                   $("#producer-upgrade-btn").text("Upgrade($"+(price*(data.level+1))+")");
                   $("#producer-sell-btn").text("Sell(+$"+((price*data.level)/2)+")");
-                  $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
+                  if(data.type == "house") {
+                    $(".producer-info-gen").text(data.citizens+" citizens!");
+                  } else {
+                    $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
+                  }
                 })
               }
             }
