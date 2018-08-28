@@ -419,7 +419,7 @@ $(function() {
   function updateOrders() {
     API.get("orders", function (data) {
       $("#market-table").html(`
-        <tr>
+        <tr id="table-headers">
           <th>Buy/Sell</th>
           <th>Commodity</th>
           <th>Price</th>

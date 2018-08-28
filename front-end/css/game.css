@@ -284,18 +284,19 @@ table {
     margin: 0 auto;
 }
 
-th, td {
-    text-align: left;
-    padding: 3px;
-}
-
 td {
   font-size: 1.4em;
+  padding: 3px;
 }
 
 tr {
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
+}
+
+#table-headers {
+  box-shadow: none;
+  font-size: 2em;
 }
 
 .order-spacer {
