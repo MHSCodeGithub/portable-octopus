@@ -228,6 +228,7 @@ $(function() {
                   if(data.type == "house") {
                     $(".producer-info-gen").text(data.citizens+" citizens!");
                     $(".producer-info-intake").text("");
+                    $(".producer-info-working").text("")
                   } else {
                     $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
                     console.log("PRODUCER:");
