@@ -435,6 +435,7 @@ $(function() {
               <td>${data[i].author}</td>
               <td><button class="order-fulfill">Fulfill</button></td>
             </tr>
+            <tr class="order-spacer"></tr>
           `
         );
       }
