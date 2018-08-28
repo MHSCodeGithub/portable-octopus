@@ -280,17 +280,28 @@ body * {
 ––––––––––––––––––––––––––––––––––––––– */
 table {
     border-spacing: 0;
-    width: 100%;
-    border: 1px solid #ddd;
+    width: 95%;
+    margin: 0 auto;
 }
 
 th, td {
     text-align: left;
-    padding: 16px;
+    padding: 3px;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2
+td {
+  font-size: 1.4em;
+}
+
+tr {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+}
+
+.order-spacer {
+  background: #FFB57A;
+  height: 25px;
+  box-shadow: none;
 }
 
 /* MARKET MODAL - Market
