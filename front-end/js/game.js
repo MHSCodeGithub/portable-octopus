@@ -228,7 +228,7 @@ $(function() {
                   if(data.type == "house") {
                     $(".producer-info-gen").text(data.citizens+" citizens!");
                   } else {
-                    $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*30)+"/hour");
+                    $(".producer-info-gen").text(cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
                   }
                 })
               }
