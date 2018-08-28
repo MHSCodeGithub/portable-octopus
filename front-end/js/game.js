@@ -455,6 +455,26 @@ $(function() {
         );
       }
 
+      $("#create-order-btn").unbind("click");
+      $("#create-order-btn").bind("click", function () {
+        if($("#market-table").is(":visible")) {
+          $("#market-table").hide();
+          $("#market-order").show();
+          $("#create-order-btn").text("Cancel")
+          getSuitableCommodities();
+        } else if($("#market-fulfill").is(":visible")) {
+          $("#market-table").show();
+          $("#market-fulfill").hide();
+          $("#create-order-btn").text("Create Order")
+          updateOrders();
+        } else {
+          $("#market-table").show();
+          $("#market-order").hide();
+          $("#create-order-btn").text("Create Order")
+          updateOrders();
+        }
+      });
+
       $(".order-fulfill").unbind("click");
       $(".order-fulfill").bind("click", function () {
 
@@ -542,25 +562,7 @@ $(function() {
             });
           });
         } else if(target == "market") {
-          $("#create-order-btn").unbind("click");
-          $("#create-order-btn").bind("click", function () {
-            if($("#market-table").is(":visible")) {
-              $("#market-table").hide();
-              $("#market-order").show();
-              $("#create-order-btn").text("Cancel")
-              getSuitableCommodities();
-            } else if($("#market-fulfill").is(":visible")) {
-              $("#market-table").show();
-              $("#market-fulfill").hide();
-              $("#create-order-btn").text("Create Order")
-              updateOrders();
-            } else {
-              $("#market-table").show();
-              $("#market-order").hide();
-              $("#create-order-btn").text("Create Order")
-              updateOrders();
-            }
-          });
+          // deprecated
         }
 
       });
