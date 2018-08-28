@@ -436,6 +436,7 @@ $(function() {
           <th>Player</th>
           <th></th>
         </tr>
+        <tr class="order-spacer"></tr>
         `);
       for (var i = 0; i < data.length; i++) {
         $("#market-table").append(
