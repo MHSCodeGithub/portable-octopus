@@ -230,6 +230,13 @@ $(function() {
                     $(".producer-info-intake").text("");
                   } else {
                     $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
+                    console.log("PRODUCER:");
+                    console.log(data);
+                    if(data.functioning == true) {
+                      $(".producer-info-working").text("Producing!")
+                    } else {
+                      $(".producer-info-working").text("Not Producing!")
+                    }
                     if(data.intake == "None") {
                       $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
                     } else {
@@ -637,6 +644,13 @@ $(function() {
                   $(".producer-info-intake").text("");
                 } else {
                   $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
+                  console.log("PRODUCER:");
+                  console.log(data);
+                  if(data.functioning == true) {
+                    $(".producer-info-working").text("Producing!")
+                  } else {
+                    $(".producer-info-working").text("Not Producing!")
+                  }
                   if(data.intake == "None") {
                     $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
                   } else {
