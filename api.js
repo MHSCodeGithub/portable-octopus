@@ -11,6 +11,14 @@ function isItemName(name) {
   return false;
 }
 
+function getAmountOfProducers(acc) {
+  current = -1;
+  for (var i = 0; i < acc.kingdom.producers.length; i++) {
+    if(acc.kingdom.producers[i].id > current) { current = acc.kingdom.producers[i].id }
+  }
+  return current + 1;
+}
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -62,7 +70,7 @@ exports.setup = function (app, gets) {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
         var kingdom = testAcc.kingdom;
-        var current = kingdom.producers.length;
+        var current = getAmountOfProducers(testAcc);
         var result = isItem(data.target);
 
         if(result) {
