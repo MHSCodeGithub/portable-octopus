@@ -8,6 +8,7 @@ const Producer = require('../producer');
 class Quarry extends Producer {
   constructor(id, x, y) {
     super(id, "quarry", x, y, "stone", 1);
+    this.intake = "None";
   }
 
   yeild() {

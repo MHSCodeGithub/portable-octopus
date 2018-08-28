@@ -8,6 +8,7 @@ const Producer = require('../producer');
 class Mill extends Producer {
   constructor(id, x, y) {
     super(id, "mill", x, y, "flour", 2);
+    this.intake = "Wheat";
   }
 
   yeild() {

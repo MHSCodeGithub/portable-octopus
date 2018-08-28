@@ -10,6 +10,7 @@ class Farm extends Producer {
     if(type == "cattle") { super(id, "farm", x, y, "beef", 1); }
     else                 { super(id, "farm", x, y, type, 1);   }
     this.subType = type;
+    this.intake = "None";
   }
 
   yeild() {

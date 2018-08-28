@@ -8,6 +8,7 @@ const Producer = require('../producer');
 class Butchery extends Producer {
   constructor(id, x, y) {
     super(id, "butchery", x, y, "smoked_beef", 2);
+    this.intake = "Beef";
   }
 
   yeild() {
