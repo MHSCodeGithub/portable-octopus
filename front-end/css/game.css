@@ -284,9 +284,13 @@ table {
     margin: 0 auto;
 }
 
+th, td {
+    text-align: left;
+    padding: 3px;
+}
+
 td {
   font-size: 1.4em;
-  padding: 3px;
 }
 
 tr {
