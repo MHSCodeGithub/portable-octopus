@@ -434,7 +434,7 @@ $(function() {
           <th>Amount</th>
           <th>Fulfillment</th>
           <th>Player</th>
-          <th></th>
+          <th><button type="button" name="button" id="create-order-btn">Create Order</button></th>
         </tr>
         <tr class="order-spacer"></tr>
         `);
