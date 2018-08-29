@@ -57,27 +57,14 @@
             <div id="market-order" style="display: none;">
               <h1>Create Order</h1>
               <tr>
-                <span>Type: </span><select id="order-type">
+                <span>Type: </span>
+                <select id="order-type">
                       <option value="buy">Buy Order</option>
                       <option value="sell">Sell Order</option>
-                    </select><br>
-                <span>Commodity: </span><select id="order-commodity">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    </select><br>
+                </select><br>
+                <span>Commodity: </span>
+                <select id="order-commodity">
+                </select><br>
                 <span>Price: </span><input type="number" id="order-price" value="1" min="1" max="10000"><br>
                 <span>Amount: </span><input type="number" id="order-amount" value="1" min="1" max="10000"><br>
                 <button type="button" id="order-submit">Create Order</button>
@@ -99,8 +86,8 @@
       <div id="stockpile-modal" class="modal">
         <div class="modal-close-btn"></div>
         <div class="modal-content" id="market-modal-wrap">
-          <div id="my-commodities">
-            <h1>COMMODITIES</h1>
+          <div id="stockpile">
+            <h1>STOCKPILE</h1>
             <table id="commodities-table">
               <tr>
                 <th>Name</th>

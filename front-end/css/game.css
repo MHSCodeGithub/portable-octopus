@@ -276,12 +276,39 @@ body * {
   height: 100%;
 }
 
-/* MARKET MODAL - My Commodities
+/* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
+#stockpile h1 {
+  text-align: center;
+  font-size: 3em;
+}
 
+#stockpile table {
+  border-spacing: 0;
+  width: 95%;
+  margin: 0 auto;
+}
 
-/* MARKET MODAL - Market
+#stockpile th, #stockpile td {
+  text-align: left;
+  padding: 3px;
+}
+
+#stockpile td {
+  font-size: 1.4em;
+}
+
+#stockpile tr {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+}
+
+/* MARKET
 ––––––––––––––––––––––––––––––––––––––– */
+#market table{
+  overflow-y: scroll;
+}
+
 #create-order-btn {
   float: right;
 }
@@ -310,14 +337,14 @@ body * {
   box-shadow: 3px 3px #D0712E;
 }
 
-#table-headers {
+th {
   box-shadow: none;
   font-size: 2em;
 }
 
 #market .order-spacer {
   background: #FFB57A;
-  height: 25px;
+  height: 15px;
   box-shadow: none;
 }
 
