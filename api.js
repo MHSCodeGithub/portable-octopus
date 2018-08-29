@@ -19,6 +19,14 @@ function getAmountOfProducers(acc) {
   return current + 1;
 }
 
+function getAmountOfOrders() {
+  current = -1;
+  for (var i = 0; i < framework.database.read().orders.length; i++) {
+    if(framework.database.read().orders[i].id > current) { current = framework.database.read().orders[i].id }
+  }
+  return current + 1;
+}
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -485,7 +493,7 @@ exports.setup = function (app, gets) {
         delete data.password;
         data.author = data.username;
         delete data.username;
-        data.id = framework.database.read().orders.length;
+        data.id = getAmountOfOrders();
 
         data.fulfillment = 0;
 
