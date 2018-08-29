@@ -276,15 +276,16 @@ body * {
   height: 100%;
 }
 
-/* MARKET MODAL - My Commodities
+/* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
 
 
-/* MARKET MODAL - Market
+/* MARKET
 ––––––––––––––––––––––––––––––––––––––– */
 #create-order-btn {
   float: right;
 }
+
 #market h1 {
   text-align: center;
   font-size: 3em;

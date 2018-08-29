@@ -36,9 +36,12 @@
       <div id="shop-modal" class="modal">
         <div class="modal-close-btn"></div>
         <div id="shop-item-wrap" class="modal-content">
-          <div id="tier1-div"><h1 class="tier-label">I</h1></div>
-          <div id="tier2-div"><h1 class="tier-label">II</h1></div>
-          <div id="tier3-div"><h1 class="tier-label">III</h1></div>
+          <div id="tier1-div"><h1 class="tier-label">I</h1>
+          </div>
+          <div id="tier2-div"><h1 class="tier-label">II</h1>
+          </div>
+          <div id="tier3-div"><h1 class="tier-label">III</h1>
+          </div>
         </div>
       </div>
 
@@ -54,50 +57,53 @@
             </table>
             <div id="market-order" style="display: none;">
               <h1>Create Order</h1>
-                <tr>
-                  <span>Type: </span><select id="order-type">
+              <tr>
+                <span>Type: </span><select id="order-type">
                     <option value="buy">Buy Order</option>
                     <option value="sell">Sell Order</option>
                   </select><br>
-                  <span>Commodity: </span><select id="order-commodity">
+                <span>Commodity: </span><select id="order-commodity">
+
+
+
                   </select><br>
-                  <span>Price: </span><input type="number" id="order-price" value="1" min="1" max="10000"><br>
-                  <span>Amount: </span><input type="number" id="order-amount" value="1" min="1" max="10000"><br>
-                  <button type="button" id="order-submit">Create Order</button>
-                </tr>
+                <span>Price: </span><input type="number" id="order-price" value="1" min="1" max="10000"><br>
+                <span>Amount: </span><input type="number" id="order-amount" value="1" min="1" max="10000"><br>
+                <button type="button" id="order-submit">Create Order</button>
+              </tr>
             </div>
 
             <div id="market-fulfill" style="display: none;">
               <h1>Fulfill Order</h1>
-                <tr>
-                  <span>Type: </span><span id="fulfill-type"></span>
-                  <span>Price: </span>$<span id="fulfill-price"></span>
-                  <span>Amount to Buy/Sell</span><input type="number" value="1" min="1" max="10000">
-                  <button type="button" id="fulfill-submit">Fulfill</button>
-                </tr>
+              <tr>
+                <span>Type: </span><span id="fulfill-type"></span>
+                <span>Price: </span>$<span id="fulfill-price"></span>
+                <span>Amount to Buy/Sell</span><input type="number" value="1" min="1" max="10000">
+                <button type="button" id="fulfill-submit">Fulfill</button>
+              </tr>
             </div>
 
           </div>
+        </div>
       </div>
-    </div>
 
-    <!-- STOCKPILE
+      <!-- STOCKPILE
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <div id="stockpile-modal" class="modal">
-      <div class="modal-close-btn"></div>
-      <div class="modal-content" id="stockpile-wrap">
-        <h1>COMMODITIES</h1>
-        <table id="commodities-table">
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Amount</th>
-          </tr>
-        </table>
+      <div id="stockpile-modal" class="modal">
+        <div class="modal-close-btn"></div>
+        <div class="modal-content" id="stockpile-wrap">
+          <h1>COMMODITIES</h1>
+          <table id="commodities-table">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Amount</th>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <div class="producer-info">
     <div class="producer-info-close"></div>
