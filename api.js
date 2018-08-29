@@ -502,6 +502,22 @@ exports.setup = function (app, gets) {
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
+    } else if(type == "cancel-order") {
+
+      var testAcc = new framework.Player(0, data.username, data.password, null, true);
+      if(testAcc.check()) {
+        var db = framework.database.read();
+        for (var i = 0; i < db.orders.length; i++) {
+          if(db.orders[i].id == data.targetID) {
+            db.orders.splice(i, 1);
+          }
+        }
+
+        framework.database.write(db);
+        res.send("OK");
+      } else {
+        res.send({type: "error", data: "Invalid Username/Password"})
+      }
     } else if(type == "get-order") {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {

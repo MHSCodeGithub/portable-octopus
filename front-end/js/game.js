@@ -472,6 +472,13 @@ $(function() {
         }
       }
 
+      $(".order-created-cancel").unbind("click");
+      $(".order-created-cancel").bind("click", function () {
+        API.send("cancel-order", {username: username, password: password, targetID: Number($(this).parent().parent().attr('id').split("-")[1])}, function (data) {
+          console.log(data);
+        });
+      });
+
       $("#create-order-btn").unbind("click");
       $("#create-order-btn").bind("click", function () {
         if($("#market-table").is(":visible")) {
