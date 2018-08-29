@@ -5,7 +5,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var app = require('express')();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
 const sha256 = require('sha256');
 const api = require('./api');
 var port = process.env.PORT || 3000;
@@ -242,12 +241,6 @@ setInterval(function () {
 
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);
-});
-
-io.on('connection', function(socket){
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-  });
 });
 
 http.listen(port, function(){

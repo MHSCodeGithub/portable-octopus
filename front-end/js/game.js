@@ -2,10 +2,6 @@
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -22,6 +18,22 @@ function getCookie(cname) {
   return false;
 }
 
+const username = getCookie("username");
+const password = getCookie("password");
+
+if (!username || !password) {
+  alert("Critical Error Please Login Again. (Reset session by re-opening browser)");
+}
+
+var me = {};
+
+/* String Cleaning
+––––––––––––––––––––––––––––––––––––––– */
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function cleanStr(string) {
   string = string.replace("_", " ");
 
@@ -36,14 +48,8 @@ function cleanStr(string) {
   return string;
 }
 
-var username = getCookie("username");
-var password = getCookie("password");
-
-if (!username || !password) {
-  alert("Critical Error Please Login Again. (Reset session by re-opening browser)");
-}
-
-var me = {};
+/* On Document Load
+––––––––––––––––––––––––––––––––––––––– */
 
 $(function() {
 
@@ -51,37 +57,14 @@ $(function() {
   ––––––––––––––––––––––––––––––––––––––– */
 
   var API = new APIClass();
-  var socket = io.connect('http://localhost:3000');
 
   updateMap();
 
   $(".producer-info").hide();
 
-  /* Deprecated Stuff
-  ––––––––––––––––––––––––––––––––––––––– */
-
-  /* ## Depracted chat system ## (IGNORE)
-  var now = new Date();
-  $('#chat-input').submit(function(){
-    if($('#message').val() != "") {
-      socket.emit('chat message', {content: $('#message').val(), author: username, timeStamp: String(now.getUTCHours()+":"+now.getUTCMinutes()+":"+now.getUTCSeconds())});
-      $('#message').val('');
-    }
-    return false;
-  });*/
-
-  // ## Depracted chat system ## (IGNORE)
-  socket.on('chat message', function(msg) { // <-- Required for bug fix
-    /*$('#chat-output').append($('<li>').text("["+msg.timeStamp+"] ["+msg.author+"] "+msg.content));
-    $("#chat-output").animate({ scrollTop: $("#chat-output")[0].scrollHeight - $("#chat-output").height() }, 100);*/
-  });
-
-  socket.on('result', function(message) {
-    alert(message);
-  });
-
   /* Image Preloading
   ––––––––––––––––––––––––––––––––––––––– */
+
   var images = new Array()
   function preload() {
     for (i = 0; i < preload.arguments.length; i++) {
@@ -155,25 +138,26 @@ $(function() {
     }
   }
 
+  /* Map Updating
+  ––––––––––––––––––––––––––––––––––––––– */
+
   function updateMap() {
 
-    API.send("get-map", {username: username, password: password}, function (data) {
-      for (var i = 0; i < 19; i++) {
+    API.send("get-map", {username: username, password: password}, function (data) { // request map from server
+      for (var i = 0; i < 19; i++) { // set map to be just grass
         for (var j = 0; j < 19; j++) {
           drawGrass(i+1, j+1);
         }
       }
 
-      console.log(data);
-
-      for (var i = 0; i < data.length; i++) {
+      for (var i = 0; i < data.length; i++) { // go through every block
         var producer = data[i];
 
-        if(i == data.length-2) {
-          drawFeature(producer.id, producer.y, producer.x, "treasury");
-        } else if(i == data.length-1) {
-          drawFeature(producer.id, producer.y, producer.x, "harbour");
-        } else {
+        if(i == data.length-2) {                                        //
+          drawFeature(producer.id, producer.y, producer.x, "treasury"); // Draw harbout/treasury at
+        } else if(i == data.length-1) {                                 // designated positions.
+          drawFeature(producer.id, producer.y, producer.x, "harbour");  //
+        } else { // draw producers
           if(producer.type == "farm") {
             drawFarm(producer.id, producer.y, producer.x, producer.subType);
           } else if(producer.type == "mine") {
@@ -189,56 +173,66 @@ $(function() {
       /* Block Interactions
       ––––––––––––––––––––––––––––––––––––––– */
       $('.built').unbind("click");
-      $('.built').bind("click", function () {
+      $('.built').bind("click", function () { // when a producer is clicked on
         $(".producer-info").show()
 
-        if($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" ||
-           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") {
-          $(".producer-info").hide()
-          return;
+        if($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" ||  // if target is not producer
+           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") { // hide producer info
+          $(".producer-info").hide() // hide producer info
+          return; // end function
         }
+
+        /* Misc Local Vars
+        ––––––––––––––––––––––––––––––––––––––– */
         var id = $(this).attr("class").split(" ")[0].split("-")[1];
         var target = $(this).attr("class").split(" ")[0].split("-")[1];
         var another = $(this).attr("class").split(" ")[0];
 
-        API.send("get-producer", {
+        /* Data Response/Event Handling
+        ––––––––––––––––––––––––––––––––––––––– */
+        API.send("get-producer", { // get producer info
           username: username,
           password: password,
           target: target
         }, function (data) {
 
-          $(".hidden-id").text(id);
+          $(".hidden-id").text(id); // set hidden data for later use
           $(".hidden-target").text(another);
 
-          API.get("items", function (items) {
-            if(data.subType) { data.type = data.subType + " " + data.type; }
+          API.get("items", function (items) { // get all possible producers
+            if(data.subType) { data.type = data.subType + " " + data.type; } // change producer type to fit if has subtype
 
-            for (var i = 0; i < items.length; i++) {
-              if(items[i].name == cleanStr(data.type)) {
+            for (var i = 0; i < items.length; i++) { // for every producer
+              if(items[i].name == cleanStr(data.type)) { // if producer is target
                 var price = items[i].price;
-                API.send("get-yeild", {
+
+                API.send("get-yeild", { // get producer yeild
                   username: username,
                   password: password,
                   target: $(".hidden-id").text()
                 }, function (producerYeild) {
+
+                  /* Set Producer Information Front End
+                  ––––––––––––––––––––––––––––––––––––––– */
                   $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                   $(".producer-info-level").text("Lvl."+data.level);
                   $("#producer-upgrade-btn").text("Upgrade($"+(price*(data.level+1))+")");
                   $("#producer-sell-btn").text("Sell(+$"+((price*data.level)/2)+")");
-                  if(data.type == "house") {
+
+                  if(data.type == "house") { // producer is a house
                     $(".producer-info-gen").text(data.citizens+" citizens!");
                     $(".producer-info-intake").text("");
                     $(".producer-info-working").text("")
-                  } else {
+                  } else { // if not a house
                     $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
-                    console.log("PRODUCER:");
-                    console.log(data);
-                    if(data.functioning == true) {
-                      $(".producer-info-working").text("Producing!")
+
+                    if(data.functioning == true) { // if producer is producing
+                      $(".producer-info-working").text("Producing!") // show producer info
                     } else {
                       $(".producer-info-working").text("Not Producing!")
                     }
-                    if(data.intake == "None") {
+
+                    if(data.intake == "None") { // clean data.intake output
                       $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
                     } else {
                       $(".producer-info-intake").text("Intake: "+cleanStr(data.intake)+" "+(producerYeild.val*12)+"/hour");
@@ -251,11 +245,12 @@ $(function() {
         })
       });
 
-      $(".producer-info-close").click(function () {
-        $(".producer-info").hide()
+      $(".producer-info-close").click(function () { // on close button
+        $(".producer-info").hide() // close producer info
       })
     });
-    getBalance()
+
+    getBalance() // update balance (helps to show background transactions)
   }
 
   function updateAmount() {
