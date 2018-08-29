@@ -439,20 +439,37 @@ $(function() {
         <tr class="order-spacer"></tr>
         `);
       for (var i = 0; i < data.length; i++) {
-        $("#market-table").append(
-          `
-            <tr id="order-${data[i].id}">
-              <td>${data[i].type}</td>
-              <td>${data[i].commodity}</td>
-              <td>$${data[i].price}</td>
-              <td>${data[i].amount}</td>
-              <td>${data[i].fulfillment}/${data[i].amount}</td>
-              <td>${data[i].author}</td>
-              <td><button class="order-fulfill">Fulfill</button></td>
-            </tr>
-            <tr class="order-spacer"></tr>
-          `
-        );
+        if(data[i].author == username) {
+          $("#market-table").append(
+            `
+              <tr id="order-${data[i].id}">
+                <td>${data[i].type}</td>
+                <td>${data[i].commodity}</td>
+                <td>$${data[i].price}</td>
+                <td>${data[i].amount}</td>
+                <td>${data[i].fulfillment}/${data[i].amount}</td>
+                <td>${data[i].author}</td>
+                <td><button class="order-fulfill">Cancel</button></td>
+              </tr>
+              <tr class="order-spacer"></tr>
+            `
+          );
+        } else {
+          $("#market-table").append(
+            `
+              <tr id="order-${data[i].id}">
+                <td>${data[i].type}</td>
+                <td>${data[i].commodity}</td>
+                <td>$${data[i].price}</td>
+                <td>${data[i].amount}</td>
+                <td>${data[i].fulfillment}/${data[i].amount}</td>
+                <td>${data[i].author}</td>
+                <td><button class="order-fulfill">Fulfill</button></td>
+              </tr>
+              <tr class="order-spacer"></tr>
+            `
+          );
+        }
       }
 
       $("#create-order-btn").unbind("click");
