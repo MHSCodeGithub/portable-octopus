@@ -145,7 +145,7 @@ setInterval(function () {
   var accounts = database.read().accounts;
   var commodities = database.read().commodities;
 
-  for (var i = 1; i < objectLength(accounts)+1; i++) {
+  for (var i = 0; i < objectLength(accounts); i++) {
     var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
     if(testAcc.check()) {
       for (var j = 0; j < testAcc.kingdom.producers.length; j++) {

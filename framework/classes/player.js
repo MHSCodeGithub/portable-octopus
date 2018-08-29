@@ -10,13 +10,13 @@ const Producer = require('./producer');
 const Harbour = require('./harbour');
 const Kingdom = require('./kingdom');
 
-function objectLength(target) {
-  var i = 0;
-  for (var property in target) {
-    i++;
+function getAmountOf(acc) {
+  current = -1;
+  for (var i = 0; i < acc.length; i++) {
+    if(acc[i].id > current) { current = acc[i].id }
   }
-  return Number(i);
-};
+  return current + 1;
+}
 
 /*
  * <---> # Player class # <--->
@@ -169,7 +169,7 @@ class Player extends Objectable {
   }
 
   save() {
-    this.id = objectLength(database.read().accounts) + 1;
+    this.id = getAmountOf(database.read().accounts);
     database.addAccount(this.toJSON(this));
   }
 

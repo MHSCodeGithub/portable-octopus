@@ -449,7 +449,7 @@ $(function() {
                 <td>${data[i].amount}</td>
                 <td>${data[i].fulfillment}/${data[i].amount}</td>
                 <td>${data[i].author}</td>
-                <td><button class="order-fulfill">Cancel</button></td>
+                <td><button class="order-created-cancel">Cancel</button></td>
               </tr>
               <tr class="order-spacer"></tr>
             `
