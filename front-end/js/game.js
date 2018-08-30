@@ -165,8 +165,40 @@ $(function() {
     }
   }
 
-  /* Map Updating
+  /* User Information Updating
   ––––––––––––––––––––––––––––––––––––––– */
+
+  /**
+   *
+   * @function updateCommodities()
+   *
+   * @description updates a users commodity table
+   *
+  **/
+
+  function updateCommodities() {
+    API.send("get-commodities", {username: username, password, password}, function (usersCommodities) { // get users commodities
+      $("#commodities-table").html(`
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Amount</th>
+        </tr>
+        `); // add table headers
+      for (var i = 0; i < usersCommodities.length; i++) { // for each commodity
+        $("#commodities-table").append( // display the information on the table
+          `
+
+            <tr>
+              <td>${usersCommodities[i].name}</td>
+              <td>${usersCommodities[i].type}</td>
+              <td>${usersCommodities[i].amount}</td>
+            </tr>
+          `
+        );
+      }
+    });
+  }
 
   function updateMap() {
 
@@ -280,6 +312,17 @@ $(function() {
     getBalance() // update balance (helps to show background transactions)
   }
 
+  /* Order Creation
+  ––––––––––––––––––––––––––––––––––––––– */
+
+  /**
+   *
+   * @function updateOrderAmountRange()
+   *
+   * @description sets the maximum and minimum input on the create order form > amount input.
+   *
+  **/
+
   function updateOrderAmountRange() { // function prevents invalid input when creating an order
     var maxAmount;
     if($("#order-type").val() == "sell") { // determine max input amount
@@ -288,48 +331,23 @@ $(function() {
       maxAmount = 10000;
     }
 
-    $("#order-amount").attr({max: maxAmount, min: 1});
-    if(Number($("#order-amount").val()) > maxAmount) { // apply on front end the max input to the input[type=number]
-      $("#order-amount").val(maxAmount);
-    } else if(Number($("#order-amount").val()) < 1) {
-      $("#order-amount").val(1);
+    $("#order-amount").attr({max: maxAmount, min: 1}); // apply on front end the max input to the input[type=number]
+    if(Number($("#order-amount").val()) > maxAmount) { // if input is over max
+      $("#order-amount").val(maxAmount); // set to max amount
+    } else if(Number($("#order-amount").val()) < 1) { // if input is under min
+      $("#order-amount").val(1); // set to min amount
     }
   }
 
-  function updateOrderAmount(amount) {
-    $("#fulfill-amount").attr({max: amount, min: 1});
-    if(Number($("#fulfill-amount").val()) > amount) {
-      $("#fulfill-amount").val(amount);
-    } else if(Number($("#fulfill-amount").val()) < 1) {
-      $("#fulfill-amount").val(1);
-    }
-  }
+  /**
+   *
+   * @function getSuitableCommoditiesToSell()
+   *
+   * @description gets all commodities that the user has and appends to the commodity select input when creating an order
+   *
+  **/
 
-  function updateCommodities() {
-    API.send("get-commodities", {username: username, password, password}, function (data) {
-      $("#commodities-table").html(`
-        <tr>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Amount</th>
-        </tr>
-        `);
-      for (var i = 0; i < data.length; i++) {
-        $("#commodities-table").append(
-          `
-            <tr>
-              <td>${data[i].name}</td>
-              <td>${data[i].type}</td>
-              <td>${data[i].amount}</td>
-            </tr>
-          `
-        );
-      }
-      console.log(data);
-    });
-  }
-
-  function getSuitableCommodities() {
+  function getSuitableCommoditiesToSell() {
     API.send("get-commodities", {username: username, password, password}, function (data) {
       $("#order-commodity").html("");
       var total = false;
@@ -398,7 +416,7 @@ $(function() {
           alert("You have nothing to sell!")
           $("#order-type").val("buy");
         }
-        getSuitableCommodities()
+        getSuitableCommoditiesToSell()
       });
 
       console.log("DATA: ");
@@ -406,25 +424,55 @@ $(function() {
     });
   }
 
+  /* Order Fulfillment
+  ––––––––––––––––––––––––––––––––––––––– */
+
+  /**
+   *
+   * @function updateOrderFulfillmentAmount()
+   *
+   * @param {Number} amount
+   *
+   * @description when a user tries to fulfill an order, this function checks that their input is valid
+   *
+  **/
+
+  function updateOrderFulfillmentAmount(amount) {
+    $("#fulfill-amount").attr({max: amount, min: 1}); // set max/min
+    if(Number($("#fulfill-amount").val()) > amount) { // check input to see if it matches the amount of commodities specified in the order
+      $("#fulfill-amount").val(amount);
+    } else if(Number($("#fulfill-amount").val()) < 1) {
+      $("#fulfill-amount").val(1);
+    }
+  }
+
+  /**
+   *
+   * @function getSuitableFulfillment()
+   *
+   * @param {Number} id
+   *
+   * @description updates the fulfill order form to fit the specified order
+   *
+  **/
+
   function getSuitableFulfillment(id) {
-    API.send("get-order", {username: username, password: password, id: id}, function (data) {
-      console.log("ORDER DAATAA");
-      console.log(data);
-      $("#market-fulfill").html(
+    API.send("get-order", {username: username, password: password, id: id}, function (order) { // get order data
+      $("#market-fulfill").html( // display order data in form
         `
           <h1>Fulfill Order</h1>
             <tr>
-              <span>Type: </span><span id="fulfill-type">${data.type}</span><br>
-              <span>Price: </span>$<span id="fulfill-price">${data.price}</span><br>
-              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${data.amount-data.fulfillment}">/${data.amount-data.fulfillment}<br>
+              <span>Type: </span><span id="fulfill-type">${order.type}</span><br>
+              <span>Price: </span>$<span id="fulfill-price">${order.price}</span><br>
+              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}<br>
               <button type="button" id="fulfill-submit">Fulfill</button>
             </tr>
         `
       );
 
-      $("#fulfill-amount").unbind("change");
-      $("#fulfill-amount").bind("change", function () {
-        updateOrderAmount(Number(data.amount)-Number(data.fulfillment))
+      $("#fulfill-amount").unbind("change"); // unbind previous listerners to prevent overlapping
+      $("#fulfill-amount").bind("change", function () { // upon input change
+        updateOrderFulfillmentAmount(Number(order.amount)-Number(order.fulfillment))
       });
 
       $("#fulfill-submit").unbind("click");
@@ -432,10 +480,9 @@ $(function() {
         API.send("fulfill-order", {
           username: username,
           password: password,
-          id: data.id,
+          id: order.id,
           amount: Number($("#fulfill-amount").val())
         }, function (response) {
-          console.log(response);
           $("#market-table").show();
           $("#market-fulfill").hide();
           $("#create-order-btn").text("Create Order")
@@ -507,7 +554,7 @@ $(function() {
           $("#market-table").hide();
           $("#market-order").show();
           $("#create-order-btn").text("Cancel")
-          getSuitableCommodities();
+          getSuitableCommoditiesToSell();
         } else if($("#market-fulfill").is(":visible")) {
           $("#market-table").show();
           $("#market-fulfill").hide();
