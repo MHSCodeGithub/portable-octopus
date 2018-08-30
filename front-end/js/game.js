@@ -364,25 +364,24 @@ $(function () {
   function getSuitableCommoditiesToSell() {
     API.send("get-commodities", {
       username: username,
-      password,
-      password
-    }, function (data) {
-      $("#order-commodity").html("");
-      var total = false;
-      for (var i = 0; i < data.length; i++) {
-        if (data[i].amount > 0) {
-          total = true;
+      password: password
+    }, function (data) { // get user's commodities
+      $("#order-commodity").html(""); // remove all options
+      var hasCommodity = false; // flag for if any commodity can be sold
+      for (var i = 0; i < data.length; i++) { // for every commodity
+        if (data[i].amount > 0) { // if the user has any
+          hasCommodity = true; // set flag to true
         }
-        if ($("#order-type").val() == "sell" && data[i].amount > 0) {
-          $("#order-commodity").append(
+        if ($("#order-type").val() == "sell" && data[i].amount > 0) { // if the order is a sell order and player has some of this commodity
+          $("#order-commodity").append( // append the commodity to the list of possible commodities
             `
               <option value="${data[i].name}-${data[i].amount}">
                 ${data[i].name} - ${data[i].amount}
               </tr>
             `
           );
-        } else if ($("#order-type").val() == "buy") {
-          $("#order-commodity").append(
+        } else if ($("#order-type").val() == "buy") { // if sell order is buy (meaning all commodities will be in the list)
+          $("#order-commodity").append( // add commodity to commodity list
             `
               <option value="${data[i].name}-${data[i].amount}">
                 ${data[i].name} - ${data[i].amount}
@@ -392,55 +391,50 @@ $(function () {
         }
       }
 
-      $("#order-amount").unbind("change");
-      $("#order-amount").bind("change", function () {
-        updateOrderAmountRange()
+      $("#order-amount").unbind("change"); // unbind to prevent overlapping
+      $("#order-amount").bind("change", function () { // when a user changes the amount to buy/sell
+        updateOrderAmountRange() // check its valid
       });
 
-      $("#order-type").unbind("change");
-      $("#order-type").bind("change", function () {
-        updateOrderAmountRange()
+      $("#order-type").unbind("change"); // unbind to prevent overlapping
+      $("#order-type").bind("change", function () { // when the user changes the order type
+        updateOrderAmountRange() // check amount is valid
       });
 
-      $("#order-commodity").unbind("change");
-      $("#order-commodity").bind("change", function () {
-        updateOrderAmountRange()
+      $("#order-commodity").unbind("change"); // unbind to prevent overlapping
+      $("#order-commodity").bind("change", function () { // when user changes the commodity to buy/sell
+        updateOrderAmountRange() // check amount is valid
       });
 
-      $("#order-submit").unbind("click");
-      $("#order-submit").bind("click", function () {
-        if ($("#order-commodity").val()) {
-          API.send("create-order", {
+      $("#order-submit").unbind("click"); // unbind to prevent overlapping
+      $("#order-submit").bind("click", function () { // when the order is submitted
+        if ($("#order-commodity").val()) { // if the user has selected a commodity
+          API.send("create-order", { // tell server user wants to create a order
             username: username,
             password: password,
             type: $("#order-type").val(),
             commodity: $("#order-commodity").val().split("-")[0],
             price: Number($("#order-price").val()),
             amount: Number($("#order-amount").val())
-          }, function (response) {
-            console.log("response");
-            console.log(response);
-            $("#market-table").show();
+          }, function (response) { // when the server responds
+            $("#market-table").show(); // show the market table
             $("#market-order").hide();
             $("#create-order-btn").text("Create Order")
-            updateOrders();
+            updateOrders(); // update the order list
           });
-        } else {
+        } else { // else the user has not filled out the order form
           alert("Please Fill Out Correct Order!")
         }
       });
 
-      $("#order-type").unbind("change");
-      $("#order-type").bind("change", function () {
-        if (!total) {
+      $("#order-type").unbind("change"); // unbind to prevent overlapping
+      $("#order-type").bind("change", function () { // when order type changes
+        if (!hasCommodity) { // check user has commodities
           alert("You have nothing to sell!")
-          $("#order-type").val("buy");
+          $("#order-type").val("buy"); // set default
         }
-        getSuitableCommoditiesToSell()
+        getSuitableCommoditiesToSell() // check order form
       });
-
-      console.log("DATA: ");
-      console.log(data);
     });
   }
 
