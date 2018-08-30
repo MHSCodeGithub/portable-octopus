@@ -182,8 +182,12 @@ $(function () {
   function updateCommodities() {
     API.send("get-commodities", {
       username: username,
+<<<<<<< HEAD
       password,
       password
+=======
+      password: password
+>>>>>>> 1a98f14e29bc9ced2a4332110c8640166dd0a2fe
     }, function (usersCommodities) { // get users commodities
       $("#commodities-table").html(`
         <tr>
@@ -213,7 +217,11 @@ $(function () {
       username: username,
       password: password
     }, function (data) { // request map from server
+<<<<<<< HEAD
       for (var i = 0; i < 19; i++) { // set map to be just grass. Nothing but grass.
+=======
+      for (var i = 0; i < 19; i++) { // set map to be just grass
+>>>>>>> 1a98f14e29bc9ced2a4332110c8640166dd0a2fe
         for (var j = 0; j < 19; j++) {
           drawGrass(i + 1, j + 1);
         }
@@ -486,7 +494,11 @@ $(function () {
       password: password,
       id: id
     }, function (order) { // get order data
+<<<<<<< HEAD
       $("#market-fulfill").html( // display order data in form a.k.a. solve world hunger
+=======
+      $("#market-fulfill").html( // display order data in form
+>>>>>>> 1a98f14e29bc9ced2a4332110c8640166dd0a2fe
         `
           <h1>Fulfill Order</h1>
             <tr>
@@ -718,7 +730,11 @@ $(function () {
   ––––––––––––––––––––––––––––––––––––––– */
 
   setInterval(function () {
+<<<<<<< HEAD
     if ($("#my-commodities").is(":visible")) { // if commodity list is visible
+=======
+    if ($("#commodities-table").is(":visible")) { // if commodity list is visible
+>>>>>>> 1a98f14e29bc9ced2a4332110c8640166dd0a2fe
       updateCommodities()
     } else if ($("#market").is(":visible")) { // if market is visible
       updateOrders()
