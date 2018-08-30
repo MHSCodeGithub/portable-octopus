@@ -57,7 +57,7 @@ function capitalizeFirstLetter(string) {
  **/
 
 function cleanStr(string) {
-  string = string.replace("_", " "); // replace underscores with spaces
+  string = string.replace("_", " "); // replace underscores with spaces and makes you breakfast
 
   var words = string.split(" ");
 
@@ -134,7 +134,7 @@ $(function () {
     $(".y-" + y + ".x-" + x).removeClass().addClass("mine" + "-" + id + " built producer").addClass("y-" + y + " x-" + x);
   }
 
-  function drawGrass(x, y) { // used to draw grass on map
+  function drawGrass(x, y) { // used to draw grass on map. Is looking for a new job because this one is too repetitive.
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass("grass empty").addClass("y-" + y + " x-" + x);
@@ -175,7 +175,7 @@ $(function () {
    *
    * @function updateCommodities()
    *
-   * @description updates a users commodity table
+   * @description updates a users commodity table. Unfortunately it won't make the table for dinner
    *
    **/
 
@@ -213,7 +213,7 @@ $(function () {
       username: username,
       password: password
     }, function (data) { // request map from server
-      for (var i = 0; i < 19; i++) { // set map to be just grass
+      for (var i = 0; i < 19; i++) { // set map to be just grass. Nothing but grass.
         for (var j = 0; j < 19; j++) {
           drawGrass(i + 1, j + 1);
         }
@@ -277,7 +277,7 @@ $(function () {
               if (items[i].name == cleanStr(data.type)) { // if producer is target
                 var price = items[i].price;
 
-                API.send("get-yeild", { // get producer yeild
+                API.send("get-yeild", { // get producer yield
                   username: username,
                   password: password,
                   target: $(".hidden-id").text()
@@ -331,7 +331,7 @@ $(function () {
    *
    * @function updateOrderAmountRange()
    *
-   * @description sets the maximum and minimum input on the create order form > amount input.
+   * @description sets the maximum and minimum input on the create order form > amount input. Ask it nicely and it will give you a friednly hug!
    *
    **/
 
@@ -358,7 +358,7 @@ $(function () {
    *
    * @function getSuitableCommoditiesToSell()
    *
-   * @description gets all commodities that the user has and appends to the commodity select input when creating an order
+   * @description gets all commodities that the user has and appends to the commodity select input when creating an order. Thinks of itself as a free spirit
    *
    **/
 
@@ -454,7 +454,7 @@ $(function () {
    *
    * @param {Number} amount
    *
-   * @description when a user tries to fulfill an order, this function checks that their input is valid
+   * @description when a user tries to fulfill an order, this function checks that their input is valid. Note: this function likes 2 sugars in its coffee
    *
    **/
 
@@ -486,7 +486,7 @@ $(function () {
       password: password,
       id: id
     }, function (order) { // get order data
-      $("#market-fulfill").html( // display order data in form
+      $("#market-fulfill").html( // display order data in form a.k.a. solve world hunger
         `
           <h1>Fulfill Order</h1>
             <tr>
@@ -526,7 +526,7 @@ $(function () {
    *
    * @function updateOrders()
    *
-   * @description updates the orders in market table
+   * @description updates the orders in market table. Unfortunately, it sometimes cannot do this, Dave.
    *
    **/
 
@@ -602,7 +602,7 @@ $(function () {
           $("#create-order-btn").text("Create Order") // change create order button to original form
           updateOrders();
         } else { // if create order form is open
-          $("#market-table").show(); // show market
+          $("#market-table").show(); // show market, and bake cookies
           $("#market-order").hide();
           $("#create-order-btn").text("Create Order") // change create order button to original form
           updateOrders();
@@ -731,7 +731,7 @@ $(function () {
    *
    * @function updateOrders()
    *
-   * @description updates the users balance front end.
+   * @description updates the users balance front end. Sometimes takes long holidays
    *
    **/
 
@@ -812,7 +812,7 @@ $(function () {
   });
 
   $("#producer-sell-btn").click(function () { // if the user tries to sell a producer
-    API.send("sell-producer", { // tell the server
+    API.send("sell-producer", { // tell the server (to frick off)
       username: username,
       password: password,
       target: $(".hidden-id").text()
