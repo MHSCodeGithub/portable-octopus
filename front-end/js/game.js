@@ -77,6 +77,8 @@ $(function() {
   /* Initialisations
   ––––––––––––––––––––––––––––––––––––––– */
 
+  var images = new Array(); // set images array to allow preloading
+
   preload( // preload images so they dont load upon contact
     "../img/menu-btn-p.png",
     "../img/logout-btn-p.png",
@@ -95,8 +97,6 @@ $(function() {
   updateMap(); // update the map to reflect the users current kingdom
 
   $(".producer-info").hide(); // hide producer info so its nice and clean
-
-  var images = new Array(); // set images array to allow preloading
 
   /* Image Preloading
   ––––––––––––––––––––––––––––––––––––––– */
@@ -309,7 +309,7 @@ $(function() {
       })
     });
 
-    getBalance() // update balance (helps to show background transactions)
+    updateBalance() // update balance (helps to show background transactions)
   }
 
   /* Order Creation
@@ -472,29 +472,38 @@ $(function() {
 
       $("#fulfill-amount").unbind("change"); // unbind previous listerners to prevent overlapping
       $("#fulfill-amount").bind("change", function () { // upon input change
-        updateOrderFulfillmentAmount(Number(order.amount)-Number(order.fulfillment))
+        updateOrderFulfillmentAmount(Number(order.amount)-Number(order.fulfillment)) // ensure that fulfillment amount is not invalid
       });
 
-      $("#fulfill-submit").unbind("click");
-      $("#fulfill-submit").bind("click", function () {
+      $("#fulfill-submit").unbind("click"); // unbind previous listerners to prevent overlapping
+      $("#fulfill-submit").bind("click", function () { // upon user submits fulfillment form
         API.send("fulfill-order", {
           username: username,
           password: password,
           id: order.id,
           amount: Number($("#fulfill-amount").val())
-        }, function (response) {
-          $("#market-table").show();
+        }, function (response) { // send fulfillment to server
+          $("#market-table").show(); // return to market
           $("#market-fulfill").hide();
-          $("#create-order-btn").text("Create Order")
-          updateOrders();
+          $("#create-order-btn").text("Create Order") // update create order button to match its normal state
+          updateOrders(); // update market/commodities/balance
           updateCommodities();
+          updateBalance();
         })
       });
     })
   }
 
+  /**
+   *
+   * @function updateOrders()
+   *
+   * @description updates the orders in market table
+   *
+  **/
+
   function updateOrders() {
-    API.get("orders", function (data) {
+    API.get("orders", function (orders) { // get all orders from server
       $("#market-table").html(`
         <tr id="table-headers">
           <th>Buy/Sell</th>
@@ -506,33 +515,33 @@ $(function() {
           <th><button type="button" name="button" id="create-order-btn">Create Order</button></th>
         </tr>
         <tr class="order-spacer"></tr>
-        `);
-      for (var i = 0; i < data.length; i++) {
-        if(data[i].author == username) {
-          $("#market-table").append(
+        `); // empty table and provide headers/create order button
+      for (var i = 0; i < orders.length; i++) { // for each order
+        if(orders[i].author == username) { // if the order is created by self
+          $("#market-table").append( // append the order to the table, however provide a cancel button
             `
-              <tr id="order-${data[i].id}">
-                <td>${data[i].type}</td>
-                <td>${data[i].commodity}</td>
-                <td>$${data[i].price}</td>
-                <td>${data[i].amount}</td>
-                <td>${data[i].fulfillment}/${data[i].amount}</td>
-                <td>${data[i].author}</td>
+              <tr id="order-${orders[i].id}">
+                <td>${orders[i].type}</td>
+                <td>${orders[i].commodity}</td>
+                <td>$${orders[i].price}</td>
+                <td>${orders[i].amount}</td>
+                <td>${orders[i].fulfillment}/${orders[i].amount}</td>
+                <td>${orders[i].author}</td>
                 <td><button class="order-created-cancel">Cancel</button></td>
               </tr>
               <tr class="order-spacer"></tr>
             `
           );
-        } else {
-          $("#market-table").append(
+        } else { // if the order is created by someone else
+          $("#market-table").append( // provide fulfill button
             `
-              <tr id="order-${data[i].id}">
-                <td>${data[i].type}</td>
-                <td>${data[i].commodity}</td>
-                <td>$${data[i].price}</td>
-                <td>${data[i].amount}</td>
-                <td>${data[i].fulfillment}/${data[i].amount}</td>
-                <td>${data[i].author}</td>
+              <tr id="order-${orders[i].id}">
+                <td>${orders[i].type}</td>
+                <td>${orders[i].commodity}</td>
+                <td>$${orders[i].price}</td>
+                <td>${orders[i].amount}</td>
+                <td>${orders[i].fulfillment}/${orders[i].amount}</td>
+                <td>${orders[i].author}</td>
                 <td><button class="order-fulfill">Fulfill</button></td>
               </tr>
               <tr class="order-spacer"></tr>
@@ -541,127 +550,122 @@ $(function() {
         }
       }
 
-      $(".order-created-cancel").unbind("click");
+      $(".order-created-cancel").unbind("click"); // unbind previous listerners to prevent overlapping
       $(".order-created-cancel").bind("click", function () {
         API.send("cancel-order", {username: username, password: password, targetID: Number($(this).parent().parent().attr('id').split("-")[1])}, function (data) {
-          console.log(data);
+          updateOrders();
         });
       });
 
-      $("#create-order-btn").unbind("click");
-      $("#create-order-btn").bind("click", function () {
-        if($("#market-table").is(":visible")) {
-          $("#market-table").hide();
+      $("#create-order-btn").unbind("click"); // unbind previous listerners to prevent overlapping
+      $("#create-order-btn").bind("click", function () { // when create order button is clicked
+        if($("#market-table").is(":visible")) { // if market tab is open
+          $("#market-table").hide(); // show create order form
           $("#market-order").show();
-          $("#create-order-btn").text("Cancel")
-          getSuitableCommoditiesToSell();
-        } else if($("#market-fulfill").is(":visible")) {
-          $("#market-table").show();
+          $("#create-order-btn").text("Cancel") // update button text to cancel
+          getSuitableCommoditiesToSell(); // prepare create order form
+        } else if($("#market-fulfill").is(":visible")) { // if fulfill order form is visible
+          $("#market-table").show(); // show market
           $("#market-fulfill").hide();
-          $("#create-order-btn").text("Create Order")
+          $("#create-order-btn").text("Create Order") // change create order button to original form
           updateOrders();
-        } else {
-          $("#market-table").show();
+        } else { // if create order form is open
+          $("#market-table").show(); // show market
           $("#market-order").hide();
-          $("#create-order-btn").text("Create Order")
+          $("#create-order-btn").text("Create Order") // change create order button to original form
           updateOrders();
         }
       });
 
-      $(".order-fulfill").unbind("click");
-      $(".order-fulfill").bind("click", function () {
+      $(".order-fulfill").unbind("click"); // unbind previous listerners to prevent overlapping
+      $(".order-fulfill").bind("click", function () { // when user clicks to fulfill an order
 
-        if($("#market-table").is(":visible")) {
-          $("#market-table").hide();
+        if($("#market-table").is(":visible")) { // if market is open
+          $("#market-table").hide(); // show fulfill order form
           $("#market-fulfill").show();
-          getSuitableFulfillment($(this).parent().parent().attr("id").split("-")[1])
-          $("#create-order-btn").text("Cancel");
+          getSuitableFulfillment($(this).parent().parent().attr("id").split("-")[1]) // prepare fulfill order form
+          $("#create-order-btn").text("Cancel"); // update button text to cancel
         }
       });
-      console.log(data);
     });
   }
 
   /* Map Generation/Setups
   ––––––––––––––––––––––––––––––––––––––– */
 
-  var total = 0;
-  for (var i = 0; i < 19; i++) {
+  var total = 0; // total used to give blocks an ID
+  for (var i = 0; i < 19; i++) { // for each block in the 19x19 grid
     for (var j = 0; j < 19; j++) {
-      total++;
-      $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + " grass empty'> </div>");
+      total++; // add 1 to total
+      $("#game-container").append("<div id='block-" + (total) + "' class='y-" + (i + 1) + " x-" + (j + 1) + " grass empty'> </div>"); // append a new block with a unique ID + x and y
     }
   }
 
 
-  $(".modal-btn").click(function() {
+  $(".modal-btn").click(function() { // when a menu button is clicked
 
-    var target = $(this).attr('id').split('-')[0];
-    if ($("#"+target+"-modal").css('display') == 'none') {
+    var target = $(this).attr('id').split('-')[0]; // get button being clicked on
+    if ($("#"+target+"-modal").css('display') == 'none') { // if modal is hidden
       $(".modal").css('display', 'none');
-      $("#"+target+"-modal").css('display', 'block');
+      $("#"+target+"-modal").css('display', 'block'); // dynamically display the menu item
 
-      $panzoom.panzoom("disable");
+      $panzoom.panzoom("disable"); // disable panzoom to allow scrolling
 
-      API.get("items", function (items) {
+      API.get("items", function (items) { // get all producers from server
         console.log(items);
-        $("#shop-item-wrap").html("")
-        for (var i = 0; i < items.length; i++) {
-          var item = `
-          <div class="shop-item" id="item-`+items[i].id+`">
-            <h2 class="item-name">`+items[i].name+`</h2>
-            <div class="item-desc-wrap">
-              <img src="`+items[i].image+`" alt="" class="item-img">
-              <p class="item-desc">`+items[i].description+`</p>
-            </div>
-            <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
-          </div>
-          `
-          $("#shop-item-wrap").append(item);
-        }
 
-        $(".modal-close-btn").unbind("click");
-        $(".modal-close-btn").bind("click", function () {
-          $("#"+target+"-modal").css('display', 'none');
-          $panzoom.panzoom("enable")
+        $(".modal-close-btn").unbind("click"); // unbind previous listerners to prevent overlapping
+        $(".modal-close-btn").bind("click", function () { // if menu item close button is clicked
+          $("#"+target+"-modal").css('display', 'none'); // hide menu item
+          $panzoom.panzoom("enable") // re-enable panzoom
         });
 
-        if(target == "shop") {
+        if(target == "shop") { // if menu item is shop
 
-          $('.item-buy-btn').bind("click", function () {
-            selectAvailiable();
-            $panzoom.panzoom("enable")
-            $(".modal").css('display', 'none');
+          $("#shop-item-wrap").html("") // reset shop
+          for (var i = 0; i < items.length; i++) { // for each producer
+            var item = `
+            <div class="shop-item" id="item-`+items[i].id+`">
+              <h2 class="item-name">`+items[i].name+`</h2>
+              <div class="item-desc-wrap">
+                <img src="`+items[i].image+`" alt="" class="item-img">
+                <p class="item-desc">`+items[i].description+`</p>
+              </div>
+              <button id="item-button-`+items[i].id+`" class="item-buy-btn">$`+items[i].price+`</button>
+            </div>
+            `
+            $("#shop-item-wrap").append(item); // add producer to producer list
+          }
 
-            var pre = this;
+          $('.item-buy-btn').bind("click", function () { // if a producer's buy button is clicked
+            selectAvailiable(); // show available blocks to place producer
+            $panzoom.panzoom("enable") // re-enable panzoom
+            $(".modal").css('display', 'none'); // hide menu item
 
-            $(".to-build").bind("click", function () {
-              console.log("PRODUCER PLACE");
-              console.log($(this).attr("class"));
-              if($(this).hasClass("selected")) {
-                API.send("buy-producer", {
+            var pre = this; // save this into variable to asynchronous access
+
+            $(".to-build").bind("click", function () { // if a block which a producer can be placed on is clicked
+              if($(this).hasClass("selected")) { // double check that the producer can be placed
+                API.send("buy-producer", { // tell the server the user wants to buy a producer
                   username: username,
                   password: password,
                   target: $(pre).parent().attr('id').split("-")[1],
                   x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
                   y: Number($(this).attr("class").split(' ')[3].split("-")[1])
-                }, function (data) {
-                  console.log(data);
-                  $('.to-build').unbind("click");
-                  updateMap();
-                  getBalance()
+                }, function (response) { // when the server responds
+                  $('.to-build').unbind("click"); // dis-allow the user from placing more producers
+                  updateMap(); // update map to show the new producer
+                  updateBalance(); // update the users balance to reflect the purchase
                 });
               }
             });
           });
-        } else if(target == "market") {
-          // deprecated
         }
 
       });
-    } else {
-      $panzoom.panzoom("enable")
-      $("#"+target+"-modal").css('display', 'none');
+    } else { // if menu item is shown
+      $panzoom.panzoom("enable") // re-enable panzoom
+      $("#"+target+"-modal").css('display', 'none'); // close menu item
     }
   });
 
@@ -673,85 +677,93 @@ $(function() {
 
   /* Front-end JS
   ––––––––––––––––––––––––––––––––––––––– */
-  $(document).ready(function() {
-    $("#tabs").tabs();
-  });
 
-  /* Automatic Commodity Table Updater
+  $(document).ready(function() { // leaving this here for shits and giggles. My god this is so dumb, wtf was I thinking
+    $("#tabs").tabs(); // enable menu items
+  }); // its ALREADY in a $(document).ready and its ALREADY in a Front-end JS file
+
+  /* Automatic Commodity Table/Market/Balance Updater
   ––––––––––––––––––––––––––––––––––––––– */
 
   setInterval(function () {
-    if($("#my-commodities").is(":visible")) {
+    if($("#my-commodities").is(":visible")) { // if commodity list is visible
       updateCommodities()
-    } else if($("#market").is(":visible")) {
+    } else if($("#market").is(":visible")) { // if market is visible
       updateOrders()
     }
-  }, 5*1000);
 
-  setInterval(function () {
-    getBalance()
-  }, 5*1000);
+    updateBalance()
+  }, 5*1000); // every 5 seconds
 
-  function getBalance() {
-    API.send("get-balance", {username: username, password: password}, function (balance) {
-      $("#balance").text("$"+balance.data);
+  /**
+   *
+   * @function updateOrders()
+   *
+   * @description updates the users balance front end.
+   *
+  **/
+
+  function updateBalance() {
+    API.send("get-balance", {username: username, password: password}, function (balance) { // get user's balance
+      $("#balance").text("$"+balance.data); // display users balance
     });
   }
 
-  $("#market-btn").click(function () {
-    updateOrders();
+  $("#market-btn").click(function () { // when the market menu button is clicked
+    updateOrders(); // update the market
   });
 
-  $("#stockpile-btn").click(function () {
-    updateCommodities();
+  $("#stockpile-btn").click(function () { // when the stockpile button is clicked
+    updateCommodities(); // update the stockpile
   });
 
 
-  $("#producer-upgrade-btn").click(function () {
-    API.send("upgrade-producer", {
+  $("#producer-upgrade-btn").click(function () { // when a user tries to upgrade a producer
+    API.send("upgrade-producer", { // tell the server they want to upgrade
       username: username,
       password: password,
       target: $(".hidden-id").text()
-    }, function (data) {
+    }, function (response) {
 
       API.send("get-producer", {
         username: username,
         password: password,
         target: $(".hidden-id").text()
-      }, function (data) {
+      }, function (producer) { // get the target producer
 
-        API.get("items", function (items) {
-          if(data.subType) { data.type = data.subType + " " + data.type; }
+        API.get("items", function (items) { // get all producers as reference
+          if(producer.subType) { producer.type = producer.subType + " " + producer.type; } // create proper producer name if producer has a subtype
 
-          for (var i = 0; i < items.length; i++) {
-            if(items[i].name == cleanStr(data.type)) {
-              var price = items[i].price;
+          for (var i = 0; i < items.length; i++) { // for each reference producer
+            if(items[i].name == cleanStr(producer.type)) { // if reference producer is the same time as the target producer
+              var price = items[i].price; // get base price of reference producer
               API.send("get-yeild", {
                 username: username,
                 password: password,
                 target: $(".hidden-id").text()
-              }, function (producerYeild) {
-                getBalance()
-                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
-                $(".producer-info-level").text("Lvl."+data.level);
-                $("#producer-upgrade-btn").text("Upgrade($"+(price*(data.level+1))+")");
-                $("#producer-sell-btn").text("Sell(+$"+((price*data.level)/2)+")");
-                if(data.type == "house") {
-                  $(".producer-info-gen").text(data.citizens+" citizens!");
+              }, function (producerYeild) { // get target producer's yeild
+                updateBalance(); // update user's balance
+
+                // update producer information // TODO: REFACTOR
+                $(".producer-info-name").html(cleanStr(producer.type) + " <span class='producer-info-level'></span>");
+                $(".producer-info-level").text("Lvl."+producer.level);
+                $("#producer-upgrade-btn").text("Upgrade($"+(price*(producer.level+1))+")");
+                $("#producer-sell-btn").text("Sell(+$"+((price*producer.level)/2)+")");
+
+                if(producer.type == "house") { // if the producer is a house
+                  $(".producer-info-gen").text(producer.citizens+" citizens!"); // display the intake/outake fittingly
                   $(".producer-info-intake").text("");
-                } else {
-                  $(".producer-info-gen").text("Output: "+cleanStr(data.produce)+" "+(producerYeild.val*12)+"/hour");
-                  console.log("PRODUCER:");
-                  console.log(data);
-                  if(data.functioning == true) {
-                    $(".producer-info-working").text("Producing!")
+                } else { // if the producer is a _real_ producer (not a house) (im not housist)
+                  $(".producer-info-gen").text("Output: "+cleanStr(producer.produce)+" "+(producerYeild.val*12)+"/hour"); // show the producer's yeild
+                  if(producer.functioning == true) { // if the producer if functioning
+                    $(".producer-info-working").text("Producing!") // let user know
                   } else {
                     $(".producer-info-working").text("Not Producing!")
                   }
-                  if(data.intake == "None") {
-                    $(".producer-info-intake").text("Intake: "+cleanStr(data.intake));
+                  if(producer.intake == "None") { // if the producer has no Intake
+                    $(".producer-info-intake").text("Intake: "+cleanStr(producer.intake)); // clean the intake message
                   } else {
-                    $(".producer-info-intake").text("Intake: "+cleanStr(data.intake)+" "+(producerYeild.val*12)+"/hour");
+                    $(".producer-info-intake").text("Intake: "+cleanStr(producer.intake)+" "+(producerYeild.val*12)+"/hour"); // display intake according to algo
                   }
                 }
               })
@@ -762,21 +774,21 @@ $(function() {
     });
   });
 
-  $("#producer-sell-btn").click(function () {
-    API.send("sell-producer", {
+  $("#producer-sell-btn").click(function () { // if the user tries to sell a producer
+    API.send("sell-producer", { // tell the server
       username: username,
       password: password,
       target: $(".hidden-id").text()
-    }, function (data) {
-      $(".producer-info").hide();
-      $("."+$(".hidden-target").text()).unbind("click");
-      getBalance()
-      updateMap()
+    }, function (response) {
+      $(".producer-info").hide(); // hide the producer info
+      $("."+$(".hidden-target").text()).unbind("click"); // unbind ability to view removed producer information
+      updateBalance() // update user's balance
+      updateMap() // update map to show producer removed
     });
   });
 
-  $("#logout-btn").click(function () {
-    window.location.replace("/logout");
+  $("#logout-btn").click(function () { // if the user chooses to logout (goodbye user ): ...)
+    window.location.replace("/logout"); // redirect to the logout page
   });
 
 });
