@@ -182,8 +182,7 @@ $(function () {
   function updateCommodities() {
     API.send("get-commodities", {
       username: username,
-      password,
-      password
+      password: password
     }, function (usersCommodities) { // get users commodities
       $("#commodities-table").html(`
         <tr>
