@@ -330,7 +330,7 @@ $(function () {
    *
    * @function updateOrderAmountRange()
    *
-   * @description sets the maximum and minimum input on the create order form > amount input. Ask it nicely and it will give you a friednly hug!
+   * @description sets the maximum and minimum input on the create order form > amount input. Ask it nicely and it will give you a friendly hug!
    *
    **/
 
