@@ -717,7 +717,7 @@ $(function () {
   ––––––––––––––––––––––––––––––––––––––– */
 
   setInterval(function () {
-    if ($("#my-commodities").is(":visible")) { // if commodity list is visible
+    if ($("#commodities-table").is(":visible")) { // if commodity list is visible
       updateCommodities()
     } else if ($("#market").is(":visible")) { // if market is visible
       updateOrders()
