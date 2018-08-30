@@ -30,22 +30,43 @@ var me = {};
 /* String Cleaning
 ––––––––––––––––––––––––––––––––––––––– */
 
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+**/
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+/**
+ *
+ * @function cleanStr()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however underscores are replaced with spaces
+ *              and all word's first letter is capitalized
+ *
+**/
+
 function cleanStr(string) {
-  string = string.replace("_", " ");
+  string = string.replace("_", " "); // replace underscores with spaces
 
   var words = string.split(" ");
 
   for (var i = 0; i < words.length; i++) {
-    words[i] = capitalizeFirstLetter(words[i])
+    words[i] = capitalizeFirstLetter(words[i]) // capitalizeFirstLetter() of each word
   }
 
   string = words.join(" ");
 
-  return string;
+  return string; // return cleaned str
 }
 
 /* On Document Load
@@ -56,23 +77,7 @@ $(function() {
   /* Initialisations
   ––––––––––––––––––––––––––––––––––––––– */
 
-  var API = new APIClass();
-
-  updateMap();
-
-  $(".producer-info").hide();
-
-  /* Image Preloading
-  ––––––––––––––––––––––––––––––––––––––– */
-
-  var images = new Array()
-  function preload() {
-    for (i = 0; i < preload.arguments.length; i++) {
-      images[i] = new Image()
-      images[i].src = preload.arguments[i]
-    }
-  }
-  preload(
+  preload( // preload images so they dont load upon contact
     "../img/menu-btn-p.png",
     "../img/logout-btn-p.png",
     "../img/close-btn.png",
@@ -85,55 +90,77 @@ $(function() {
     "../img/upgrade-btn-p.png"
   )
 
-  /* Draw Functions
+  var API = new APIClass(); // create API w/server
+
+  updateMap(); // update the map to reflect the users current kingdom
+
+  $(".producer-info").hide(); // hide producer info so its nice and clean
+
+  var images = new Array(); // set images array to allow preloading
+
+  /* Image Preloading
   ––––––––––––––––––––––––––––––––––––––– */
 
-  function drawFarm(id, x, y, type) {
+  /**
+   *
+   * @function preload()
+   *
+   * @param {List<String>} arguments
+   *
+   * @description creates a new image, sets its src and loads it for every parameter
+   *
+  **/
+
+  function preload() {
+    for (i = 0; i < preload.arguments.length; i++) {
+      images[i] = new Image() // create new image and append to image array
+      images[i].src = preload.arguments[i] // set src to preload the image
+    }
+  }
+
+  /* Map Draw Functions
+  ––––––––––––––––––––––––––––––––––––––– */
+
+  function drawFarm(id, x, y, type) { // used to display farms on the map (this is because the have subtypes)
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/farm-" + type + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass("farm"+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
-  function drawMine(id, x, y, type) {
+  function drawMine(id, x, y, type) { // used to display mines on the map (this is because they have subtypes)
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/mine-" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass("mine"+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
-  function drawGrass(x, y) {
+  function drawGrass(x, y) { // used to draw grass on map
     $(".y-" + y + ".x-" + x).css("background", "url('../img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass("grass empty").addClass("y-" + y + " x-" + x);
   }
 
-  function drawProducer(id, x, y, type) {
+  function drawProducer(id, x, y, type) { // used to display producers on map
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".gif')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
   }
 
-  function drawHouse(id, x, y, type) {
-    $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
-    $(".y-" + y + ".x-" + x).css("background-size", "contain");
-    $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built producer").addClass("y-" + y + " x-" + x);
-  }
-
-  function drawFeature(id, x, y, type) {
+  function drawFeature(id, x, y, type) { // used to display a treasury, harbour or house on map
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/" + type + ".png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).removeClass().addClass(type+"-"+id+" built feature").addClass("y-" + y + " x-" + x);
   }
 
-  function drawSelect(x, y, reason) {
+  function drawSelect(x, y, reason) { // used to display a selection of a tile on the map
     $(".y-" + y + ".x-" + x).css("background", "url('img/map/selected-tile.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).addClass("selected "+reason);
   }
 
-  function selectAvailiable() {
+  function selectAvailiable() { // used to allow building placement
     for (var i = 0; i < 19; i++) {
       for (var j = 0; j < 19; j++) {
-        if($(".y-" + (i+1) + ".x-" + (j+1)).hasClass("empty")) { drawSelect(j+1, i+1, "to-build"); }
+        if($(".y-" + (i+1) + ".x-" + (j+1)).hasClass("empty")) { drawSelect(j+1, i+1, "to-build"); } // select all available blocks on map
       }
     }
   }
@@ -163,7 +190,7 @@ $(function() {
           } else if(producer.type == "mine") {
             drawMine(producer.id, producer.y, producer.x, producer.subType);
           } else if(producer.type == "house") {
-            drawHouse(producer.id, producer.y, producer.x, "house");
+            drawFeature(producer.id, producer.y, producer.x, "house");
           } else {
             drawProducer(producer.id, producer.y, producer.x, producer.type);
           }
