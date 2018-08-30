@@ -106,7 +106,7 @@ body * {
   padding: 5px;
 }
 
-/* MODALs
+/* ALL MODALS
 ––––––––––––––––––––––––––––––––––––––– */
 .modal {
   display: none; /* Hidden by default */
@@ -125,7 +125,11 @@ body * {
   width: 93%;
   height: 89.5%;
   margin: 3.5%;
-  overflow: scroll;
+  background: #FFB57A;
+  border: 10px solid #D0712E;
+  outline: 4px solid #753713;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 .modal-close-btn {
@@ -234,48 +238,6 @@ body * {
   cursor: pointer;
 }
 
-/* MARKET MODAL
-––––––––––––––––––––––––––––––––––––––– */
-#market-modal-wrap {
-  background: #FFB57A;
-  border: 10px solid #D0712E;
-  outline: 4px solid #753713;
-}
-
-.ui-tabs-nav {
-  display: flex;
-  margin: 18px;
-}
-
-.ui-tab {
-  background: #00BCB7;
-  width: 50%;
-  height: 100%;
-  list-style: none;
-  text-align: center;
-  padding: 0.5em;
-}
-
-.ui-tab:hover {
-  background: #009692;
-  border-bottom: 5px solid #327b75;
-}
-
-.ui-tabs-anchor {
-  color: white;
-  text-decoration: none;
-  height: 100%;
-  width: 100%;
-  font-size: 2em;
-}
-
-.ui-state-active, .ui-state-active:hover {
-  background: #008986;
-  border-bottom: 5px solid #005B53;
-  width: 50%;
-  height: 100%;
-}
-
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
 #stockpile h1 {
@@ -285,12 +247,13 @@ body * {
 
 #stockpile table {
   border-spacing: 0;
-  width: 95%;
-  margin: 0 auto;
+  max-width: 30%;
+  margin: 25px;
+height: 100%;
 }
 
 #stockpile th, #stockpile td {
-  text-align: left;
+  text-align: center;
   padding: 3px;
 }
 
