@@ -110,7 +110,7 @@ body * {
 ––––––––––––––––––––––––––––––––––––––– */
 .modal {
   display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
+  position: absolute;
   z-index: 1; /* Sit on top */
   left: 0;
   top: 0;
@@ -125,6 +125,7 @@ body * {
   width: 93%;
   height: 89.5%;
   margin: 3.5%;
+  overflow: scroll;
 }
 
 .modal-close-btn {
@@ -149,7 +150,6 @@ body * {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-content: flex-start;
-  overflow-y: scroll;
   background: #FFB57A;
   border: 10px solid #D0712E;
   outline: 4px solid #753713;
