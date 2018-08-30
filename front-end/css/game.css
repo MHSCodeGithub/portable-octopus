@@ -171,14 +171,11 @@ body * {
   }
 }
 
-/* Tier Divs */
-
-
-/* Shop Items */
+/* SHOP ITEMS
+––––––––––––––––––––––––––––––––––––––– */
 .shop-item {
   max-width: 300px;
   margin: 20px 15px;
-  float: left;
   display: block;
   padding: 10px 15px;
   max-height: 170px;
@@ -238,34 +235,6 @@ body * {
   cursor: pointer;
 }
 
-/* STOCKPILE
-––––––––––––––––––––––––––––––––––––––– */
-#stockpile h1 {
-  text-align: center;
-  font-size: 3em;
-}
-
-#stockpile table {
-  border-spacing: 0;
-  max-width: 30%;
-  margin: 25px;
-height: 100%;
-}
-
-#stockpile th, #stockpile td {
-  text-align: center;
-  padding: 3px;
-}
-
-#stockpile td {
-  font-size: 1.4em;
-}
-
-#stockpile tr {
-  background: #FFE3DA;
-  box-shadow: 3px 3px #D0712E;
-}
-
 /* MARKET
 ––––––––––––––––––––––––––––––––––––––– */
 #market table{
@@ -309,6 +278,38 @@ th {
   background: #FFB57A;
   height: 15px;
   box-shadow: none;
+}
+
+/* CREATE ORDER
+––––––––––––––––––––––––––––––––––––––– */
+
+
+/* STOCKPILE
+––––––––––––––––––––––––––––––––––––––– */
+#stockpile h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+#stockpile table {
+  border-spacing: 0;
+  max-width: 30%;
+  margin: 25px;
+  height: 100%;
+}
+
+#stockpile th, #stockpile td {
+  text-align: center;
+  padding: 3px 15px;
+}
+
+#stockpile td {
+  font-size: 1.4em;
+}
+
+#stockpile tr {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
 }
 
 /* PRODUCER INFORMATION
