@@ -253,17 +253,17 @@ $(function() {
     getBalance() // update balance (helps to show background transactions)
   }
 
-  function updateAmount() {
-    var amount;
-    if($("#order-type").val() == "sell") {
-      amount = Number($("#order-commodity").val().split("-")[1]);
+  function updateOrderAmountRange() { // function prevents invalid input when creating an order
+    var maxAmount;
+    if($("#order-type").val() == "sell") { // determine max input amount
+      maxAmount = Number($("#order-commodity").val().split("-")[1]);
     } else {
-      amount = 10000;
+      maxAmount = 10000;
     }
 
-    $("#order-amount").attr({max: amount, min: 1});
-    if(Number($("#order-amount").val()) > amount) {
-      $("#order-amount").val(amount);
+    $("#order-amount").attr({max: maxAmount, min: 1});
+    if(Number($("#order-amount").val()) > maxAmount) { // apply on front end the max input to the input[type=number]
+      $("#order-amount").val(maxAmount);
     } else if(Number($("#order-amount").val()) < 1) {
       $("#order-amount").val(1);
     }
@@ -329,17 +329,17 @@ $(function() {
 
       $("#order-amount").unbind("change");
       $("#order-amount").bind("change", function () {
-        updateAmount()
+        updateOrderAmountRange()
       });
 
       $("#order-type").unbind("change");
       $("#order-type").bind("change", function () {
-        updateAmount()
+        updateOrderAmountRange()
       });
 
       $("#order-commodity").unbind("change");
       $("#order-commodity").bind("change", function () {
-        updateAmount()
+        updateOrderAmountRange()
       });
 
       $("#order-submit").unbind("click");
