@@ -140,296 +140,111 @@ exports.setup = function (app, gets) {
         var result = getItemByID(data.target);
 
         if(result) {
+          console.log(result);
+
+          var price;
+          var producer;
+
           switch (result.name) {
             case "Gold Mine":
-              var producer = new framework.producers.Mine(current, "gold", Number(data.x), Number(data.y));
+              producer = new framework.producers.Mine(current, "gold", Number(data.x), Number(data.y));
 
-              var price = getItem("Gold Mine").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Gold Mine").price;
               break;
             case "Iron Mine":
-              var producer = new framework.producers.Mine(current, "iron", Number(data.x), Number(data.y));
+              producer = new framework.producers.Mine(current, "iron", Number(data.x), Number(data.y));
 
-              var price = getItem("Iron Mine").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Iron Mine").price;
               break;
             case "Gem Mine":
-              var producer = new framework.producers.Mine(current, "gem", Number(data.x), Number(data.y));
+              producer = new framework.producers.Mine(current, "gem", Number(data.x), Number(data.y));
 
-              var price = getItem("Gem Mine").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Gem Mine").price;
               break;
             case "Wheat Farm":
-              var producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
 
-              var price = getItem("Wheat Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Wheat Farm").price;
               break;
             case "Hop Farm":
-              var producer = new framework.producers.Farm(current, "hop", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "hop", Number(data.x), Number(data.y));
 
-              var price = getItem("Hop Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Hop Farm").price;
               break;
             case "Grape Farm":
-              var producer = new framework.producers.Farm(current, "grape", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "grape", Number(data.x), Number(data.y));
 
-              var price = getItem("Grape Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Grape Farm").price;
               break;
             case "Brewery":
-              var producer = new framework.producers.Brewery(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Brewery(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Brewery").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Brewery").price;
               break;
             case "House":
-              var producer = new framework.producers.House(current, Number(data.x), Number(data.y), 5);
+              producer = new framework.producers.House(current, Number(data.x), Number(data.y), 5);
 
-              var price = getItem("House").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("House").price;
               break;
             case "Winery":
-              var producer = new framework.producers.Winery(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Winery(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Winery").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Winery").price;
               break;
             case "Cotton Farm":
-              var producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
 
-              var price = getItem("Cotton Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Cotton Farm").price;
               break;
             case "Wood Farm":
-              var producer = new framework.producers.Farm(current, "wood", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "wood", Number(data.x), Number(data.y));
 
-              var price = getItem("Wood Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Wood Farm").price;
               break;
             case "Quarry":
-              var producer = new framework.producers.Quarry(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Quarry(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Quarry").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Quarry").price;
               break;
             case "Cattle Farm":
-              var producer = new framework.producers.Farm(current, "cattle", Number(data.x), Number(data.y));
+              producer = new framework.producers.Farm(current, "cattle", Number(data.x), Number(data.y));
 
-              var price = getItem("Cattle Farm").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Cattle Farm").price;
               break;
             case "Mill":
-              var producer = new framework.producers.Mill(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Mill(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Mill").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Mill").price;
               break;
             case "Bakery":
-              var producer = new framework.producers.Bakery(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Bakery(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Bakery").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Bakery").price;
               break;
             case "Blacksmith":
-              var producer = new framework.producers.Blacksmith(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Blacksmith(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Blacksmith").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Blacksmith").price;
               break;
             case "Cotton Mill":
-              var producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Cotton Mill").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Cotton Mill").price;
               break;
             case "Butchery":
-              var producer = new framework.producers.Butchery(current, Number(data.x), Number(data.y));
+              producer = new framework.producers.Butchery(current, Number(data.x), Number(data.y));
 
-              var price = getItem("Butchery").price;
-
-              console.log(price);
-
-              if(testAcc.kingdom.treasury.balance - price < 0) {
-                res.send({type: "error", data: "You do not have enough money!"});
-                return;
-              }
-
-              testAcc.charge(price);
-
-              kingdom.producers.push(producer);
+              price = getItem("Butchery").price;
               break;
           }
+
+          if((testAcc.kingdom.treasury.balance - price) < 0) {
+            res.send({type: "error", data: "You do not have enough money!"});
+            return;
+          }
+
+          testAcc.charge(price);
+          kingdom.producers.push(producer);
 
           testAcc.kingdom = kingdom;
 
