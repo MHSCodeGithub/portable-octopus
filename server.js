@@ -35,7 +35,7 @@ const database = require('./database');
 function getNextIDOfAccounts() {
   var accounts = database.read().accounts;
   current = -1;
-  for (var i = 0; i < data.length; i++) {
+  for (var i = 0; i < accounts.length; i++) {
     if (accounts[i].id > current) {
       current = accounts[i].id
     }
