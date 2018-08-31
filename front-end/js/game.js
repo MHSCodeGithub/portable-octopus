@@ -208,6 +208,14 @@ $(function () {
     });
   }
 
+  /**
+   *
+   * @function updateMap()
+   *
+   * @description updates the game map to reflect the user's kingdom
+   *
+   **/
+
   function updateMap() {
 
     API.send("get-map", {
