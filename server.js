@@ -21,6 +21,15 @@ const Harbour = require('./framework/classes/harbour');
 
 const database = require('./database');
 
+function getNextIDOfAccounts() {
+  var accounts = database.read().accounts;
+  current = -1;
+  for (var i = 0; i < data.length; i++) {
+    if(accounts[i].id > current) { current = accounts[i].id }
+  }
+  return current + 1;
+}
+
 function objectLength(target) {
   var i = 0;
   for (var property in target) {
@@ -66,7 +75,7 @@ app.get('/', function(req, res){
   res.cookie('failedLog', false, {httpOnly: false});
 
   if(req.session.username && req.session.password) {
-    var tempAccount = new Player(objectLength(database.read().accounts), req.session.username, req.session.password, null, true);
+    var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
     if(tempAccount.check()) {
       res.cookie('username', tempAccount.username, {httpOnly: false});
       res.cookie('password', tempAccount.password, {httpOnly: false});
@@ -97,7 +106,7 @@ app.get('/index.html', function(req, res){
   res.cookie('failedLog', false, {httpOnly: false});
 
   if(req.session.username && req.session.password) {
-    var tempAccount = new Player(objectLength(database.read().accounts), req.session.username, req.session.password, null, true);
+    var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
     if(tempAccount.check()) {
       res.cookie('username', tempAccount.username, {httpOnly: false});
       res.cookie('password', tempAccount.password, {httpOnly: false});
@@ -125,7 +134,7 @@ app.post('/', function (req, res) {
     var harbour = new Harbour(0, 19, 10);
     harbour.commodities[0].amount = 10;
     var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
-    var newAccount = new Player(objectLength(database.read().accounts), req.body.username, req.body.password, kingdom, false);
+    var newAccount = new Player(getNextIDOfAccounts(database.read().accounts), req.body.username, req.body.password, kingdom, false);
     if(database.getAccount(newAccount.username)) {
       req.session.username = null;
       req.session.password = null;
