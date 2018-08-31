@@ -189,6 +189,7 @@ $(function () {
           <th>Name</th>
           <th>Type</th>
           <th>Amount</th>
+          <th>Production</th>
         </tr>
         `); // add table headers
       for (var i = 0; i < usersCommodities.length; i++) { // for each commodity
@@ -199,6 +200,7 @@ $(function () {
               <td>${usersCommodities[i].name}</td>
               <td>${usersCommodities[i].type}</td>
               <td>${usersCommodities[i].amount}</td>
+              <td>${usersCommodities[i].production}</td>
             </tr>
           `
         );

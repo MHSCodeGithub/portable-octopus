@@ -148,6 +148,11 @@ body * {
   cursor: pointer;
 }
 
+.modal-title {
+  text-align: center;
+  font-size: 3em;
+}
+
 /* SHOP MODAL
 ––––––––––––––––––––––––––––––––––––––– */
 #shop-item-wrap {
@@ -244,10 +249,6 @@ body * {
 #create-order-btn {
   float: right;
 }
-#market h1 {
-  text-align: center;
-  font-size: 3em;
-}
 
 #market table {
     border-spacing: 0;
@@ -286,30 +287,39 @@ th {
 
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
-#stockpile h1 {
-  text-align: center;
-  font-size: 3em;
+#stockpile-div {
+  width: 50%;
+  float: left;
+  display: grid;
+  justify-content: center;
 }
 
-#stockpile table {
+#stockpile-div table {
   border-spacing: 0;
-  max-width: 30%;
   margin: 25px;
-  height: 100%;
+  max-height: 100%;
+  overflow: visible;
 }
 
-#stockpile th, #stockpile td {
+#stockpile-div th, #stockpile-div td {
   text-align: center;
   padding: 3px 15px;
 }
 
-#stockpile td {
+#stockpile-div td {
   font-size: 1.4em;
 }
 
-#stockpile tr {
+#stockpile-div tr {
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
+}
+
+/* KINGDOM INFO
+––––––––––––––––––––––––––––––––––––––– */
+#kingdom-info-div {
+  width: 50%;
+  float: right;
 }
 
 /* PRODUCER INFORMATION
