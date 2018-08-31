@@ -237,7 +237,7 @@ setInterval(function () {
       testAcc.update()
     }
   }
-}, 5*5*1000);
+}, 5*60*1000);
 
 app.get("*", function (req, res) {
   automaticRoute(__dirname+"/front-end/", req, res);
