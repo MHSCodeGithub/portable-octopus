@@ -21,6 +21,14 @@ const Harbour = require('./framework/classes/harbour');
 
 const database = require('./database');
 
+/**
+ *
+ * @function getNextIDOfAccounts()
+ *
+ * @description returns the ID + 1 from the latest account
+ *
+ **/
+
 function getNextIDOfAccounts() {
   var accounts = database.read().accounts;
   current = -1;
@@ -30,6 +38,16 @@ function getNextIDOfAccounts() {
   return current + 1;
 }
 
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+ **/
+
 function objectLength(target) {
   var i = 0;
   for (var property in target) {
@@ -38,9 +56,30 @@ function objectLength(target) {
   return Number(i);
 };
 
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+ **/
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/**
+ *
+ * @function cleanStr()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however underscores are replaced with spaces
+ *              and all word's first letter is capitalized
+ *
+ **/
 
 function cleanStr(string) {
   string = string.replace("_", " ");
@@ -148,6 +187,17 @@ app.post('/', function (req, res) {
     }
   }
 });
+
+/**
+ *
+ * @function anonymous
+ *
+ * @param {String} string
+ *
+ * @description Every 5 minutes the server pays every user their according taxes,
+ *              makes their producers produce and feeds their citizens
+ *
+ **/
 
 setInterval(function () {
   var accounts = database.read().accounts;
