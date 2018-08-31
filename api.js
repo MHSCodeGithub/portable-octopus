@@ -1,7 +1,17 @@
 
 const framework = require('./framework');
 
-function isItemName(name) {
+/**
+ *
+ * @function getItem()
+ *
+ * @param {String} name
+ *
+ * @description returns the specified item, if it does not exist, it return false
+ *
+ **/
+
+function getItem(name) {
   var items = framework.database.getItems();
 
   for (var i = 0; i < items.length; i++) {
@@ -11,7 +21,37 @@ function isItemName(name) {
   return false;
 }
 
-function getAmountOfProducers(acc) {
+/**
+ *
+ * @function getItem()
+ *
+ * @param {Number} id
+ *
+ * @description returns the specified item, if it does not exist, it return false
+ *
+ **/
+
+function getItemByID(id) {
+  var items = framework.database.getItems();
+
+  for (var i = 0; i < items.length; i++) {
+    if(items[i].id == id) { return items[i]; }
+  }
+
+  return false;
+}
+
+/**
+ *
+ * @function getNextIDOfProducers()
+ *
+ * @param {Account} acc
+ *
+ * @description returns the ID + 1 from the latest account's producer
+ *
+ **/
+
+function getNextIDOfProducers(acc) {
   current = -1;
   for (var i = 0; i < acc.kingdom.producers.length; i++) {
     if(acc.kingdom.producers[i].id > current) { current = acc.kingdom.producers[i].id }
@@ -19,7 +59,15 @@ function getAmountOfProducers(acc) {
   return current + 1;
 }
 
-function getAmountOfOrders() {
+/**
+ *
+ * @function getNextIDOfOrders()
+ *
+ * @description returns the ID + 1 from the latest order
+ *
+ **/
+
+function getNextIDOfOrders() {
   current = -1;
   for (var i = 0; i < framework.database.read().orders.length; i++) {
     if(framework.database.read().orders[i].id > current) { current = framework.database.read().orders[i].id }
@@ -27,9 +75,29 @@ function getAmountOfOrders() {
   return current + 1;
 }
 
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+ **/
+
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+ **/
 
 function cleanStr(string) {
   string = string.replace("_", " ");
@@ -43,16 +111,6 @@ function cleanStr(string) {
   string = words.join(" ");
 
   return string;
-}
-
-function isItem(id) {
-  var items = framework.database.getItems();
-
-  for (var i = 0; i < items.length; i++) {
-    if(items[i].id == id) { return items[i]; }
-  }
-
-  return false;
 }
 
 exports.setup = function (app, gets) {
@@ -78,15 +136,15 @@ exports.setup = function (app, gets) {
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if(testAcc.check()) {
         var kingdom = testAcc.kingdom;
-        var current = getAmountOfProducers(testAcc);
-        var result = isItem(data.target);
+        var current = getNextIDOfProducers(testAcc);
+        var result = getItemByID(data.target);
 
         if(result) {
           switch (result.name) {
             case "Gold Mine":
               var producer = new framework.producers.Mine(current, "gold", Number(data.x), Number(data.y));
 
-              var price = isItemName("Gold Mine").price;
+              var price = getItem("Gold Mine").price;
 
               console.log(price);
 
@@ -102,7 +160,7 @@ exports.setup = function (app, gets) {
             case "Iron Mine":
               var producer = new framework.producers.Mine(current, "iron", Number(data.x), Number(data.y));
 
-              var price = isItemName("Iron Mine").price;
+              var price = getItem("Iron Mine").price;
 
               console.log(price);
 
@@ -118,7 +176,7 @@ exports.setup = function (app, gets) {
             case "Gem Mine":
               var producer = new framework.producers.Mine(current, "gem", Number(data.x), Number(data.y));
 
-              var price = isItemName("Gem Mine").price;
+              var price = getItem("Gem Mine").price;
 
               console.log(price);
 
@@ -134,7 +192,7 @@ exports.setup = function (app, gets) {
             case "Wheat Farm":
               var producer = new framework.producers.Farm(current, "wheat", Number(data.x), Number(data.y));
 
-              var price = isItemName("Wheat Farm").price;
+              var price = getItem("Wheat Farm").price;
 
               console.log(price);
 
@@ -150,7 +208,7 @@ exports.setup = function (app, gets) {
             case "Hop Farm":
               var producer = new framework.producers.Farm(current, "hop", Number(data.x), Number(data.y));
 
-              var price = isItemName("Hop Farm").price;
+              var price = getItem("Hop Farm").price;
 
               console.log(price);
 
@@ -166,7 +224,7 @@ exports.setup = function (app, gets) {
             case "Grape Farm":
               var producer = new framework.producers.Farm(current, "grape", Number(data.x), Number(data.y));
 
-              var price = isItemName("Grape Farm").price;
+              var price = getItem("Grape Farm").price;
 
               console.log(price);
 
@@ -182,7 +240,7 @@ exports.setup = function (app, gets) {
             case "Brewery":
               var producer = new framework.producers.Brewery(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Brewery").price;
+              var price = getItem("Brewery").price;
 
               console.log(price);
 
@@ -198,7 +256,7 @@ exports.setup = function (app, gets) {
             case "House":
               var producer = new framework.producers.House(current, Number(data.x), Number(data.y), 5);
 
-              var price = isItemName("House").price;
+              var price = getItem("House").price;
 
               console.log(price);
 
@@ -214,7 +272,7 @@ exports.setup = function (app, gets) {
             case "Winery":
               var producer = new framework.producers.Winery(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Winery").price;
+              var price = getItem("Winery").price;
 
               console.log(price);
 
@@ -230,7 +288,7 @@ exports.setup = function (app, gets) {
             case "Cotton Farm":
               var producer = new framework.producers.Farm(current, "cotton", Number(data.x), Number(data.y));
 
-              var price = isItemName("Cotton Farm").price;
+              var price = getItem("Cotton Farm").price;
 
               console.log(price);
 
@@ -246,7 +304,7 @@ exports.setup = function (app, gets) {
             case "Wood Farm":
               var producer = new framework.producers.Farm(current, "wood", Number(data.x), Number(data.y));
 
-              var price = isItemName("Wood Farm").price;
+              var price = getItem("Wood Farm").price;
 
               console.log(price);
 
@@ -262,7 +320,7 @@ exports.setup = function (app, gets) {
             case "Quarry":
               var producer = new framework.producers.Quarry(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Quarry").price;
+              var price = getItem("Quarry").price;
 
               console.log(price);
 
@@ -278,7 +336,7 @@ exports.setup = function (app, gets) {
             case "Cattle Farm":
               var producer = new framework.producers.Farm(current, "cattle", Number(data.x), Number(data.y));
 
-              var price = isItemName("Cattle Farm").price;
+              var price = getItem("Cattle Farm").price;
 
               console.log(price);
 
@@ -294,7 +352,7 @@ exports.setup = function (app, gets) {
             case "Mill":
               var producer = new framework.producers.Mill(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Mill").price;
+              var price = getItem("Mill").price;
 
               console.log(price);
 
@@ -310,7 +368,7 @@ exports.setup = function (app, gets) {
             case "Bakery":
               var producer = new framework.producers.Bakery(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Bakery").price;
+              var price = getItem("Bakery").price;
 
               console.log(price);
 
@@ -326,7 +384,7 @@ exports.setup = function (app, gets) {
             case "Blacksmith":
               var producer = new framework.producers.Blacksmith(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Blacksmith").price;
+              var price = getItem("Blacksmith").price;
 
               console.log(price);
 
@@ -342,7 +400,7 @@ exports.setup = function (app, gets) {
             case "Cotton Mill":
               var producer = new framework.producers.CottonMill(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Cotton Mill").price;
+              var price = getItem("Cotton Mill").price;
 
               console.log(price);
 
@@ -358,7 +416,7 @@ exports.setup = function (app, gets) {
             case "Butchery":
               var producer = new framework.producers.Butchery(current, Number(data.x), Number(data.y));
 
-              var price = isItemName("Butchery").price;
+              var price = getItem("Butchery").price;
 
               console.log(price);
 
@@ -493,7 +551,7 @@ exports.setup = function (app, gets) {
         delete data.password;
         data.author = data.username;
         delete data.username;
-        data.id = getAmountOfOrders();
+        data.id = getNextIDOfOrders();
 
         data.fulfillment = 0;
 

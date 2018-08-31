@@ -1,4 +1,3 @@
-
 const automaticRoute = require('automatic-routing');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -10,9 +9,13 @@ const api = require('./api');
 var port = process.env.PORT || 3000;
 
 app.use(cookieParser());
-app.use(session({secret: "Shh, its a secret!"}));
+app.use(session({
+  secret: "Shh, its a secret!"
+}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 const Player = require('./framework/classes/player');
 const Kingdom = require('./framework/classes/kingdom');
@@ -33,7 +36,9 @@ function getNextIDOfAccounts() {
   var accounts = database.read().accounts;
   current = -1;
   for (var i = 0; i < data.length; i++) {
-    if(accounts[i].id > current) { current = accounts[i].id }
+    if (accounts[i].id > current) {
+      current = accounts[i].id
+    }
   }
   return current + 1;
 }
@@ -109,20 +114,30 @@ var apiGets = {
 
 api.setup(app, apiGets);
 
-app.get('/', function(req, res){
-  res.cookie('failedReg', false, {httpOnly: false});
-  res.cookie('failedLog', false, {httpOnly: false});
+app.get('/', function(req, res) {
+  res.cookie('failedReg', false, {
+    httpOnly: false
+  });
+  res.cookie('failedLog', false, {
+    httpOnly: false
+  });
 
-  if(req.session.username && req.session.password) {
+  if (req.session.username && req.session.password) {
     var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
-    if(tempAccount.check()) {
-      res.cookie('username', tempAccount.username, {httpOnly: false});
-      res.cookie('password', tempAccount.password, {httpOnly: false});
+    if (tempAccount.check()) {
+      res.cookie('username', tempAccount.username, {
+        httpOnly: false
+      });
+      res.cookie('password', tempAccount.password, {
+        httpOnly: false
+      });
       res.sendFile(__dirname + '/front-end/index.html');
     } else {
       req.session.username = false;
       req.session.password = false;
-      res.cookie('failedLog', true, {httpOnly: false});
+      res.cookie('failedLog', true, {
+        httpOnly: false
+      });
       res.sendFile(__dirname + '/front-end/login.html');
     }
   } else {
@@ -132,28 +147,42 @@ app.get('/', function(req, res){
   }
 });
 
-app.get("/logout", function (req, res) {
-  res.cookie('failedReg', false, {httpOnly: false});
-  res.cookie('failedLog', false, {httpOnly: false});
+app.get("/logout", function(req, res) {
+  res.cookie('failedReg', false, {
+    httpOnly: false
+  });
+  res.cookie('failedLog', false, {
+    httpOnly: false
+  });
   req.session.username = false;
   req.session.password = false;
   res.sendFile(__dirname + '/front-end/login.html');
 })
 
-app.get('/index.html', function(req, res){
-  res.cookie('failedReg', false, {httpOnly: false});
-  res.cookie('failedLog', false, {httpOnly: false});
+app.get('/index.html', function(req, res) {
+  res.cookie('failedReg', false, {
+    httpOnly: false
+  });
+  res.cookie('failedLog', false, {
+    httpOnly: false
+  });
 
-  if(req.session.username && req.session.password) {
+  if (req.session.username && req.session.password) {
     var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
-    if(tempAccount.check()) {
-      res.cookie('username', tempAccount.username, {httpOnly: false});
-      res.cookie('password', tempAccount.password, {httpOnly: false});
+    if (tempAccount.check()) {
+      res.cookie('username', tempAccount.username, {
+        httpOnly: false
+      });
+      res.cookie('password', tempAccount.password, {
+        httpOnly: false
+      });
       res.sendFile(__dirname + '/front-end/index.html');
     } else {
       req.session.username = false;
       req.session.password = false;
-      res.cookie('failedLog', true, {httpOnly: false});
+      res.cookie('failedLog', true, {
+        httpOnly: false
+      });
       res.sendFile(__dirname + '/front-end/login.html');
     }
   } else {
@@ -163,21 +192,24 @@ app.get('/index.html', function(req, res){
   }
 });
 
-app.post('/', function (req, res) {
-  if(req.body.type == "login") {
+app.post('/', function(req, res) {
+  if (req.body.type == "login") {
     req.session.username = req.body.username;
     req.session.password = sha256(req.body.password);
     res.redirect('/');
-  } else if(req.body.type == "register") {
-    var treasury = new Treasury(0, 10, 10); treasury.balance = 500;
+  } else if (req.body.type == "register") {
+    var treasury = new Treasury(0, 10, 10);
+    treasury.balance = 500;
     var harbour = new Harbour(0, 19, 10);
     harbour.commodities[0].amount = 10;
     var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
     var newAccount = new Player(getNextIDOfAccounts(database.read().accounts), req.body.username, req.body.password, kingdom, false);
-    if(database.getAccount(newAccount.username)) {
+    if (database.getAccount(newAccount.username)) {
       req.session.username = null;
       req.session.password = null;
-      res.cookie('failedReg', true, {httpOnly: false});
+      res.cookie('failedReg', true, {
+        httpOnly: false
+      });
       res.redirect('login.html');
     } else {
       req.session.username = newAccount.username;
@@ -199,13 +231,13 @@ app.post('/', function (req, res) {
  *
  **/
 
-setInterval(function () {
+setInterval(function() {
   var accounts = database.read().accounts;
   var commodities = database.read().commodities;
 
   for (var i = 0; i < objectLength(accounts); i++) {
     var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
-    if(testAcc.check()) {
+    if (testAcc.check()) {
       for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
         var producer = testAcc.kingdom.producers[j];
 
@@ -213,12 +245,12 @@ setInterval(function () {
         var tier = producer.tier;
         var level = producer.level;
 
-        if(producer.type == "house") {
+        if (producer.type == "house") {
           var fed = false;
           for (var k = 0; k < testAcc.kingdom.harbour.commodities.length; k++) {
-            if(commodities[k].type == "Food") {
-              if(amount) {
-                if(testAcc.kingdom.harbour.commodities[k].amount >= amount) {
+            if (commodities[k].type == "Food") {
+              if (amount) {
+                if (testAcc.kingdom.harbour.commodities[k].amount >= amount) {
                   testAcc.kingdom.harbour.commodities[k].amount -= amount;
                   amount = 0;
                   break;
@@ -254,23 +286,23 @@ setInterval(function () {
         var tier = producer.tier;
         var level = producer.level;
 
-        if(producer.type != "house") {
+        if (producer.type != "house") {
           citizens -= producer.tier;
 
-          if(citizens > 0) {
+          if (citizens > 0) {
             testAcc.kingdom.producers[j].functioning = true;
             var data = database.read();
             for (var k = 0; k < data.commodities.length; k++) {
-              if(data.commodities[k].name == cleanStr(producer.produce)) {
+              if (data.commodities[k].name == cleanStr(producer.produce)) {
                 for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
-                  if(testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                    if(producer.intake != "None") {
+                  if (testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
+                    if (producer.intake != "None") {
                       for (var b = 0; b < data.commodities.length; b++) {
-                        if(data.commodities[b].name == (producer.intake)) {
+                        if (data.commodities[b].name == (producer.intake)) {
                           for (var c = 0; c < testAcc.kingdom.harbour.commodities.length; c++) {
-                            if(testAcc.kingdom.harbour.commodities[c].id == data.commodities[b].id) {
-                              if(testAcc.kingdom.harbour.commodities[c].amount >= amount) {
-                                testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
+                            if (testAcc.kingdom.harbour.commodities[c].id == data.commodities[b].id) {
+                              if (testAcc.kingdom.harbour.commodities[c].amount >= amount) {
+                                testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level);
                                 testAcc.kingdom.harbour.commodities[n].amount += amount;
                                 testAcc.kingdom.harbour.commodities[c].amount -= amount;
                               } else {
@@ -281,7 +313,7 @@ setInterval(function () {
                         }
                       }
                     } else {
-                      testAcc.kingdom.treasury.balance += (Number(tier)*6)*Number(level);
+                      testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level);
                       testAcc.kingdom.harbour.commodities[n].amount += amount;
                     }
                   }
@@ -296,12 +328,12 @@ setInterval(function () {
       testAcc.update()
     }
   }
-}, 5*60*1000);
+}, 5 * 60 * 1000);
 
-app.get("*", function (req, res) {
-  automaticRoute(__dirname+"/front-end/", req, res);
+app.get("*", function(req, res) {
+  automaticRoute(__dirname + "/front-end/", req, res);
 });
 
-http.listen(port, function(){
+http.listen(port, function() {
   console.log('listening on *:' + port);
 });
