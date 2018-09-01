@@ -282,9 +282,67 @@ th {
   box-shadow: none;
 }
 
-/* CREATE ORDER
+/* ORDER POPUPS
 ––––––––––––––––––––––––––––––––––––––– */
+.order-popup-bg {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
 
+.order-popup-wrap {
+  width: 300px;
+  display: block;
+  margin: 250px auto;
+}
+
+.order-popup-div {
+  background: #FFB57A;
+  border: 5px solid #D0712E;
+  outline: 2px solid #753713;
+  padding: 20px;
+}
+
+/* CREATE ORDER POPUP
+––––––––––––––––––––––––––––––––––––––– */
+.order-popup-btn {
+  color: white;
+  background-size: contain;
+  height: 47px;
+  width: 120px;
+  border: none;
+  padding-bottom: 6px;
+  position: relative;
+  bottom: 20px;
+  font-size: 1.5em;
+}
+
+#order-submit {
+  background: url("../img/upgrade-btn.png");
+  margin: 0 20px 0 30px;
+}
+
+#order-submit:hover {
+  background: url("../img/upgrade-btn-p.png");
+  background-size: contain;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+#order-cancel-btn {
+  background: url("../img/sell-btn.png");
+  margin: 0 20px;
+}
+
+#order-cancel-btn:hover {
+  background: url("../img/sell-btn-p.png");
+  background-size: contain;
+  padding-top: 8px;
+  cursor: pointer;
+}
 
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
@@ -394,7 +452,7 @@ th {
   cursor: pointer;
 }
 
-.producer-info-btn-wrap {
+.inline-btn-wrap {
   width: 120px;
   height: 55px;
   display: block;

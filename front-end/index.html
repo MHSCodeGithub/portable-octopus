@@ -59,13 +59,14 @@
         </table>
 
         <!--Create Order-->
-        <div id="market-order" style="display: none;">
-          <h1>Create Order</h1>
-          <tr>
+        <div class="order-popup-bg" id="market-order" style="display: none;">
+        <div class="order-popup-wrap">
+          <div class="order-popup-div">
+            <h1>ORDER</h1>
             <span>Type: </span>
             <select id="order-type">
-                  <option value="buy">Buy Order</option>
-                  <option value="sell">Sell Order</option>
+              <option value="buy">Buy</option>
+              <option value="sell">Sell</option>
             </select>
             <br>
             <span>Commodity: </span>
@@ -74,20 +75,28 @@
             <span>Price: </span><input type="number" id="order-price" value="1" min="1" max="10000">
             <br>
             <span>Amount: </span><input type="number" id="order-amount" value="1" min="1" max="10000">
-            <br>
-            <button type="button" id="order-submit">Create Order</button>
-          </tr>
+          </div>
+
+          <div class="inline-btn-wrap">
+            <button class="order-popup-btn" type="button" id="order-cancel-btn">CANCEL</button>
+          </div>
+
+          <div class="inline-btn-wrap">
+            <button class="order-popup-btn" type="button" id="order-submit">CREATE</button>
+          </div>
+          
+        </div>
         </div>
 
         <!--Fullfill Order-->
-        <div id="market-fulfill" style="display: none;">
+        <div class="order-popup-div" id="market-fulfill" style="display: none;">
           <h1>Fulfill Order</h1>
-          <tr>
+          <div>
             <span>Type: </span><span id="fulfill-type"></span>
             <span>Price: </span>$<span id="fulfill-price"></span>
             <span>Amount to Buy/Sell</span><input type="number" value="1" min="1" max="10000">
             <button type="button" id="fulfill-submit">Fulfill</button>
-          </tr>
+          </div>
         </div>
       </div>
     </div>
@@ -126,11 +135,11 @@
       </ul>
     </div>
 
-    <div class="producer-info-btn-wrap">
+    <div class="inline-btn-wrap">
       <button type="button" name="button" class="producer-btn" id="producer-upgrade-btn">Upgrade($200)</button>
     </div>
 
-    <div class="producer-info-btn-wrap">
+    <div class="inline-btn-wrap">
       <button type="button" name="button" class="producer-btn" id="producer-sell-btn">Sell(+$100)</button>
     </div>
   </div>
