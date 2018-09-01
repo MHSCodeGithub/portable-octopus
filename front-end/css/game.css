@@ -294,18 +294,32 @@ th {
 }
 
 .order-popup-wrap {
-  width: 300px;
+  width: 350px;
   display: block;
-  margin: 250px auto;
+  margin: 150px auto;
 }
 
 .order-popup-div {
   background: #FFB57A;
   border: 5px solid #D0712E;
   outline: 2px solid #753713;
-  padding: 20px;
+  padding: 30px 20px 40px 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+#order-popup-title {
+  display: table;
+  width: 250px;
+  height: 59px;
+  background: url("../img/popup-banner.png") no-repeat;
+  text-align: center;
+  font-size: 2em;
+  color: white;
+  margin: 0 auto;
+  position: relative;
+  bottom: -30px;
+  padding-top: 3px;
 }
 
 /* CREATE ORDER POPUP
@@ -313,7 +327,7 @@ th {
 
 /* Inputs */
 .create-order-column {
-  display: flex;
+  display: grid;
   flex-direction: column;
   justify-content: space-around;
 }
@@ -321,11 +335,17 @@ th {
 .create-order-p {
   font-size: 1.4em;
   display: inline-block;
+  margin: 2.5px 0;
+  padding: 3.5px;
+  float: left;
 }
 
 .create-order-input {
-  display: inline-block;
-  font-size: 1.2em;
+  display: table;
+  font-size: 1.4em;
+  margin: 2.5px 0;
+  border: 2px solid #E4E4E4;
+  padding: 5px;
 }
 
 /* Buttons */
@@ -337,13 +357,13 @@ th {
   border: none;
   padding-bottom: 6px;
   position: relative;
-  bottom: 20px;
+  bottom: 30px;
   font-size: 1.5em;
 }
 
 #order-submit {
   background: url("../img/upgrade-btn.png");
-  margin: 0 20px 0 30px;
+  margin: 0 40px 0 70px;
 }
 
 #order-submit:hover {
@@ -355,7 +375,7 @@ th {
 
 #order-cancel-btn {
   background: url("../img/sell-btn.png");
-  margin: 0 20px;
+  margin: 0 40px;
 }
 
 #order-cancel-btn:hover {
