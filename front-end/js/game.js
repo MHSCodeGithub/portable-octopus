@@ -596,7 +596,6 @@ $(function () {
       $("#create-order-btn").bind("click", function () { // when create order button is clicked
         if ($("#market-table").is(":visible")) { // if market tab is open
           $("#market-order").show();// show create order form
-          $("#create-order-btn").text("Cancel") // update button text to cancel
           getSuitableCommoditiesToSell(); // prepare create order form
         } else if ($("#market-fulfill").is(":visible")) { // if fulfill order form is visible
           $("#market-table").show(); // show market
@@ -609,6 +608,11 @@ $(function () {
           $("#create-order-btn").text("Create Order") // change create order button to original form
           updateOrders();
         }
+      });
+
+      $("#order-cancel-btn").click(function () {
+        $("#market-order").hide();
+        $(".order-popup-bg").css("display", "none");
       });
 
       $(".order-fulfill").unbind("click"); // unbind previous listerners to prevent overlapping
