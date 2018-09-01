@@ -743,7 +743,7 @@ $(function () {
       username: username,
       password: password
     }, function (balance) { // get user's balance
-      $("#balance").text("$" + balance.data); // display users balance
+      $("#balance").text("Balance: $" + balance.data); // display users balance
     });
   }
 
