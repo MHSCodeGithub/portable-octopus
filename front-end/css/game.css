@@ -304,10 +304,31 @@ th {
   border: 5px solid #D0712E;
   outline: 2px solid #753713;
   padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /* CREATE ORDER POPUP
 ––––––––––––––––––––––––––––––––––––––– */
+
+/* Inputs */
+.create-order-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.create-order-p {
+  font-size: 1.4em;
+  display: inline-block;
+}
+
+.create-order-input {
+  display: inline-block;
+  font-size: 1.2em;
+}
+
+/* Buttons */
 .order-popup-btn {
   color: white;
   background-size: contain;

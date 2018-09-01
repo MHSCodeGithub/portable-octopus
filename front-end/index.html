@@ -62,19 +62,25 @@
         <div class="order-popup-bg" id="market-order" style="display: none;">
         <div class="order-popup-wrap">
           <div class="order-popup-div">
-            <h1>ORDER</h1>
-            <span>Type: </span>
-            <select id="order-type">
-              <option value="buy">Buy</option>
-              <option value="sell">Sell</option>
-            </select>
-            <br>
-            <span>Commodity: </span>
-            <select id="order-commodity"></select>
-            <br>
-            <span>Price: </span><input type="number" id="order-price" value="1" min="1" max="10000">
-            <br>
-            <span>Amount: </span><input type="number" id="order-amount" value="1" min="1" max="10000">
+            <!--Labels-->
+            <div class="create-order-column">
+              <p class="create-order-p">Type: </p><br> <!--Line breaks because using inline-block-->
+              <p class="create-order-p">Commodity: </p><br>
+              <p class="create-order-p">Price: </p><br>
+              <p class="create-order-p">Amount: </p>
+            </div>
+
+            <!--Inputs-->
+            <div class="create-order-column">
+              <select class="create-order-input" id="order-type">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+              </select>
+              <select class="create-order-input" id="order-commodity"></select>
+              <input class="create-order-input" type="number" id="order-price" value="1" min="1" max="10000">
+              <input class="create-order-input" type="number" id="order-amount" value="1" min="1" max="10000">
+            </div>
+
           </div>
 
           <div class="inline-btn-wrap">
@@ -84,7 +90,7 @@
           <div class="inline-btn-wrap">
             <button class="order-popup-btn" type="button" id="order-submit">CREATE</button>
           </div>
-          
+
         </div>
         </div>
 
