@@ -471,7 +471,7 @@ th {
 
 #producer-upgrade-btn {
   background: url("../img/upgrade-btn.png");
-  margin: 0 20px;
+  margin: 0 20px 0 30px;
 }
 
 #producer-upgrade-btn:hover {
@@ -483,7 +483,7 @@ th {
 
 #producer-sell-btn {
   background: url("../img/sell-btn.png");
-  margin: 0 20px 0 30px;
+  margin: 0 20px;
 }
 
 #producer-sell-btn:hover {
