@@ -374,8 +374,8 @@ $(function () {
       $("#order-amount").val(1); // set to min amount
     }
 
-    if(Number($("#order-price").val()) < 1) {
-      $("#order-price").val(1)
+    if(Number($("#order-price").val()) < 1) { // check if price of new order is less than one
+      $("#order-price").val(1); // if it is, set it to 1 (preventing negative number inputs)
     }
   }
 
@@ -553,9 +553,9 @@ $(function () {
         updateOrderFulfillmentAmount(Number(order.amount) - Number(order.fulfillment)) // ensure that fulfillment amount is not invalid
       });
 
-      $("#fulfill-cancel-btn").click(function () {
-        $("#market-order").hide();
-        $(".order-popup-bg").css("display", "none");
+      $("#fulfill-cancel-btn").click(function () { // when the fulfill popup close button is clicked
+        $("#market-order").hide(); // hide the popup
+        $(".order-popup-bg").css("display", "none"); // hide the popup container
       });
 
       $("#fulfill-submit").unbind("click"); // unbind previous listerners to prevent overlapping
@@ -652,9 +652,9 @@ $(function () {
         }
       });
 
-      $("#order-cancel-btn").click(function () {
-        $("#market-order").hide();
-        $(".order-popup-bg").css("display", "none");
+      $("#order-cancel-btn").click(function () { // when create order cancel button is clicked
+        $("#market-order").hide(); // hide create order popup
+        $(".order-popup-bg").css("display", "none"); // hide create order popup menu container
       });
 
       $(".order-fulfill").unbind("click"); // unbind previous listerners to prevent overlapping
