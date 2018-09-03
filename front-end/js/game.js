@@ -315,7 +315,7 @@ $(function () {
                       $(".producer-info-working").text("Not Producing!")
                     }
 
-                    var IntakeIconName = data.intake;
+                    var IntakeIconName = data.intake.toLowerCase();
                         IntakeIconName.replace(" ", "_");
 
                     if (data.intake == "None") { // clean data.intake output
