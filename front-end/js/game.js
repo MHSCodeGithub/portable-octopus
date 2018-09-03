@@ -523,9 +523,9 @@ $(function () {
 
           <!--Inputs-->
           <div class="order-column">
-            <span id="fulfill-type"></span>
-            <span id="fulfill-price"></span>
-            <input type="number" value="1" min="1" max="10000">
+            <span id="fulfill-type">${order.type}</span>
+            <span id="fulfill-price">${order.price}</span>
+            <input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}
           </div>
         </div>
 
