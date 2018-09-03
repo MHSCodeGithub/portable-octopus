@@ -35,9 +35,9 @@ const database = require('./database');
 function getNextIDOfAccounts() {
   var accounts = database.read().accounts;
   current = -1;
-  for (var i = 0; i < accounts.length; i++) {
-    if (accounts[i].id > current) {
-      current = accounts[i].id
+  for (var account in accounts) {
+    if (accounts[account].id > current) {
+      current = accounts[account].id
     }
   }
   return current + 1;
@@ -203,7 +203,7 @@ app.post('/', function(req, res) {
     var harbour = new Harbour(0, 19, 10);
     harbour.commodities[0].amount = 10;
     var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
-    var newAccount = new Player(getNextIDOfAccounts(database.read().accounts), req.body.username, req.body.password, kingdom, false);
+    var newAccount = new Player(getNextIDOfAccounts(), req.body.username, req.body.password, kingdom, false);
     if (database.getAccount(newAccount.username)) {
       req.session.username = null;
       req.session.password = null;
@@ -214,6 +214,7 @@ app.post('/', function(req, res) {
     } else {
       req.session.username = newAccount.username;
       req.session.password = newAccount.password;
+      console.log(` --- !! NEW ACCOUNT ID: ${newAccount.id} !! --- `);
       newAccount.save();
       res.redirect('/');
     }
