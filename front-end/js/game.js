@@ -534,7 +534,7 @@ $(function () {
         </div>
 
         <div class="inline-btn-wrap">
-          <button class="order-popup-btn" type="button" id="fulfill-submit">CREATE</button>
+          <button class="order-popup-btn" type="button" id="fulfill-submit">FULFILL</button>
         </div>
         `
       );
@@ -542,6 +542,11 @@ $(function () {
       $("#fulfill-amount").unbind("change"); // unbind previous listerners to prevent overlapping
       $("#fulfill-amount").bind("change", function () { // upon input change
         updateOrderFulfillmentAmount(Number(order.amount) - Number(order.fulfillment)) // ensure that fulfillment amount is not invalid
+      });
+
+      $("#fulfill-cancel-btn").click(function () {
+        $("#market-order").hide();
+        $(".order-popup-bg").css("display", "none");
       });
 
       $("#fulfill-submit").unbind("click"); // unbind previous listerners to prevent overlapping
@@ -657,7 +662,6 @@ $(function () {
       $(".order-fulfill").bind("click", function () { // when user clicks to fulfill an order
 
         if ($("#market-table").is(":visible")) { // if market is open
-          $("#market-table").hide(); // show fulfill order form
           $("#market-fulfill").show();
           getSuitableFulfillment($(this).parent().parent().attr("id").split("-")[1]) // prepare fulfill order form
           $("#create-order-btn").text("Cancel"); // update button text to cancel
