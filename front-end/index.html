@@ -58,45 +58,44 @@
         <table id="market-table">
         </table>
 
-        <!--Create Order-->
+        <!-- CREATE ORDER -->
         <div class="order-popup-bg" id="market-order" style="display: none;">
-        <div class="order-popup-wrap">
-          <h1 id="order-popup-title">ORDER</h1>
-          <div class="order-popup-div">
-            <!--Labels-->
-            <div class="create-order-column">
-              <p class="create-order-p">Type: </p><br> <!--Line breaks because using inline-block-->
-              <p class="create-order-p">Commodity: </p><br>
-              <p class="create-order-p">Price: </p><br>
-              <p class="create-order-p">Amount: </p>
+          <div class="order-popup-wrap">
+            <h1 id="order-popup-title">ORDER</h1>
+            <div class="order-popup-div">
+              <!--Labels-->
+              <div class="order-column">
+                <p class="order-p">Type: </p><br> <!--Line breaks because using inline-block-->
+                <p class="order-p">Commodity: </p><br>
+                <p class="order-p">Price: </p><br>
+                <p class="order-p">Amount: </p>
+              </div>
+
+              <!--Data/Inputs-->
+              <div class="order-column">
+                <select class="order-input" id="order-type">
+                  <option value="buy">Buy</option>
+                  <option value="sell">Sell</option>
+                </select>
+                <select class="order-input" id="order-commodity"></select>
+                <input class="order-input" type="number" id="order-price" value="1" min="1" max="10000">
+                <input class="order-input" type="number" id="order-amount" value="1" min="1" max="10000">
+              </div>
+            </div>
+            <!-- Buttons -->
+            <div class="inline-btn-wrap">
+              <button class="order-popup-btn" type="button" id="order-cancel-btn">CANCEL</button>
             </div>
 
-            <!--Inputs-->
-            <div class="create-order-column">
-              <select class="create-order-input" id="order-type">
-                <option value="buy">Buy</option>
-                <option value="sell">Sell</option>
-              </select>
-              <select class="create-order-input" id="order-commodity"></select>
-              <input class="create-order-input" type="number" id="order-price" value="1" min="1" max="10000">
-              <input class="create-order-input" type="number" id="order-amount" value="1" min="1" max="10000">
+            <div class="inline-btn-wrap">
+              <button class="order-popup-btn" type="button" id="order-submit">CREATE</button>
             </div>
 
           </div>
-
-          <div class="inline-btn-wrap">
-            <button class="order-popup-btn" type="button" id="order-cancel-btn">CANCEL</button>
-          </div>
-
-          <div class="inline-btn-wrap">
-            <button class="order-popup-btn" type="button" id="order-submit">CREATE</button>
-          </div>
-
-        </div>
         </div>
 
         <!--Fullfill Order-->
-        <div class="order-popup-div" id="market-fulfill" style="display: none;">
+        <!-- <div class="order-popup-div" id="market-fulfill" style="display: none;">
           <h1>Fulfill Order</h1>
           <div>
             <span>Type: </span><span id="fulfill-type"></span>
@@ -104,7 +103,16 @@
             <span>Amount to Buy/Sell</span><input type="number" value="1" min="1" max="10000">
             <button type="button" id="fulfill-submit">Fulfill</button>
           </div>
+        </div> -->
+        <!-- FULFILL ORDER -->
+        <div class="order-popup-bg" id="market-fulfill" style="display: none;">
+          <div class="order-popup-wrap" id="fulfill-order-div">
+
+
+          </div>
         </div>
+
+
       </div>
     </div>
   </div>

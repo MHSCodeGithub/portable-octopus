@@ -495,15 +495,41 @@ $(function () {
       password: password,
       id: id
     }, function (order) { // get order data
-      $("#market-fulfill").html( // display order data in form
+      $("#fulfill-order-div").html( // display order data in form
+        // `
+        //   <h1>Fulfill Order</h1>
+        //     <tr>
+        //       <span>Type: </span><span id="fulfill-type">${order.type}</span><br>
+        //       <span>Price: </span>$<span id="fulfill-price">${order.price}</span><br>
+        //       <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}<br>
+        //       <button type="button" id="fulfill-submit">Fulfill</button>
+        //     </tr>
+        // `
         `
-          <h1>Fulfill Order</h1>
-            <tr>
-              <span>Type: </span><span id="fulfill-type">${order.type}</span><br>
-              <span>Price: </span>$<span id="fulfill-price">${order.price}</span><br>
-              <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}<br>
-              <button type="button" id="fulfill-submit">Fulfill</button>
-            </tr>
+        <h1 id="order-popup-title">ORDER</h1>
+        <div class="order-popup-div">
+          <!--Labels-->
+          <div class="order-column">
+            <p class="order-p">Type: </p><br> <!--Line breaks because using inline-block-->
+            <p class="order-p">Price: </p><br>
+            <p class="order-p">Amount: </p>
+          </div>
+
+          <!--Inputs-->
+          <div class="order-column">
+            <span id="fulfill-type"></span>
+            <span id="fulfill-price"></span>
+            <input type="number" value="1" min="1" max="10000">
+          </div>
+        </div>
+
+        <div class="inline-btn-wrap">
+          <button class="order-popup-btn" type="button" id="fulfill-cancel-btn">CANCEL</button>
+        </div>
+
+        <div class="inline-btn-wrap">
+          <button class="order-popup-btn" type="button" id="fulfill-submit">CREATE</button>
+        </div>
         `
       );
 

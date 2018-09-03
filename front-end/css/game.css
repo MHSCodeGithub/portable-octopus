@@ -256,7 +256,7 @@ body * {
   overflow-y: scroll;
 }
 
-#create-order-btn {
+#order-btn {
   float: right;
 }
 
@@ -335,13 +335,13 @@ th {
 ––––––––––––––––––––––––––––––––––––––– */
 
 /* Inputs */
-.create-order-column {
+.order-column {
   display: grid;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.create-order-p {
+.order-p {
   font-size: 1.4em;
   display: inline-block;
   margin: 2.5px 0;
@@ -349,7 +349,7 @@ th {
   float: left;
 }
 
-.create-order-input {
+.order-input {
   display: table;
   font-size: 1.4em;
   margin: 2.5px 0;
