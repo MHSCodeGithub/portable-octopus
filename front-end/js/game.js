@@ -640,16 +640,6 @@ $(function () {
         if ($("#market-table").is(":visible")) { // if market tab is open
           $("#market-order").show();// show create order form
           getSuitableCommoditiesToSell(); // prepare create order form
-        } else if ($("#market-fulfill").is(":visible")) { // if fulfill order form is visible
-          $("#market-table").show(); // show market
-          $("#market-fulfill").hide();
-          $("#create-order-btn").text("Create Order") // change create order button to original form
-          updateOrders();
-        } else { // if create order form is open
-          $("#market-table").show(); // show market, and bake cookies
-          $("#market-order").hide();
-          $("#create-order-btn").text("Create Order") // change create order button to original form
-          updateOrders();
         }
       });
 
@@ -664,7 +654,6 @@ $(function () {
         if ($("#market-table").is(":visible")) { // if market is open
           $("#market-fulfill").show();
           getSuitableFulfillment($(this).parent().parent().attr("id").split("-")[1]) // prepare fulfill order form
-          $("#create-order-btn").text("Cancel"); // update button text to cancel
         }
       });
     });
