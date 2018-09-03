@@ -373,6 +373,10 @@ $(function () {
     } else if (Number($("#order-amount").val()) < 1) { // if input is under min
       $("#order-amount").val(1); // set to min amount
     }
+
+    if(Number($("#order-price").val()) < 1) {
+      $("#order-price").val(1)
+    }
   }
 
   /**
@@ -421,6 +425,11 @@ $(function () {
       $("#order-type").unbind("change"); // unbind to prevent overlapping
       $("#order-type").bind("change", function () { // when the user changes the order type
         updateOrderAmountRange() // check amount is valid
+      });
+
+      $("#order-price").unbind("change");
+      $("#order-price").bind("change", function () {
+        updateOrderAmountRange();
       });
 
       $("#order-commodity").unbind("change"); // unbind to prevent overlapping
