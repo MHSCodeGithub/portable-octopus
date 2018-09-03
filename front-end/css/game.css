@@ -49,6 +49,10 @@ body * {
   height: 2vw !important;
 }
 
+.producer-info-icon {
+  margin-bottom: -10px;
+}
+
 /* MENU
 ––––––––––––––––––––––––––––––––––––––– */
 #menu {
