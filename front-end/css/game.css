@@ -44,6 +44,11 @@ body * {
   height: 100%;
 }
 
+.text-icon {
+  width: 2vw !important;
+  height: 2vw !important;
+}
+
 /* MENU
 ––––––––––––––––––––––––––––––––––––––– */
 #menu {

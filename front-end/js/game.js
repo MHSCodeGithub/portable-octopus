@@ -304,7 +304,10 @@ $(function () {
                     $(".producer-info-intake").text("");
                     $(".producer-info-working").text("")
                   } else { // if not a house
-                    $(".producer-info-gen").text("Output: " + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+                    var iconName = data.produce;
+                        iconName.replace(" ", "_");
+
+                    $(".producer-info-gen").html("Output:  <img class='text-icon' src='img/commodities/"+ iconName+".png'></img> " + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
 
                     if (data.functioning == true) { // if producer is producing
                       $(".producer-info-working").text("Producing!") // show producer info
