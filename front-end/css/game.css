@@ -291,6 +291,43 @@ th {
   box-shadow: none;
 }
 
+#create-order-btn {
+  width: 200px;
+  height: 70px;
+  background: url('../img/create-order-btn.png') no-repeat;
+  background-size: contain;
+  text-align: center;
+  border: none;
+  color: white;
+}
+
+.order-created-cancel, .order-fulfill {
+  background: url('../img/cancel-order-btn.png') no-repeat;
+  background-size: contain;
+  width: 102px;
+  height: 47px;
+  color: white;
+  text-align: center;
+  border: none;
+  padding-bottom: 6px;
+  font-size: 1.2em;
+}
+
+.order-fulfill {
+  background: url('../img/fulfill-order-btn.png') no-repeat;
+}
+
+.order-created-cancel:hover, .order-fulfill:hover {
+  background: url('../img/cancel-order-btn-p.png') no-repeat;
+  background-size: contain;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+.order-fulfill:hover {
+  background: url('../img/fulfill-order-btn-p.png') no-repeat;
+}
+
 /* ORDER POPUPS
 ––––––––––––––––––––––––––––––––––––––– */
 .order-popup-bg {

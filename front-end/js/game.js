@@ -90,7 +90,13 @@ $(function () {
     "../img/sell-btn.png",
     "../img/sell-btn-p.png",
     "../img/upgrade-btn.png",
-    "../img/upgrade-btn-p.png"
+    "../img/upgrade-btn-p.png",
+    "../img/cancel-order-btn.png",
+    "../img/cancel-order-btn-p.png",
+    "../img/create-order-btn.png",
+    "../img/create-order-btn-p.png",
+    "../img/fulfill-order-btn.png",
+    "../img/fulfill-order-btn-p.png"
   )
 
   var API = new APIClass(); // create API w/server
