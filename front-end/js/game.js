@@ -830,34 +830,34 @@ $(function () {
                 // update producer information // TODO: REFACTOR
                 /* Set Producer Information Front End
                 ––––––––––––––––––––––––––––––––––––––– */
-                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
-                $(".producer-info-level").text("Lvl." + data.level);
-                $("#producer-upgrade-btn").text("Upgrade($" + (price * (data.level + 1)) + ")");
-                $("#producer-sell-btn").text("Sell(+$" + ((price * data.level) / 2) + ")");
+                $(".producer-info-name").html(cleanStr(producer.type) + " <span class='producer-info-level'></span>");
+                $(".producer-info-level").text("Lvl." + producer.level);
+                $("#producer-upgrade-btn").text("Upgrade($" + (price * (producer.level + 1)) + ")");
+                $("#producer-sell-btn").text("Sell(+$" + ((price * producer.level) / 2) + ")");
 
-                if (data.type == "house") { // producer is a house
-                  $(".producer-info-gen").text(data.citizens + " citizens!");
+                if (producer.type == "house") { // producer is a house
+                  $(".producer-info-gen").text(producer.citizens + " citizens!");
                   $(".producer-info-intake").text("");
                   $(".producer-info-working").text("")
                 } else { // if not a house
-                  var OutputIconName = data.produce;
+                  var OutputIconName = producer.produce;
                       OutputIconName.replace(" ", "_");
 
-                  $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+                  $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(producer.produce) + " " + (producerYeild.val * 12) + "/hour");
 
-                  if (data.functioning == true) { // if producer is producing
+                  if (producer.functioning == true) { // if producer is producing
                     $(".producer-info-working").text("Producing!") // show producer info
                   } else {
                     $(".producer-info-working").text("Not Producing!")
                   }
 
-                  var IntakeIconName = data.intake.toLowerCase();
+                  var IntakeIconName = producer.intake.toLowerCase();
                       IntakeIconName.replace(" ", "_");
 
-                  if (data.intake == "None") { // clean data.intake output
-                    $(".producer-info-intake").text("Intake: " + cleanStr(data.intake));
+                  if (producer.intake == "None") { // clean producer.intake output
+                    $(".producer-info-intake").text("Intake: " + cleanStr(producer.intake));
                   } else {
-                    $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
+                    $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(producer.intake) + " " + (producerYeild.val * 12) + "/hour");
                   }
                 }
               })
