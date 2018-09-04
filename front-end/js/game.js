@@ -240,15 +240,15 @@ $(function () {
         if (i == data.length - 2) { //
           drawFeature(producer.id, producer.y, producer.x, "treasury"); // Draw harbout/treasury at
         } else if (i == data.length - 1) { // designated positions.
-          drawFeature(producer.id, producer.y, producer.x, "harbour"); //
+          drawFeature(producer.id, producer.y, producer.x, "harbour");
         } else { // draw producers
-          if (producer.type == "farm") {
+          if (producer.type == "farm") { // if producer is subtype of farm
             drawFarm(producer.id, producer.y, producer.x, producer.subType);
-          } else if (producer.type == "mine") {
+          } else if (producer.type == "mine") { // if producer is subtype of mine
             drawMine(producer.id, producer.y, producer.x, producer.subType);
-          } else if (producer.type == "house") {
+          } else if (producer.type == "house") { // if producer is house
             drawFeature(producer.id, producer.y, producer.x, "house");
-          } else {
+          } else { // if normal producer
             drawProducer(producer.id, producer.y, producer.x, producer.type);
           }
         }
