@@ -420,24 +420,24 @@ th {
   font-size: 1.5em;
 }
 
-#order-submit {
+#order-submit, #fulfill-submit {
   background: url("../img/upgrade-btn.png");
   margin: 0 40px 0 70px;
 }
 
-#order-submit:hover {
+#order-submit:hover, #fulfill-submit:hover {
   background: url("../img/upgrade-btn-p.png");
   background-size: contain;
   padding-top: 8px;
   cursor: pointer;
 }
 
-#order-cancel-btn {
+#order-cancel-btn, #fulfill-cancel-btn {
   background: url("../img/sell-btn.png");
   margin: 0 40px;
 }
 
-#order-cancel-btn:hover {
+#order-cancel-btn:hover, #fulfill-cancel-btn:hover {
   background: url("../img/sell-btn-p.png");
   background-size: contain;
   padding-top: 8px;

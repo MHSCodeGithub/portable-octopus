@@ -539,11 +539,11 @@ $(function () {
         </div>
 
         <div class="inline-btn-wrap">
-          <button class="order-popup-btn" type="button" id="fulfill-cancel-btn">CANCEL</button>
+          <button class="order-popup-btn" type="button" id="fulfill-cancel-btn">Cancel</button>
         </div>
 
         <div class="inline-btn-wrap">
-          <button class="order-popup-btn" type="button" id="fulfill-submit">FULFILL</button>
+          <button class="order-popup-btn" type="button" id="fulfill-submit">Fulfill</button>
         </div>
         `
       );
