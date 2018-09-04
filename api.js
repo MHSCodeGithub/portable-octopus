@@ -126,34 +126,35 @@ function cleanStr(string) {
  **/
 
 exports.setup = function (app, gets) { // when the API is setup
-  app.get("/api/get/:type", function (req, res) {
-    var type = req.params.type;
+  app.get("/api/get/:type", function (req, res) { // when a simple API get is called
+    var type = req.params.type; // find the type of get needed
     console.log("--- ## API Get ## ---");
     console.log(type);
 
-    if(gets[type]) { res.send(gets[type]);  }
-    else if(type == "orders") { res.send(framework.database.getOrders()); }
-    else           { res.send({type: "error", data: "No API Answer, please contact developers!"}); }
+    if(gets[type]) { res.send(gets[type]);  } // if the get type is known return with the pre-defined static value
+    else if(type == "orders") { res.send(framework.database.getOrders()); } // if the get type is a pre-defined get, but has a dynamic response (specifically 'orders')
+    else           { res.send({type: "error", data: "No API Answer, please contact developers!"}); } // if the get type is unkown return an error
   });
 
-  app.post("/api/send/:type", function (req, res) {
-    var type = req.params.type;
-    var data = req.body;
+  app.post("/api/send/:type", function (req, res) { // when a API post with incoming data is called
+    var type = req.params.type; // determine post type
+    var data = req.body; // determine sent data
     console.log("--- ## API Post ## ---");
     console.log(type);
     console.log(data);
 
     if(type == "buy-producer") {
 
-      var testAcc = new framework.Player(0, data.username, data.password, null, true);
-      if(testAcc.check()) {
-        var kingdom = testAcc.kingdom;
-        var current = getNextIDOfProducers(testAcc);
-        var result = getItemByID(data.target);
+      var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account to check validity and get the real account
+      if(testAcc.check()) { // check the validity of the account and fill in the real accounts data
+        var kingdom = testAcc.kingdom; // get the
+        var current = getNextIDOfProducers(testAcc); // get the next producer ID
+        var result = getItemByID(data.target); // get the database defaults for the producer the user wants to buy
 
-        if(result) {
+        if(result) { // if the target producer exists
           console.log(result);
 
+          // set producer defaults
           var price;
           var producer;
 
