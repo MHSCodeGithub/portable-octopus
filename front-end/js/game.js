@@ -313,7 +313,7 @@ $(function () {
                     var OutputIconName = data.produce;
                         OutputIconName.replace(" ", "_");
 
-                    $(".producer-info-gen").html("Output: <img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+                    $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
 
                     if (data.functioning == true) { // if producer is producing
                       $(".producer-info-working").text("Producing!") // show producer info
@@ -327,7 +327,7 @@ $(function () {
                     if (data.intake == "None") { // clean data.intake output
                       $(".producer-info-intake").text("Intake: " + cleanStr(data.intake));
                     } else {
-                      $(".producer-info-intake").html("Intake: <img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
+                      $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                     }
                   }
                 })
@@ -828,25 +828,36 @@ $(function () {
                 updateBalance(); // update user's balance
 
                 // update producer information // TODO: REFACTOR
-                $(".producer-info-name").html(cleanStr(producer.type) + " <span class='producer-info-level'></span>");
-                $(".producer-info-level").text("Lvl." + producer.level);
-                $("#producer-upgrade-btn").text("Upgrade($" + (price * (producer.level + 1)) + ")");
-                $("#producer-sell-btn").text("Sell(+$" + ((price * producer.level) / 2) + ")");
+                /* Set Producer Information Front End
+                ––––––––––––––––––––––––––––––––––––––– */
+                $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+                $(".producer-info-level").text("Lvl." + data.level);
+                $("#producer-upgrade-btn").text("Upgrade($" + (price * (data.level + 1)) + ")");
+                $("#producer-sell-btn").text("Sell(+$" + ((price * data.level) / 2) + ")");
 
-                if (producer.type == "house") { // if the producer is a house
-                  $(".producer-info-gen").text(producer.citizens + " citizens!"); // display the intake/outake fittingly
+                if (data.type == "house") { // producer is a house
+                  $(".producer-info-gen").text(data.citizens + " citizens!");
                   $(".producer-info-intake").text("");
-                } else { // if the producer is a _real_ producer (not a house) (im not housist)
-                  $(".producer-info-gen").text("Output: " + cleanStr(producer.produce) + " " + (producerYeild.val * 12) + "/hour"); // show the producer's yeild
-                  if (producer.functioning == true) { // if the producer if functioning
-                    $(".producer-info-working").text("Producing!") // let user know
+                  $(".producer-info-working").text("")
+                } else { // if not a house
+                  var OutputIconName = data.produce;
+                      OutputIconName.replace(" ", "_");
+
+                  $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+
+                  if (data.functioning == true) { // if producer is producing
+                    $(".producer-info-working").text("Producing!") // show producer info
                   } else {
                     $(".producer-info-working").text("Not Producing!")
                   }
-                  if (producer.intake == "None") { // if the producer has no Intake
-                    $(".producer-info-intake").text("Intake: " + cleanStr(producer.intake)); // clean the intake message
+
+                  var IntakeIconName = data.intake.toLowerCase();
+                      IntakeIconName.replace(" ", "_");
+
+                  if (data.intake == "None") { // clean data.intake output
+                    $(".producer-info-intake").text("Intake: " + cleanStr(data.intake));
                   } else {
-                    $(".producer-info-intake").text("Intake: " + cleanStr(producer.intake) + " " + (producerYeild.val * 12) + "/hour"); // display intake according to algo
+                    $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                   }
                 }
               })
