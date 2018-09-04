@@ -291,14 +291,26 @@ th {
   box-shadow: none;
 }
 
+/* Buttons */
+
 #create-order-btn {
-  width: 200px;
-  height: 70px;
+  width: 171px;
+  height: 60px;
   background: url('../img/create-order-btn.png') no-repeat;
   background-size: contain;
   text-align: center;
   border: none;
   color: white;
+  padding-bottom: 10px;
+  font-size: 0.95em;
+  margin-bottom: -3px;
+}
+
+#create-order-btn:hover {
+  background: url('../img/create-order-btn-p.png') no-repeat;
+  background-size: contain;
+  padding-top: 8px;
+  cursor: pointer;
 }
 
 .order-created-cancel, .order-fulfill {
@@ -311,6 +323,7 @@ th {
   border: none;
   padding-bottom: 6px;
   font-size: 1.2em;
+  margin-bottom: -3px;
 }
 
 .order-fulfill {
