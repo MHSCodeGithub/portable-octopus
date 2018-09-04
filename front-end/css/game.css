@@ -421,12 +421,12 @@ th {
 }
 
 #order-submit, #fulfill-submit {
-  background: url("../img/upgrade-btn.png");
+  background: url("../img/fulfill-order-popup-btn.png");
   margin: 0 40px 0 70px;
 }
 
 #order-submit:hover, #fulfill-submit:hover {
-  background: url("../img/upgrade-btn-p.png");
+  background: url("../img/fulfill-order-popup-btn-p.png");
   background-size: contain;
   padding-top: 8px;
   cursor: pointer;

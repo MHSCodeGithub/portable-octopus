@@ -96,7 +96,9 @@ $(function () {
     "../img/create-order-btn.png",
     "../img/create-order-btn-p.png",
     "../img/fulfill-order-btn.png",
-    "../img/fulfill-order-btn-p.png"
+    "../img/fulfill-order-btn-p.png",
+    "../img/fulfill-order-popup-btn.png",
+    "../img/fulfill-order-popup-btn-p.png"
   )
 
   var API = new APIClass(); // create API w/server
