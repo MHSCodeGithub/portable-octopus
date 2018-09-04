@@ -522,20 +522,17 @@ $(function () {
         // `
         `
         <h1 id="order-popup-title">ORDER</h1>
-        <div class="order-popup-div" id="fulfill-order-div">
+
+        <div class="order-popup-div" id="fulfill-order-content">
           <!--Labels-->
-          <div class="order-column">
-            <p class="order-p">Type: </p><br> <!--Line breaks because using inline-block-->
-            <p class="order-p">Price: </p><br>
-            <p class="order-p">Amount: </p>
-          </div>
+            <p class="order-p" id="fulfill-type-label">Type: </p>
+            <p class="order-p" id="fulfill-price-label">Price: </p>
+            <p class="order-p" id="fulfill-amount-label">Amount: </p>
 
           <!--Inputs-->
-          <div class="order-column">
-            <p id="fulfill-type">${order.type}</p>
-            <p id="fulfill-price">${order.price}</p>
-            <input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}
-          </div>
+            <p id="fulfill-type" class="order-p">${order.type}</p>
+            <p id="fulfill-price" class="order-p">$${order.price}</p>
+            <input id="fulfill-amount" class="order-p" type="number" value="1" min="1" max="${order.amount-order.fulfillment}"><p class="order-p" id="amount-total">/${order.amount-order.fulfillment}</p>
         </div>
 
         <div class="inline-btn-wrap">

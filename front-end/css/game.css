@@ -446,7 +446,54 @@ th {
 
 /* FULFILL ORDER
 ––––––––––––––––––––––––––––––––––––––– */
-#fulfill-order-div .order-column {
+#fulfill-order-content {
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto 1fr;
+  justify-content: flex-start;
+  margin-left: 12px;
+}
+
+#fulfill-type-label {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+#fulfill-type {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#fulfill-price-label {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+#fulfill-price {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+#fulfill-amount-label {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+#fulfill-amount {
+  grid-row: 3;
+  grid-column: 2;
+  width: 85px;
+  grid-row: 3;
+  border: 2px solid #E4E4E4;
+  padding: 1px 2px;
+}
+
+#amount-total {
+  grid-row: 3;
+  grid-column: 2;
+  margin-left: 87px;
+}
+
+#fulfill-order-labels {
 
 }
 
