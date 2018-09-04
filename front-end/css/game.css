@@ -422,7 +422,7 @@ th {
 
 #order-submit, #fulfill-submit {
   background: url("../img/fulfill-order-popup-btn.png");
-  margin: 0 40px 0 70px;
+  margin: 0 40px 0 75px;
 }
 
 #order-submit:hover, #fulfill-submit:hover {
@@ -434,7 +434,7 @@ th {
 
 #order-cancel-btn, #fulfill-cancel-btn {
   background: url("../img/sell-btn.png");
-  margin: 0 40px;
+  margin: 0 45px;
 }
 
 #order-cancel-btn:hover, #fulfill-cancel-btn:hover {
