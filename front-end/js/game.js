@@ -522,7 +522,7 @@ $(function () {
         // `
         `
         <h1 id="order-popup-title">ORDER</h1>
-        <div class="order-popup-div">
+        <div class="order-popup-div" id="fulfill-order-div">
           <!--Labels-->
           <div class="order-column">
             <p class="order-p">Type: </p><br> <!--Line breaks because using inline-block-->
@@ -532,8 +532,8 @@ $(function () {
 
           <!--Inputs-->
           <div class="order-column">
-            <span id="fulfill-type">${order.type}</span>
-            <span id="fulfill-price">${order.price}</span>
+            <p id="fulfill-type">${order.type}</p>
+            <p id="fulfill-price">${order.price}</p>
             <input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}
           </div>
         </div>

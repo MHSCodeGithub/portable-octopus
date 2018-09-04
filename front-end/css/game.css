@@ -364,7 +364,7 @@ th {
   outline: 2px solid #753713;
   padding: 30px 20px 40px 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
 }
 
 #order-popup-title {
@@ -389,6 +389,7 @@ th {
   display: grid;
   flex-direction: column;
   justify-content: space-around;
+  text-align: left;
 }
 
 .order-p {
@@ -396,7 +397,6 @@ th {
   display: inline-block;
   margin: 2.5px 0;
   padding: 3.5px;
-  float: left;
 }
 
 .order-input {
@@ -442,6 +442,12 @@ th {
   background-size: contain;
   padding-top: 8px;
   cursor: pointer;
+}
+
+/* FULFILL ORDER
+––––––––––––––––––––––––––––––––––––––– */
+#fulfill-order-div .order-column {
+
 }
 
 /* STOCKPILE
