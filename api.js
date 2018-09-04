@@ -12,10 +12,10 @@ const framework = require('./framework');
  **/
 
 function getItem(name) {
-  var items = framework.database.getItems();
+  var items = framework.database.getItems(); // get all producers from database
 
-  for (var i = 0; i < items.length; i++) {
-    if(items[i].name == name) { return items[i]; }
+  for (var i = 0; i < items.length; i++) { // for each producer in db
+    if(items[i].name == name) { return items[i]; } // if producer fits parameters
   }
 
   return false;
@@ -32,10 +32,10 @@ function getItem(name) {
  **/
 
 function getItemByID(id) {
-  var items = framework.database.getItems();
+  var items = framework.database.getItems(); // get all producers from database
 
-  for (var i = 0; i < items.length; i++) {
-    if(items[i].id == id) { return items[i]; }
+  for (var i = 0; i < items.length; i++) { // for each producer in db
+    if(items[i].id == id) { return items[i]; } // if producer fits parameters
   }
 
   return false;
@@ -47,16 +47,16 @@ function getItemByID(id) {
  *
  * @param {Account} acc
  *
- * @description returns the ID + 1 from the latest account's producer
+ * @description returns the highest ID + 1 from the latest account's producer
  *
  **/
 
 function getNextIDOfProducers(acc) {
   current = -1;
-  for (var i = 0; i < acc.kingdom.producers.length; i++) {
-    if(acc.kingdom.producers[i].id > current) { current = acc.kingdom.producers[i].id }
+  for (var i = 0; i < acc.kingdom.producers.length; i++) { // for each producer in accounts kingdom
+    if(acc.kingdom.producers[i].id > current) { current = acc.kingdom.producers[i].id } // if target ID is the largest seen set current to that ID
   }
-  return current + 1;
+  return current + 1; // return the highest ID + 1
 }
 
 /**
@@ -69,10 +69,10 @@ function getNextIDOfProducers(acc) {
 
 function getNextIDOfOrders() {
   current = -1;
-  for (var i = 0; i < framework.database.read().orders.length; i++) {
-    if(framework.database.read().orders[i].id > current) { current = framework.database.read().orders[i].id }
+  for (var i = 0; i < framework.database.read().orders.length; i++) { // for each order in db
+    if(framework.database.read().orders[i].id > current) { current = framework.database.read().orders[i].id } // if target ID is the largest seen set current to that ID
   }
-  return current + 1;
+  return current + 1; // return the highest ID + 1
 }
 
 /**
@@ -100,20 +100,32 @@ function capitalizeFirstLetter(string) {
  **/
 
 function cleanStr(string) {
-  string = string.replace("_", " ");
+  string = string.replace("_", " "); // replace all underscores with spaces
 
-  var words = string.split(" ");
+  var words = string.split(" "); // split all words up
 
-  for (var i = 0; i < words.length; i++) {
-    words[i] = capitalizeFirstLetter(words[i])
+  for (var i = 0; i < words.length; i++) { // for each word
+    words[i] = capitalizeFirstLetter(words[i]); // capitalize the first letter of the word and update the word list
   }
 
-  string = words.join(" ");
+  string = words.join(" "); // join the words back into a sentence
 
   return string;
 }
 
-exports.setup = function (app, gets) {
+/**
+ *
+ * @function exports.setup()
+ *
+ * @param {Express} app
+ *
+ * @param {Object} gets
+ *
+ * @description sets listeners for front end API calls and responds accordingly
+ *
+ **/
+
+exports.setup = function (app, gets) { // when the API is setup
   app.get("/api/get/:type", function (req, res) {
     var type = req.params.type;
     console.log("--- ## API Get ## ---");
