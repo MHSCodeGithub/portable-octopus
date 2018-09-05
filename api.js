@@ -274,6 +274,10 @@ exports.setup = function (app, gets) { // when the API is setup
       if(testAcc.check()) { // check the account is valid and load in user data
         var kingdom = testAcc.toJSON(testAcc).kingdom; // get JSON version of user's kingdom
 
+        var target = kingdom.producers;
+        target.push(kingdom.treasury);
+        target.push(kingdom.harbour);
+
         res.send(kingdom.producers); // send all producers in kingdom
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
