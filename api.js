@@ -158,7 +158,7 @@ exports.setup = function (app, gets) { // when the API is setup
           var price;
           var producer;
 
-          switch (result.name) {
+          switch (result.name) { // go though switch statement to determine the target producer
             case "Gold Mine":
               producer = new framework.producers.Mine(current, "gold", Number(data.x), Number(data.y));
 
@@ -251,17 +251,17 @@ exports.setup = function (app, gets) { // when the API is setup
               break;
           }
 
-          if((testAcc.kingdom.treasury.balance - price) < 0) {
-            res.send({type: "error", data: "You do not have enough money!"});
+          if((testAcc.kingdom.treasury.balance - price) < 0) { // check that the user can afford the producer
+            res.send({type: "error", data: "You do not have enough money!"}); // if not alert the user
             return;
           }
 
-          testAcc.charge(price);
-          kingdom.producers.push(producer);
+          testAcc.charge(price); // charge the user
+          kingdom.producers.push(producer); // add the producer to the users kingdom
 
-          testAcc.kingdom = kingdom;
+          testAcc.kingdom = kingdom; // update the kingdom
 
-          testAcc.update();
+          testAcc.update(); // update the user to the database
           res.send("Updated!")
         } else {
           res.send({type: "error", data: "Invalid Item!"})
@@ -269,64 +269,53 @@ exports.setup = function (app, gets) { // when the API is setup
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
-    } else if(type == "get-map") {
+    } else if(type == "get-map") { // if the post type is get map
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
-      if(testAcc.check()) {
-        var kingdom = testAcc.toJSON(testAcc).kingdom;
+      if(testAcc.check()) { // check the account is valid and load in user data
+        var kingdom = testAcc.toJSON(testAcc).kingdom; // get JSON version of user's kingdom
 
-        var target = kingdom.producers;
-        target.push(kingdom.treasury);
-        target.push(kingdom.harbour);
-
-        res.send(kingdom.producers);
+        res.send(kingdom.producers); // send all producers in kingdom
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
-    } else if(type == "get-commodities") {
+    } else if(type == "get-commodities") { // if the post type is get commodities
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
-      if(testAcc.check()) {
-        var data = framework.database.getCommodities();
+      if(testAcc.check()) { // the the account is valid
+        var data = framework.database.getCommodities(); // all commodity templates
 
-        for (var i = 0; i < data.length; i++) {
-          data[i].amount = testAcc.getCommodityAmount(data[i].id);
+        for (var i = 0; i < data.length; i++) { // for each commodity template
+          data[i].amount = testAcc.getCommodityAmount(data[i].id); // set the amount of each commodity
         }
 
-        res.send(data);
+        res.send(data); // send the users commodities w/amounts
       } else {
         res.send({type: "error", data: "Invalid Username/Password"})
       }
-    } else if(type == "upgrade-producer") {
+    } else if(type == "upgrade-producer") { // if the post type is upgrade producer
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
-      if(testAcc.check()) {
+      if(testAcc.check()) { // validate the user's account
 
+        for (var i = 0; i < testAcc.kingdom.producers.length; i++) { // go through the user's producers
+          if(testAcc.kingdom.producers[i].id == data.target) { // if the selected producer is the producer the user wants to upgrade
+            var items = framework.database.getItems(); // get all producer templates
 
-        for (var i = 0; i < testAcc.kingdom.producers.length; i++) {
-          if(testAcc.kingdom.producers[i].id == data.target) {
-            var items = framework.database.getItems();
-
-            var name = testAcc.kingdom.producers[i].type;
+            var name = testAcc.kingdom.producers[i].type; // get the name of the target producer
 
             if(testAcc.kingdom.producers[i].subType) { name = testAcc.kingdom.producers[i].subType + " " + name; }
 
-            name = cleanStr(name);
+            name = cleanStr(name); // clean the name of the producer to make user friendly
 
-            console.log("Name;");
-            console.log(name);
+            for (var k = 0; k < items.length; k++) { // for each producer template
+              if(items[k].name == name) { // find the correct template
+                var price = items[k].price * (testAcc.kingdom.producers[i].level+1); // generate the price of upgrade
 
-            for (var k = 0; k < items.length; k++) {
-              if(items[k].name == name) {
-                var price = items[k].price * (testAcc.kingdom.producers[i].level+1);
-                console.log("price: ");
-                console.log(items[k]);
-                console.log(testAcc.kingdom.producers[i]);
-                console.log(price);
-                if(testAcc.kingdom.treasury.balance - price < 0) {
+                if(testAcc.kingdom.treasury.balance - price < 0) { // check if the user has enough money
                   res.send({type: "error", data: "You do not have enough money!"});
                   return;
-                } else {
-                  testAcc.kingdom.producers[i].upgrade();
-                  testAcc.charge(price);
-                  testAcc.update();
+                } else { // if the user has enough money
+                  testAcc.kingdom.producers[i].upgrade(); // upgrade the target producer
+                  testAcc.charge(price); // charge the user for the upgrade
+                  testAcc.update(); // update the user's account in db
                   res.send("Updated!");
                   return;
                 }
