@@ -599,7 +599,7 @@ $(function () {
         <tr class="order-spacer"></tr>
         `); // empty table and provide headers/create order button
       for (var i = 0; i < orders.length; i++) { // for each order
-        if(order[i]) {
+        if(order[i] != null) {
           if (orders[i].author == username) { // if the order is created by self
             $("#market-table").append( // append the order to the table, however provide a cancel button
               `
