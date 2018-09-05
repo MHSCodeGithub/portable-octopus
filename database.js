@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 if (!fs.existsSync("./data.json")) { // check if the db is alive
@@ -13,7 +12,7 @@ if (!fs.existsSync("./data.json")) { // check if the db is alive
  *
  **/
 
-exports.read = function () {
+exports.read = function() {
   return JSON.parse(fs.readFileSync("./data.json"));
 };
 
@@ -27,7 +26,7 @@ exports.read = function () {
  *
  **/
 
-exports.write = function (data) {
+exports.write = function(data) {
   return fs.writeFileSync("./data.json", JSON.stringify(data, null, 2));
 };
 
@@ -41,7 +40,7 @@ exports.write = function (data) {
  *
  **/
 
-exports.addAccount = function (account) {
+exports.addAccount = function(account) {
   var database = exports.read(); // read the db
   database.accounts[account.id] = account; // set the account
   exports.write(database); // update the db
@@ -57,10 +56,10 @@ exports.addAccount = function (account) {
  *
  **/
 
-exports.getAccount = function (username) {
+exports.getAccount = function(username) {
   var data = exports.read(); // read the db
   for (var property in data.accounts) { // find the account
-    if(data.accounts[property].username === username) {
+    if (data.accounts[property].username === username) {
       return data.accounts[property]; // return the account
     }
   }
@@ -78,7 +77,7 @@ exports.getAccount = function (username) {
  *
  **/
 
-exports.addOrder = function (order) {
+exports.addOrder = function(order) {
   var database = exports.read(); // read the db
   database.orders[order.id] = order; // add the order
   exports.write(database); // update the db
@@ -94,10 +93,10 @@ exports.addOrder = function (order) {
  *
  **/
 
-exports.getOrder = function (id) {
+exports.getOrder = function(id) {
   var data = exports.read(); // read the db
   for (var property in data.orders) { // find the order
-    if(data.orders[property].id === id) {
+    if (data.orders[property].id === id) {
       return data.orders[property]; // return the order
     }
   }
@@ -115,10 +114,10 @@ exports.getOrder = function (id) {
  *
  **/
 
-exports.getItem = function (id) {
+exports.getItem = function(id) {
   var data = exports.read(); // read the db
   for (var property in data.items) { // find the item
-    if(data.items[property].id === id) {
+    if (data.items[property].id === id) {
       return data.items[property]; // return the item
     }
   }
@@ -136,10 +135,10 @@ exports.getItem = function (id) {
  *
  **/
 
-exports.getCommodity = function (name) {
+exports.getCommodity = function(name) {
   var data = exports.read(); // read the db
   for (var property in data.commodities) { // find the commodity
-    if(data.commodities[property].name === name) {
+    if (data.commodities[property].name === name) {
       return data.commodities[property]; // return the commodity
     }
   }
@@ -155,7 +154,7 @@ exports.getCommodity = function (name) {
  *
  **/
 
-exports.getItems = function () {
+exports.getItems = function() {
   return exports.read().items;
 }
 
@@ -168,7 +167,7 @@ exports.getItems = function () {
  **/
 
 
-exports.getOrders = function () {
+exports.getOrders = function() {
   return exports.read().orders;
 }
 
@@ -180,6 +179,6 @@ exports.getOrders = function () {
  *
  **/
 
-exports.getCommodities = function () {
+exports.getCommodities = function() {
   return exports.read().commodities;
 }
