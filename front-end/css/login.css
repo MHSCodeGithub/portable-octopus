@@ -2,7 +2,7 @@
 ––––––––––––––––––––––––––––––––––––––– */
 body {
   background: url('../img/background.jpg');
-  background-size: contain;
+  background-size: cover;
   overflow: hidden;
   display: flex;
   align-items: center;
