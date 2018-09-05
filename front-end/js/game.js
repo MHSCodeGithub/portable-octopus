@@ -1,8 +1,5 @@
-
-
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
-
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -73,7 +70,7 @@ function cleanStr(string) {
 /* On Document Load
 ––––––––––––––––––––––––––––––––––––––– */
 
-$(function () {
+$(function() {
 
   /* Initialisations
   ––––––––––––––––––––––––––––––––––––––– */
@@ -191,7 +188,7 @@ $(function () {
     API.send("get-commodities", {
       username: username,
       password: password
-    }, function (usersCommodities) { // get users commodities
+    }, function(usersCommodities) { // get users commodities
       $("#commodities-table").html(`
         <tr>
           <th>Name</th>
@@ -229,7 +226,7 @@ $(function () {
     API.send("get-map", {
       username: username,
       password: password
-    }, function (data) { // request map from server
+    }, function(data) { // request map from server
       for (var i = 0; i < 19; i++) { // set map to be just grass
         for (var j = 0; j < 19; j++) {
           drawGrass(i + 1, j + 1);
@@ -259,7 +256,7 @@ $(function () {
       /* Block Interactions
       ––––––––––––––––––––––––––––––––––––––– */
       $('.built').unbind("click");
-      $('.built').bind("click", function () { // when a producer is clicked on
+      $('.built').bind("click", function() { // when a producer is clicked on
         $(".producer-info").show()
 
         if ($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" || // if target is not producer
@@ -280,12 +277,12 @@ $(function () {
           username: username,
           password: password,
           target: target
-        }, function (data) {
+        }, function(data) {
 
           $(".hidden-id").text(id); // set hidden data for later use
           $(".hidden-target").text(another);
 
-          API.get("items", function (items) { // get all possible producers
+          API.get("items", function(items) { // get all possible producers
             if (data.subType) {
               data.type = data.subType + " " + data.type;
             } // change producer type to fit if has subtype
@@ -298,7 +295,7 @@ $(function () {
                   username: username,
                   password: password,
                   target: $(".hidden-id").text()
-                }, function (producerYeild) {
+                }, function(producerYeild) {
 
                   /* Set Producer Information Front End
                   ––––––––––––––––––––––––––––––––––––––– */
@@ -313,9 +310,9 @@ $(function () {
                     $(".producer-info-working").text("")
                   } else { // if not a house
                     var OutputIconName = data.produce;
-                        OutputIconName.replace(" ", "_");
+                    OutputIconName.replace(" ", "_");
 
-                    $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+                    $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/" + OutputIconName + ".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
 
                     if (data.functioning == true) { // if producer is producing
                       $(".producer-info-working").text("Producing!") // show producer info
@@ -324,12 +321,12 @@ $(function () {
                     }
 
                     var IntakeIconName = data.intake.toLowerCase();
-                        IntakeIconName.replace(" ", "_");
+                    IntakeIconName.replace(" ", "_");
 
                     if (data.intake == "None") { // clean data.intake output
                       $(".producer-info-intake").text("Intake: " + cleanStr(data.intake));
                     } else {
-                      $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
+                      $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                     }
                   }
                 })
@@ -339,7 +336,7 @@ $(function () {
         })
       });
 
-      $(".producer-info-close").click(function () { // on close button
+      $(".producer-info-close").click(function() { // on close button
         $(".producer-info").hide() // close producer info
       })
     });
@@ -376,7 +373,7 @@ $(function () {
       $("#order-amount").val(1); // set to min amount
     }
 
-    if(Number($("#order-price").val()) < 1) { // check if price of new order is less than one
+    if (Number($("#order-price").val()) < 1) { // check if price of new order is less than one
       $("#order-price").val(1); // if it is, set it to 1 (preventing negative number inputs)
     }
   }
@@ -393,7 +390,7 @@ $(function () {
     API.send("get-commodities", {
       username: username,
       password: password
-    }, function (data) { // get user's commodities
+    }, function(data) { // get user's commodities
       $("#order-commodity").html(""); // remove all options
       var hasCommodity = false; // flag for if any commodity can be sold
       for (var i = 0; i < data.length; i++) { // for every commodity
@@ -420,27 +417,27 @@ $(function () {
       }
 
       $("#order-amount").unbind("change"); // unbind to prevent overlapping
-      $("#order-amount").bind("change", function () { // when a user changes the amount to buy/sell
+      $("#order-amount").bind("change", function() { // when a user changes the amount to buy/sell
         updateOrderAmountRange() // check its valid
       });
 
       $("#order-type").unbind("change"); // unbind to prevent overlapping
-      $("#order-type").bind("change", function () { // when the user changes the order type
+      $("#order-type").bind("change", function() { // when the user changes the order type
         updateOrderAmountRange() // check amount is valid
       });
 
       $("#order-price").unbind("change");
-      $("#order-price").bind("change", function () {
+      $("#order-price").bind("change", function() {
         updateOrderAmountRange();
       });
 
       $("#order-commodity").unbind("change"); // unbind to prevent overlapping
-      $("#order-commodity").bind("change", function () { // when user changes the commodity to buy/sell
+      $("#order-commodity").bind("change", function() { // when user changes the commodity to buy/sell
         updateOrderAmountRange() // check amount is valid
       });
 
       $("#order-submit").unbind("click"); // unbind to prevent overlapping
-      $("#order-submit").bind("click", function () { // when the order is submitted
+      $("#order-submit").bind("click", function() { // when the order is submitted
         if ($("#order-commodity").val()) { // if the user has selected a commodity
           API.send("create-order", { // tell server user wants to create a order
             username: username,
@@ -449,7 +446,7 @@ $(function () {
             commodity: $("#order-commodity").val().split("-")[0],
             price: Number($("#order-price").val()),
             amount: Number($("#order-amount").val())
-          }, function (response) { // when the server responds
+          }, function(response) { // when the server responds
             $("#market-table").show(); // show the market table
             $("#market-order").hide();
             $("#create-order-btn").text("Create Order")
@@ -461,7 +458,7 @@ $(function () {
       });
 
       $("#order-type").unbind("change"); // unbind to prevent overlapping
-      $("#order-type").bind("change", function () { // when order type changes
+      $("#order-type").bind("change", function() { // when order type changes
         if (!hasCommodity) { // check user has commodities
           alert("You have nothing to sell!")
           $("#order-type").val("buy"); // set default
@@ -511,7 +508,7 @@ $(function () {
       username: username,
       password: password,
       id: id
-    }, function (order) { // get order data
+    }, function(order) { // get order data
       $("#fulfill-order-div").html( // display order data in form
         // `
         //   <h1>Fulfill Order</h1>
@@ -548,23 +545,23 @@ $(function () {
       );
 
       $("#fulfill-amount").unbind("change"); // unbind previous listerners to prevent overlapping
-      $("#fulfill-amount").bind("change", function () { // upon input change
+      $("#fulfill-amount").bind("change", function() { // upon input change
         updateOrderFulfillmentAmount(Number(order.amount) - Number(order.fulfillment)) // ensure that fulfillment amount is not invalid
       });
 
-      $("#fulfill-cancel-btn").click(function () { // when the fulfill popup close button is clicked
+      $("#fulfill-cancel-btn").click(function() { // when the fulfill popup close button is clicked
         $("#market-order").hide(); // hide the popup
         $(".order-popup-bg").css("display", "none"); // hide the popup container
       });
 
       $("#fulfill-submit").unbind("click"); // unbind previous listerners to prevent overlapping
-      $("#fulfill-submit").bind("click", function () { // upon user submits fulfillment form
+      $("#fulfill-submit").bind("click", function() { // upon user submits fulfillment form
         API.send("fulfill-order", {
           username: username,
           password: password,
           id: order.id,
           amount: Number($("#fulfill-amount").val())
-        }, function (response) { // send fulfillment to server
+        }, function(response) { // send fulfillment to server
           $("#market-table").show(); // return to market
           $("#market-fulfill").hide();
           $("#create-order-btn").text("Create Order") // update create order button to match its normal state
@@ -585,7 +582,7 @@ $(function () {
    **/
 
   function updateOrders() {
-    API.get("orders", function (orders) { // get all orders from server
+    API.get("orders", function(orders) { // get all orders from server
       $("#market-table").html(`
         <tr id="table-headers">
           <th>Buy/Sell</th>
@@ -599,7 +596,7 @@ $(function () {
         <tr class="order-spacer"></tr>
         `); // empty table and provide headers/create order button
       for (var i = 0; i < orders.length; i++) { // for each order
-        if(orders[i] != null) {
+        if (orders[i] != null) {
           if (orders[i].author == username) { // if the order is created by self
             $("#market-table").append( // append the order to the table, however provide a cancel button
               `
@@ -635,31 +632,31 @@ $(function () {
       }
 
       $(".order-created-cancel").unbind("click"); // unbind previous listerners to prevent overlapping
-      $(".order-created-cancel").bind("click", function () {
+      $(".order-created-cancel").bind("click", function() {
         API.send("cancel-order", {
           username: username,
           password: password,
           targetID: Number($(this).parent().parent().attr('id').split("-")[1])
-        }, function (data) {
+        }, function(data) {
           updateOrders();
         });
       });
 
       $("#create-order-btn").unbind("click"); // unbind previous listerners to prevent overlapping
-      $("#create-order-btn").bind("click", function () { // when create order button is clicked
+      $("#create-order-btn").bind("click", function() { // when create order button is clicked
         if ($("#market-table").is(":visible")) { // if market tab is open
-          $("#market-order").show();// show create order form
+          $("#market-order").show(); // show create order form
           getSuitableCommoditiesToSell(); // prepare create order form
         }
       });
 
-      $("#order-cancel-btn").click(function () { // when create order cancel button is clicked
+      $("#order-cancel-btn").click(function() { // when create order cancel button is clicked
         $("#market-order").hide(); // hide create order popup
         $(".order-popup-bg").css("display", "none"); // hide create order popup menu container
       });
 
       $(".order-fulfill").unbind("click"); // unbind previous listerners to prevent overlapping
-      $(".order-fulfill").bind("click", function () { // when user clicks to fulfill an order
+      $(".order-fulfill").bind("click", function() { // when user clicks to fulfill an order
 
         if ($("#market-table").is(":visible")) { // if market is open
           $("#market-fulfill").show();
@@ -681,7 +678,7 @@ $(function () {
   }
 
 
-  $(".modal-btn").click(function () { // when a menu button is clicked
+  $(".modal-btn").click(function() { // when a menu button is clicked
 
     var target = $(this).attr('id').split('-')[0]; // get button being clicked on
     if ($("#" + target + "-modal").css('display') == 'none') { // if modal is hidden
@@ -690,11 +687,11 @@ $(function () {
 
       $panzoom.panzoom("disable"); // disable panzoom to allow scrolling
 
-      API.get("items", function (items) { // get all producers from server
+      API.get("items", function(items) { // get all producers from server
         console.log(items);
 
         $(".modal-close-btn").unbind("click"); // unbind previous listerners to prevent overlapping
-        $(".modal-close-btn").bind("click", function () { // if menu item close button is clicked
+        $(".modal-close-btn").bind("click", function() { // if menu item close button is clicked
           $("#" + target + "-modal").css('display', 'none'); // hide menu item
           $panzoom.panzoom("enable") // re-enable panzoom
         });
@@ -716,14 +713,14 @@ $(function () {
             $("#shop-item-wrap").append(item); // add producer to producer list
           }
 
-          $('.item-buy-btn').bind("click", function () { // if a producer's buy button is clicked
+          $('.item-buy-btn').bind("click", function() { // if a producer's buy button is clicked
             selectAvailiable(); // show available blocks to place producer
             $panzoom.panzoom("enable") // re-enable panzoom
             $(".modal").css('display', 'none'); // hide menu item
 
             var pre = this; // save this into variable to asynchronous access
 
-            $(".to-build").bind("click", function () { // if a block which a producer can be placed on is clicked
+            $(".to-build").bind("click", function() { // if a block which a producer can be placed on is clicked
               if ($(this).hasClass("selected")) { // double check that the producer can be placed
                 API.send("buy-producer", { // tell the server the user wants to buy a producer
                   username: username,
@@ -731,7 +728,7 @@ $(function () {
                   target: $(pre).parent().attr('id').split("-")[1],
                   x: Number($(this).attr("class").split(' ')[2].split("-")[1]),
                   y: Number($(this).attr("class").split(' ')[3].split("-")[1])
-                }, function (response) { // when the server responds
+                }, function(response) { // when the server responds
                   $('.to-build').unbind("click"); // dis-allow the user from placing more producers
                   updateMap(); // update map to show the new producer
                   updateBalance(); // update the users balance to reflect the purchase
@@ -757,14 +754,14 @@ $(function () {
   /* Front-end JS
   ––––––––––––––––––––––––––––––––––––––– */
 
-  $(document).ready(function () { // leaving this here for shits and giggles. My god this is so dumb, wtf was I thinking
+  $(document).ready(function() { // leaving this here for shits and giggles. My god this is so dumb, wtf was I thinking
     $("#tabs").tabs(); // enable menu items
   }); // its ALREADY in a $(document).ready and its ALREADY in a Front-end JS file
 
   /* Automatic Commodity Table/Market/Balance Updater
   ––––––––––––––––––––––––––––––––––––––– */
 
-  setInterval(function () {
+  setInterval(function() {
     if ($("#commodities-table").is(":visible")) { // if commodity list is visible
       updateCommodities()
     } else if ($("#market").is(":visible")) { // if market is visible
@@ -786,34 +783,34 @@ $(function () {
     API.send("get-balance", {
       username: username,
       password: password
-    }, function (balance) { // get user's balance
+    }, function(balance) { // get user's balance
       $("#balance").text("Balance: $" + balance.data); // display users balance
     });
   }
 
-  $("#market-btn").click(function () { // when the market menu button is clicked
+  $("#market-btn").click(function() { // when the market menu button is clicked
     updateOrders(); // update the market
   });
 
-  $("#stockpile-btn").click(function () { // when the stockpile button is clicked
+  $("#stockpile-btn").click(function() { // when the stockpile button is clicked
     updateCommodities(); // update the stockpile
   });
 
 
-  $("#producer-upgrade-btn").click(function () { // when a user tries to upgrade a producer
+  $("#producer-upgrade-btn").click(function() { // when a user tries to upgrade a producer
     API.send("upgrade-producer", { // tell the server they want to upgrade
       username: username,
       password: password,
       target: $(".hidden-id").text()
-    }, function (response) {
+    }, function(response) {
 
       API.send("get-producer", {
         username: username,
         password: password,
         target: $(".hidden-id").text()
-      }, function (producer) { // get the target producer
+      }, function(producer) { // get the target producer
 
-        API.get("items", function (items) { // get all producers as reference
+        API.get("items", function(items) { // get all producers as reference
           if (producer.subType) {
             producer.type = producer.subType + " " + producer.type;
           } // create proper producer name if producer has a subtype
@@ -825,7 +822,7 @@ $(function () {
                 username: username,
                 password: password,
                 target: $(".hidden-id").text()
-              }, function (producerYeild) { // get target producer's yeild
+              }, function(producerYeild) { // get target producer's yeild
                 updateBalance(); // update user's balance
 
                 // update producer information // TODO: REFACTOR
@@ -842,9 +839,9 @@ $(function () {
                   $(".producer-info-working").text("")
                 } else { // if not a house
                   var OutputIconName = producer.produce;
-                      OutputIconName.replace(" ", "_");
+                  OutputIconName.replace(" ", "_");
 
-                  $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/"+ OutputIconName +".png'></img>" + cleanStr(producer.produce) + " " + (producerYeild.val * 12) + "/hour");
+                  $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/" + OutputIconName + ".png'></img>" + cleanStr(producer.produce) + " " + (producerYeild.val * 12) + "/hour");
 
                   if (producer.functioning == true) { // if producer is producing
                     $(".producer-info-working").text("Producing!") // show producer info
@@ -853,12 +850,12 @@ $(function () {
                   }
 
                   var IntakeIconName = producer.intake.toLowerCase();
-                      IntakeIconName.replace(" ", "_");
+                  IntakeIconName.replace(" ", "_");
 
                   if (producer.intake == "None") { // clean producer.intake output
                     $(".producer-info-intake").text("Intake: " + cleanStr(producer.intake));
                   } else {
-                    $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/"+ IntakeIconName +".png'></img>" + cleanStr(producer.intake) + " " + (producerYeild.val * 12) + "/hour");
+                    $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(producer.intake) + " " + (producerYeild.val * 12) + "/hour");
                   }
                 }
               })
@@ -869,12 +866,12 @@ $(function () {
     });
   });
 
-  $("#producer-sell-btn").click(function () { // if the user tries to sell a producer
+  $("#producer-sell-btn").click(function() { // if the user tries to sell a producer
     API.send("sell-producer", { // tell the server (to frick off)
       username: username,
       password: password,
       target: $(".hidden-id").text()
-    }, function (response) {
+    }, function(response) {
       $(".producer-info").hide(); // hide the producer info
       $("." + $(".hidden-target").text()).unbind("click"); // unbind ability to view removed producer information
       updateBalance() // update user's balance
@@ -882,7 +879,7 @@ $(function () {
     });
   });
 
-  $("#logout-btn").click(function () { // if the user chooses to logout (goodbye user ): ...)
+  $("#logout-btn").click(function() { // if the user chooses to logout (goodbye user ): ...)
     window.location.replace("/logout"); // redirect to the logout page
   });
 
