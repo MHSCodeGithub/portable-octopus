@@ -161,7 +161,7 @@ $(function () {
   }
 
   function drawSelect(x, y, reason) { // used to display a selection of a tile on the map
-    $(".y-" + y + ".x-" + x).css("background", "url('img/map/selected-tile.png')");
+    $(".y-" + y + ".x-" + x).css("background-image", "url('img/map/selected-tile.png'), url('img/map/grass.png')");
     $(".y-" + y + ".x-" + x).css("background-size", "contain");
     $(".y-" + y + ".x-" + x).addClass("selected " + reason);
   }
