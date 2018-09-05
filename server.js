@@ -1,28 +1,54 @@
+
+/* Initialisations
+––––––––––––––––––––––––––––––––––––––– */
+
 const automaticRoute = require('automatic-routing');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var session = require('express-session');
-var app = require('express')();
-var http = require('http').Server(app);
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const session = require('express-session');
+const app = require('express')();
+const http = require('http').Server(app);
 const sha256 = require('sha256');
 const api = require('./api');
-var port = process.env.PORT || 3000;
+const Player = require('./framework/classes/player');
+const Kingdom = require('./framework/classes/kingdom');
+const Treasury = require('./framework/classes/treasury');
+const Harbour = require('./framework/classes/harbour');
+const database = require('./database');
 
+var port = process.env.PORT || 3000; // set the port
+
+// initialise cookies/sessions
 app.use(cookieParser());
 app.use(session({
   secret: "Shh, its a secret!"
 }));
+
+// setup post data handling
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-const Player = require('./framework/classes/player');
-const Kingdom = require('./framework/classes/kingdom');
-const Treasury = require('./framework/classes/treasury');
-const Harbour = require('./framework/classes/harbour');
+// set the charset
+app.use(function(req, res, next) {
+  res.setHeader('charset', 'utf-8')
+  next();
+});
 
-const database = require('./database');
+// set the gets
+var apiGets = {
+  // # items
+  items: database.getItems(),
+  // # ping
+  ping: "pong"
+}
+
+// setup API
+api.setup(app, apiGets);
+
+/* Functions
+––––––––––––––––––––––––––––––––––––––– */
 
 /**
  *
@@ -100,19 +126,8 @@ function cleanStr(string) {
   return string;
 }
 
-app.use(function(req, res, next) {
-  res.setHeader('charset', 'utf-8')
-  next();
-});
-
-var apiGets = {
-  // # items
-  items: database.getItems(),
-  // # ping
-  ping: "pong"
-}
-
-api.setup(app, apiGets);
+/* Routing
+––––––––––––––––––––––––––––––––––––––– */
 
 app.get('/', function(req, res) {
   res.cookie('failedReg', false, {
@@ -220,6 +235,13 @@ app.post('/', function(req, res) {
     }
   }
 });
+
+app.get("*", function(req, res) {
+  automaticRoute(__dirname + "/front-end/", req, res);
+});
+
+/* Game Functions
+––––––––––––––––––––––––––––––––––––––– */
 
 /**
  *
@@ -331,9 +353,8 @@ setInterval(function() {
   }
 }, 3 * 60 * 1000);
 
-app.get("*", function(req, res) {
-  automaticRoute(__dirname + "/front-end/", req, res);
-});
+/* Server Listening
+––––––––––––––––––––––––––––––––––––––– */
 
 http.listen(port, function() {
   console.log('listening on *:' + port);
