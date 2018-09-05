@@ -2,7 +2,7 @@
 ––––––––––––––––––––––––––––––––––––––– */
 body {
   background: url('../img/background.jpg');
-  background-size: contain;
+  background-size: cover;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -98,6 +98,7 @@ input[type=submit] {
   border: none;
   align-self: center;
   font-size: 2.5em;
+  padding-bottom: 20px;
 }
 
 input[type=submit]:hover {

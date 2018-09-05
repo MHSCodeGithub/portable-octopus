@@ -303,6 +303,8 @@ th {
   color: white;
   padding-bottom: 10px;
   font-size: 0.95em;
+  display: table;
+  margin: 0 auto;
   margin-bottom: -3px;
 }
 
@@ -323,6 +325,8 @@ th {
   border: none;
   padding-bottom: 6px;
   font-size: 1.2em;
+  display: table;
+  margin: 0 auto;
   margin-bottom: -3px;
 }
 
