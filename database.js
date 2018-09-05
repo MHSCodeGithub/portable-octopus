@@ -1,3 +1,4 @@
+
 const fs = require('fs');
 
 if (!fs.existsSync("./data.json")) { // check if the db is alive
