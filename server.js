@@ -227,7 +227,7 @@ app.post('/', function(req, res) {
  *
  * @param {String} string
  *
- * @description Every 5 minutes the server pays every user their according taxes,
+ * @description Every 3 minutes the server pays every user their according taxes,
  *              makes their producers produce and feeds their citizens
  *
  **/
@@ -329,7 +329,7 @@ setInterval(function() {
       testAcc.update()
     }
   }
-}, 5 * 60 * 1000);
+}, 3 * 60 * 1000);
 
 app.get("*", function(req, res) {
   automaticRoute(__dirname + "/front-end/", req, res);
