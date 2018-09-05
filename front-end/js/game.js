@@ -599,36 +599,38 @@ $(function () {
         <tr class="order-spacer"></tr>
         `); // empty table and provide headers/create order button
       for (var i = 0; i < orders.length; i++) { // for each order
-        if (orders[i].author == username) { // if the order is created by self
-          $("#market-table").append( // append the order to the table, however provide a cancel button
-            `
-              <tr id="order-${orders[i].id}">
-                <td>${orders[i].type}</td>
-                <td>${orders[i].commodity}</td>
-                <td>$${orders[i].price}</td>
-                <td>${orders[i].amount}</td>
-                <td>${orders[i].fulfillment}/${orders[i].amount}</td>
-                <td>${orders[i].author}</td>
-                <td><button class="order-created-cancel">Cancel</button></td>
-              </tr>
-              <tr class="order-spacer"></tr>
-            `
-          );
-        } else { // if the order is created by someone else
-          $("#market-table").append( // provide fulfill button
-            `
-              <tr id="order-${orders[i].id}">
-                <td>${orders[i].type}</td>
-                <td>${orders[i].commodity}</td>
-                <td>$${orders[i].price}</td>
-                <td>${orders[i].amount}</td>
-                <td>${orders[i].fulfillment}/${orders[i].amount}</td>
-                <td>${orders[i].author}</td>
-                <td><button class="order-fulfill">Fulfill</button></td>
-              </tr>
-              <tr class="order-spacer"></tr>
-            `
-          );
+        if(order[i]) {
+          if (orders[i].author == username) { // if the order is created by self
+            $("#market-table").append( // append the order to the table, however provide a cancel button
+              `
+                <tr id="order-${orders[i].id}">
+                  <td>${orders[i].type}</td>
+                  <td>${orders[i].commodity}</td>
+                  <td>$${orders[i].price}</td>
+                  <td>${orders[i].amount}</td>
+                  <td>${orders[i].fulfillment}/${orders[i].amount}</td>
+                  <td>${orders[i].author}</td>
+                  <td><button class="order-created-cancel">Cancel</button></td>
+                </tr>
+                <tr class="order-spacer"></tr>
+              `
+            );
+          } else { // if the order is created by someone else
+            $("#market-table").append( // provide fulfill button
+              `
+                <tr id="order-${orders[i].id}">
+                  <td>${orders[i].type}</td>
+                  <td>${orders[i].commodity}</td>
+                  <td>$${orders[i].price}</td>
+                  <td>${orders[i].amount}</td>
+                  <td>${orders[i].fulfillment}/${orders[i].amount}</td>
+                  <td>${orders[i].author}</td>
+                  <td><button class="order-fulfill">Fulfill</button></td>
+                </tr>
+                <tr class="order-spacer"></tr>
+              `
+            );
+          }
         }
       }
 
