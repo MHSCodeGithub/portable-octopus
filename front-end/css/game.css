@@ -96,6 +96,12 @@ body * {
   cursor: pointer;
 }
 
+#help-btn {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 110px;
+}
+
 #logout-btn {
   background: url("../img/logout-btn.png");
   background-size: contain;
