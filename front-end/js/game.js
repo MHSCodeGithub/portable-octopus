@@ -733,7 +733,7 @@ $(function() {
             var item = `
             <div class="shop-item" id="item-` + items[i].id + `">
               <h2 class="item-name">` + items[i].name + `</h2>
-              <h3>Tier: ${function () {
+              <h3>Tier: ${function () { // display tier
                 if (items[i].tier == 1) { return "I"; }
                 if (items[i].tier == 2) { return "II"; }
                 if (items[i].tier == 1) { return "III"; }
@@ -742,7 +742,7 @@ $(function() {
                 <img src="` + items[i].image + `" alt="" class="item-img">
                 <p class="item-desc">` + items[i].description + `</p>
               </div>
-              <p>Intake: ${function () {
+              <p>Intake: ${function () { // display intake
                 if (items[i].intake == "None") {
                   return "None";
                 } else if (items[i].intake == "food") {
@@ -751,7 +751,7 @@ $(function() {
                   return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].intake}.png'></img> ${cleanStr(items[i].intake)}`;
                 }
               }()}</p>
-              <p>Produce: ${function () {
+              <p>Produce: ${function () { // display produce
                 if (items[i].produce == "None") {
                   return "None";
                 } else {
