@@ -311,6 +311,15 @@ exports.setup = function(app, gets) { // when the API is setup
           data: "Invalid Username/Password"
         })
       }
+    } else if (type == "get-other-map") { // if the post type is get map
+      var testAcc = framework.database.getAccount(data.username)
+      var kingdom = testAcc.kingdom; // get JSON version of user's kingdom
+
+      var target = kingdom.producers;
+      target.push(kingdom.treasury);
+      target.push(kingdom.harbour);
+
+      res.send(kingdom.producers); // send all producers in kingdom
     } else if (type == "get-commodities") { // if the post type is get commodities
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if (testAcc.check()) { // the the account is valid
@@ -612,6 +621,51 @@ exports.setup = function(app, gets) { // when the API is setup
           data: "Invalid Username/Password"
         })
       }
+    } else if (type == "get-other-producer") { // if the post type is get producer
+      var testAcc = framework.database.getAccount(data.username);
+      console.log(testAcc);
+
+      for (var i = 0; i < testAcc.kingdom.producers.length; i++) { // go through the user's producers
+        if (testAcc.kingdom.producers[i].id == Number(data.target)) { // if the target producer matches the producer
+          res.send(testAcc.kingdom.producers[i]); // send JSON version of the producer
+          return;
+        }
+      }
+
+      res.send({
+        type: "error",
+        data: "Request for non-existant producer, please contact developers!"
+      });
+    } else if (type == "get-leaderboard") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account
+      if (testAcc.check()) { // validate the account
+        var accounts = framework.database.read().accounts; // get accounts from db
+
+        var leaderboard = [];
+
+        for (var account in accounts) {
+          var currentAccount = accounts[account];
+          leaderboard.push({username: currentAccount.username, balance: currentAccount.kingdom.treasury.balance});
+        }
+
+        leaderboard.sort(function (a, b) {
+          if(a.balance > b.balance) {
+            return -1;
+          } else if(b.balance > a.balance) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+
+        console.log(leaderboard);
+        res.send(leaderboard);
+      } else {
+        res.send({
+          type: "error",
+          data: "Invalid Username/Password"
+        })
+      }
     } else if (type == "get-yeild") { // if the post type is get yeild
       var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account
       if (testAcc.check()) { // validate the account
@@ -636,10 +690,28 @@ exports.setup = function(app, gets) { // when the API is setup
           data: "Invalid Username/Password"
         })
       }
+    } else if (type == "get-other-yeild") { // if the post type is get yeild
+      var testAcc = new framework.Player(0, data.username, null, null, true);
+      if(testAcc.weakCheck()) {
+
+        for (var i = 0; i < testAcc.kingdom.producers.length; i++) { // for each producer the user owns
+          if (testAcc.kingdom.producers[i].id == data.target) { // check if producer is target
+            res.send({
+              val: testAcc.kingdom.producers[i].yeild()
+            }); // send the yeild of the producer
+            return; // prevent double sending
+          }
+        }
+
+        res.send({
+          type: "error",
+          data: "Request for non-existant producer, please contact developers!"
+        }); // will run if no producer is matched
+      }
     } else {
       res.send({
         type: "error",
-        data: "No API Answer, please contact developers!"
+       data: "No API Answer, please contact developers!"
       });
     }
   });

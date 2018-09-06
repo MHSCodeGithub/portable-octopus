@@ -651,3 +651,28 @@ th {
   height: 15vw;
   margin: 20px;
 }
+
+/* LEADERBOARD MODAL
+––––––––––––––––––––––––––––––––––––––– */
+
+#leaderboard-table {
+  border-spacing: 0;
+  margin: 25px;
+  max-height: 100%;
+  width: 80%;
+  overflow: visible;
+}
+
+#leaderboard-table th, #leaderboard-table td {
+  text-align: center;
+  padding: 3px 15px;
+}
+
+#leaderboard-table td {
+  font-size: 1.4em;
+}
+
+#leaderboard-table tr {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+}
