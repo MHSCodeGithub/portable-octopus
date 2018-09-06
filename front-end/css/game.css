@@ -624,3 +624,12 @@ th {
   display: block;
   float: left;
 }
+
+/* HELP MODAL
+––––––––––––––––––––––––––––––––––––––– */
+
+.help-img {
+  width: 15vw;
+  height: 15vw;
+  margin: 20px;
+}
