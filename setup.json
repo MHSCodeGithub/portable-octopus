@@ -13,7 +13,8 @@
       "description": "A house that shelters citizens!",
       "price": 100,
       "intake": "food",
-      "produce": "None"
+      "produce": "None",
+      "tier": 1
     }, {
       "id": 0,
       "name": "Wheat Farm",
@@ -21,7 +22,8 @@
       "description": "A farm that produces wheat!",
       "price": 100,
       "intake": "None",
-      "produce": "wheat"
+      "produce": "wheat",
+      "tier": 1
     }, {
       "id": 1,
       "name": "Cotton Farm",
@@ -29,7 +31,8 @@
       "description": "A farm that produces cotton!",
       "price": 300,
       "intake": "None",
-      "produce": "cotton"
+      "produce": "cotton",
+      "tier": 1
     }, {
       "id": 2,
       "name": "Cattle Farm",
@@ -37,7 +40,8 @@
       "description": "A farm that produces meat!",
       "price": 500,
       "intake": "None",
-      "produce": "beef"
+      "produce": "beef",
+      "tier": 1
     }, {
       "id": 11,
       "name": "Hop Farm",
@@ -45,7 +49,8 @@
       "description": "A farm that produces hops!",
       "price": 800,
       "intake": "None",
-      "produce": "hop"
+      "produce": "hop",
+      "tier": 1
     }, {
       "id": 12,
       "name": "Brewery",
@@ -53,7 +58,8 @@
       "description": "A brewery that uses hops to make beer!",
       "price": 1600,
       "intake": "hop",
-      "produce": "beer"
+      "produce": "beer",
+      "tier": 2
     }, {
       "id": 13,
       "name": "Grape Farm",
@@ -61,7 +67,8 @@
       "description": "A farm that produces grapes!",
       "price": 1000,
       "intake": "None",
-      "produce": "grape"
+      "produce": "grape",
+      "tier": 1
     }, {
       "id": 14,
       "name": "Winery",
@@ -69,7 +76,8 @@
       "description": "A winery that uses grapes to make wine!",
       "price": 2000,
       "intake": "grape",
-      "produce": "wine"
+      "produce": "wine",
+      "tier": 2
     }, {
       "id": 15,
       "name": "Quarry",
@@ -77,7 +85,8 @@
       "description": "A quarry that produces stone!",
       "price": 100,
       "intake": "None",
-      "produce": "stone"
+      "produce": "stone",
+      "tier": 1
     }, {
       "id": 16,
       "name": "Wood Farm",
@@ -85,7 +94,8 @@
       "description": "A farm that produces wood!",
       "price": 100,
       "intake": "None",
-      "produce": "wood"
+      "produce": "wood",
+      "tier": 1
     }, {
       "id": 3,
       "name": "Mill",
@@ -93,7 +103,8 @@
       "description": "A mill that grinds wheat and turns it into flour!",
       "price": 200,
       "intake": "wheat",
-      "produce": "flour"
+      "produce": "flour",
+      "tier": 2
     }, {
       "id": 4,
       "name": "Bakery",
@@ -101,7 +112,8 @@
       "description": "A bakery that bakes wheat and turns it into bread!",
       "price": 400,
       "intake": "flour",
-      "produce": "wheat"
+      "produce": "wheat",
+      "tier": 3
     }, {
       "id": 5,
       "name": "Cotton Mill",
@@ -109,7 +121,8 @@
       "description": "A cotton mill that turns cotton into clothing!",
       "price": 600,
       "intake": "cotton",
-      "produce": "clothing"
+      "produce": "clothing",
+      "tier": 2
     }, {
       "id": 6,
       "name": "Butchery",
@@ -117,7 +130,8 @@
       "description": "A butchery that turns meat into smoked meat!",
       "price": 1000,
       "intake": "beef",
-      "produce": "smoked_beef"
+      "produce": "smoked_beef",
+      "tier": 2
     }, {
       "id": 7,
       "name": "Gold Mine",
@@ -125,7 +139,8 @@
       "description": "A mine that collects gold!",
       "price": 1200,
       "intake": "None",
-      "produce": "gold"
+      "produce": "gold",
+      "tier": 1
     }, {
       "id": 8,
       "name": "Iron Mine",
@@ -133,7 +148,8 @@
       "description": "A mine that collects iron!",
       "price": 900,
       "intake": "None",
-      "produce": "iron"
+      "produce": "iron",
+      "tier": 1
     }, {
       "id": 9,
       "name": "Gem Mine",
@@ -141,7 +157,8 @@
       "description": "A mine that collects gems!",
       "price": 2000,
       "intake": "None",
-      "produce": "gem"
+      "produce": "gem",
+      "tier": 1
     }, {
       "id": 10,
       "name": "Blacksmith",
@@ -149,7 +166,8 @@
       "description": "A blacksmith that turns iron into iron swords!",
       "price": 1800,
       "intake": "iron",
-      "produce": "iron_sword"
+      "produce": "iron_sword",
+      "tier": 2
     }
   ],
   "commodities": [

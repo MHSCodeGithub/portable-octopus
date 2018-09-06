@@ -733,6 +733,11 @@ $(function() {
             var item = `
             <div class="shop-item" id="item-` + items[i].id + `">
               <h2 class="item-name">` + items[i].name + `</h2>
+              <h3>Tier: ${function () {
+                if (items[i].tier == 1) { return "I"; }
+                if (items[i].tier == 2) { return "II"; }
+                if (items[i].tier == 1) { return "III"; }
+              }()}</h3>
               <div class="item-desc-wrap">
                 <img src="` + items[i].image + `" alt="" class="item-img">
                 <p class="item-desc">` + items[i].description + `</p>
