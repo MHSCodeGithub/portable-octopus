@@ -907,7 +907,7 @@ $(function() {
               <h3>Tier: ${function () { // display tier
                 if (items[i].tier == 1) { return "I"; }
                 if (items[i].tier == 2) { return "II"; }
-                if (items[i].tier == 1) { return "III"; }
+                if (items[i].tier == 3) { return "III"; }
               }()}</h3>
               <div class="item-desc-wrap">
                 <img src="` + items[i].image + `" alt="" class="item-img">
