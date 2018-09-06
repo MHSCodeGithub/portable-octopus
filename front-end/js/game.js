@@ -227,6 +227,24 @@ $(function() {
 
   /**
    *
+   * @function updateKingdomInfo()
+   *
+   * @description updates a users kingdom information panel
+   *
+   **/
+
+  function updateKingdomInfo() {
+    API.send("get-info", {
+      username: username,
+      password: password
+    }, function(kingdomInfo) { // get users info
+      $("#info-alive-citizens").text(kingdomInfo.aliveCitizens);
+      $("#info-potential-citizens").text(kingdomInfo.potentialCitizens);
+    });
+  }
+
+  /**
+   *
    * @function updateMap()
    *
    * @description updates the game map to reflect the user's kingdom
@@ -780,6 +798,7 @@ $(function() {
   setInterval(function() {
     if ($("#commodities-table").is(":visible")) { // if commodity list is visible
       updateCommodities()
+      updateKingdomInfo()
     } else if ($("#market").is(":visible")) { // if market is visible
       updateOrders()
     }
@@ -810,6 +829,7 @@ $(function() {
 
   $("#stockpile-btn").click(function() { // when the stockpile button is clicked
     updateCommodities(); // update the stockpile
+    updateKingdomInfo();
   });
 
 
