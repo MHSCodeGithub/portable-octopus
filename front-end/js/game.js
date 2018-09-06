@@ -291,7 +291,7 @@ $(function() {
       $(".user-visit").bind("click", function () {
         $(".modal").css('display', 'none'); // hide menu item
         $panzoom.panzoom("enable")
-        visitOtherMap(String($(this).parent().parent().children().eq(1).text()));
+        visitOtherMap(String($(this).parent().parent().children().eq(1).text())); // visit target's kingdom
       });
     })
   }
@@ -356,10 +356,10 @@ $(function() {
       `);
 
       $("#return-btn").unbind("click");
-      $("#return-btn").bind("click", function () {
-        $(this).remove()
-        $("#menu").children().show();
-        updateMap();
+      $("#return-btn").bind("click", function () { // when a user visits another kingdom and wishes to return
+        $(this).remove() // destroy self
+        $("#menu").children().show(); // show original menu items
+        updateMap(); // retunr to home map
       });
 
       $('.built').unbind("click");
@@ -718,15 +718,6 @@ $(function() {
       id: id
     }, function(order) { // get order data
       $("#fulfill-order-div").html( // display order data in form
-        // `
-        //   <h1>Fulfill Order</h1>
-        //     <tr>
-        //       <span>Type: </span><span id="fulfill-type">${order.type}</span><br>
-        //       <span>Price: </span>$<span id="fulfill-price">${order.price}</span><br>
-        //       <span>Amount to Buy/Sell </span><input id="fulfill-amount" type="number" value="1" min="1" max="${order.amount-order.fulfillment}">/${order.amount-order.fulfillment}<br>
-        //       <button type="button" id="fulfill-submit">Fulfill</button>
-        //     </tr>
-        // `
         `
         <h1 id="order-popup-title">ORDER</h1>
 
@@ -977,12 +968,6 @@ $(function() {
       $("#" + target + "-modal").css('display', 'none'); // close menu item
     }
   });
-
-  /*window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }*/
 
   /* Front-end JS
   ––––––––––––––––––––––––––––––––––––––– */
