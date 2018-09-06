@@ -280,6 +280,147 @@ $(function() {
           `
         );
       }
+
+      $(".user-visit").unbind("click");
+      $(".user-visit").bind("click", function () {
+        visitOtherMap(String($(this).parent().parent().children().eq(1).text()));
+      });
+    })
+  }
+
+  /**
+   *
+   * @function displayMap()
+   *
+   * @param {Array} data
+   *
+   * @description displays a map
+   *
+   **/
+
+  function displayMap(data) {
+    for (var i = 0; i < 19; i++) { // set map to be just grass
+      for (var j = 0; j < 19; j++) {
+        drawGrass(i + 1, j + 1);
+      }
+    }
+
+    for (var i = 0; i < data.length; i++) { // go through every block
+      var producer = data[i];
+
+      if (i == data.length - 2) { //
+        drawFeature(producer.id, producer.y, producer.x, "treasury"); // Draw harbout/treasury at
+      } else if (i == data.length - 1) { // designated positions.
+        drawFeature(producer.id, producer.y, producer.x, "harbour");
+      } else { // draw producers
+        if (producer.type == "farm") { // if producer is subtype of farm
+          drawFarm(producer.id, producer.y, producer.x, producer.subType);
+        } else if (producer.type == "mine") { // if producer is subtype of mine
+          drawMine(producer.id, producer.y, producer.x, producer.subType);
+        } else if (producer.type == "house") { // if producer is house
+          drawFeature(producer.id, producer.y, producer.x, "house");
+        } else { // if normal producer
+          drawProducer(producer.id, producer.y, producer.x, producer.type);
+        }
+      }
+    }
+  }
+
+  /**
+   *
+   * @function visitOtherMap()
+   *
+   * @description shows another user's map
+   *
+   **/
+
+  function visitOtherMap(targetUsername) {
+    console.log(targetUsername);
+    API.send("get-other-map",
+    {
+      username: targetUsername
+    }, function (map) { // get map from server
+      displayMap(map);
+      console.log(map);
+
+      $('.built').unbind("click");
+      $('.built').bind("click", function() { // when a producer is clicked on
+        $(".producer-info").show()
+
+        if ($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" || // if target is not producer
+          $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") { // hide producer info
+          $(".producer-info").hide() // hide producer info
+          return; // end function
+        }
+
+        /* Misc Local Vars
+        ––––––––––––––––––––––––––––––––––––––– */
+        var id = $(this).attr("class").split(" ")[0].split("-")[1];
+        var target = $(this).attr("class").split(" ")[0].split("-")[1];
+        var another = $(this).attr("class").split(" ")[0];
+
+        /* Data Response/Event Handling
+        ––––––––––––––––––––––––––––––––––––––– */
+        API.send("get-other-producer", { // get producer info
+          username: targetUsername,
+          target: target
+        }, function(data) {
+
+          $(".hidden-id").text(id); // set hidden data for later use
+          $(".hidden-target").text(another);
+
+          API.get("items", function(items) { // get all possible producers
+            if (data.subType) {
+              data.type = data.subType + " " + data.type;
+            } // change producer type to fit if has subtype
+
+            for (var i = 0; i < items.length; i++) { // for every producer
+              if (items[i].name == cleanStr(data.type)) { // if producer is target
+                var price = items[i].price;
+
+                API.send("get-other-yeild", { // get producer yield
+                  username: targetUsername,
+                  target: $(".hidden-id").text()
+                }, function(producerYeild) {
+
+                  /* Set Producer Information Front End
+                  ––––––––––––––––––––––––––––––––––––––– */
+                  $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
+                  $(".producer-info-level").text("Lvl." + data.level);
+                  $("#producer-upgrade-btn").text("Upgrade($" + (price * (data.level + 1)) + ")").hide();
+                  $("#producer-sell-btn").text("Sell(+$" + ((price * data.level) / 2) + ")").hide();
+
+                  if (data.type == "house") { // producer is a house
+                    $(".producer-info-gen").text(data.citizens + " citizens!");
+                    $(".producer-info-intake").text("");
+                    $(".producer-info-working").text("")
+                  } else { // if not a house
+                    var OutputIconName = data.produce;
+                    OutputIconName.replace(" ", "_");
+
+                    $(".producer-info-gen").html("Output:<img class='text-icon producer-info-icon' src='img/commodities/" + OutputIconName + ".png'></img>" + cleanStr(data.produce) + " " + (producerYeild.val * 12) + "/hour");
+
+                    if (data.functioning == true) { // if producer is producing
+                      $(".producer-info-working").text("Producing!") // show producer info
+                    } else {
+                      $(".producer-info-working").text("Not Producing!")
+                    }
+
+                    var IntakeIconName = data.intake.toLowerCase();
+                    IntakeIconName.replace(" ", "_");
+
+                    if (data.intake == "None") { // clean data.intake output
+                      $(".producer-info-intake").text("Intake: " + cleanStr(data.intake));
+                    } else {
+                      $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
+                    }
+                  }
+                })
+              }
+            }
+          })
+        })
+      });
     })
   }
 
@@ -297,31 +438,7 @@ $(function() {
       username: username,
       password: password
     }, function(data) { // request map from server
-      for (var i = 0; i < 19; i++) { // set map to be just grass
-        for (var j = 0; j < 19; j++) {
-          drawGrass(i + 1, j + 1);
-        }
-      }
-
-      for (var i = 0; i < data.length; i++) { // go through every block
-        var producer = data[i];
-
-        if (i == data.length - 2) { //
-          drawFeature(producer.id, producer.y, producer.x, "treasury"); // Draw harbout/treasury at
-        } else if (i == data.length - 1) { // designated positions.
-          drawFeature(producer.id, producer.y, producer.x, "harbour");
-        } else { // draw producers
-          if (producer.type == "farm") { // if producer is subtype of farm
-            drawFarm(producer.id, producer.y, producer.x, producer.subType);
-          } else if (producer.type == "mine") { // if producer is subtype of mine
-            drawMine(producer.id, producer.y, producer.x, producer.subType);
-          } else if (producer.type == "house") { // if producer is house
-            drawFeature(producer.id, producer.y, producer.x, "house");
-          } else { // if normal producer
-            drawProducer(producer.id, producer.y, producer.x, producer.type);
-          }
-        }
-      }
+      displayMap(data);
 
       /* Block Interactions
       ––––––––––––––––––––––––––––––––––––––– */
@@ -371,8 +488,8 @@ $(function() {
                   ––––––––––––––––––––––––––––––––––––––– */
                   $(".producer-info-name").html(cleanStr(data.type) + " <span class='producer-info-level'></span>");
                   $(".producer-info-level").text("Lvl." + data.level);
-                  $("#producer-upgrade-btn").text("Upgrade($" + (price * (data.level + 1)) + ")");
-                  $("#producer-sell-btn").text("Sell(+$" + ((price * data.level) / 2) + ")");
+                  $("#producer-upgrade-btn").text("Upgrade($" + (price * (data.level + 1)) + ")").show();
+                  $("#producer-sell-btn").text("Sell(+$" + ((price * data.level) / 2) + ")").show();
 
                   if (data.type == "house") { // producer is a house
                     $(".producer-info-gen").text(data.citizens + " citizens!");
@@ -749,6 +866,8 @@ $(function() {
 
 
   $(".modal-btn").click(function() { // when a menu button is clicked
+
+    updateMap();
 
     var target = $(this).attr('id').split('-')[0]; // get button being clicked on
     if ($("#" + target + "-modal").css('display') == 'none') { // if modal is hidden
