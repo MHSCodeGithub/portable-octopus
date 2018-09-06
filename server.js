@@ -165,44 +165,43 @@ app.get("*", function(req, res) {
  **/
 
 setInterval(function() {
-  var accounts = database.read().accounts;
-  var commodities = database.read().commodities;
+  var accounts = database.read().accounts; // get accounts in db
+  var commodities = database.read().commodities; // get commodities in db
 
-  for (var i = 0; i < objectLength(accounts); i++) {
-    var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true)
-    if (testAcc.check()) {
-      for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
-        var producer = testAcc.kingdom.producers[j];
+  for (var i = 0; i < objectLength(accounts); i++) { // go through all accounts
+    var testAcc = new Player(0, accounts[i].username, accounts[i].password, null, true) // create test account
+    if (testAcc.check()) { // check validity
+      for (var j = 0; j < testAcc.kingdom.producers.length; j++) { // go through user's producers
+        var producer = testAcc.kingdom.producers[j]; // select the current producer
 
+        // general info on teh producer at hand
         var amount = producer.yeild();
         var tier = producer.tier;
         var level = producer.level;
 
-        if (producer.type == "house") {
-          var fed = false;
-          for (var k = 0; k < testAcc.kingdom.harbour.commodities.length; k++) {
-            if (commodities[k].type == "Food") {
-              if (amount) {
-                if (testAcc.kingdom.harbour.commodities[k].amount >= amount) {
-                  testAcc.kingdom.harbour.commodities[k].amount -= amount;
-                  amount = 0;
-                  break;
-                } else {
-                  amount -= testAcc.kingdom.harbour.commodities[k].amount;
+        if (producer.type == "house") { // if the producer is a house
+          for (var k = 0; k < testAcc.kingdom.harbour.commodities.length; k++) { // for each commodity in the harbour
+            if (commodities[k].type == "Food") { // if the commodity is food (yum, I need breakfast)
+              if (amount) { // if the user has some food (k, back from breakfast)
+                if (testAcc.kingdom.harbour.commodities[k].amount >= amount) { // if the user has enough food to feed the citizens
+                  testAcc.kingdom.harbour.commodities[k].amount -= amount; // reduce food (feed citizens)
+                  amount = 0; // reduce amount to prevent more feeding (we dont want fat citizens)
+                  break; // end the loop
+                } else { // if the user does not have enough of this commodity to feel the citizens
+                  amount -= testAcc.kingdom.harbour.commodities[k].amount; // take remaining food from this commodity
                   testAcc.kingdom.harbour.commodities[k].amount = 0;
                 }
               }
             }
           }
 
-          if (amount > 0) {
-            console.log(`left over ${amount}`);
-            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild() - amount;
-            if (testAcc.kingdom.producers[j].citizens < 0) {
+          if (amount > 0) { // if the user has not fed some citizens
+            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild() - amount; // kill dead citizens (damn, thats the worst sentence I've ever written)
+            if (testAcc.kingdom.producers[j].citizens < 0) { // ensure that citizens are always at 0 (not below) (that would mean we get undead citizens)
               testAcc.kingdom.producers[j].citizens = 0;
             }
-          } else {
-            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild()
+          } else { // if the user has fed the citizens
+            testAcc.kingdom.producers[j].citizens = testAcc.kingdom.producers[j].yeild() // bring all dead people back to life
           }
 
           continue;
@@ -210,58 +209,74 @@ setInterval(function() {
 
       }
 
-      var citizens = testAcc.kingdom.getCitizens();
+      var citizens = testAcc.kingdom.getCitizens(); // get citizen count
 
-      for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
+      for (var j = 0; j < testAcc.kingdom.producers.length; j++) { // for each producer in kingdom
+        // general info on teh producer at hand
         var producer = testAcc.kingdom.producers[j];
 
         var amount = producer.yeild();
         var tier = producer.tier;
         var level = producer.level;
 
-        if (producer.type != "house") {
-          citizens -= producer.tier;
+        if (producer.type != "house") { // make sure producer is not a house (im not housist)
+          citizens -= producer.tier; // reduce citizens by the tier (e.g: 1 person works at a farm, but 2 people work at a mill)
 
-          if (citizens > 0) {
-            testAcc.kingdom.producers[j].functioning = true;
-            var data = database.read();
-            for (var k = 0; k < data.commodities.length; k++) {
-              if (data.commodities[k].name == cleanStr(producer.produce)) {
-                for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) {
-                  if (testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) {
-                    if (producer.intake != "None") {
-                      for (var b = 0; b < data.commodities.length; b++) {
-                        if (data.commodities[b].name == (producer.intake)) {
-                          for (var c = 0; c < testAcc.kingdom.harbour.commodities.length; c++) {
-                            if (testAcc.kingdom.harbour.commodities[c].id == data.commodities[b].id) {
-                              if (testAcc.kingdom.harbour.commodities[c].amount >= amount) {
-                                testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level);
-                                testAcc.kingdom.harbour.commodities[n].amount += amount;
-                                testAcc.kingdom.harbour.commodities[c].amount -= amount;
-                              } else {
-                                testAcc.kingdom.producers[j].functioning = false;
+          // my eyes are bleeding at whats ahead
+
+          if (citizens > 0) { // check that there are some available citizens
+            testAcc.kingdom.producers[j].functioning = true; // make producer funtion
+
+            var data = database.read(); // get db
+
+            for (var k = 0; k < data.commodities.length; k++) { // for each commodity template
+              if (data.commodities[k].name == cleanStr(producer.produce)) { // match with producer producer
+
+                for (var n = 0; n < testAcc.kingdom.harbour.commodities.length; n++) { // for user's commodities
+                  if (testAcc.kingdom.harbour.commodities[n].id == data.commodities[k].id) { // match commodities with the commodity template which matches with the producer's produce (kill me please)
+
+                    if (producer.intake != "None") { // if the producer does intake resources
+
+                      for (var b = 0; b < data.commodities.length; b++) { // for each commodity template
+                        if (data.commodities[b].name == (producer.intake)) { // if the commodity matches the producer's intake
+
+                          for (var c = 0; c < testAcc.kingdom.harbour.commodities.length; c++) { // go through the users commodities
+                            if (testAcc.kingdom.harbour.commodities[c].id == data.commodities[b].id) { // match the user's commodities with the commodity template
+
+                              if (testAcc.kingdom.harbour.commodities[c].amount >= amount) { // if the user has enough commodities to intake
+                                testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level); // pay user taxes
+                                testAcc.kingdom.harbour.commodities[n].amount += amount; // give user produce
+                                testAcc.kingdom.harbour.commodities[c].amount -= amount; // take away intake
+                              } else { // if the user cannot provide intake
+                                testAcc.kingdom.producers[j].functioning = false; // prevent producer from producing
                               }
+
                             }
                           }
+
                         }
                       }
-                    } else {
-                      testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level);
-                      testAcc.kingdom.harbour.commodities[n].amount += amount;
+
+                    } else { // if the producer does not intake
+                      testAcc.kingdom.treasury.balance += (Number(tier) * 6) * Number(level); // pay user taxes
+                      testAcc.kingdom.harbour.commodities[n].amount += amount; // give user produce
                     }
+
                   }
                 }
+
               }
             }
-          } else {
-            producer.functioning = false;
+
+          } else { // if there are no citizens to work
+            producer.functioning = false; // prevent the producer from producing
           }
         }
       }
-      testAcc.update()
+      testAcc.update() // update the user in the db
     }
   }
-}, 3 * 60 * 1000);
+}, 3 * 60 * 1000); // set set interval for 3m
 
 /* Server Listening
 ––––––––––––––––––––––––––––––––––––––– */
