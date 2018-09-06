@@ -217,7 +217,7 @@ $(function() {
               <td>${usersCommodities[i].name}</td>
               <td>${usersCommodities[i].type}</td>
               <td>${usersCommodities[i].amount}</td>
-              <td>${usersCommodities[i].production}</td>
+              <td>${usersCommodities[i].production}/hour</td>
             </tr>
           `
         );
