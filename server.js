@@ -15,6 +15,7 @@ const Kingdom = require('./framework/classes/kingdom');
 const Treasury = require('./framework/classes/treasury');
 const Harbour = require('./framework/classes/harbour');
 const database = require('./database');
+const routes = require('./routes');
 
 var port = process.env.PORT || 3000; // set the port
 
@@ -59,23 +60,23 @@ api.setup(app, apiGets);
  **/
 
 function getNextIDOfAccounts() {
-  var accounts = database.read().accounts;
-  current = -1;
-  for (var account in accounts) {
-    if (accounts[account].id > current) {
-      current = accounts[account].id
+  var accounts = database.read().accounts; // get accounts in db
+  current = -1; // set id, which will always be overwritten
+  for (var account in accounts) { // for each account
+    if (accounts[account].id > current) { // if teh account's ID is larger than the current id
+      current = accounts[account].id // set the current id to their ID
     }
   }
-  return current + 1;
+  return current + 1; // add 1 to the highest ID (giving us a unique ID)
 }
 
 /**
  *
- * @function capitalizeFirstLetter()
+ * @function objectLength()
  *
- * @param {String} string
+ * @param {Object} target
  *
- * @description returns the specified string however the first character is capitalized
+ * @description returns the amount of properties in the specified object
  *
  **/
 
@@ -113,15 +114,15 @@ function capitalizeFirstLetter(string) {
  **/
 
 function cleanStr(string) {
-  string = string.replace("_", " ");
+  string = string.replace("_", " "); // replace underscores with spaces
 
-  var words = string.split(" ");
+  var words = string.split(" "); // split the string up by spaces
 
-  for (var i = 0; i < words.length; i++) {
-    words[i] = capitalizeFirstLetter(words[i])
+  for (var i = 0; i < words.length; i++) { // for each word
+    words[i] = capitalizeFirstLetter(words[i]) // capitalize the first letter
   }
 
-  string = words.join(" ");
+  string = words.join(" "); // join string back together
 
   return string;
 }
@@ -129,115 +130,24 @@ function cleanStr(string) {
 /* Routing
 ––––––––––––––––––––––––––––––––––––––– */
 
-app.get('/', function(req, res) {
-  res.cookie('failedReg', false, {
-    httpOnly: false
-  });
-  res.cookie('failedLog', false, {
-    httpOnly: false
-  });
-
-  if (req.session.username && req.session.password) {
-    var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
-    if (tempAccount.check()) {
-      res.cookie('username', tempAccount.username, {
-        httpOnly: false
-      });
-      res.cookie('password', tempAccount.password, {
-        httpOnly: false
-      });
-      res.sendFile(__dirname + '/front-end/index.html');
-    } else {
-      req.session.username = false;
-      req.session.password = false;
-      res.cookie('failedLog', true, {
-        httpOnly: false
-      });
-      res.sendFile(__dirname + '/front-end/login.html');
-    }
-  } else {
-    req.session.username = false;
-    req.session.password = false;
-    res.sendFile(__dirname + '/front-end/login.html');
-  }
+app.get('/', function(req, res) { // if a client requests for the home directory
+  routes.handleHomeRequest(req, res); // send request to routes.js
 });
 
-app.get("/logout", function(req, res) {
-  res.cookie('failedReg', false, {
-    httpOnly: false
-  });
-  res.cookie('failedLog', false, {
-    httpOnly: false
-  });
-  req.session.username = false;
-  req.session.password = false;
-  res.sendFile(__dirname + '/front-end/login.html');
-})
-
 app.get('/index.html', function(req, res) {
-  res.cookie('failedReg', false, {
-    httpOnly: false
-  });
-  res.cookie('failedLog', false, {
-    httpOnly: false
-  });
+  routes.handleHomeRequest(req, res); // send request to routes.js
+});
 
-  if (req.session.username && req.session.password) {
-    var tempAccount = new Player(0, req.session.username, req.session.password, null, true);
-    if (tempAccount.check()) {
-      res.cookie('username', tempAccount.username, {
-        httpOnly: false
-      });
-      res.cookie('password', tempAccount.password, {
-        httpOnly: false
-      });
-      res.sendFile(__dirname + '/front-end/index.html');
-    } else {
-      req.session.username = false;
-      req.session.password = false;
-      res.cookie('failedLog', true, {
-        httpOnly: false
-      });
-      res.sendFile(__dirname + '/front-end/login.html');
-    }
-  } else {
-    req.session.username = false;
-    req.session.password = false;
-    res.sendFile(__dirname + '/front-end/login.html');
-  }
+app.get("/logout", function(req, res) { // if a client wishes to logout
+  routes.handleLogoutRequest(req, res); // send request to routes.js
 });
 
 app.post('/', function(req, res) {
-  if (req.body.type == "login") {
-    req.session.username = req.body.username;
-    req.session.password = sha256(req.body.password);
-    res.redirect('/');
-  } else if (req.body.type == "register") {
-    var treasury = new Treasury(0, 10, 10);
-    treasury.balance = 500;
-    var harbour = new Harbour(0, 19, 10);
-    harbour.commodities[0].amount = 10;
-    var kingdom = new Kingdom(0, req.body.kingdom, treasury, harbour);
-    var newAccount = new Player(getNextIDOfAccounts(), req.body.username, req.body.password, kingdom, false);
-    if (database.getAccount(newAccount.username)) {
-      req.session.username = null;
-      req.session.password = null;
-      res.cookie('failedReg', true, {
-        httpOnly: false
-      });
-      res.redirect('login.html');
-    } else {
-      req.session.username = newAccount.username;
-      req.session.password = newAccount.password;
-      console.log(` --- !! NEW ACCOUNT ID: ${newAccount.id} !! --- `);
-      newAccount.save();
-      res.redirect('/');
-    }
-  }
+  routes.handleRegisterOrLoginRequest(req, res); // send request to routes.js
 });
 
 app.get("*", function(req, res) {
-  automaticRoute(__dirname + "/front-end/", req, res);
+  automaticRoute(__dirname + "/front-end/", req, res); // automatically route to the front-end/ file
 });
 
 /* Game Functions
