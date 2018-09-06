@@ -2,6 +2,7 @@
 /* Importing
 ––––––––––––––––––––––––––––––––––––––– */
 
+const sha256 = require('sha256');
 const Player = require('./framework/classes/player');
 const Kingdom = require('./framework/classes/kingdom');
 const Treasury = require('./framework/classes/treasury');
