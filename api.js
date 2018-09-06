@@ -343,15 +343,15 @@ exports.setup = function(app, gets) { // when the API is setup
       var testAcc = new framework.Player(0, data.username, data.password, null, true);
       if (testAcc.check()) { // the the account is valid
 
-        var info = {
+        var info = { // create object container of data
           aliveCitizens: 0,
           potentialCitizens: 0
         }
 
         for (var j = 0; j < testAcc.kingdom.producers.length; j++) { // for each producer in user's kingdom
-          if(testAcc.kingdom.producers[j].type == "house") { // if it produces target commodity
-            info.aliveCitizens += testAcc.kingdom.producers[j].citizens;
-            info.potentialCitizens += testAcc.kingdom.producers[j].level * 5;
+          if(testAcc.kingdom.producers[j].type == "house") { // if the producer is a house
+            info.aliveCitizens += testAcc.kingdom.producers[j].citizens; // add to alive citizens count
+            info.potentialCitizens += testAcc.kingdom.producers[j].level * 5; // add to potential citizens count
           }
         }
 
