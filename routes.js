@@ -1,4 +1,95 @@
 
+/* Importing
+––––––––––––––––––––––––––––––––––––––– */
+
+const Player = require('./framework/classes/player');
+const Kingdom = require('./framework/classes/kingdom');
+const Treasury = require('./framework/classes/treasury');
+const Harbour = require('./framework/classes/harbour');
+const database = require('./database');
+
+/* Functions
+––––––––––––––––––––––––––––––––––––––– */
+
+/**
+ *
+ * @function getNextIDOfAccounts()
+ *
+ * @description returns the ID + 1 from the latest account
+ *
+ **/
+
+function getNextIDOfAccounts() {
+  var accounts = database.read().accounts; // get accounts in db
+  current = -1; // set id, which will always be overwritten
+  for (var account in accounts) { // for each account
+    if (accounts[account].id > current) { // if teh account's ID is larger than the current id
+      current = accounts[account].id // set the current id to their ID
+    }
+  }
+  return current + 1; // add 1 to the highest ID (giving us a unique ID)
+}
+
+/**
+ *
+ * @function objectLength()
+ *
+ * @param {Object} target
+ *
+ * @description returns the amount of properties in the specified object
+ *
+ **/
+
+function objectLength(target) {
+  var i = 0;
+  for (var property in target) {
+    i++;
+  }
+  return Number(i);
+};
+
+/**
+ *
+ * @function capitalizeFirstLetter()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however the first character is capitalized
+ *
+ **/
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
+ *
+ * @function cleanStr()
+ *
+ * @param {String} string
+ *
+ * @description returns the specified string however underscores are replaced with spaces
+ *              and all word's first letter is capitalized
+ *
+ **/
+
+function cleanStr(string) {
+  string = string.replace("_", " "); // replace underscores with spaces
+
+  var words = string.split(" "); // split the string up by spaces
+
+  for (var i = 0; i < words.length; i++) { // for each word
+    words[i] = capitalizeFirstLetter(words[i]) // capitalize the first letter
+  }
+
+  string = words.join(" "); // join string back together
+
+  return string;
+}
+
+/* Routing
+––––––––––––––––––––––––––––––––––––––– */
+
 /**
  *
  * @function handleHomeRequest()
@@ -56,7 +147,7 @@ exports.handleHomeRequest = function(req, res) {
  *
  **/
 
-exports.handleLogoutRequest = function () {
+exports.handleLogoutRequest = function (req, res) {
   res.cookie('failedReg', false, { // remove cookies
     httpOnly: false
   });
@@ -80,7 +171,7 @@ exports.handleLogoutRequest = function () {
  *
  **/
 
-exports.handleRegisterOrLoginRequest = function () {
+exports.handleRegisterOrLoginRequest = function (req, res) {
   if (req.body.type == "login") {
     req.session.username = req.body.username;
     req.session.password = sha256(req.body.password);
