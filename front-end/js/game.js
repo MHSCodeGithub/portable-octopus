@@ -617,7 +617,7 @@ $(function() {
           $("#order-commodity").append( // add commodity to commodity list
             `
               <option value="${data[i].name}-${data[i].amount}">
-                ${data[i].name} - ${data[i].amount}
+                ${data[i].name}
               </tr>
             `
           );
