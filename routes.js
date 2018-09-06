@@ -176,6 +176,9 @@ exports.handleRegisterOrLoginRequest = function (req, res) {
   if (req.body.type == "login") {
     req.session.username = req.body.username;
     req.session.password = sha256(req.body.password);
+    res.cookie('register', false, {
+      httpOnly: false
+    });
     res.redirect('/');
   } else if (req.body.type == "register") {
     var treasury = new Treasury(0, 10, 10);
@@ -195,6 +198,9 @@ exports.handleRegisterOrLoginRequest = function (req, res) {
       req.session.username = newAccount.username;
       req.session.password = newAccount.password;
       newAccount.save();
+      res.cookie('register', true, {
+        httpOnly: false
+      });
       res.redirect('/');
     }
   }
