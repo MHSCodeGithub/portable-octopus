@@ -737,6 +737,22 @@ $(function() {
                 <img src="` + items[i].image + `" alt="" class="item-img">
                 <p class="item-desc">` + items[i].description + `</p>
               </div>
+              <p>Intake: ${function () {
+                if (items[i].intake == "None") {
+                  return "None";
+                } else if (items[i].intake == "food") {
+                  return "Food";
+                } else {
+                  return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].intake}.png'></img> ${cleanStr(items[i].intake)}`;
+                }
+              }()}</p>
+              <p>Produce: ${function () {
+                if (items[i].produce == "None") {
+                  return "None";
+                } else {
+                  return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].produce}.png'></img> ${cleanStr(items[i].produce)}`;
+                }
+              }()}</p>
               <button id="item-button-` + items[i].id + `" class="item-buy-btn">$` + items[i].price + `</button>
             </div>
             `
