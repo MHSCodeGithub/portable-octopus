@@ -318,6 +318,16 @@ exports.setup = function(app, gets) { // when the API is setup
 
         for (var i = 0; i < data.length; i++) { // for each commodity template
           data[i].amount = testAcc.getCommodityAmount(data[i].id); // set the amount of each commodity
+
+          total = 0;
+
+          for (var j = 0; j < testAcc.kingdom.producers.length; j++) {
+            if(cleanStr(testAcc.kingdom.producers[j].produce) == data[i].name) {
+              total += testAcc.kingdom.producers[j].yeild() * 12;
+            }
+          }
+
+          data[i].production = total;
         }
 
         res.send(data); // send the users commodities w/amounts
