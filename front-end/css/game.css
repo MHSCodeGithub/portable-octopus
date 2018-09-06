@@ -551,6 +551,7 @@ th {
 ––––––––––––––––––––––––––––––––––––––– */
 #help-modal-wrap {
   padding: 0 260px;
+  padding-bottom: 40px;
 }
 
 #help-modal-wrap h2 {
