@@ -274,7 +274,13 @@ $(function() {
               <td>#${i+1}</td>
               <td>${leaderboard[i].username}</td>
               <td>$${leaderboard[i].balance}</td>
-              <td><button class="user-visit">Visit</button></td>
+              <td>${function () {
+                if(leaderboard[i].username == username) {
+                  return "Own Kingdom!"
+                } else {
+                  return "<button class='user-visit'>Visit</button>"
+                }
+              }()}</td>
             </tr>
             <tr class="order-spacer"></tr>
           `
@@ -447,7 +453,7 @@ $(function() {
    **/
 
   function updateMap() {
-    $(".producer-info").show()
+    $(".producer-info").hide() // hide producer info
 
     API.send("get-map", {
       username: username,
