@@ -11,109 +11,145 @@
       "name": "House",
       "image": "img/map/house.png",
       "description": "A house that shelters citizens!",
-      "price": 100
+      "price": 100,
+      "intake": "food",
+      "produce": "None"
     }, {
       "id": 0,
       "name": "Wheat Farm",
       "image": "img/map/farm-wheat.png",
       "description": "A farm that produces wheat!",
-      "price": 100
+      "price": 100,
+      "intake": "None",
+      "produce": "wheat"
     }, {
       "id": 1,
       "name": "Cotton Farm",
       "image": "img/map/farm-cotton.png",
       "description": "A farm that produces cotton!",
-      "price": 300
+      "price": 300,
+      "intake": "None",
+      "produce": "cotton"
     }, {
       "id": 2,
       "name": "Cattle Farm",
       "image": "img/map/farm-cattle.png",
       "description": "A farm that produces meat!",
-      "price": 500
+      "price": 500,
+      "intake": "None",
+      "produce": "beef"
     }, {
       "id": 11,
       "name": "Hop Farm",
       "image": "img/map/farm-hop.png",
       "description": "A farm that produces hops!",
-      "price": 800
+      "price": 800,
+      "intake": "None",
+      "produce": "hop"
     }, {
       "id": 12,
       "name": "Brewery",
       "image": "img/map/brewery.gif",
       "description": "A brewery that uses hops to make beer!",
-      "price": 1600
+      "price": 1600,
+      "intake": "hop",
+      "produce": "beer"
     }, {
       "id": 13,
       "name": "Grape Farm",
       "image": "img/map/farm-grape.png",
       "description": "A farm that produces grapes!",
-      "price": 1000
+      "price": 1000,
+      "intake": "None",
+      "produce": "grape"
     }, {
       "id": 14,
       "name": "Winery",
       "image": "img/map/winery.gif",
       "description": "A winery that uses grapes to make wine!",
-      "price": 2000
+      "price": 2000,
+      "intake": "grape",
+      "produce": "wine"
     }, {
       "id": 15,
       "name": "Quarry",
       "image": "img/map/quarry.gif",
       "description": "A quarry that produces stone!",
-      "price": 100
+      "price": 100,
+      "intake": "None",
+      "produce": "stone"
     }, {
       "id": 16,
       "name": "Wood Farm",
       "image": "img/map/farm-wood.png",
       "description": "A farm that produces wood!",
-      "price": 100
+      "price": 100,
+      "intake": "None",
+      "produce": "wood"
     }, {
       "id": 3,
       "name": "Mill",
       "image": "img/map/mill.gif",
       "description": "A mill that grinds wheat and turns it into flour!",
-      "price": 200
+      "price": 200,
+      "intake": "wheat",
+      "produce": "flour"
     }, {
       "id": 4,
       "name": "Bakery",
       "image": "img/map/bakery.gif",
       "description": "A bakery that bakes wheat and turns it into bread!",
-      "price": 400
+      "price": 400,
+      "intake": "flour",
+      "produce": "wheat"
     }, {
       "id": 5,
       "name": "Cotton Mill",
       "image": "img/map/cotton_mill.gif",
       "description": "A cotton mill that turns cotton into clothing!",
-      "price": 600
+      "price": 600,
+      "intake": "cotton",
+      "produce": "clothing"
     }, {
       "id": 6,
       "name": "Butchery",
       "image": "img/map/butchery.gif",
       "description": "A butchery that turns meat into smoked meat!",
-      "price": 1000
+      "price": 1000,
+      "intake": "beef",
+      "produce": "smoked_beef"
     }, {
       "id": 7,
       "name": "Gold Mine",
       "image": "img/map/mine-gold.gif",
       "description": "A mine that collects gold!",
-      "price": 1200
+      "price": 1200,
+      "intake": "None",
+      "produce": "gold"
     }, {
       "id": 8,
       "name": "Iron Mine",
       "image": "img/map/mine-iron.gif",
       "description": "A mine that collects iron!",
-      "price": 900
+      "price": 900,
+      "intake": "None",
+      "produce": "iron"
     }, {
       "id": 9,
       "name": "Gem Mine",
       "image": "img/map/mine-gem.gif",
       "description": "A mine that collects gems!",
-      "price": 2000
+      "price": 2000,
+      "intake": "None",
+      "produce": "gem"
     }, {
       "id": 10,
       "name": "Blacksmith",
       "image": "img/map/blacksmith.gif",
       "description": "A blacksmith that turns iron into iron swords!",
-      "price": 1800
+      "price": 1800,
+      "intake": "iron",
+      "produce": "iron_sword"
     }
   ],
   "commodities": [
