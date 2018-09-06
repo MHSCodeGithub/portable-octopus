@@ -238,7 +238,7 @@ $(function() {
       username: username,
       password: password
     }, function(kingdomInfo) { // get users info
-      $("#info-alive-citizens").text(kingdomInfo.aliveCitizens);
+      $("#info-alive-citizens").text(kingdomInfo.aliveCitizens); // update panel
       $("#info-potential-citizens").text(kingdomInfo.potentialCitizens);
     });
   }
