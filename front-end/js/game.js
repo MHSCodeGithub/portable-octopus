@@ -243,12 +243,20 @@ $(function() {
     });
   }
 
+  /**
+   *
+   * @function updateLeaderboard()
+   *
+   * @description updates the leaderboard panel
+   *
+   **/
+
   function updateLeaderboard() {
     API.send("get-leaderboard",
     {
       username: username,
       password: password
-    }, function (leaderboard) {
+    }, function (leaderboard) { // get leaderboard from server
       $("#leaderboard-table").html(`
         <tr id="table-headers">
           <th>Rank</th>
@@ -257,10 +265,10 @@ $(function() {
           <th>Visit</th>
         </tr>
         <tr class="order-spacer"></tr>
-      `);
+      `); // set table headers
 
-      for (var i = 0; i < leaderboard.length; i++) {
-        $("#leaderboard-table").append( // append the order to the table, however provide a cancel button
+      for (var i = 0; i < leaderboard.length; i++) { // for each user in leaderboard
+        $("#leaderboard-table").append( // append the user's details to the table
           `
             <tr>
               <td>#${i+1}</td>
