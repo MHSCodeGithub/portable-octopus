@@ -547,6 +547,23 @@ th {
   float: right;
 }
 
+/* HELP MODAL
+––––––––––––––––––––––––––––––––––––––– */
+#help-modal-wrap {
+  padding: 0 260px;
+}
+
+#help-modal-wrap h2 {
+  font-size: 2em;
+}
+
+#help-modal-wrap p {
+  padding: 15px;
+  font-size: 1.3em;
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+}
+
 /* PRODUCER INFORMATION
 ––––––––––––––––––––––––––––––––––––––– */
 .producer-info {
