@@ -2,6 +2,16 @@
 /* Authentication
 ––––––––––––––––––––––––––––––––––––––– */
 
+/**
+ *
+ * @function getCookie()
+ *
+ * @param {String} cname
+ *
+ * @description returns the specified cookie, or if not found, false
+ *
+ **/
+
 function getCookie(cname) {
   var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
@@ -758,7 +768,7 @@ $(function() {
 
   $(document).ready(function() { // leaving this here for shits and giggles. My god this is so dumb, wtf was I thinking
     $("#tabs").tabs(); // enable menu items
-    
+
     if(getCookie("register") == "true") {
       $("#help-btn").click();
     }
