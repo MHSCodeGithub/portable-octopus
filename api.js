@@ -612,6 +612,36 @@ exports.setup = function(app, gets) { // when the API is setup
           data: "Invalid Username/Password"
         })
       }
+    } else if (type == "get-leaderboard") {
+      var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account
+      if (testAcc.check()) { // validate the account
+        var accounts = framework.database.read().accounts; // get accounts from db
+
+        var leaderboard = [];
+
+        for (var account in accounts) {
+          var currentAccount = accounts[account];
+          leaderboard.push({username: currentAccount.username, balance: currentAccount.kingdom.treasury.balance});
+        }
+
+        leaderboard.sort(function (a, b) {
+          if(a.balance > b.balance) {
+            return -1;
+          } else if(b.balance > a.balance) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+
+        console.log(leaderboard);
+        res.send(leaderboard);
+      } else {
+        res.send({
+          type: "error",
+          data: "Invalid Username/Password"
+        })
+      }
     } else if (type == "get-yeild") { // if the post type is get yeild
       var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account
       if (testAcc.check()) { // validate the account

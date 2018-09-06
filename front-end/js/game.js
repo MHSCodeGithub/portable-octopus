@@ -243,6 +243,38 @@ $(function() {
     });
   }
 
+  function updateLeaderboard() {
+    API.send("get-leaderboard",
+    {
+      username: username,
+      password: password
+    }, function (leaderboard) {
+      $("#leaderboard-table").html(`
+        <tr id="table-headers">
+          <th>Rank</th>
+          <th>Username</th>
+          <th>Balance</th>
+          <th>Visit</th>
+        </tr>
+        <tr class="order-spacer"></tr>
+      `);
+
+      for (var i = 0; i < leaderboard.length; i++) {
+        $("#leaderboard-table").append( // append the order to the table, however provide a cancel button
+          `
+            <tr>
+              <td>#${i+1}</td>
+              <td>${leaderboard[i].username}</td>
+              <td>$${leaderboard[i].balance}</td>
+              <td><button class="user-visit">Visit</button></td>
+            </tr>
+            <tr class="order-spacer"></tr>
+          `
+        );
+      }
+    })
+  }
+
   /**
    *
    * @function updateMap()
@@ -787,6 +819,8 @@ $(function() {
               }
             });
           });
+        } else if (target == "leaderboard") {
+          updateLeaderboard();
         }
 
       });
