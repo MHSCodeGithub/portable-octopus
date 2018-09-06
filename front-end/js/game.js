@@ -283,6 +283,8 @@ $(function() {
 
       $(".user-visit").unbind("click");
       $(".user-visit").bind("click", function () {
+        $(".modal").css('display', 'none'); // hide menu item
+        $panzoom.panzoom("enable")
         visitOtherMap(String($(this).parent().parent().children().eq(1).text()));
       });
     })
@@ -341,7 +343,18 @@ $(function() {
       username: targetUsername
     }, function (map) { // get map from server
       displayMap(map);
-      console.log(map);
+      $("#menu").children().hide();
+
+      $("#menu").append(`
+        <button type="button" name="button" class="modal-btn" id="return-btn">Return</button>
+      `);
+
+      $("#return-btn").unbind("click");
+      $("#return-btn").bind("click", function () {
+        $(this).remove()
+        $("#menu").children().show();
+        updateMap();
+      });
 
       $('.built').unbind("click");
       $('.built').bind("click", function() { // when a producer is clicked on
