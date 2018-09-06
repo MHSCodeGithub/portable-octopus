@@ -447,6 +447,7 @@ $(function() {
    **/
 
   function updateMap() {
+    $(".producer-info").show()
 
     API.send("get-map", {
       username: username,
