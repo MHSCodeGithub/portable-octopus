@@ -592,6 +592,10 @@ th {
   margin: 13px 0;
 }
 
+.formula {
+  border-bottom: 3px solid #9300EC;
+}
+
 /* PRODUCER INFORMATION
 ––––––––––––––––––––––––––––––––––––––– */
 .producer-info {
