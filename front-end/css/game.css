@@ -543,8 +543,6 @@ th {
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
 #stockpile-div {
-  width: 50%;
-  float: left;
   display: grid;
   justify-content: center;
 }
@@ -558,7 +556,7 @@ th {
 
 #stockpile-div th, #stockpile-div td {
   text-align: center;
-  padding: 3px 15px;
+  padding: 3px 35px;
 }
 
 #stockpile-div td {
@@ -570,12 +568,7 @@ th {
   box-shadow: 3px 3px #D0712E;
 }
 
-/* KINGDOM INFO
-––––––––––––––––––––––––––––––––––––––– */
-#kingdom-info-div {
-  width: 50%;
-  float: right;
-}
+
 
 /* HELP MODAL
 ––––––––––––––––––––––––––––––––––––––– */
