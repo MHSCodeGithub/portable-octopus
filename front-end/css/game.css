@@ -584,7 +584,6 @@ th {
   width: 190px;
   height: 46px;
   color: white;
-
   margin-left: -28px;
   padding-left: 35px;
   margin-bottom: -70px;
@@ -629,7 +628,6 @@ th {
 .producer-info-wrap {
   background: #FFB57A;
   border: 5px solid #D0712E;
-  outline: 2px solid #753713;
   padding: 7px;
   font-size: 1.3em;
   height: 180px;
@@ -694,6 +692,26 @@ th {
   height: 55px;
   display: block;
   float: left;
+}
+
+.producer-info-name {
+  font-size: 1.2em;
+  background: url("../img/orange-banner2.png") no-repeat;
+  background-size: contain;
+  width: 250px;
+  height: 46px;
+  color: white;
+  margin-left: -40px;
+  padding-left: 42px;
+  padding-top: 4px;
+}
+
+.producer-info-intake {
+  color: #DB0053;
+}
+
+.producer-info-gen {
+  color: #00BC00;
 }
 
 /* LEADERBOARD MODAL
