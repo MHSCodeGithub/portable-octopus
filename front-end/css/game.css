@@ -618,10 +618,19 @@ th {
 
 /* PRODUCER INFORMATION
 ––––––––––––––––––––––––––––––––––––––– */
+.producer-info-bg {
+  width: 81vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .producer-info {
-  position: absolute;
-  top: 50px;
-  left: 50px;
+  display: table;
+  margin: 200px auto 0;
+  position: relative;
 }
 
 .producer-info-wrap {

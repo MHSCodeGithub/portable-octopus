@@ -117,7 +117,7 @@ $(function() {
 
   updateMap(); // update the map to reflect the users current kingdom
 
-  $(".producer-info").hide(); // hide producer info so its nice and clean
+  $(".producer-info-bg").hide(); // hide producer info so its nice and clean
 
   /* Image Preloading
   ––––––––––––––––––––––––––––––––––––––– */
@@ -371,7 +371,7 @@ $(function() {
 
         if ($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" || // if target is not producer
           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") { // hide producer info
-          $(".producer-info").hide() // hide producer info
+          $(".producer-info-bg").hide() // hide producer info
           return; // end function
         }
 
@@ -436,7 +436,7 @@ $(function() {
                     } else {
                       $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                     }
-                    $(".producer-info").show()
+                    $(".producer-info-bg").show()
                   }
                 })
               }
@@ -456,7 +456,7 @@ $(function() {
    **/
 
   function updateMap() {
-    $(".producer-info").hide() // hide producer info
+    $(".producer-info-bg").hide() // hide producer info
 
     API.send("get-map", {
       username: username,
@@ -471,7 +471,7 @@ $(function() {
 
         if ($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" || // if target is not producer
           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") { // hide producer info
-          $(".producer-info").hide() // hide producer info
+          $(".producer-info-bg").hide() // hide producer info
           return; // end function
         }
 
@@ -539,7 +539,7 @@ $(function() {
                     } else {
                       $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                     }
-                    $(".producer-info").show()
+                    $(".producer-info-bg").show()
                   }
                 })
               }
@@ -549,7 +549,7 @@ $(function() {
       });
 
       $(".producer-info-close").click(function() { // on close button
-        $(".producer-info").hide() // close producer info
+        $(".producer-info-bg").hide() // close producer info
       })
     });
 
@@ -1108,7 +1108,7 @@ $(function() {
       target: $(".hidden-id").text(),
       type: $(".hidden-type").text()
     }, function(response) {
-      $(".producer-info").hide(); // hide the producer info
+      $(".producer-info-bg").hide(); // hide the producer info
       $("." + $(".hidden-target").text()).unbind("click"); // unbind ability to view removed producer information
       updateBalance() // update user's balance
       updateMap() // update map to show producer removed
