@@ -112,7 +112,7 @@
       "description": "A bakery that bakes wheat and turns it into bread!",
       "price": 400,
       "intake": "flour",
-      "produce": "wheat",
+      "produce": "bread",
       "tier": 3
     }, {
       "id": 5,
