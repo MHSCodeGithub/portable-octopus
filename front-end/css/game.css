@@ -641,7 +641,7 @@ th {
   border: 5px solid #D0712E;
   padding: 7px;
   font-size: 1.3em;
-  height: 180px;
+  height: 200px;
   width: 290px;
 }
 
@@ -723,6 +723,13 @@ th {
 
 .producer-info-gen {
   color: #00BC00;
+}
+
+#producer-info-p {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  padding: 5px;
+  margin: 0 5px;
 }
 
 /* LEADERBOARD MODAL
