@@ -55,23 +55,41 @@ input, .input {
   align-self: center;
 }
 
+#errLog {
+  position: absolute;
+  margin-top: 40px;
+  color: #DB0053;
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  padding: 5px;
+  font-size: 1.1em;
+  width: 226px;
+}
+
+#errReg {
+
+}
+
 .ui-tabs-nav {
   display: flex;
   margin: 18px;
 }
 
 .ui-tab {
-  background: #00BCB7;
-  width: 50%;
-  height: 100%;
+  background: url("../img/login-tab-btn.png") no-repeat;
+  background-size: contain;
+  width: 162px;
+  height: 65px;
   list-style: none;
   text-align: center;
-  padding: 0.5em;
+  padding-top: 4px;
+  margin: 0 3px;
 }
 
 .ui-tab:hover {
-  background: #009692;
-  border-bottom: 5px solid #327b75;
+  background: url("../img/login-tab-btn-p.png") no-repeat;
+  background-size: contain;
+  padding-top: 8px;
 }
 
 .ui-tabs-anchor {
@@ -83,10 +101,9 @@ input, .input {
 }
 
 .ui-state-active, .ui-state-active:hover {
-  background: #008986;
-  border-bottom: 5px solid #005B53;
-  width: 50%;
-  height: 100%;
+  background: url("../img/login-tab-btn-p.png") no-repeat;
+  background-size: contain;
+  padding-top: 8px;
 }
 
 input[type=submit] {

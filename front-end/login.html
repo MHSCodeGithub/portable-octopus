@@ -23,18 +23,18 @@
           <input type="text" id="username" name="username" placeholder="Username">
           <input type="password" id="password" name="password" placeholder="Password">
           <div class="input">.</div>
-          <p id="errLog" style="display: none;">Incorrect Login Details!</p>
+          <p id="errLog" style="display: none;">Username or password incorrect<br> Please try again</p>
           <input type="submit" value="Login">
         </form>
       </div>
 
       <div id="register">
         <form action="/" method="post">
+          <p id="errReg" style="display: none;">Username Taken!</p>
           <input type="hidden" name="type" value="register">
           <input type="text" id="username" name="username" placeholder="Username">
           <input type="password" id="password" name="password" placeholder="Password">
           <input type="text" id="kingdom" name="kingdom" placeholder="Kingdom Name">
-          <p id="errReg" style="display: none;">Username Taken!</p>
           <input type="submit" value="Register">
         </form>
       </div>
