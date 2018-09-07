@@ -213,11 +213,23 @@ $(function() {
         </tr>
         `); // add table headers
       for (var i = 0; i < usersCommodities.length; i++) { // for each commodity
+        var Icon = usersCommodities[i].name.toLowerCase();
+        Icon.replace(" ", "_");
         $("#commodities-table").append( // display the information on the table
           `
 
             <tr>
-              <td>${usersCommodities[i].name}</td>
+              <td><img class='text-icon producer-info-icon' src='img/commodities/${function () {
+                if(usersCommodities[i].name == "Smoked Beef") {
+                  return "smoked_beef"
+                } else if(usersCommodities[i].name == "Gems") {
+                  return "gem"
+                } else if(usersCommodities[i].name == "Sword") {
+                  return "iron_sword"
+                } else {
+                  return Icon;
+                }
+              }()}.png'></img> ${usersCommodities[i].name}</td>
               <td>${usersCommodities[i].type}</td>
               <td>${usersCommodities[i].amount}</td>
               <td>${usersCommodities[i].production}/hour</td>
