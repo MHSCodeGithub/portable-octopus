@@ -430,10 +430,11 @@ exports.setup = function(app, gets) { // when the API is setup
 
             for (var k = 0; k < items.length; k++) { // match the template with the target producer
               if (items[k].id == data.target) {
+                testAcc.kingdom.producers.splice(i, 1); // remove the producer from their kingdom
+                testAcc.update();
                 var price = (items[k].price * testAcc.kingdom.producers[i].level) / 2; // calaculate the sell price
 
                 testAcc.charge(-price); // pay the user accordingly
-                testAcc.kingdom.producers.splice(i, 1); // remove the producer from their kingdom
                 testAcc.update(); // update the actions to the db
                 res.send("Updated!");
                 return;
