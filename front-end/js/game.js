@@ -488,6 +488,7 @@ $(function() {
 
           $(".hidden-id").text(id); // set hidden data for later use
           $(".hidden-target").text(another);
+          $(".hidden-type").text(cleanStr(data.subType + " " + data.type));
 
           API.get("items", function(items) { // get all possible producers
             if (data.subType) {
@@ -1096,7 +1097,8 @@ $(function() {
     API.send("sell-producer", { // tell the server (to frick off)
       username: username,
       password: password,
-      target: $(".hidden-id").text()
+      target: $(".hidden-id").text(),
+      type: $(".hidden-type").text()
     }, function(response) {
       $(".producer-info").hide(); // hide the producer info
       $("." + $(".hidden-target").text()).unbind("click"); // unbind ability to view removed producer information

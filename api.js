@@ -423,16 +423,18 @@ exports.setup = function(app, gets) { // when the API is setup
     } else if (type == "sell-producer") { // if the post type is sell producer
       var testAcc = new framework.Player(0, data.username, data.password, null, true); // create a test account
       if (testAcc.check()) { // validate the account
+      console.log(data);
 
         for (var i = 0; i < testAcc.kingdom.producers.length; i++) { // for each producer that the user owns
           if (testAcc.kingdom.producers[i].id == data.target) { // if the producer matches the target's ID
             var items = framework.database.getItems(); // get all producer templates
+            console.log(testAcc.kingdom.producers[i]);
 
             for (var k = 0; k < items.length; k++) { // match the template with the target producer
-              if (items[k].id == data.target) {
+              if (items[k].name == data.type) {
+                var price = (items[k].price * testAcc.kingdom.producers[i].level) / 2; // calaculate the sell price
                 testAcc.kingdom.producers.splice(i, 1); // remove the producer from their kingdom
                 testAcc.update();
-                var price = (items[k].price * testAcc.kingdom.producers[i].level) / 2; // calaculate the sell price
 
                 testAcc.charge(-price); // pay the user accordingly
                 testAcc.update(); // update the actions to the db
