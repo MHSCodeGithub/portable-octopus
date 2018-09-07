@@ -613,7 +613,7 @@ $(function() {
               </tr>
             `
           );
-        } else if ($("#order-type").val() == "buy") { // if sell order is buy (meaning all commodities will be in the list)
+        } else if ($("#order-type").val() == "buy") { // if order is a buy order (meaning all commodities will be in the list)
           $("#order-commodity").append( // add commodity to commodity list
             `
               <option value="${data[i].name}-${data[i].amount}">
@@ -647,6 +647,10 @@ $(function() {
       $("#order-submit").unbind("click"); // unbind to prevent overlapping
       $("#order-submit").bind("click", function() { // when the order is submitted
         if ($("#order-commodity").val()) { // if the user has selected a commodity
+          $("#market-table").show(); // show the market table
+          $("#market-order").hide();
+          $("#create-order-btn").text("Create Order")
+          console.log("submit");
           API.send("create-order", { // tell server user wants to create a order
             username: username,
             password: password,
@@ -655,9 +659,7 @@ $(function() {
             price: Number($("#order-price").val()),
             amount: Number($("#order-amount").val())
           }, function(response) { // when the server responds
-            $("#market-table").show(); // show the market table
-            $("#market-order").hide();
-            $("#create-order-btn").text("Create Order")
+
             updateOrders(); // update the order list
           });
         } else { // else the user has not filled out the order form
