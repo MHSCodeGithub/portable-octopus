@@ -905,16 +905,17 @@ $(function() {
 
         if (target == "shop") { // if menu item is shop
 
-          $("#shop-item-wrap").html("") // reset shop
+          $("#shop-item-wrap").html(`
+            <div id="tier1-div"><h1 class="tier-label">I</h1>
+            </div>
+            <div id="tier2-div"><h1 class="tier-label">II</h1>
+            </div>
+            <div id="tier3-div"><h1 class="tier-label">III</h1>
+            </div>`) // reset shop
           for (var i = 0; i < items.length; i++) { // for each producer
             var item = `
             <div class="shop-item" id="item-` + items[i].id + `">
               <h2 class="item-name">` + items[i].name + `</h2>
-              <h3>Tier: ${function () { // display tier
-                if (items[i].tier == 1) { return "I"; }
-                if (items[i].tier == 2) { return "II"; }
-                if (items[i].tier == 3) { return "III"; }
-              }()}</h3>
               <div class="item-desc-wrap">
                 <img src="` + items[i].image + `" alt="" class="item-img">
                 <p class="item-desc">` + items[i].description + `</p>
@@ -938,7 +939,7 @@ $(function() {
               <button id="item-button-` + items[i].id + `" class="item-buy-btn">$` + items[i].price + `</button>
             </div>
             `
-            $("#shop-item-wrap").append(item); // add producer to producer list
+            $("#tier"+items[i].tier+"-div").append(item); // add producer to producer list
           }
 
           $('.item-buy-btn').bind("click", function() { // if a producer's buy button is clicked
