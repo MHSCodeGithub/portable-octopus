@@ -916,12 +916,13 @@ $(function() {
             <div class="tier-div" id="tier3-div"></div>`) // reset shop
           for (var i = 0; i < items.length; i++) { // for each producer
             var item = `
+            <div>
             <div class="shop-item" id="item-` + items[i].id + `">
               <img src="` + items[i].image + `" alt="" class="item-img">
               <h2 class="item-name">` + items[i].name + `</h2>
               <div class="item-desc-wrap">
-                <p class="item-desc">` + items[i].description + `</p>
-                <p>Intake: ${function () { // display intake
+                <p class="item-desc">` + items[i].description + `</p><br>
+                <p class="item-desc" id="intake">Intake: ${function () { // display intake
                   if (items[i].intake == "None") {
                     return "None";
                   } else if (items[i].intake == "food") {
@@ -930,15 +931,16 @@ $(function() {
                     return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].intake}.png'></img> ${cleanStr(items[i].intake)}`;
                   }
                 }()}</p>
-                <p>Produce: ${function () { // display produce
+                <p class="item-desc" id="produce">Produce: ${function () { // display produce
                   if (items[i].produce == "None") {
                     return "None";
                   } else {
-                    return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].produce}.png'></img> ${cleanStr(items[i].produce)}`;
+                    return `<img class='text-icon producer-info-icon' src='img/commodities/${items[i].produce}.png'></img> <span class="description-overflow">${cleanStr(items[i].produce)}</span>`;
                   }
                 }()}</p>
               </div>
               <button id="item-button-` + items[i].id + `" class="item-buy-btn">$` + items[i].price + `</button>
+            </div>
             </div>
             `
             $("#tier"+items[i].tier+"-div").append(item); // add producer to producer list

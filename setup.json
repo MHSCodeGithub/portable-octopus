@@ -109,7 +109,7 @@
       "id": 4,
       "name": "Bakery",
       "image": "img/map/bakery.gif",
-      "description": "A bakery that bakes wheat and turns it into bread!",
+      "description": "Bakes wheat and turns it into bread!",
       "price": 400,
       "intake": "flour",
       "produce": "bread",
@@ -118,7 +118,7 @@
       "id": 5,
       "name": "Cotton Mill",
       "image": "img/map/cotton_mill.gif",
-      "description": "A cotton mill that turns cotton into clothing!",
+      "description": "A mill that turns cotton into clothing!",
       "price": 600,
       "intake": "cotton",
       "produce": "clothing",
@@ -163,7 +163,7 @@
       "id": 10,
       "name": "Blacksmith",
       "image": "img/map/blacksmith.gif",
-      "description": "A blacksmith that turns iron into iron swords!",
+      "description": "Uses iron to create iron swords!",
       "price": 1800,
       "intake": "iron",
       "produce": "iron_sword",
@@ -269,7 +269,7 @@
     },
     {
       "id": 10,
-      "name": "Iron Sword",
+      "name": "Sword",
       "type": "Tool",
       "description": "Sword made from iron used in battle!"
     }

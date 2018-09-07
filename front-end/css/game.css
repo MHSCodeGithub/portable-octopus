@@ -188,6 +188,7 @@ body * {
   outline: 4px solid #753713;
   display: flex;
   flex-direction: column;
+  padding: 50px;
 }
 
 #commodities-table {
@@ -198,13 +199,13 @@ body * {
 
 @media screen and (max-width:1500px) {
   .tier-div {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
 .tier-div {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-content: flex-start;
   border-bottom: 3px solid #D0712E;
   padding-top: 30px;
@@ -220,12 +221,13 @@ body * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 200px;
-  max-height: 370px;
+  width: 235px;
+  height: 310px;
   margin: 20px 15px;
-  padding: 10px 15px;
+  padding: 10px;
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
+  position: relative;
 }
 
 .shop-item img {
@@ -233,14 +235,11 @@ body * {
   height: 80px;
 }
 
-.item-desc-wrap {
-  background: white;
-}
-
 .item-name {
   width: 100%;
   font-size: 2em;
   text-align: center;
+  padding-bottom: 8px;
 }
 
 .item-img {
@@ -249,12 +248,20 @@ body * {
 
 .item-desc {
   margin: 0 6px;
+  font-size: 1.2em;
+}
+
+#intake {
+color: #DB0053;
+}
+
+#produce{
+  color: #00BC00;
 }
 
 .item-buy-btn {
-  float: right;
-  position: relative;
-  bottom: 0;
+  position: absolute;
+  bottom: -16px;
   background: url('../img/buy-btn.png');
   background-size: contain;
   width: 81px;
