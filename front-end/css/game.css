@@ -542,16 +542,14 @@ th {
 
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
-#stockpile-div {
-  display: grid;
-  justify-content: center;
-}
+
 
 #stockpile-div table {
   border-spacing: 0;
-  margin: 25px;
+  margin: 25px auto;
   max-height: 100%;
   overflow: visible;
+  display: table;
 }
 
 #stockpile-div th, #stockpile-div td {
@@ -568,6 +566,19 @@ th {
   box-shadow: 3px 3px #D0712E;
 }
 
+#citizen-info {
+  display: table;
+  margin: 20px auto;
+}
+
+.citizen-info {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  margin: 0 25px;
+  padding: 5px;
+  font-size: 1.4em;
+  display: inline-block;
+}
 
 
 /* HELP MODAL
@@ -719,7 +730,6 @@ th {
 
 #leaderboard-table {
   border-spacing: 0;
-  margin: 40px 25px;
   max-height: 100%;
   width: 80%;
   overflow: visible;
