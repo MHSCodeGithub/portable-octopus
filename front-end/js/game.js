@@ -465,7 +465,6 @@ $(function() {
       ––––––––––––––––––––––––––––––––––––––– */
       $('.built').unbind("click");
       $('.built').bind("click", function() { // when a producer is clicked on
-        $(".producer-info").show()
 
         if ($(this).attr("class").split(" ")[0].split("-")[0] == "harbour" || // if target is not producer
           $(this).attr("class").split(" ")[0].split("-")[0] == "treasury") { // hide producer info
@@ -536,6 +535,7 @@ $(function() {
                     } else {
                       $(".producer-info-intake").html("Intake:<img class='text-icon producer-info-icon' src='img/commodities/" + IntakeIconName + ".png'></img>" + cleanStr(data.intake) + " " + (producerYeild.val * 12) + "/hour");
                     }
+                    $(".producer-info").show()
                   }
                 })
               }
