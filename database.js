@@ -80,7 +80,7 @@ exports.getAccount = function(username) {
 
 exports.addOrder = function(order) {
   var database = exports.read(); // read the db
-  database.orders[order.id] = order; // add the order
+  database.orders.push(order); // add the order
   exports.write(database); // update the db
 };
 
