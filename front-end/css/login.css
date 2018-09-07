@@ -67,7 +67,15 @@ input, .input {
 }
 
 #errReg {
-
+  position: absolute;
+  color: #DB0053;
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  padding: 5px;
+  font-size: 1.1em;
+  margin: 0 38px;
+  width: 226px;
+  margin-top: -35px
 }
 
 .ui-tabs-nav {

@@ -29,8 +29,9 @@
       </div>
 
       <div id="register">
+        <p id="errReg" style="display: none;">Username Taken!</p>
         <form action="/" method="post">
-          <p id="errReg" style="display: none;">Username Taken!</p>
+
           <input type="hidden" name="type" value="register">
           <input type="text" id="username" name="username" placeholder="Username">
           <input type="password" id="password" name="password" placeholder="Password">
