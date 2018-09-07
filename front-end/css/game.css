@@ -542,16 +542,14 @@ th {
 
 /* STOCKPILE
 ––––––––––––––––––––––––––––––––––––––– */
-#stockpile-div {
-  display: grid;
-  justify-content: center;
-}
+
 
 #stockpile-div table {
   border-spacing: 0;
-  margin: 25px;
+  margin: 25px auto;
   max-height: 100%;
   overflow: visible;
+  display: table;
 }
 
 #stockpile-div th, #stockpile-div td {
@@ -568,6 +566,19 @@ th {
   box-shadow: 3px 3px #D0712E;
 }
 
+#citizen-info {
+  display: table;
+  margin: 20px auto;
+}
+
+.citizen-info {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  margin: 0 25px;
+  padding: 5px;
+  font-size: 1.4em;
+  display: inline-block;
+}
 
 
 /* HELP MODAL
@@ -630,7 +641,7 @@ th {
   border: 5px solid #D0712E;
   padding: 7px;
   font-size: 1.3em;
-  height: 180px;
+  height: 200px;
   width: 290px;
 }
 
@@ -714,12 +725,18 @@ th {
   color: #00BC00;
 }
 
+#producer-info-p {
+  background: #FFE3DA;
+  box-shadow: 3px 3px #D0712E;
+  padding: 5px;
+  margin: 0 5px;
+}
+
 /* LEADERBOARD MODAL
 ––––––––––––––––––––––––––––––––––––––– */
 
 #leaderboard-table {
   border-spacing: 0;
-  margin: 40px 25px;
   max-height: 100%;
   width: 80%;
   overflow: visible;
