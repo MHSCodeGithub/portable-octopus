@@ -555,14 +555,29 @@ th {
 }
 
 #help-modal-wrap h2 {
-  font-size: 2em;
+  font-size: 1.8em;
+  background: url("../img/orange-banner.png") no-repeat;
+  background-size: contain;
+  width: 190px;
+  height: 46px;
+  color: white;
+
+  margin-left: -28px;
+  padding-left: 35px;
+  margin-bottom: -70px;
+  padding-top: 3px;
+  position: relative;
+  z-index: 2;
 }
 
 #help-modal-wrap p {
   padding: 15px;
+  padding-top: 55px;
   font-size: 1.3em;
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
+  z-index: -1;
+  margin: 13px 0;
 }
 
 /* PRODUCER INFORMATION
@@ -641,15 +656,6 @@ th {
   height: 55px;
   display: block;
   float: left;
-}
-
-/* HELP MODAL
-––––––––––––––––––––––––––––––––––––––– */
-
-.help-img {
-  width: 15vw;
-  height: 15vw;
-  margin: 20px;
 }
 
 /* LEADERBOARD MODAL
