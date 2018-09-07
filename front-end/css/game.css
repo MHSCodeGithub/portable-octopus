@@ -80,7 +80,7 @@ body * {
 .modal-btn {
   margin: 10px 0;
   height: 70px;
-  width: 200px;
+  width: 230px;
   background: url('../img/menu-btn.png');
   border: none;
   background-size: contain;
@@ -146,6 +146,7 @@ body * {
   outline: 4px solid #753713;
   overflow: hidden;
   overflow-y: scroll;
+  padding: 45px 0;
 }
 
 .modal-close-btn {
@@ -167,6 +168,16 @@ body * {
 .modal-title {
   text-align: center;
   font-size: 3em;
+  background: url("../img/red-banner.png") no-repeat;
+  background-size: contain;
+  height: 73px;
+  width: 350px;
+  color: white;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 10px;
 }
 
 /* SHOP MODAL
@@ -381,7 +392,7 @@ th {
   display: table;
   width: 250px;
   height: 59px;
-  background: url("../img/popup-banner.png") no-repeat;
+  background: url("../img/red-banner.png") no-repeat;
   text-align: center;
   font-size: 2em;
   color: white;
@@ -389,6 +400,7 @@ th {
   position: relative;
   bottom: -30px;
   padding-top: 3px;
+  background-size: contain;
 }
 
 /* CREATE ORDER POPUP
@@ -550,7 +562,7 @@ th {
 /* HELP MODAL
 ––––––––––––––––––––––––––––––––––––––– */
 #help-modal-wrap {
-  padding: 0 260px;
+  padding: 60px 260px;
   padding-bottom: 40px;
 }
 
