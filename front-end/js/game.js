@@ -906,13 +906,13 @@ $(function() {
         if (target == "shop") { // if menu item is shop
 
           $("#shop-item-wrap").html(`
-            <h1 class="tier-label">I</h1>
+            <h1 class="tier-label">Tier I</h1>
             <div class="tier-div" id="tier1-div"></div>
 
-            <h1 class="tier-label">II</h1>
+            <h1 class="tier-label">Tier II</h1>
             <div class="tier-div" id="tier2-div"></div>
 
-            <h1 class="tier-label">III</h1>
+            <h1 class="tier-label">Tier III</h1>
             <div class="tier-div" id="tier3-div"></div>`) // reset shop
           for (var i = 0; i < items.length; i++) { // for each producer
             var item = `

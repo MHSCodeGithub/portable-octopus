@@ -178,6 +178,7 @@ body * {
   left: 0;
   right: 0;
   top: 10px;
+  z-index: 300;
 }
 
 /* SHOP MODAL
@@ -199,7 +200,7 @@ body * {
 
 @media screen and (max-width:1500px) {
   .tier-div {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 
@@ -208,11 +209,14 @@ body * {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-content: flex-start;
   border-bottom: 3px solid #D0712E;
-  padding-top: 30px;
+  padding-bottom: 45px;
+  margin-bottom: 30px;
 }
 
 .tier-label {
   position: relative;
+  color: #a65a24;
+  display: table;
 }
 
 /* SHOP ITEMS
