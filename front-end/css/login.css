@@ -57,13 +57,14 @@ input, .input {
 
 #errLog {
   position: absolute;
-  margin-top: 27px;
   color: #DB0053;
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
   padding: 5px;
   font-size: 1.1em;
   width: 226px;
+  margin: 0 40px;
+  margin-top: 150px;
 }
 
 #errReg {
