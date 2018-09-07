@@ -265,7 +265,7 @@ $(function() {
           <th>Rank</th>
           <th>Username</th>
           <th>Balance</th>
-          <th>Visit</th>
+          <th></th>
         </tr>
         <tr class="order-spacer"></tr>
       `); // set table headers
@@ -279,7 +279,7 @@ $(function() {
               <td>$${leaderboard[i].balance}</td>
               <td>${function () {
                 if(leaderboard[i].username == username) {
-                  return "Own Kingdom!"
+                  return "Your Kingdom"
                 } else {
                   return "<button class='user-visit'>Visit</button>"
                 }

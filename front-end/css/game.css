@@ -708,10 +708,12 @@ th {
 
 #leaderboard-table {
   border-spacing: 0;
-  margin: 25px;
+  margin: 40px 25px;
   max-height: 100%;
   width: 80%;
   overflow: visible;
+  display: table;
+  margin: 0 auto;
 }
 
 #leaderboard-table th, #leaderboard-table td {
@@ -720,10 +722,33 @@ th {
 }
 
 #leaderboard-table td {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 
 #leaderboard-table tr {
   background: #FFE3DA;
   box-shadow: 3px 3px #D0712E;
+}
+
+.user-visit {
+  background: url('../img/fulfill-order-btn.png') no-repeat;
+  background-size: contain;
+  width: 102px;
+  height: 47px;
+  color: white;
+  text-align: center;
+  border: none;
+  padding-bottom: 6px;
+  font-size: 1.2em;
+}
+
+.user-visit:hover {
+  background: url('../img/fulfill-order-btn-p.png') no-repeat;
+  background-size: contain;
+  padding-top: 8px;
+  cursor: pointer;
+}
+
+#return-btn {
+  margin: 30px 0;
 }
